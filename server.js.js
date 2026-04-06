@@ -32,7 +32,7 @@ db.serialize(() => {
     
     // Cliente 1 (Tus datos)
     db.run("INSERT INTO clientes VALUES ('30616577', 'JOSE ARELLANO', 'VERIFIED - ADMIN', '/fotos/jose.jpg')");
-
+    db.run("INSERT INTO clientes VALUES ('30616576', 'JUAN PABLO', 'VERIFIED - ADMIN', '/fotos/jose.jpg')");
     // Cliente 2 (Ejemplo de cómo agregar otro)
     // db.run("INSERT INTO clientes VALUES ('12345678', 'JUAN PEREZ', 'VERIFIED', '/fotos/juan.jpg')");
 
