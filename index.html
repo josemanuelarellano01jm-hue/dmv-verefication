@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - Verificación de Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .contenedor {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,50,0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border-top: 5px solid #002244; /* Azul oscuro Aura */
+        }
+        h2 {
+            color: #002244; /* Azul oscuro */
+            margin-bottom: 5px;
+        }
+        .subtitulo {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #002244; /* Azul oscuro */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 90%;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #003366;
+        }
+        #resultado {
+            margin-top: 25px;
+            padding: 20px;
+            display: none;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        #resultado img {
+            max-width: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #002244;
+        }
+        /* Estilo para la etiqueta de VERIFICADO */
+        .badge-verificado {
+            background-color: #28a745; /* Verde de éxito */
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(40,167,69,0.4);
+            animation: aparecer 0.5s ease-in-out;
+        }
+        @keyframes aparecer {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            background-color: #f8d7da;
+            border-radius: 4px;
+        }
+        p {
+            margin: 8px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Portal Aura</h2>
+    <div class="subtitulo">Sistema de Verificación de Clientes</div>
+    
+    <input type="text" id="nombreCliente" placeholder="Nombre completo del cliente" required>
+    <input type="text" id="idCliente" placeholder="Número de ID o Cédula" required>
+    
+    <button onclick="verificarCliente()">Consultar</button>
+
+    <div id="resultado">
+        </div>
+</div>
+
+<script>
+    async function verificarCliente() {
+        const nombre = document.getElementById('nombreCliente').value.trim();
+        const id_cliente = document.getElementById('idCliente').value.trim();
+        const divResultado = document.getElementById('resultado');
+
+        // Mostrar estado de carga
+        divResultado.style.display = 'block';
+        divResultado.innerHTML = 'Consultando en la base de datos...';
+
+        try {
+            // Conexión con tu servidor backend (asegúrate de que server.js esté encendido)
+            const respuesta = await fetch('http://localhost:3000/api/verificar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre: nombre, id_cliente: id_cliente })
+            });
+
+            const datosServidor = await respuesta.json();
+
+            if (datosServidor.success) {
+                const cliente = datosServidor.datos;
+                
+                // Aquí se inyecta la etiqueta de VERIFICADO junto con los datos
+                divResultado.innerHTML = `
+                    <div class="badge-verificado">✓ VERIFICADO</div>
+                    <br>
+                    <img src="${cliente.foto_url}" alt="Foto del cliente">
+                    <h3 style="color: #002244; margin: 10px 0;">${cliente.nombre}</h3>
+                    <p><strong>ID:</strong> ${cliente.id_cliente}</p>
+                    <p><strong>Detalle:</strong> ${cliente.estatus}</p>
+                `;
+            } else {
+                divResultado.innerHTML = `<div class="error">${datosServidor.mensaje}</div>`;
+            }
+        } catch (error) {
+            divResultado.innerHTML = `<div class="error">Error de conexión. Verifica que el servidor (Backend) esté activo.</div>`;
+        }
+    }
+</script>
+
+</body>
+</html>
