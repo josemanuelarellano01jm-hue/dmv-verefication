@@ -1,164 +1,138 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura - Verificación de Clientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DMV CAR LOW GROUP | Official Verification Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .tab-active { color: #2563eb; position: relative; font-weight: 900; }
+        .tab-active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: #2563eb; border-radius: 10px; }
+        .verified-stamp {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
+            border: 8px solid #16a34a; color: #16a34a; padding: 15px 30px; font-size: 3rem;
+            font-weight: 900; text-transform: uppercase; border-radius: 15px;
+            background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            pointer-events: none; z-index: 20; opacity: 0.9;
         }
-        .contenedor {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,50,0.15);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            border-top: 5px solid #002244; /* Azul oscuro Aura */
-        }
-        h2 {
-            color: #002244; /* Azul oscuro */
-            margin-bottom: 5px;
-        }
-        .subtitulo {
-            color: #555;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #002244; /* Azul oscuro */
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 90%;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #003366;
-        }
-        #resultado {
-            margin-top: 25px;
-            padding: 20px;
-            display: none;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background-color: #fafafa;
-        }
-        #resultado img {
-            max-width: 120px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 3px solid #002244;
-        }
-        /* Estilo para la etiqueta de VERIFICADO */
-        .badge-verificado {
-            background-color: #28a745; /* Verde de éxito */
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(40,167,69,0.4);
-            animation: aparecer 0.5s ease-in-out;
-        }
-        @keyframes aparecer {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .error {
-            color: #dc3545;
-            font-weight: bold;
-            padding: 10px;
-            border: 1px solid #f5c6cb;
-            background-color: #f8d7da;
-            border-radius: 4px;
-        }
-        p {
-            margin: 8px 0;
-            color: #333;
-        }
+        .animate-fade { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden { display: none; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900">
 
-<div class="contenedor">
-    <h2>Portal Aura</h2>
-    <div class="subtitulo">Sistema de Verificación de Clientes</div>
-    
-    <input type="text" id="nombreCliente" placeholder="Nombre completo del cliente" required>
-    <input type="text" id="idCliente" placeholder="Número de ID o Cédula" required>
-    
-    <button onclick="verificarCliente()">Consultar</button>
+    <div class="bg-blue-950 text-white py-2 text-[9px] font-black text-center uppercase tracking-[0.3em] px-4">
+        FEDERAL DOCUMENTATION COMPLIANCE PORTAL — SECURED ACCESS 2026
+    </div>
 
-    <div id="resultado">
+    <header class="bg-white sticky top-0 z-50 shadow-sm border-b">
+        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="bg-blue-600 text-white p-2.5 rounded-2xl shadow-lg">
+                    <i class="fas fa-shield-check text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black italic uppercase leading-none">
+                        DMV <span class="text-blue-600">CAR LOW GROUP</span>
+                    </h1>
+                    <p class="text-[9px] font-extrabold text-slate-400 tracking-widest uppercase mt-1">Independent Legal Consulting</p>
+                </div>
+            </div>
+            <div class="text-center md:text-right border-l-0 md:border-l-2 md:pl-6 border-slate-100">
+                <p class="text-[11px] font-black text-slate-700 uppercase">
+                    <i class="fas fa-map-marker-alt text-red-600 mr-1"></i> 2621 E Sahara Ave, Las Vegas, NV 89104
+                </p>
+            </div>
         </div>
-</div>
 
-<script>
-    async function verificarCliente() {
-        const nombre = document.getElementById('nombreCliente').value.trim();
-        const id_cliente = document.getElementById('idCliente').value.trim();
-        const divResultado = document.getElementById('resultado');
+        <nav class="bg-white border-t">
+            <div class="container mx-auto flex justify-center space-x-8">
+                <button onclick="showTab('verify')" id="nav-verify" class="px-6 py-4 text-[10px] font-black uppercase tracking-widest tab-active">Verification Portal</button>
+                <button onclick="showTab('vision')" id="nav-vision" class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">About Us</button>
+            </div>
+        </nav>
+    </header>
 
-        // Mostrar estado de carga
-        divResultado.style.display = 'block';
-        divResultado.innerHTML = 'Consultando en la base de datos...';
+    <main id="tab-verify" class="container mx-auto px-6 py-16 animate-fade">
+        <div id="verify-form" class="max-w-xl mx-auto bg-white p-10 rounded-[4rem] shadow-2xl border-t-[16px] border-blue-600">
+            <div class="text-center mb-10">
+                <i class="fas fa-fingerprint text-6xl text-blue-600 mb-4"></i>
+                <h2 class="text-3xl font-black uppercase italic">Status <span class="text-blue-600">Authentication</span></h2>
+            </div>
+            <form onsubmit="handleVerify(event)" class="space-y-6">
+                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl font-black uppercase text-xs outline-none focus:border-blue-600" required>
+                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl font-black uppercase text-xs outline-none focus:border-blue-600" required>
+                <button type="submit" class="w-full bg-blue-700 text-white py-6 rounded-3xl font-black uppercase text-[13px] tracking-[0.2em] shadow-xl hover:bg-blue-900 transition">
+                    Authenticate Record
+                </button>
+            </form>
+        </div>
 
-        try {
-            // Conexión con tu servidor backend (asegúrate de que server.js esté encendido)
-            const respuesta = await fetch('http://localhost:3000/api/verificar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nombre: nombre, id_cliente: id_cliente })
-            });
+        <div id="verify-result" class="hidden max-w-4xl mx-auto animate-fade">
+            <div class="bg-white p-12 md:p-20 rounded-[5rem] shadow-2xl border-[12px] border-green-500/10 relative overflow-hidden">
+                <div class="verified-stamp">VALIDATED</div>
+                <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+                    <div class="flex-1 space-y-8">
+                        <div class="flex items-center space-x-6">
+                            <div class="bg-green-600 text-white p-5 rounded-3xl"><i class="fas fa-check-shield text-3xl"></i></div>
+                            <h3 class="text-4xl font-black uppercase italic leading-none">Security <br/><span class="text-green-600 text-5xl">Certificate</span></h3>
+                        </div>
+                        <div class="space-y-6 border-l-[10px] border-slate-50 pl-10 font-black uppercase italic">
+                            <div><p class="text-[9px] text-slate-400 not-italic">Authorized Holder</p><p id="res-name" class="text-3xl"></p></div>
+                            <div><p class="text-[9px] text-slate-400 not-italic">Folio Number</p><p id="res-id" class="text-blue-600 text-xl"></p></div>
+                        </div>
+                    </div>
+                    <div class="w-72 h-72 bg-slate-100 rounded-[3.5rem] overflow-hidden border-[15px] border-white shadow-2xl shrink-0">
+                        <img id="res-img" src="" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-            const datosServidor = await respuesta.json();
+    <footer class="bg-white border-t py-12 mt-20 text-center">
+        <h2 class="text-2xl font-black italic uppercase tracking-tighter mb-4">DMV <span class="text-blue-600">CAR LOW GROUP</span></h2>
+        <p class="text-[9px] text-slate-300 font-bold uppercase">&copy; 2026 DMV CAR LOW GROUP INC. ALL RIGHTS RESERVED.</p>
+    </footer>
 
-            if (datosServidor.success) {
-                const cliente = datosServidor.datos;
-                
-                // Aquí se inyecta la etiqueta de VERIFICADO junto con los datos
-                divResultado.innerHTML = `
-                    <div class="badge-verificado">✓ VERIFICADO</div>
-                    <br>
-                    <img src="${cliente.foto_url}" alt="Foto del cliente">
-                    <h3 style="color: #002244; margin: 10px 0;">${cliente.nombre}</h3>
-                    <p><strong>ID:</strong> ${cliente.id_cliente}</p>
-                    <p><strong>Detalle:</strong> ${cliente.estatus}</p>
-                `;
-            } else {
-                divResultado.innerHTML = `<div class="error">${datosServidor.mensaje}</div>`;
-            }
-        } catch (error) {
-            divResultado.innerHTML = `<div class="error">Error de conexión. Verifica que el servidor (Backend) esté activo.</div>`;
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
+            document.getElementById('tab-' + id).classList.remove('hidden');
         }
-    }
-</script>
 
+        async function handleVerify(e) {
+            e.preventDefault();
+            const name = document.getElementById('v-name').value.trim();
+            const id_cliente = document.getElementById('v-id').value.trim();
+
+            try {
+                // IMPORTANTE: Render usa la misma URL de la página para la API
+                const respuesta = await fetch('/api/verificar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: name, id_cliente: id_cliente })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (resultado.success) {
+                    document.getElementById('res-name').textContent = resultado.datos.nombre;
+                    document.getElementById('res-id').textContent = resultado.datos.id_cliente;
+                    document.getElementById('res-img').src = resultado.datos.foto_url;
+                    document.getElementById('verify-form').classList.add('hidden');
+                    document.getElementById('verify-result').classList.remove('hidden');
+                } else {
+                    alert("RECORD NOT FOUND: Please check the information.");
+                }
+            } catch (err) {
+                alert("Connection Error. Please try again later.");
+            }
+        }
+    </script>
 </body>
 </html>
