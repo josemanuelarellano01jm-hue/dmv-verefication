@@ -2,135 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DMV CAR LOW GROUP | Official Verification Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMV CAR LOW GROUP | Official Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .tab-active { color: #2563eb; position: relative; font-weight: 900; }
-        .tab-active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: #2563eb; border-radius: 10px; }
-        .verified-stamp {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg);
-            border: 8px solid #16a34a; color: #16a34a; padding: 15px 30px; font-size: 3rem;
-            font-weight: 900; text-transform: uppercase; border-radius: 15px;
-            background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            pointer-events: none; z-index: 20; opacity: 0.9;
-        }
-        .animate-fade { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { color: #2563eb; border-bottom: 4px solid #2563eb; font-weight: 900; }
         .hidden { display: none; }
+        .hero-bg { background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1000'); background-size: cover; background-position: center; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <div class="bg-blue-950 text-white py-2 text-[9px] font-black text-center uppercase tracking-[0.3em] px-4">
-        FEDERAL DOCUMENTATION COMPLIANCE PORTAL — SECURED ACCESS 2026
-    </div>
-
-    <header class="bg-white sticky top-0 z-50 shadow-sm border-b">
-        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-4">
-                <div class="bg-blue-600 text-white p-2.5 rounded-2xl shadow-lg">
-                    <i class="fas fa-shield-check text-2xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-black italic uppercase leading-none">
-                        DMV <span class="text-blue-600">CAR LOW GROUP</span>
-                    </h1>
-                    <p class="text-[9px] font-extrabold text-slate-400 tracking-widest uppercase mt-1">Independent Legal Consulting</p>
-                </div>
+    <header class="bg-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg"><i class="fas fa-car-side text-xl"></i></div>
+                <h1 class="text-xl font-black italic uppercase">DMV <span class="text-blue-600">CAR LOW GROUP</span></h1>
             </div>
-            <div class="text-center md:text-right border-l-0 md:border-l-2 md:pl-6 border-slate-100">
-                <p class="text-[11px] font-black text-slate-700 uppercase">
-                    <i class="fas fa-map-marker-alt text-red-600 mr-1"></i> 2621 E Sahara Ave, Las Vegas, NV 89104
-                </p>
-            </div>
+            <nav class="flex space-x-6 mt-4 md:mt-0">
+                <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active">Home</button>
+                <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Verification</button>
+                <button onclick="showTab('about')" id="nav-about" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">About Us</button>
+            </nav>
         </div>
-
-        <nav class="bg-white border-t">
-            <div class="container mx-auto flex justify-center space-x-8">
-                <button onclick="showTab('verify')" id="nav-verify" class="px-6 py-4 text-[10px] font-black uppercase tracking-widest tab-active">Verification Portal</button>
-                <button onclick="showTab('vision')" id="nav-vision" class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">About Us</button>
-            </div>
-        </nav>
     </header>
 
-    <main id="tab-verify" class="container mx-auto px-6 py-16 animate-fade">
-        <div id="verify-form" class="max-w-xl mx-auto bg-white p-10 rounded-[4rem] shadow-2xl border-t-[16px] border-blue-600">
-            <div class="text-center mb-10">
-                <i class="fas fa-fingerprint text-6xl text-blue-600 mb-4"></i>
-                <h2 class="text-3xl font-black uppercase italic">Status <span class="text-blue-600">Authentication</span></h2>
+    <main id="tab-home" class="animate-fade">
+        <section class="hero-bg text-white py-24 px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 italic uppercase">Independent Legal <br> <span class="text-blue-500">Documentation</span></h2>
+            <p class="max-w-2xl mx-auto text-slate-300 mb-10 font-medium">Ofrecemos asesoría especializada en trámites vehiculares y gestión de licencias en Estados Unidos. Seguridad y rapidez en cada proceso.</p>
+            <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-black uppercase tracking-widest transition shadow-lg">
+                Verify My Status <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </section>
+
+        <section class="container mx-auto py-20 px-6 grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-3xl shadow-xl text-center border-t-4 border-blue-600">
+                <i class="fas fa-id-card text-4xl text-blue-600 mb-4"></i>
+                <h3 class="font-black uppercase mb-2">Licencias</h3>
+                <p class="text-sm text-slate-500 font-medium">Asistencia completa para la gestión y procesamiento de licencias de conducir.</p>
             </div>
-            <form onsubmit="handleVerify(event)" class="space-y-6">
-                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl font-black uppercase text-xs outline-none focus:border-blue-600" required>
-                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl font-black uppercase text-xs outline-none focus:border-blue-600" required>
-                <button type="submit" class="w-full bg-blue-700 text-white py-6 rounded-3xl font-black uppercase text-[13px] tracking-[0.2em] shadow-xl hover:bg-blue-900 transition">
-                    Authenticate Record
-                </button>
+            <div class="bg-white p-8 rounded-3xl shadow-xl text-center border-t-4 border-blue-600">
+                <i class="fas fa-file-invoice text-4xl text-blue-600 mb-4"></i>
+                <h3 class="font-black uppercase mb-2">Trámites DMV</h3>
+                <p class="text-sm text-slate-500 font-medium">Gestión documental ante el Departamento de Vehículos Motorizados.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl text-center border-t-4 border-blue-600">
+                <i class="fas fa-user-shield text-4xl text-blue-600 mb-4"></i>
+                <h3 class="font-black uppercase mb-2">Verificación</h3>
+                <p class="text-sm text-slate-500 font-medium">Consulta el estatus oficial de tus trámites en nuestra base de datos.</p>
+            </div>
+        </section>
+    </main>
+
+    <main id="tab-verify" class="hidden container mx-auto px-6 py-16">
+        <div id="verify-form" class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-black uppercase italic">Search <span class="text-blue-600">Record</span></h2>
+            </div>
+            <form onsubmit="handleVerify(event)" class="space-y-4">
+                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition">Authenticate</button>
             </form>
         </div>
 
-        <div id="verify-result" class="hidden max-w-4xl mx-auto animate-fade">
-            <div class="bg-white p-12 md:p-20 rounded-[5rem] shadow-2xl border-[12px] border-green-500/10 relative overflow-hidden">
-                <div class="verified-stamp">VALIDATED</div>
-                <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
-                    <div class="flex-1 space-y-8">
-                        <div class="flex items-center space-x-6">
-                            <div class="bg-green-600 text-white p-5 rounded-3xl"><i class="fas fa-check-shield text-3xl"></i></div>
-                            <h3 class="text-4xl font-black uppercase italic leading-none">Security <br/><span class="text-green-600 text-5xl">Certificate</span></h3>
-                        </div>
-                        <div class="space-y-6 border-l-[10px] border-slate-50 pl-10 font-black uppercase italic">
-                            <div><p class="text-[9px] text-slate-400 not-italic">Authorized Holder</p><p id="res-name" class="text-3xl"></p></div>
-                            <div><p class="text-[9px] text-slate-400 not-italic">Folio Number</p><p id="res-id" class="text-blue-600 text-xl"></p></div>
-                        </div>
-                    </div>
-                    <div class="w-72 h-72 bg-slate-100 rounded-[3.5rem] overflow-hidden border-[15px] border-white shadow-2xl shrink-0">
-                        <img id="res-img" src="" class="w-full h-full object-cover">
-                    </div>
+        <div id="verify-result" class="hidden max-w-2xl mx-auto mt-10 bg-white p-10 rounded-[3rem] shadow-2xl border-l-[15px] border-green-500 relative">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-1">
+                    <h3 class="text-green-600 font-black italic uppercase text-2xl mb-4">Verified Holder</h3>
+                    <p id="res-name" class="text-3xl font-black uppercase italic"></p>
+                    <p id="res-id" class="text-slate-400 font-bold mt-2"></p>
                 </div>
+                <img id="res-img" src="" class="w-48 h-48 rounded-2xl object-cover border-4 border-slate-100">
             </div>
+            <button onclick="location.reload()" class="mt-8 text-blue-600 font-black uppercase text-[10px] tracking-widest underline">New Search</button>
         </div>
     </main>
 
-    <footer class="bg-white border-t py-12 mt-20 text-center">
-        <h2 class="text-2xl font-black italic uppercase tracking-tighter mb-4">DMV <span class="text-blue-600">CAR LOW GROUP</span></h2>
-        <p class="text-[9px] text-slate-300 font-bold uppercase">&copy; 2026 DMV CAR LOW GROUP INC. ALL RIGHTS RESERVED.</p>
+    <main id="tab-about" class="hidden container mx-auto px-6 py-20 text-center">
+        <h2 class="text-4xl font-black uppercase italic mb-6">Our <span class="text-blue-600">Mission</span></h2>
+        <p class="max-w-2xl mx-auto text-slate-600 font-medium leading-relaxed">
+            En **DMV CAR LOW GROUP**, nos dedicamos a facilitar la vida de nuestros clientes a través de consultoría legal transparente y eficiente. Ubicados en Las Vegas, Nevada, somos tu puente de confianza para trámites vehiculares seguros.
+        </p>
+    </main>
+
+    <footer class="py-10 text-center border-t bg-white mt-10">
+        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP INC.</p>
     </footer>
 
     <script>
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
             document.getElementById('tab-' + id).classList.remove('hidden');
+            
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active', 'text-slate-400'));
+            document.getElementById('nav-' + id).classList.add('tab-active');
         }
 
         async function handleVerify(e) {
             e.preventDefault();
-            const name = document.getElementById('v-name').value.trim();
-            const id_cliente = document.getElementById('v-id').value.trim();
+            const name = document.getElementById('v-name').value;
+            const id_cliente = document.getElementById('v-id').value;
 
-            try {
-                // IMPORTANTE: Render usa la misma URL de la página para la API
-                const respuesta = await fetch('/api/verificar', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nombre: name, id_cliente: id_cliente })
-                });
+            const res = await fetch('/api/verificar', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ nombre: name, id_cliente: id_cliente })
+            });
+            const data = await res.json();
 
-                const resultado = await respuesta.json();
-
-                if (resultado.success) {
-                    document.getElementById('res-name').textContent = resultado.datos.nombre;
-                    document.getElementById('res-id').textContent = resultado.datos.id_cliente;
-                    document.getElementById('res-img').src = resultado.datos.foto_url;
-                    document.getElementById('verify-form').classList.add('hidden');
-                    document.getElementById('verify-result').classList.remove('hidden');
-                } else {
-                    alert("RECORD NOT FOUND: Please check the information.");
-                }
-            } catch (err) {
-                alert("Connection Error. Please try again later.");
+            if(data.success) {
+                document.getElementById('res-name').textContent = data.datos.nombre;
+                document.getElementById('res-id').textContent = "ID: " + data.datos.id_cliente;
+                document.getElementById('res-img').src = data.datos.foto_url;
+                document.getElementById('verify-form').classList.add('hidden');
+                document.getElementById('verify-result').classList.remove('hidden');
+            } else {
+                alert("REGISTRO NO ENCONTRADO");
             }
         }
     </script>
