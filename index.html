@@ -9,8 +9,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        
-        /* Estilo para botón activo corregido con !important */
         .tab-active { color: #2563eb !important; border-bottom: 4px solid #2563eb !important; font-weight: 900 !important; }
         .hidden { display: none; }
         
@@ -21,11 +19,9 @@
             background-position: center; 
         }
 
-        .advisor-card:hover { transform: translateY(-10px); transition: all 0.3s ease; }
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Sello de Verificación */
         .verify-seal {
             background: #16a34a;
             color: white;
@@ -35,33 +31,19 @@
             font-weight: 900;
             text-transform: uppercase;
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            align-items: center; gap: 8px;
             box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
             border: 2px solid white;
         }
 
-        /* AJUSTE DE FOTO: Muestra la imagen COMPLETA sin recortes */
         .photo-container {
-            width: 100%;
-            max-width: 320px;
-            aspect-ratio: 3 / 2;
-            background: #f8fafc;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%; max-width: 320px; aspect-ratio: 3 / 2;
+            background: #f8fafc; border-radius: 1.5rem; overflow: hidden;
+            border: 4px solid white; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
         }
         
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* CRÍTICO: Evita que la foto se corte */
-            background-color: #f1f5f9;
-        }
+        .photo-container img { width: 100%; height: 100%; object-fit: contain; background-color: #f1f5f9; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -82,52 +64,104 @@
     </header>
 
     <main id="tab-home" class="animate-fade">
-        <section class="hero-bg text-white py-28 px-6 text-center">
-            <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Your Journey Starts <br> <span class="text-blue-500 text-3xl md:text-5xl italic">With Trusted Experts</span></h2>
-            <p class="max-w-3xl mx-auto text-slate-300 mb-10 text-lg font-medium leading-relaxed">
-                We turn complex processes into simple solutions. Secure, legal, and stress-free.
-            </p>
-            <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record</button>
+        <section class="hero-bg text-white py-32 px-6 text-center">
+            <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
+            <p class="max-w-3xl mx-auto text-slate-300 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
+            <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
         </section>
 
         <section class="py-24 px-6 bg-white">
-            <div class="container mx-auto text-center">
-                <h2 class="text-3xl font-black uppercase italic mb-12 text-slate-800">Customer <span class="text-blue-600">Success Stories</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    <div class="p-4 bg-slate-50 rounded-2xl italic text-[10px] font-medium border-l-4 border-green-500">"Excellent service!" <br> <span class="block mt-2 font-black uppercase">- Carlos M.</span></div>
-                    <div class="p-4 bg-slate-50 rounded-2xl italic text-[10px] font-medium border-l-4 border-green-500">"Super reliable." <br> <span class="block mt-2 font-black uppercase">- Elena R.</span></div>
-                    <div class="p-4 bg-slate-50 rounded-2xl italic text-[10px] font-medium border-l-4 border-green-500">"Great security." <br> <span class="block mt-2 font-black uppercase">- Javier H.</span></div>
-                    <div class="p-4 bg-slate-50 rounded-2xl italic text-[10px] font-medium border-l-4 border-green-500">"Fast results." <br> <span class="block mt-2 font-black uppercase">- Monica P.</span></div>
-                    <div class="p-4 bg-slate-50 rounded-2xl italic text-[10px] font-medium border-l-4 border-green-500">"Best investment." <br> <span class="block mt-2 font-black uppercase">- Ricardo G.</span></div>
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-black uppercase italic mb-16 text-center">Success <span class="text-blue-600">Stories</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
+                        <p class="italic text-slate-600 text-sm leading-relaxed">"I was struggling with my paperwork for months until I found DMV CAR LOW GROUP. Their team handled everything with such professionalism and speed. My license arrived way sooner than I expected. Truly the best in the business!"</p>
+                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Carlos Martinez</span>
+                    </div>
+                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
+                        <p class="italic text-slate-600 text-sm leading-relaxed">"The level of transparency here is unmatched. Being able to verify my document status directly on their portal gave me total peace of mind. They are reliable, honest, and very patient with all my questions."</p>
+                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Elena Rodriguez</span>
+                    </div>
+                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
+                        <p class="italic text-slate-600 text-sm leading-relaxed">"If you are looking for serious consultants, look no further. They helped me navigate a very complex legal process in Nevada without any stress. 100% recommended for the immigrant community."</p>
+                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Monica Peralta</span>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <main id="tab-trust" class="hidden animate-fade">
-        <section class="container mx-auto py-24 px-6 text-center">
-            <h2 class="text-4xl font-black uppercase italic mb-6">Expertise That <span class="text-blue-600">Moves You</span></h2>
-            <p class="text-slate-600 text-lg max-w-2xl mx-auto">We provide the #1 independent verification service for the community.</p>
+        <section class="container mx-auto py-24 px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span>
+                <h2 class="text-5xl font-black uppercase italic mt-4">Why Choose <span class="text-blue-600">Us?</span></h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-black uppercase italic text-slate-800 mb-4">20 Years of Unmatched Experience</h3>
+                        <p class="text-slate-600 leading-relaxed">Since our founding, we have dedicated two decades to mastering the complexities of document consulting. Our longevity is a testament to our commitment to legality and customer satisfaction.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-2xl border-b-4 border-blue-600">
+                            <p class="text-3xl font-black text-blue-700">150K+</p>
+                            <p class="text-[10px] font-bold uppercase text-slate-500 tracking-widest">Satisfied Clients</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-2xl border-b-4 border-blue-600">
+                            <p class="text-3xl font-black text-blue-700">100%</p>
+                            <p class="text-[10px] font-bold uppercase text-slate-500 tracking-widest">Legal Processes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl">
+                    <h3 class="text-xl font-black uppercase italic mb-6 text-blue-400">Our Core Pillars</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <i class="fas fa-shield-check text-blue-400 mt-1"></i>
+                            <div>
+                                <p class="font-black uppercase text-sm">Absolute Security</p>
+                                <p class="text-xs text-slate-400 mt-1">We use high-end encryption for your data and verified legal channels for all paperwork.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <i class="fas fa-bolt text-blue-400 mt-1"></i>
+                            <div>
+                                <p class="font-black uppercase text-sm">Industry Speed</p>
+                                <p class="text-xs text-slate-400 mt-1">Our direct connections and expertise allow us to process documents up to 3x faster than traditional agencies.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <i class="fas fa-user-group text-blue-400 mt-1"></i>
+                            <div>
+                                <p class="font-black uppercase text-sm">Personal Support</p>
+                                <p class="text-xs text-slate-400 mt-1">You are not a number. Every client gets a dedicated senior advisor for their case.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </section>
     </main>
 
     <main id="tab-advisors" class="hidden animate-fade">
-        <section class="bg-slate-100 py-24 px-6 container mx-auto text-center">
-            <h2 class="text-3xl font-black uppercase italic mb-16">Senior <span class="text-blue-600">Advisors</span></h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+        <section class="bg-slate-100 py-24 px-6 text-center">
+            <h2 class="text-3xl font-black uppercase italic mb-16">Meet Our <span class="text-blue-600">Senior Advisors</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 container mx-auto gap-6">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600 advisor-card">
                     <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4">
                     <h4 class="font-black uppercase text-xs">Rogelio Olivo</h4>
                 </div>
-                <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600 advisor-card">
                     <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4">
                     <h4 class="font-black uppercase text-xs">Fermin Garcia</h4>
                 </div>
-                <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600 advisor-card">
                     <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4">
                     <h4 class="font-black uppercase text-xs">Marcela Vanegas</h4>
                 </div>
-                <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600 advisor-card">
                     <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4">
                     <h4 class="font-black uppercase text-xs">Edwin Peralta</h4>
                 </div>
@@ -138,7 +172,7 @@
     <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade">
         <div class="max-w-4xl mx-auto space-y-10">
             <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
-                <h2 class="text-2xl font-black uppercase italic mb-8">Record <span class="text-blue-600">Authentication</span></h2>
+                <h2 class="text-2xl font-black uppercase italic mb-8">Secure <span class="text-blue-600">Authentication</span></h2>
                 <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
                     <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
                     <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
@@ -148,27 +182,17 @@
             
             <div id="verify-result" class="hidden bg-white rounded-[3rem] shadow-2xl border-2 border-slate-100 overflow-hidden animate-fade">
                 <div class="p-8 md:p-12 flex flex-col lg:flex-row gap-10 items-center lg:items-start">
-                    
                     <div class="flex flex-col items-center gap-6">
-                        <div class="photo-container relative">
-                            <img id="res-img" src="">
-                        </div>
+                        <div class="photo-container relative"><img id="res-img" src=""></div>
                         <div class="verify-seal"><i class="fas fa-check-circle"></i> Authenticated</div>
                     </div>
-
                     <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-10">
                         <div class="md:col-span-2 border-b border-slate-100 pb-2">
                             <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Full Name</p>
                             <p id="res-name" class="text-2xl font-black text-blue-700 uppercase leading-none"></p>
                         </div>
-                        <div>
-                            <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">ID / FOLIO</p>
-                            <p id="res-id" class="font-black text-lg uppercase text-slate-700"></p>
-                        </div>
-                        <div>
-                            <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">License Type</p>
-                            <p id="res-tipo" class="font-black text-lg uppercase text-slate-700"></p>
-                        </div>
+                        <div><p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">ID / FOLIO</p><p id="res-id" class="font-black text-lg uppercase text-slate-700"></p></div>
+                        <div><p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">License Type</p><p id="res-tipo" class="font-black text-lg uppercase text-slate-700"></p></div>
                         <div class="md:col-span-2 bg-slate-50 p-4 rounded-2xl">
                             <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-1">Registered Address</p>
                             <p id="res-address" class="font-bold text-sm uppercase text-slate-600"></p>
@@ -184,26 +208,19 @@
     </main>
 
     <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center">
-        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP. ALL RIGHTS RESERVED.</p>
+        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
     </footer>
 
     <script>
-        // FUNCIÓN DE NAVEGACIÓN CORREGIDA
         function showTab(id) {
-            // Ocultar todas las secciones
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
-            
-            // Mostrar la seleccionada
             const target = document.getElementById('tab-' + id);
             if(target) target.classList.remove('hidden');
 
-            // Resetear estilos de botones
             document.querySelectorAll('nav button').forEach(b => {
                 b.classList.remove('tab-active');
                 b.classList.add('text-slate-400');
             });
-
-            // Activar botón actual
             const activeBtn = document.getElementById('nav-' + id);
             if(activeBtn) {
                 activeBtn.classList.add('tab-active');
@@ -212,7 +229,6 @@
             window.scrollTo(0,0);
         }
 
-        // FUNCIÓN DE VERIFICACIÓN
         async function handleVerify(e) {
             e.preventDefault();
             const nInput = document.getElementById('v-name').value;
@@ -240,11 +256,11 @@
                     
                     resCard.scrollIntoView({ behavior: 'smooth' });
                 } else {
-                    alert("RECORD NOT FOUND: Please check your credentials.");
+                    alert("RECORD NOT FOUND.");
                     resCard.classList.add('hidden');
                 }
             } catch (err) {
-                alert("Connection error with the server.");
+                alert("Server error.");
             }
         }
     </script>
