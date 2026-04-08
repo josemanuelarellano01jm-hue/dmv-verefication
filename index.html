@@ -3,155 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMV CAR LOW GROUP | Trusted Consulting</title>
+    <title>DMV CAR LOW GROUP | Trusted Document Consulting</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .tab-active { color: #2563eb; border-bottom: 4px solid #2563eb; font-weight: 900; }
         .hidden { display: none; }
-        .hero-bg { background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; }
-        .stat-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .trust-section { background: linear-gradient(to right, #f8fafc, #ffffff); }
-        .animate-fade { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-bg { background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1500'); background-size: cover; background-position: center; }
+        .advisor-card:hover { transform: translateY(-10px); transition: all 0.3s ease; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
     <header class="bg-white sticky top-0 z-50 shadow-md">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white p-2 rounded-lg shadow-lg"><i class="fas fa-shield-alt text-xl"></i></div>
+                <div class="bg-blue-600 text-white p-2 rounded-lg"><i class="fas fa-shield-alt text-xl"></i></div>
                 <h1 class="text-xl font-black italic uppercase tracking-tighter">DMV <span class="text-blue-600">CAR LOW GROUP</span></h1>
             </div>
-            <nav class="flex space-x-4">
-                <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-bold tracking-widest tab-active">Home</button>
-                <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-bold tracking-widest text-slate-400">Verification</button>
+            <nav class="flex space-x-6 mt-4 md:mt-0">
+                <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active">Home</button>
+                <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Verification</button>
             </nav>
         </div>
     </header>
 
     <main id="tab-home" class="animate-fade">
-        <section class="hero-bg text-white py-24 px-6 text-center">
-            <div class="container mx-auto">
-                <h2 class="text-4xl md:text-7xl font-black mb-8 italic uppercase leading-tight tracking-tighter">Reliability <br> <span class="text-blue-500 text-3xl md:text-5xl italic tracking-normal">Built on Experience</span></h2>
-                
-                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    <div class="stat-card p-10 rounded-3xl border-b-4 border-blue-500">
-                        <i class="fas fa-history text-4xl text-blue-400 mb-4"></i>
-                        <p class="text-5xl font-black mb-1">20+</p>
-                        <p class="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em]">Years of Professional Service</p>
-                    </div>
-                    <div class="stat-card p-10 rounded-3xl border-b-4 border-blue-500">
-                        <i class="fas fa-check-double text-4xl text-blue-400 mb-4"></i>
-                        <p class="text-5xl font-black mb-1">150K+</p>
-                        <p class="text-[10px] uppercase font-black text-slate-400 tracking-[0.2em]">Successful Consultations</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-center gap-4">
-                    <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition-all transform hover:scale-105 shadow-xl">Start Verification</button>
-                    <a href="#trust" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition">Why Trust Us</a>
-                </div>
+        <section class="hero-bg text-white py-28 px-6 text-center">
+            <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Your Journey Starts <br> <span class="text-blue-500 text-3xl md:text-5xl italic">With Trusted Experts</span></h2>
+            <p class="max-w-3xl mx-auto text-slate-300 mb-10 text-lg font-medium leading-relaxed">
+                At **DMV CAR LOW GROUP**, we turn complex processes into simple solutions. We are leaders in document consulting, ensuring your path to the driver's seat is secure, legal, and stress-free.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl">Verify My Record</button>
+                <a href="#services" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-10 py-5 rounded-full font-black uppercase tracking-widest transition">Our Services</a>
             </div>
         </section>
 
-        <section id="trust" class="trust-section py-24 px-6 border-y border-slate-100">
-            <div class="container mx-auto flex flex-col md:flex-row items-center gap-16">
+        <section id="services" class="container mx-auto py-24 px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
                 <div class="flex-1">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=1000" alt="Professional Consulting Office" class="rounded-[3rem] shadow-2xl relative z-10 border-8 border-white">
-                        <div class="absolute -bottom-6 -right-6 w-full h-full bg-blue-600 rounded-[3rem] -z-0"></div>
+                    <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs">Why Trust Us?</span>
+                    <h2 class="text-4xl font-black uppercase italic mt-4 mb-6">Expertise That <span class="text-blue-600">Moves You</span></h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6 font-medium">
+                        We understand that a paperwork process isn't just about a document; it's about your peace of mind. With years of industry experience, **DMV CAR LOW GROUP** has become the #1 independent agency for the community. We don't just fill out forms; we protect your interests and guide you step-by-step with absolute transparency.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center space-x-3"><i class="fas fa-check-circle text-green-500"></i> <span class="font-bold text-sm uppercase">100% Legal</span></div>
+                        <div class="flex items-center space-x-3"><i class="fas fa-check-circle text-green-500"></i> <span class="font-bold text-sm uppercase">Fast Processing</span></div>
+                        <div class="flex items-center space-x-3"><i class="fas fa-check-circle text-green-500"></i> <span class="font-bold text-sm uppercase">Certified Agents</span></div>
+                        <div class="flex items-center space-x-3"><i class="fas fa-check-circle text-green-500"></i> <span class="font-bold text-sm uppercase">Personal Support</span></div>
                     </div>
                 </div>
-                
-                <div class="flex-1 space-y-6">
-                    <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs">Unmatched Reliability</span>
-                    <h2 class="text-5xl font-black uppercase italic leading-none">Expertise That <span class="text-blue-600 italic">Moves You</span></h2>
-                    <p class="text-slate-600 text-lg leading-relaxed font-medium">
-                        We don't just fill out forms; we build trust. Our certified independent agents are deeply knowledgeable and committed to your success. With absolute transparency, personal support, and a history of over 150,000 satisfied clients, we are the experts you can rely on.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
-                        <div class="flex items-center space-x-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                            <i class="fas fa-file-contract text-blue-600 text-2xl"></i>
-                            <span class="font-black uppercase text-[10px] tracking-widest text-slate-700">100% Legal Processes</span>
-                        </div>
-                        <div class="flex items-center space-x-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                            <i class="fas fa-user-shield text-blue-600 text-2xl"></i>
-                            <span class="font-black uppercase text-[10px] tracking-widest text-slate-700">Certified Agents</span>
-                        </div>
-                        <div class="flex items-center space-x-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                            <i class="fas fa-bolt text-blue-600 text-2xl"></i>
-                            <span class="font-black uppercase text-[10px] tracking-widest text-slate-700">Fast Processing</span>
-                        </div>
-                        <div class="flex items-center space-x-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                            <i class="fas fa-search-dollar text-blue-600 text-2xl"></i>
-                            <span class="font-black uppercase text-[10px] tracking-widest text-slate-700">Secure Verification</span>
-                        </div>
+                <div class="flex-1 bg-blue-600 rounded-[4rem] p-12 text-white shadow-2xl">
+                    <h3 class="text-2xl font-black uppercase italic mb-4">How to Process Your License?</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <span class="bg-white text-blue-600 w-8 h-8 rounded-full flex items-center justify-center font-black shrink-0">1</span>
+                            <p class="text-sm font-bold">Initial Consulting: We evaluate your status and requirements based on your State.</p>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="bg-white text-blue-600 w-8 h-8 rounded-full flex items-center justify-center font-black shrink-0">2</span>
+                            <p class="text-sm font-bold">Document Management: We prepare and verify all your legal paperwork.</p>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="bg-white text-blue-600 w-8 h-8 rounded-full flex items-center justify-center font-black shrink-0">3</span>
+                            <p class="text-sm font-bold">Appointment & Guidance: We guide you through the finish line to get your official document.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-100 py-24 px-6">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-black uppercase italic mb-16">Meet Our <span class="text-blue-600">Senior Advisors</span></h2>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                        <div class="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden"><img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-full"></div>
+                        <h4 class="font-black uppercase text-sm">Rogelio Olivo</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Senior Consultant</p>
+                    </div>
+                    <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                        <div class="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden"><img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-full"></div>
+                        <h4 class="font-black uppercase text-sm">Fermin Garcia</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Compliance Expert</p>
+                    </div>
+                    <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                        <div class="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden"><img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-full"></div>
+                        <h4 class="font-black uppercase text-sm">Marcela Vanegas</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Document Specialist</p>
+                    </div>
+                    <div class="advisor-card bg-white p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                        <div class="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-4 overflow-hidden"><img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-full"></div>
+                        <h4 class="font-black uppercase text-sm">Edwin Peralta</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Legal Advisor</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-24 bg-slate-900 text-white overflow-hidden">
-            <div class="container mx-auto px-6 text-center mb-16">
-                <h2 class="text-3xl font-black uppercase italic tracking-tighter">Premium Support for <span class="text-blue-500">Every Vehicle</span></h2>
-            </div>
-            <div class="flex flex-wrap justify-center gap-4 px-4">
-                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=400" class="w-72 h-48 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500" alt="Luxury Car 1">
-                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=400" class="w-72 h-48 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500" alt="Luxury Car 2">
-                <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=400" class="w-72 h-48 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500" alt="Luxury Car 3">
-                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=400" class="w-72 h-48 object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500" alt="Luxury Car 4">
+        <section class="py-24 px-6 bg-white">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-black uppercase italic mb-12">Customer <span class="text-blue-600">Success Stories</span></h2>
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div class="p-6 bg-slate-50 rounded-2xl italic text-xs font-medium border-l-4 border-green-500">"Excellent service, my license arrived faster than expected. Thank you, Rogelio!" <br> <span class="block mt-4 font-black uppercase not-italic">- Carlos M.</span></div>
+                    <div class="p-6 bg-slate-50 rounded-2xl italic text-xs font-medium border-l-4 border-green-500">"Super reliable. Marcela helped me with all the Nevada paperwork. 10/10." <br> <span class="block mt-4 font-black uppercase not-italic">- Elena R.</span></div>
+                    <div class="p-6 bg-slate-50 rounded-2xl italic text-xs font-medium border-l-4 border-green-500">"The verification portal gave me great security by seeing my real data." <br> <span class="block mt-4 font-black uppercase not-italic">- Javier H.</span></div>
+                    <div class="p-6 bg-slate-50 rounded-2xl italic text-xs font-medium border-l-4 border-green-500">"Fermin is a true professional. They answered my questions immediately." <br> <span class="block mt-4 font-black uppercase not-italic">- Monica P.</span></div>
+                    <div class="p-6 bg-slate-50 rounded-2xl italic text-xs font-medium border-l-4 border-green-500">"Best investment for my legal processes in the US. Edwin was very attentive." <br> <span class="block mt-4 font-black uppercase not-italic">- Ricardo G.</span></div>
+                </div>
             </div>
         </section>
     </main>
 
-    <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade">
-        <div class="max-w-2xl mx-auto">
+    <main id="tab-verify" class="hidden container mx-auto px-6 py-16">
+        <div class="max-w-2xl mx-auto space-y-8">
             <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600">
-                <h2 class="text-2xl font-black uppercase italic mb-8 text-center text-slate-800">Record <span class="text-blue-600">Authentication</span></h2>
+                <h2 class="text-2xl font-black uppercase italic mb-8 text-center">Record <span class="text-blue-600">Authentication</span></h2>
                 <form onsubmit="handleVerify(event)" class="space-y-4">
-                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none transition-all" required>
-                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none transition-all" required>
-                    <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
+                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition">Authenticate Record</button>
                 </form>
             </div>
             
-            <div id="verify-result" class="hidden mt-8 bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden animate-fade">
-                <div class="bg-green-600 p-3 text-white text-center font-black uppercase text-[10px] tracking-widest">Verified Record</div>
-                <div class="p-8 flex flex-col md:flex-row gap-8 items-center">
-                    <div class="w-40 h-48 bg-slate-100 rounded-2xl overflow-hidden border-4 border-white shadow-md flex-shrink-0">
+            <div id="verify-result" class="hidden bg-white rounded-[2rem] shadow-2xl border-2 border-slate-100 overflow-hidden">
+                <div class="p-8 flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-full md:w-40 h-48 bg-slate-100 rounded-2xl overflow-hidden border-4 border-white shadow-md">
                         <img id="res-img" src="" class="w-full h-full object-cover">
                     </div>
-                    <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="md:col-span-2 border-b pb-2">
-                            <p class="text-[9px] font-black text-slate-400 uppercase">Holder Name</p>
-                            <p id="res-name" class="text-xl font-black text-blue-700 uppercase"></p>
+                            <p class="text-[10px] font-black uppercase text-slate-400">Full Name</p>
+                            <p id="res-name" class="text-xl font-black text-blue-700"></p>
                         </div>
-                        <div><p class="text-[9px] font-black text-slate-400 uppercase">Record ID</p><p id="res-id" class="font-black text-sm uppercase"></p></div>
-                        <div><p class="text-[9px] font-black text-slate-400 uppercase">License Class</p><p id="res-tipo" class="font-black text-sm uppercase"></p></div>
-                        <div><p class="text-[9px] font-black text-slate-400 uppercase">Jurisdiction</p><p id="res-estado" class="font-black text-sm uppercase"></p></div>
-                        <div class="md:col-span-2 pt-2 border-t"><p class="text-[9px] font-black text-slate-400 uppercase">Physical Address</p><p id="res-direccion" class="font-black text-[11px] text-slate-600 uppercase"></p></div>
+                        <div><p class="text-[10px] font-black text-slate-400">ID / FOLIO</p><p id="res-id" class="font-black text-sm"></p></div>
+                        <div><p class="text-[10px] font-black text-slate-400">LICENSE TYPE</p><p id="res-tipo" class="font-black text-sm"></p></div>
+                        <div><p class="text-[10px] font-black text-slate-400">STATE</p><p id="res-estado" class="font-black text-sm"></p></div>
+                        <div><p class="text-[10px] font-black text-slate-400">EMAIL</p><p id="res-correo" class="font-black text-sm lowercase"></p></div>
+                        <div class="md:col-span-2"><p class="text-[10px] font-black text-slate-400">ADDRESS</p><p id="res-direccion" class="font-black text-sm"></p></div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center border-t border-slate-800 mt-20">
-        <div class="container mx-auto">
-            <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-6 text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                Notice: DMV CAR LOW GROUP is an independent document consulting agency. We provide expert verification and management services not directly affiliated with government entities.
+    <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto border-t border-slate-800 pt-10">
+            <p class="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 text-slate-300 leading-relaxed">
+                NOTICE: DMV CAR LOW GROUP is an independent agency specializing in document consulting and verification.
             </p>
-            <div class="flex justify-center space-x-6 text-xl mb-8">
-                <i class="fab fa-facebook hover:text-blue-500 cursor-pointer transition"></i>
-                <i class="fab fa-instagram hover:text-pink-500 cursor-pointer transition"></i>
-                <i class="fab fa-whatsapp hover:text-green-500 cursor-pointer transition"></i>
-            </div>
-            <p class="text-[9px] font-black uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP INC. ALL RIGHTS RESERVED.</p>
+            <p class="text-[9px] font-bold uppercase tracking-widest">
+                &copy; 2026 DMV CAR LOW GROUP INC. ALL RIGHTS RESERVED.
+            </p>
         </div>
     </footer>
 
@@ -177,11 +184,12 @@
                 document.getElementById('res-id').textContent = data.datos.id_cliente;
                 document.getElementById('res-tipo').textContent = data.datos.tipo_licencia;
                 document.getElementById('res-estado').textContent = data.datos.estado;
+                document.getElementById('res-correo').textContent = data.datos.correo;
                 document.getElementById('res-direccion').textContent = data.datos.direccion;
                 document.getElementById('res-img').src = data.datos.foto_url;
                 document.getElementById('verify-result').classList.remove('hidden');
             } else {
-                alert("RECORD NOT FOUND: Please check your credentials.");
+                alert("RECORD NOT FOUND: Please verify your information.");
                 document.getElementById('verify-result').classList.add('hidden');
             }
         }
