@@ -36,7 +36,7 @@ db.serialize(() => {
         'NEVADA', 
         'CLASS C - OPERATOR', 
         'SMITH.dmv@gmail.com', 
-        '/fotos/jose.jpg'
+        '/fotos/edwin.jpg'
     )`);
 });
 
