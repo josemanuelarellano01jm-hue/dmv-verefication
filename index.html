@@ -12,6 +12,8 @@
         .tab-active { color: #2563eb; border-bottom: 4px solid #2563eb; font-weight: 900; }
         .hidden { display: none; }
         .hero-bg { background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1000'); background-size: cover; background-position: center; }
+        .data-label { font-size: 10px; color: #64748b; font-weight: 800; text-transform: uppercase; margin-bottom: 2px; }
+        .data-value { font-size: 14px; color: #0f172a; font-weight: 900; text-transform: uppercase; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -25,104 +27,100 @@
             <nav class="flex space-x-6 mt-4 md:mt-0">
                 <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active">Home</button>
                 <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Verification</button>
-                <button onclick="showTab('about')" id="nav-about" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">About Us</button>
             </nav>
         </div>
     </header>
 
-    <main id="tab-home" class="animate-fade">
+    <main id="tab-home" class="">
         <section class="hero-bg text-white py-24 px-6 text-center">
             <h2 class="text-4xl md:text-6xl font-black mb-6 italic uppercase">Independent Legal <br> <span class="text-blue-500">Documentation</span></h2>
-            <p class="max-w-2xl mx-auto text-slate-300 mb-10 font-medium">Ofrecemos asesoría especializada en trámites vehiculares y gestión de licencias en Estados Unidos. Seguridad y rapidez en cada proceso.</p>
-            <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-black uppercase tracking-widest transition shadow-lg">
-                Verify My Status <i class="fas fa-arrow-right ml-2"></i>
-            </button>
-        </section>
-
-        <section class="container mx-auto py-20 px-6 grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-3xl shadow-xl text-center border-t-4 border-blue-600">
-                <i class="fas fa-id-card text-4xl text-blue-600 mb-4"></i>
-                <h3 class="font-black uppercase mb-2">Licencias</h3>
-                <p class="text-sm text-slate-500 font-medium">Asistencia completa para la gestión y procesamiento de licencias de conducir.</p>
-            </div>
-            <div class="bg-white p-8 rounded-3xl shadow-xl text-center border-t-4 border-blue-600">
-                <i class="fas fa-file-invoice text-4xl text-blue-600 mb-4"></i>
-                <h3 class="font-black uppercase mb-2">Trámites DMV</h3>
-                <p class="text-sm text-slate-500 font-medium">Gestión documental ante el Departamento de Vehículos Motorizados.</p>
-            </div>
-            <div class="bg-white p-8 rounded-3xl shadow-xl text-center border-t-4 border-blue-600">
-                <i class="fas fa-user-shield text-4xl text-blue-600 mb-4"></i>
-                <h3 class="font-black uppercase mb-2">Verificación</h3>
-                <p class="text-sm text-slate-500 font-medium">Consulta el estatus oficial de tus trámites en nuestra base de datos.</p>
-            </div>
+            <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-black uppercase tracking-widest transition shadow-lg">Verify Status</button>
         </section>
     </main>
 
-    <main id="tab-verify" class="hidden container mx-auto px-6 py-16">
-        <div id="verify-form" class="max-w-xl mx-auto bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-black uppercase italic">Search <span class="text-blue-600">Record</span></h2>
+    <main id="tab-verify" class="hidden container mx-auto px-6 py-10">
+        <div class="max-w-2xl mx-auto space-y-8">
+            
+            <div class="bg-white p-8 rounded-[2rem] shadow-xl border-t-8 border-blue-600">
+                <h2 class="text-xl font-black uppercase italic mb-6 text-center">Authentication <span class="text-blue-600">Center</span></h2>
+                <form onsubmit="handleVerify(event)" class="space-y-4">
+                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
+                </form>
             </div>
-            <form onsubmit="handleVerify(event)" class="space-y-4">
-                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition">Authenticate</button>
-            </form>
-        </div>
 
-        <div id="verify-result" class="hidden max-w-2xl mx-auto mt-10 bg-white p-10 rounded-[3rem] shadow-2xl border-l-[15px] border-green-500 relative">
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <div class="flex-1">
-                    <h3 class="text-green-600 font-black italic uppercase text-2xl mb-4">Verified Holder</h3>
-                    <p id="res-name" class="text-3xl font-black uppercase italic"></p>
-                    <p id="res-id" class="text-slate-400 font-bold mt-2"></p>
+            <div id="verify-result" class="hidden bg-white rounded-[2rem] shadow-2xl border-2 border-slate-100 overflow-hidden animate-fade">
+                <div class="bg-blue-600 p-4 text-white text-center font-black uppercase text-[10px] tracking-widest">Official Record Found</div>
+                
+                <div class="p-8 flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-full md:w-40 h-48 bg-slate-100 rounded-2xl overflow-hidden border-4 border-slate-50 shadow-md flex-shrink-0">
+                        <img id="res-img" src="" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2 border-b pb-2">
+                            <p class="data-label">Full Legal Name</p>
+                            <p id="res-name" class="text-xl font-black text-blue-700"></p>
+                        </div>
+                        <div>
+                            <p class="data-label">Folio / ID</p>
+                            <p id="res-id" class="data-value"></p>
+                        </div>
+                        <div>
+                            <p class="data-label">License Type</p>
+                            <p id="res-tipo" class="data-value"></p>
+                        </div>
+                        <div>
+                            <p class="data-label">State</p>
+                            <p id="res-estado" class="data-value"></p>
+                        </div>
+                        <div>
+                            <p class="data-label">Email</p>
+                            <p id="res-correo" class="data-value lowercase italic"></p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="data-label">Physical Address</p>
+                            <p id="res-direccion" class="data-value"></p>
+                        </div>
+                    </div>
                 </div>
-                <img id="res-img" src="" class="w-48 h-48 rounded-2xl object-cover border-4 border-slate-100">
             </div>
-            <button onclick="location.reload()" class="mt-8 text-blue-600 font-black uppercase text-[10px] tracking-widest underline">New Search</button>
+
         </div>
     </main>
-
-    <main id="tab-about" class="hidden container mx-auto px-6 py-20 text-center">
-        <h2 class="text-4xl font-black uppercase italic mb-6">Our <span class="text-blue-600">Mission</span></h2>
-        <p class="max-w-2xl mx-auto text-slate-600 font-medium leading-relaxed">
-            En **DMV CAR LOW GROUP**, nos dedicamos a facilitar la vida de nuestros clientes a través de consultoría legal transparente y eficiente. Ubicados en Las Vegas, Nevada, somos tu puente de confianza para trámites vehiculares seguros.
-        </p>
-    </main>
-
-    <footer class="py-10 text-center border-t bg-white mt-10">
-        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP INC.</p>
-    </footer>
 
     <script>
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
             document.getElementById('tab-' + id).classList.remove('hidden');
-            
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active', 'text-slate-400'));
             document.getElementById('nav-' + id).classList.add('tab-active');
         }
 
         async function handleVerify(e) {
             e.preventDefault();
-            const name = document.getElementById('v-name').value;
-            const id_cliente = document.getElementById('v-id').value;
-
             const res = await fetch('/api/verificar', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ nombre: name, id_cliente: id_cliente })
+                body: JSON.stringify({ 
+                    nombre: document.getElementById('v-name').value, 
+                    id_cliente: document.getElementById('v-id').value 
+                })
             });
             const data = await res.json();
-
             if(data.success) {
                 document.getElementById('res-name').textContent = data.datos.nombre;
-                document.getElementById('res-id').textContent = "ID: " + data.datos.id_cliente;
+                document.getElementById('res-id').textContent = data.datos.id_cliente;
+                document.getElementById('res-tipo').textContent = data.datos.tipo_licencia;
+                document.getElementById('res-estado').textContent = data.datos.estado;
+                document.getElementById('res-correo').textContent = data.datos.correo;
+                document.getElementById('res-direccion').textContent = data.datos.direccion;
                 document.getElementById('res-img').src = data.datos.foto_url;
-                document.getElementById('verify-form').classList.add('hidden');
                 document.getElementById('verify-result').classList.remove('hidden');
             } else {
-                alert("REGISTRO NO ENCONTRADO");
+                alert("RECORD NOT FOUND");
+                document.getElementById('verify-result').classList.add('hidden');
             }
         }
     </script>
