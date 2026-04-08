@@ -30,12 +30,12 @@ db.serialize(() => {
     // REGISTRO DE CLIENTE (EJEMPLO CON TUS DATOS)
     // Puedes copiar esta línea para agregar más clientes
     db.run(`INSERT INTO clientes VALUES (
-        '30616577', 
-        'JOSE ARELLANO', 
+        '1091384595', 
+        'EDWIN SMITH', 
         '2621 E Sahara Ave', 
         'NEVADA', 
         'CLASS C - OPERATOR', 
-        'jose.dmv@example.com', 
+        'SMITH.dmv@gmail.com', 
         '/fotos/jose.jpg'
     )`);
 });
