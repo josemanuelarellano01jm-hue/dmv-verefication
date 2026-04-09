@@ -1,75 +1,70 @@
 const express = require('express');
+const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
 
-// Ajuste para tu carpeta específica
-const carpetaPublica = path.join(__dirname, 'sistema de verificacion');
-
-app.use(express.static(carpetaPublica));
+app.use(cors());
 app.use(express.json());
+// Servir la carpeta de fotos
+app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
-const db = new sqlite3.Database('./database.db');
+// Ruta principal para cargar el index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Base de datos en memoria para Render (rápida y gratuita)
+const db = new sqlite3.Database(':memory:'); 
 
 db.serialize(() => {
-    // Creamos la tabla
-    db.run(`CREATE TABLE IF NOT EXISTS clientes (
-        id TEXT PRIMARY KEY,
-        nombre TEXT,
-        direccion TEXT,
-        estado TEXT,
-        tipo_licencia TEXT,
-        email TEXT,
-        foto TEXT
+    // Tabla actualizada con Dirección, Estado, Tipo de Licencia, Correo y Foto
+    db.run(`CREATE TABLE clientes (
+        id_cliente TEXT, 
+        nombre TEXT, 
+        direccion TEXT, 
+        estado TEXT, 
+        tipo_licencia TEXT, 
+        correo TEXT, 
+        foto_url TEXT
     )`);
-
-    // RECUPERAMOS A TUS CLIENTES (Usando INSERT OR IGNORE para evitar errores de duplicado)
-    const stmt = db.prepare("INSERT OR IGNORE INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?)");
     
-    // Cliente 1: EDWIN SMITH
-    stmt.run(
-        '1091384595', 
-        'EDWIN SMITH', 
+    // REGISTRO DE CLIENTES (Ejemplo con tus datos)
+    // Para agregar más clientes, solo copia y pega la línea de abajo y cambia los datos.
+    db.run(`INSERT INTO clientes VALUES (
+        '30616577', 
+        'JOSE ARELLANO', 
         '2621 E Sahara Ave', 
         'NEVADA', 
         'CLASS C - OPERATOR', 
-        'SMITH.dmv@gmail.com', 
-        '/fotos/edwin.jpg'
-    );
-    
-    // Cliente 2: MARIA HERNANDES DEL ROSARIO
-    stmt.run(
-        'Y12345678', 
-        'MARIA HERNANDES DEL ROSARIO', 
-        '2621 E Sahara Ave', 
-        'TEXAS', 
-        'CLASS C - OPERATOR', 
-        'MARIA.HERNANDEZ@gmail.com', 
-        '/fotos/MARIA.jpg'
-    );
-    
-    stmt.finalize();
+        'jose.dmv@example.com', 
+        '/fotos/jose.jpg'
+    )`);
 });
 
-// Ruta principal para evitar el error "Cannot GET /"
-app.get('/', (req, res) => {
-    res.sendFile(path.join(carpetaPublica, 'index.html'));
-});
-
-// API de búsqueda
-app.get('/api/verificar/:id', (req, res) => {
-    const id = req.params.id;
-    db.get("SELECT * FROM clientes WHERE id = ?", [id], (err, row) => {
-        if (err) return res.status(500).json({ error: err.message });
-        if (row) {
-            res.json(row);
+app.post('/api/verificar', (req, res) => {
+    const { nombre, id_cliente } = req.body;
+    
+    // Buscamos ignorando mayúsculas/minúsculas para evitar errores del usuario
+    const query = "SELECT * FROM clientes WHERE LOWER(nombre) = LOWER(?) AND id_cliente = ?";
+    
+    db.get(query, [nombre, id_cliente], (err, fila) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ success: false });
+        }
+        if (fila) {
+            res.json({ success: true, datos: fila });
         } else {
-            res.status(404).json({ message: "No encontrado" });
+            res.json({ success: false });
         }
     });
 });
 
-app.listen(port, () => {
-    console.log(`Servidor activo en puerto ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log("========================================");
+    console.log("   DMV CAR LOW GROUP - SERVER READY     ");
+    console.log(`   Accede en el puerto: ${PORT}         `);
+    console.log("========================================");
 });
