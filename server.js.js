@@ -50,7 +50,7 @@ db.serialize(() => {
         'TEXAS', 
         'CLASS C', 
         'MARIAN.HERNANDEZ@GMAIL.COM', 
-        '/fotos/MARIA.jpg'
+        '/fotos/MARIA.png'
     );
 
     stmt.finalize();
