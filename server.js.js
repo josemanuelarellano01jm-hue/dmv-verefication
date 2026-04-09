@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 // Servir la carpeta de fotos
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
@@ -14,13 +15,12 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Base de datos en memoria para Render (rápida y gratuita)
+// Base de datos en memoria
 const db = new sqlite3.Database(':memory:'); 
 
 db.serialize(() => {
-    // Tabla actualizada con Dirección, Estado, Tipo de Licencia, Correo y Foto
-    db.run(`CREATE TABLE clientes (
-        id_cliente TEXT, 
+    db.run(`CREATE TABLE IF NOT EXISTS clientes (
+        id_cliente TEXT PRIMARY KEY, 
         nombre TEXT, 
         direccion TEXT, 
         estado TEXT, 
@@ -29,9 +29,10 @@ db.serialize(() => {
         foto_url TEXT
     )`);
     
-    // REGISTRO DE CLIENTES (Ejemplo con tus datos)
-    // Para agregar más clientes, solo copia y pega la línea de abajo y cambia los datos.
-    db.run(`INSERT INTO clientes VALUES (
+    const stmt = db.prepare("INSERT OR IGNORE INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+    // CLIENTE 1: JOSE ARELLANO
+    stmt.run(
         '30616577', 
         'JOSE ARELLANO', 
         '2621 E Sahara Ave', 
@@ -39,13 +40,24 @@ db.serialize(() => {
         'CLASS C - OPERATOR', 
         'jose.dmv@example.com', 
         '/fotos/jose.jpg'
-    )`);
+    );
+    
+    // CLIENTE 2: MARIA HERNANDEZ DEL ROSARIO (NUEVA)
+    stmt.run(
+        'Y12345678', 
+        'MARIA HERNANDEZ DEL ROSARIO', 
+        '2312 A Texas Av 32', 
+        'TEXAS', 
+        'CLASS C', 
+        'MARIAN.HERNANDEZ@GMAIL.COM', 
+        '/fotos/MARIA.JPG'
+    );
+
+    stmt.finalize();
 });
 
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
-    
-    // Buscamos ignorando mayúsculas/minúsculas para evitar errores del usuario
     const query = "SELECT * FROM clientes WHERE LOWER(nombre) = LOWER(?) AND id_cliente = ?";
     
     db.get(query, [nombre, id_cliente], (err, fila) => {
@@ -64,7 +76,7 @@ app.post('/api/verificar', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("========================================");
-    console.log("   DMV CAR LOW GROUP - SERVER READY     ");
-    console.log(`   Accede en el puerto: ${PORT}         `);
+    console.log("    DMV CAR LOW GROUP - SERVER READY     ");
+    console.log(`    Accede en el puerto: ${PORT}         `);
     console.log("========================================");
 });
