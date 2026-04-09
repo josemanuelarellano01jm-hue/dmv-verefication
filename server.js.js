@@ -37,6 +37,17 @@ db.serialize(() => {
         'CLASS C - OPERATOR', 
         'SMITH.dmv@gmail.com', 
         '/fotos/edwin.jpg'
+
+
+    db.run(`INSERT INTO clientes VALUES (
+        'Y12345678', 
+        'MARIA HERNANDES DEL ROSARIO ', 
+        '2621 E Sahara Ave', 
+        'TEXAS', 
+        'CLASS C - OPERATOR', 
+        'MARIA.HERNANDEZ@gmail.com', 
+        '/fotos/MARIA.jpg'
+        
     )`);
 });
 
