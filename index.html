@@ -12,10 +12,10 @@
         .tab-active { color: #2563eb !important; border-bottom: 4px solid #2563eb !important; font-weight: 900 !important; }
         .hidden { display: none; }
         
-        /* Fondos Dinámicos con Temática de Conducción */
+        /* Fondos Dinámicos con Temática de Conducción y Nevada */
         .hero-bg { 
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-            url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1500&auto=format&fit=crop'); /* Imagen de carretera nocturna con estelas de luz */
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+            url('https://images.unsplash.com/photo-1581350860824-c8c724775086?q=80&w=1920&auto=format&fit=crop'); /* Imagen de carretera hacia Las Vegas, Nevada al atardecer */
             background-size: cover; background-position: center; 
         }
 
@@ -68,24 +68,25 @@
     </header>
 
     <main id="tab-home" class="animate-fade hero-bg">
-        <section class="text-white py-32 px-6 text-center">
+        <section class="text-white py-32 px-6 text-center relative z-10">
             <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
-            <p class="max-w-3xl mx-auto text-slate-300 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We handle the paperwork so you can focus on the road.</p>
+            <p class="max-w-3xl mx-auto text-slate-200 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We handle the paperwork so you can focus on the road through Nevada and beyond.</p>
             <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
         </section>
-        <section class="py-24 px-6 bg-slate-900/60 backdrop-blur-sm">
+        
+        <section class="py-24 px-6 bg-slate-950/70 backdrop-blur-sm relative z-10">
             <div class="container mx-auto text-white">
                 <h2 class="text-3xl font-black uppercase italic mb-16 text-center">Success <span class="text-blue-500">Stories</span></h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-8 bg-slate-800 rounded-3xl border-l-8 border-blue-600 shadow-sm">
+                    <div class="p-8 bg-slate-900 rounded-3xl border-l-8 border-blue-600 shadow-sm">
                         <p class="italic text-slate-300 text-sm leading-relaxed">"I was struggling with my paperwork for months until I found DMV CAR LOW GROUP. Their team handled everything with such professionalism. Truly the best in the business!"</p>
                         <span class="block mt-6 font-black uppercase text-blue-500 text-xs">— Carlos Martinez</span>
                     </div>
-                    <div class="p-8 bg-slate-800 rounded-3xl border-l-8 border-blue-600 shadow-sm">
+                    <div class="p-8 bg-slate-900 rounded-3xl border-l-8 border-blue-600 shadow-sm">
                         <p class="italic text-slate-300 text-sm leading-relaxed">"The level of transparency here is unmatched. Being able to verify my document status directly on their portal gave me total peace of mind. Reliable and honest."</p>
                         <span class="block mt-6 font-black uppercase text-blue-500 text-xs">— Elena Rodriguez</span>
                     </div>
-                    <div class="p-8 bg-slate-800 rounded-3xl border-l-8 border-blue-600 shadow-sm">
+                    <div class="p-8 bg-slate-900 rounded-3xl border-l-8 border-blue-600 shadow-sm">
                         <p class="italic text-slate-300 text-sm leading-relaxed">"If you are looking for serious consultants, look no further. They helped me navigate a complex legal process without any stress. 100% recommended."</p>
                         <span class="block mt-6 font-black uppercase text-blue-500 text-xs">— Monica Peralta</span>
                     </div>
@@ -95,13 +96,13 @@
     </main>
 
     <main id="tab-trust" class="hidden animate-fade trust-bg">
-        <section class="container mx-auto py-24 px-6 text-white">
+        <section class="container mx-auto py-24 px-6 text-white relative z-10">
             <div class="text-center mb-16">
                 <span class="text-blue-500 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span>
                 <h2 class="text-5xl font-black uppercase italic mt-4">Why Choose <span class="text-blue-500">Us?</span></h2>
             </div>
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8 bg-slate-800/80 p-10 rounded-[3rem] backdrop-blur-md">
+                <div class="space-y-8 bg-slate-900/80 p-10 rounded-[3rem] backdrop-blur-md">
                     <h3 class="text-2xl font-black uppercase italic text-slate-100">20 Years of Unmatched Experience</h3>
                     <p class="text-slate-300 leading-relaxed">Since our founding, we have dedicated two decades to mastering the complexities of document consulting. Our longevity is a testament to our commitment to legality and customer satisfaction.</p>
                 </div>
@@ -136,22 +137,22 @@
     </main>
 
     <main id="tab-advisors" class="hidden animate-fade advisors-bg">
-        <section class="py-24 px-6 text-center text-white">
+        <section class="py-24 px-6 text-center text-white relative z-10">
             <h2 class="text-3xl font-black uppercase italic mb-16">Meet Our <span class="text-blue-500">Senior Advisors</span></h2>
             <div class="grid grid-cols-2 md:grid-cols-4 container mx-auto gap-6">
-                <div class="bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-slate-900/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
                     <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-slate-700">
                     <h4 class="font-black uppercase text-xs text-slate-100">Rogelio Olivo</h4>
                 </div>
-                <div class="bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-slate-900/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
                     <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-slate-700">
                     <h4 class="font-black uppercase text-xs text-slate-100">Fermin Garcia</h4>
                 </div>
-                <div class="bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-slate-900/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
                     <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-slate-700">
                     <h4 class="font-black uppercase text-xs text-slate-100">Marcela Vanegas</h4>
                 </div>
-                <div class="bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
+                <div class="bg-slate-900/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
                     <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-slate-700">
                     <h4 class="font-black uppercase text-xs text-slate-100">Edwin Peralta</h4>
                 </div>
@@ -160,7 +161,7 @@
     </main>
 
     <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade verify-view">
-        <div class="max-w-4xl mx-auto space-y-10">
+        <div class="max-w-4xl mx-auto space-y-10 relative z-10">
             <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
                 <h2 class="text-2xl font-black uppercase italic mb-8">Secure <span class="text-blue-600">Authentication</span></h2>
                 <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
@@ -197,7 +198,7 @@
         </div>
     </main>
 
-    <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center">
+    <footer class="bg-slate-950 text-slate-600 py-16 px-6 text-center relative z-10">
         <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
     </footer>
 
