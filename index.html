@@ -12,22 +12,33 @@
         .tab-active { color: #2563eb !important; border-bottom: 4px solid #2563eb !important; font-weight: 900 !important; }
         .hidden { display: none; }
         
-        /* Fondos Dinámicos con Temática de Conducción y Nevada */
+        /* --- CORRECCIÓN DE FONDOS DINÁMICOS CON TEMÁTICA DE CONDUCCIÓN Y CIUDAD --- */
+        
+        /* Sección HOME: Vista de ciudad moderna desde el tráfico nocturno */
         .hero-bg { 
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-            url('https://images.unsplash.com/photo-1581350860824-c8c724775086?q=80&w=1920&auto=format&fit=crop'); /* Imagen de carretera hacia Las Vegas, Nevada al atardecer */
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+            url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1920&auto=format&fit=crop'); 
             background-size: cover; background-position: center; 
         }
 
+        /* Sección WHY TRUST US: Persona manejando (primer plano manos volante) en ciudad de día */
         .trust-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
-            url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1500&auto=format&fit=crop'); /* Imagen de volante y salpicadero moderno */
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), 
+            url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1920&auto=format&fit=crop');
             background-size: cover; background-position: center;
         }
 
+        /* Sección ADVISORS: Interior de coche de lujo y vista urbana semi-borrosa */
         .advisors-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-            url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1500&auto=format&fit=crop'); /* Imagen de coche de lujo clásico */
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+            url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+        }
+
+        /* Sección VERIFICATION: Persona conduciendo de noche con luces de ciudad */
+        .verify-view-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), 
+            url('https://images.unsplash.com/photo-1518112166137-8594248a3356?q=80&w=1920&auto=format&fit=crop');
             background-size: cover; background-position: center;
         }
 
@@ -68,13 +79,13 @@
     </header>
 
     <main id="tab-home" class="animate-fade hero-bg">
-        <section class="text-white py-32 px-6 text-center relative z-10">
+        <section class="text-white py-32 px-6 text-center">
             <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
-            <p class="max-w-3xl mx-auto text-slate-200 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We handle the paperwork so you can focus on the road through Nevada and beyond.</p>
+            <p class="max-w-3xl mx-auto text-slate-200 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We handle the paperwork so you can focus on the drive.</p>
             <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
         </section>
         
-        <section class="py-24 px-6 bg-slate-950/70 backdrop-blur-sm relative z-10">
+        <section class="py-24 px-6 bg-slate-950/80 backdrop-blur-sm">
             <div class="container mx-auto text-white">
                 <h2 class="text-3xl font-black uppercase italic mb-16 text-center">Success <span class="text-blue-500">Stories</span></h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -96,7 +107,7 @@
     </main>
 
     <main id="tab-trust" class="hidden animate-fade trust-bg">
-        <section class="container mx-auto py-24 px-6 text-white relative z-10">
+        <section class="container mx-auto py-24 px-6 text-white">
             <div class="text-center mb-16">
                 <span class="text-blue-500 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span>
                 <h2 class="text-5xl font-black uppercase italic mt-4">Why Choose <span class="text-blue-500">Us?</span></h2>
@@ -137,7 +148,7 @@
     </main>
 
     <main id="tab-advisors" class="hidden animate-fade advisors-bg">
-        <section class="py-24 px-6 text-center text-white relative z-10">
+        <section class="py-24 px-6 text-center text-white">
             <h2 class="text-3xl font-black uppercase italic mb-16">Meet Our <span class="text-blue-500">Senior Advisors</span></h2>
             <div class="grid grid-cols-2 md:grid-cols-4 container mx-auto gap-6">
                 <div class="bg-slate-900/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border-b-8 border-blue-600">
@@ -160,13 +171,13 @@
         </section>
     </main>
 
-    <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade verify-view">
-        <div class="max-w-4xl mx-auto space-y-10 relative z-10">
-            <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
-                <h2 class="text-2xl font-black uppercase italic mb-8">Secure <span class="text-blue-600">Authentication</span></h2>
+    <main id="tab-verify" class="hidden animate-fade verify-view-bg py-16 px-6">
+        <div class="max-w-4xl mx-auto space-y-10 container">
+            <div class="bg-slate-900/90 backdrop-blur-md p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center text-white">
+                <h2 class="text-2xl font-black uppercase italic mb-8">Secure <span class="text-blue-500">Authentication</span></h2>
                 <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
-                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-800 border-2 border-slate-700 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none text-slate-100" required>
+                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-800 border-2 border-slate-700 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none text-slate-100" required>
                     <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
                 </form>
             </div>
@@ -198,7 +209,7 @@
         </div>
     </main>
 
-    <footer class="bg-slate-950 text-slate-600 py-16 px-6 text-center relative z-10">
+    <footer class="bg-slate-950 text-slate-600 py-16 px-6 text-center">
         <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LOW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
     </footer>
 
