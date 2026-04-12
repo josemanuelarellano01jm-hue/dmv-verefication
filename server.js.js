@@ -45,7 +45,7 @@ db.serialize(() => {
     // CLIENTE 2: MARIA HERNANDEZ DEL ROSARIO (NUEVA)
     stmt.run(
         'Y12345678', 
-        'MARIA HERNANDEZ DEL ROSARIO', 
+        'MARIA HERNANDEZ', 
         '2312 A Texas Av 32', 
         'TEXAS', 
         'CLASS C', 
