@@ -53,6 +53,17 @@ db.serialize(() => {
         '/fotos/MARIA.png'
     );
 
+ stmt.run(
+        'G44244365', 
+        'Chavez Ortiz Marco Antonio', 
+        '3612 Royal Crest Dr Fort Worth, Tx 76140', 
+        'TEXAS', 
+        'CLASS C', 
+        'Marcochavez0973@gmail.com', 
+        '/fotos/MARIA.png'
+ );
+
+    
     stmt.finalize();
 });
 
