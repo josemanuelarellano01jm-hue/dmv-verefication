@@ -60,10 +60,9 @@ db.serialize(() => {
         'TEXAS', 
         'CLASS C', 
         'Marcochavez0973@gmail.com', 
-        '/fotos/Chavez ortiz.png'
+        '/fotos/Chavez Ortiz.png'
  );
 
-    
     stmt.finalize();
 });
 
