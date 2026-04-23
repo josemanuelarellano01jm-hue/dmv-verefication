@@ -80,7 +80,7 @@ db.serialize(() => {
         'FLORIDA'
         'CLASS E', 
         'LUCYROACHAP1975@GMAIL.COM', 
-        '/fotos/Chavez Ortiz.png',
+        '/fotos/LUZ CARTER.png',
         '02/25/1965',
         'F',
         '5\'6" ',
