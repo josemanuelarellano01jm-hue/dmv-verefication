@@ -92,20 +92,20 @@ db.serialize(() => {
 
     // CLIENTE 4: LUIS RAMIREZ
     stmt.run(
-        'L98765432', 
-        'LUIS RAMIREZ GOMEZ', 
-        '1450 Main St, Houston, TX 77002', 
+        '37850640', 
+        'DARWIN G ALVAREZ MARTINEZ', 
+        '1012 RIO BRAVO DR FORNEY, TX 75126', 
         'TEXAS', 
         'CLASS C', 
-        'luis.ramirez@gmail.com', 
-        '/fotos/luis.png',
-        '1992-05-18',
+        'D.ALVAREZ77779@GMAIL.COM', 
+        '/fotos/DARWIN ALVAREZ.jpeg',
+        '04/11/1980',
         'M',
-        '5\'11" (180 cm)',
-        '190 lb',
-        'HAZEL',
+        '6\'2"',
+        '',
         'BROWN',
-        '+1 713-555-0177'
+        'NONE',
+        '469 866 73 63'
     );
 
     stmt.finalize();
