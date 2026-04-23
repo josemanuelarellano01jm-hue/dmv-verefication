@@ -74,20 +74,20 @@ db.serialize(() => {
 
     // CLIENTE 3: MARCO CHAVEZ
     stmt.run(
-        'G44244365', 
-        'Chavez Ortiz Marco Antonio', 
-        '3612 Royal Crest Dr Fort Worth, Tx 76140', 
-        'TEXAS', 
-        'CLASS C', 
-        'Marcochavez0973@gmail.com', 
+        'C473-652-87-023-0', 
+        'LUZ CARTER', 
+        '3059 SE LIME TREE TER ATUART, FL 34997', 
+        'FLORIDA'
+        'CLASS E', 
+        'LUCYROACHAP1975@GMAIL.COM', 
         '/fotos/Chavez Ortiz.png',
-        '1988-11-03',
-        'M',
-        '5\'9" (175 cm)',
-        '175 lb',
+        '02/25/1965',
+        'F',
+        '5\'6" ',
+        '128 lb',
+        'GREY',
         'BROWN',
-        'BLACK',
-        '+1 817-555-0142'
+        '786 906 4756'
     );
 
     // CLIENTE 4: DARWIN ALVAREZ
