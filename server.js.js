@@ -74,7 +74,7 @@ db.serialize(() => {
 
     // CLIENTE 3: MARCO CHAVEZ
     stmt.run(
-        'C473-652-87-023-0', 
+        'C473652870230', 
         'LUZ CARTER', 
         '3059 SE LIME TREE TER ATUART, FL 34997', 
         'FLORIDA'
