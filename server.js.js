@@ -7,15 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Servir la carpeta de fotos
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
-// Ruta principal para cargar el index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Base de datos en memoria
 const db = new sqlite3.Database(':memory:'); 
 
 db.serialize(() => {
@@ -26,10 +23,18 @@ db.serialize(() => {
         estado TEXT, 
         tipo_licencia TEXT, 
         correo TEXT, 
-        foto_url TEXT
+        foto_url TEXT,
+        fecha_nacimiento TEXT,
+        sexo TEXT,
+        estatura TEXT,
+        peso TEXT,
+        color_ojos TEXT,
+        color_cabello TEXT,
+        telefono TEXT
     )`);
     
-    const stmt = db.prepare("INSERT OR IGNORE INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?)");
+    const stmt = db.prepare(`INSERT OR IGNORE INTO clientes VALUES 
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
     // CLIENTE 1: JOSE ARELLANO
     stmt.run(
@@ -39,10 +44,17 @@ db.serialize(() => {
         'NEVADA', 
         'CLASS C - OPERATOR', 
         'jose.dmv@example.com', 
-        '/fotos/jose.jpg'
+        '/fotos/jose.jpg',
+        '1985-03-15',      // fecha_nacimiento
+        'M',               // sexo
+        '5\'10" (178 cm)', // estatura
+        '180 lb',          // peso
+        'BROWN',           // color_ojos
+        'BLACK',           // color_cabello
+        '+1 702-555-0101'  // telefono
     );
     
-    // CLIENTE 2: MARIA HERNANDEZ DEL ROSARIO (NUEVA)
+    // CLIENTE 2: MARIA HERNANDEZ
     stmt.run(
         'Y12345678', 
         'MARIA HERNANDEZ', 
@@ -50,18 +62,51 @@ db.serialize(() => {
         'TEXAS', 
         'CLASS C', 
         'MARIAN.HERNANDEZ@GMAIL.COM', 
-        '/fotos/MARIA.png'
+        '/fotos/MARIA.png',
+        '1990-07-22',
+        'F',
+        '5\'5" (165 cm)',
+        '140 lb',
+        'BROWN',
+        'BROWN',
+        '+1 214-555-0199'
     );
 
- stmt.run(
+    // CLIENTE 3: MARCO CHAVEZ
+    stmt.run(
         'G44244365', 
         'Chavez Ortiz Marco Antonio', 
         '3612 Royal Crest Dr Fort Worth, Tx 76140', 
         'TEXAS', 
         'CLASS C', 
         'Marcochavez0973@gmail.com', 
-        '/fotos/Chavez Ortiz.png'
- );
+        '/fotos/Chavez Ortiz.png',
+        '1988-11-03',
+        'M',
+        '5\'9" (175 cm)',
+        '175 lb',
+        'BROWN',
+        'BLACK',
+        '+1 817-555-0142'
+    );
+
+    // CLIENTE 4: LUIS RAMIREZ
+    stmt.run(
+        'L98765432', 
+        'LUIS RAMIREZ GOMEZ', 
+        '1450 Main St, Houston, TX 77002', 
+        'TEXAS', 
+        'CLASS C', 
+        'luis.ramirez@gmail.com', 
+        '/fotos/luis.png',
+        '1992-05-18',
+        'M',
+        '5\'11" (180 cm)',
+        '190 lb',
+        'HAZEL',
+        'BROWN',
+        '+1 713-555-0177'
+    );
 
     stmt.finalize();
 });
@@ -80,6 +125,14 @@ app.post('/api/verificar', (req, res) => {
         } else {
             res.json({ success: false });
         }
+    });
+});
+
+// Listar todos los clientes
+app.get('/api/clientes', (req, res) => {
+    db.all("SELECT * FROM clientes", [], (err, filas) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(filas);
     });
 });
 
