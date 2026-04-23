@@ -90,7 +90,7 @@ db.serialize(() => {
         '+1 817-555-0142'
     );
 
-    // CLIENTE 4: LUIS RAMIREZ
+    // CLIENTE 4: DARWIN ALVAREZ
     stmt.run(
         '37850640', 
         'DARWIN G ALVAREZ MARTINEZ', 
