@@ -4,15 +4,19 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const app = express();
 
+// --- CONFIGURACIÓN ---
 app.use(cors());
 app.use(express.json());
 
+// Servir archivos estáticos (asegúrate de que la carpeta 'fotos' exista)
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
+// Ruta principal para el index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// --- BASE DE DATOS (EN MEMORIA) ---
 const db = new sqlite3.Database(':memory:'); 
 
 db.serialize(() => {
@@ -72,7 +76,7 @@ db.serialize(() => {
         '+1 214-555-0199'
     );
 
-    // CLIENTE 3: LUZ CARTER (Aquí estaba el error de la coma)
+    // CLIENTE 3: LUZ CARTER
     stmt.run(
         'C473652870230', 
         'LUZ CARTER', 
@@ -80,10 +84,10 @@ db.serialize(() => {
         'FLORIDA',
         'CLASS E', 
         'LUCYROACHAP1975@GMAIL.COM', 
-        '/fotos/LUZ CARTER.png',
-        '02/25/1965',
+        '/fotos/LUZ_CARTER.png',
+        '1965-02-25',
         'F',
-        '5\'6" ',
+        '5\'6"',
         '128 lb',
         'GREY',
         'BROWN',
@@ -98,8 +102,8 @@ db.serialize(() => {
         'TEXAS', 
         'CLASS C', 
         'D.ALVAREZ77779@GMAIL.COM', 
-        '/fotos/DARWIN ALVAREZ.jpeg',
-        '04/11/1980',
+        '/fotos/DARWIN_ALVAREZ.jpeg',
+        '1980-04-11',
         'M',
         '6\'2"',
         '',
@@ -108,28 +112,12 @@ db.serialize(() => {
         '469 866 73 63'
     );
 
-
- // CLIENTE 5: LUZ CARTER
- 'C473652870230', 
-        'LUZ CARTER', 
-        '3059 SE LIME TREE TER ATUART, FL 34997', 
-        'FLORIDA',
-        'CLASS E', 
-        'LUCYROACHAP1975@GMAIL.COM', 
-        '/fotos/LUZ CARTER.png',
-        '02/25/1965',
-        'F',
-        '5\'6" ',
-        '128 lb',
-        'GREY',
-        'BROWN',
-        '786 906 4756'
-    );
-
-    
     stmt.finalize();
 });
 
+// --- RUTAS DE LA API ---
+
+// Verificar cliente por nombre e ID
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     const query = "SELECT * FROM clientes WHERE LOWER(nombre) = LOWER(?) AND id_cliente = ?";
@@ -137,16 +125,17 @@ app.post('/api/verificar', (req, res) => {
     db.get(query, [nombre, id_cliente], (err, fila) => {
         if (err) {
             console.error(err);
-            return res.status(500).json({ success: false });
+            return res.status(500).json({ success: false, message: "Error en el servidor" });
         }
         if (fila) {
             res.json({ success: true, datos: fila });
         } else {
-            res.json({ success: false });
+            res.json({ success: false, message: "Cliente no encontrado" });
         }
     });
 });
 
+// Listar todos los clientes
 app.get('/api/clientes', (req, res) => {
     db.all("SELECT * FROM clientes", [], (err, filas) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -154,10 +143,12 @@ app.get('/api/clientes', (req, res) => {
     });
 });
 
+// --- INICIO DEL SERVIDOR ---
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("========================================");
-    console.log("    DMV CAR LOW GROUP - SERVER READY     ");
+    console.log("    DMV CAR LOW GROUP - SERVER READY    ");
     console.log(`    Accede en el puerto: ${PORT}         `);
+    console.log(`    http://localhost:${PORT}             `);
     console.log("========================================");
 });
