@@ -64,8 +64,11 @@ app.get('/api/clientes', (req, res) => {
     });
 });
 
-// Iniciar servidor
+// Esto toma el puerto que Railway te da, y si no hay uno, usa el 3000
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor activo en puerto ${PORT}`);
+    console.log(`========================================`);
+    console.log(`  Servidor corriendo en el puerto ${PORT}`);
+    console.log(`========================================`);
 });
