@@ -45,13 +45,13 @@ db.serialize(() => {
         'CLASS C - OPERATOR', 
         'jose.dmv@example.com', 
         '/fotos/jose.jpg',
-        '1985-03-15',      // fecha_nacimiento
-        'M',               // sexo
-        '5\'10" (178 cm)', // estatura
-        '180 lb',          // peso
-        'BROWN',           // color_ojos
-        'BLACK',           // color_cabello
-        '+1 702-555-0101'  // telefono
+        '1985-03-15',
+        'M',
+        '5\'10" (178 cm)',
+        '180 lb',
+        'BROWN',
+        'BLACK',
+        '+1 702-555-0101'
     );
     
     // CLIENTE 2: MARIA HERNANDEZ
@@ -72,12 +72,12 @@ db.serialize(() => {
         '+1 214-555-0199'
     );
 
-    // CLIENTE 3: MARCO CHAVEZ
+    // CLIENTE 3: LUZ CARTER (Aquí estaba el error de la coma)
     stmt.run(
         'C473652870230', 
         'LUZ CARTER', 
         '3059 SE LIME TREE TER ATUART, FL 34997', 
-        'FLORIDA'
+        'FLORIDA',
         'CLASS E', 
         'LUCYROACHAP1975@GMAIL.COM', 
         '/fotos/LUZ CARTER.png',
@@ -128,7 +128,6 @@ app.post('/api/verificar', (req, res) => {
     });
 });
 
-// Listar todos los clientes
 app.get('/api/clientes', (req, res) => {
     db.all("SELECT * FROM clientes", [], (err, filas) => {
         if (err) return res.status(500).json({ error: err.message });
