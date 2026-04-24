@@ -4,19 +4,18 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const app = express();
 
-// --- CONFIGURACIÓN ---
 app.use(cors());
 app.use(express.json());
 
-// Servir archivos estáticos (asegúrate de que la carpeta 'fotos' exista)
+// Servir archivos estáticos
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
-// Ruta principal para el index.html
+// Ruta principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// --- BASE DE DATOS (EN MEMORIA) ---
+// Base de datos
 const db = new sqlite3.Database(':memory:'); 
 
 db.serialize(() => {
@@ -37,105 +36,27 @@ db.serialize(() => {
         telefono TEXT
     )`);
     
-    const stmt = db.prepare(`INSERT OR IGNORE INTO clientes VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+    const stmt = db.prepare(`INSERT OR IGNORE INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
-    // CLIENTE 1: JOSE ARELLANO
-    stmt.run(
-        '30616577', 
-        'JOSE ARELLANO', 
-        '2621 E Sahara Ave', 
-        'NEVADA', 
-        'CLASS C - OPERATOR', 
-        'jose.dmv@example.com', 
-        '/fotos/jose.jpg',
-        '1985-03-15',
-        'M',
-        '5\'10" (178 cm)',
-        '180 lb',
-        'BROWN',
-        'BLACK',
-        '+1 702-555-0101'
-    );
-    
-    // CLIENTE 2: MARIA HERNANDEZ
-    stmt.run(
-        'Y12345678', 
-        'MARIA HERNANDEZ', 
-        '2312 A Texas Av 32', 
-        'TEXAS', 
-        'CLASS C', 
-        'MARIAN.HERNANDEZ@GMAIL.COM', 
-        '/fotos/MARIA.png',
-        '1990-07-22',
-        'F',
-        '5\'5" (165 cm)',
-        '140 lb',
-        'BROWN',
-        'BROWN',
-        '+1 214-555-0199'
-    );
-
-    // CLIENTE 3: LUZ CARTER
-    stmt.run(
-        'C473652870230', 
-        'LUZ CARTER', 
-        '3059 SE LIME TREE TER ATUART, FL 34997', 
-        'FLORIDA',
-        'CLASS E', 
-        'LUCYROACHAP1975@GMAIL.COM', 
-        '/fotos/LUZ CARTER.png',
-        '1965-02-25',
-        'F',
-        '5\'6"',
-        '128 lb',
-        'GREY',
-        'BROWN',
-        '786 906 4756'
-    );
-
-    // CLIENTE 4: DARWIN ALVAREZ
-    stmt.run(
-        '37850640', 
-        'DARWIN G ALVAREZ MARTINEZ', 
-        '1012 RIO BRAVO DR FORNEY, TX 75126', 
-        'TEXAS', 
-        'CLASS C', 
-        'D.ALVAREZ77779@GMAIL.COM', 
-        '/fotos/DARWIN ALVAREZ.jpeg',
-        '1980-04-11',
-        'M',
-        '6\'2"',
-        '',
-        'BROWN',
-        'NONE',
-        '469 866 73 63'
-    );
+    // CLIENTES (Normalizados con guiones bajos en fotos para evitar errores de URL)
+    stmt.run('30616577', 'JOSE ARELLANO', '2621 E Sahara Ave', 'NEVADA', 'CLASS C', 'jose.dmv@example.com', '/fotos/jose.jpg', '1985-03-15', 'M', '5\'10"', '180 lb', 'BROWN', 'BLACK', '+1 702-555-0101');
+    stmt.run('Y12345678', 'MARIA HERNANDEZ', '2312 A Texas Av 32', 'TEXAS', 'CLASS C', 'MARIAN.HERNANDEZ@GMAIL.COM', '/fotos/MARIA.png', '1990-07-22', 'F', '5\'5"', '140 lb', 'BROWN', 'BROWN', '+1 214-555-0199');
+    stmt.run('C473652870230', 'LUZ CARTER', '3059 SE LIME TREE TER ATUART, FL 34997', 'FLORIDA', 'CLASS E', 'LUCY@GMAIL.COM', '/fotos/LUZ_CARTER.png', '1965-02-25', 'F', '5\'6"', '128 lb', 'GREY', 'BROWN', '786 906 4756');
+    stmt.run('37850640', 'DARWIN G ALVAREZ MARTINEZ', '1012 RIO BRAVO DR FORNEY, TX 75126', 'TEXAS', 'CLASS C', 'D.ALVAREZ@GMAIL.COM', '/fotos/DARWIN_ALVAREZ.jpeg', '1980-04-11', 'M', '6\'2"', '', 'BROWN', 'NONE', '469 866 73 63');
 
     stmt.finalize();
 });
 
-// --- RUTAS DE LA API ---
-
-// Verificar cliente por nombre e ID
+// APIs
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     const query = "SELECT * FROM clientes WHERE LOWER(nombre) = LOWER(?) AND id_cliente = ?";
-    
     db.get(query, [nombre, id_cliente], (err, fila) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ success: false, message: "Error en el servidor" });
-        }
-        if (fila) {
-            res.json({ success: true, datos: fila });
-        } else {
-            res.json({ success: false, message: "Cliente no encontrado" });
-        }
+        if (err) return res.status(500).json({ success: false });
+        res.json({ success: !!fila, datos: fila || null });
     });
 });
 
-// Listar todos los clientes
 app.get('/api/clientes', (req, res) => {
     db.all("SELECT * FROM clientes", [], (err, filas) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -143,12 +64,8 @@ app.get('/api/clientes', (req, res) => {
     });
 });
 
-// --- INICIO DEL SERVIDOR ---
+// Iniciar servidor
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log("========================================");
-    console.log("    DMV CAR LOW GROUP - SERVER READY    ");
-    console.log(`    Accede en el puerto: ${PORT}         `);
-    console.log(`    http://localhost:${PORT}             `);
-    console.log("========================================");
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor activo en puerto ${PORT}`);
 });
