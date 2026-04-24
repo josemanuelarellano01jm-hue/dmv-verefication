@@ -108,6 +108,25 @@ db.serialize(() => {
         '469 866 73 63'
     );
 
+
+ // CLIENTE 5: LUZ CARTER
+ 'C473652870230', 
+        'LUZ CARTER', 
+        '3059 SE LIME TREE TER ATUART, FL 34997', 
+        'FLORIDA',
+        'CLASS E', 
+        'LUCYROACHAP1975@GMAIL.COM', 
+        '/fotos/LUZ CARTER.png',
+        '02/25/1965',
+        'F',
+        '5\'6" ',
+        '128 lb',
+        'GREY',
+        'BROWN',
+        '786 906 4756'
+    );
+
+    
     stmt.finalize();
 });
 
