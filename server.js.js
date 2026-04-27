@@ -43,7 +43,7 @@ db.serialize(() => {
     stmt.run('Y12345678', 'MARIA HERNANDEZ', '2312 A Texas Av 32', 'TEXAS', 'CLASS C', 'MARIAN.HERNANDEZ@GMAIL.COM', '/fotos/MARIA.png', '1990-07-22', 'F', '5\'5"', '140 lb', 'BROWN', 'BROWN', '+1 214-555-0199');
     stmt.run('C473652870230', 'LUZ CARTER', '3059 SE LIME TREE TER ATUART, FL 34997', 'FLORIDA', 'CLASS E', 'LUCY@GMAIL.COM', '/fotos/LUZ_CARTER.png', '1965-02-25', 'F', '5\'6"', '128 lb', 'GREY', 'BROWN', '786 906 4756');
     stmt.run('37850640', 'DARWIN G ALVAREZ MARTINEZ', '1012 RIO BRAVO DR FORNEY, TX 75126', 'TEXAS', 'CLASS C', 'D.ALVAREZ@GMAIL.COM', '/fotos/DARWIN_ALVAREZ.jpeg', '1980-04-11', 'M', '6\'2"', '', 'BROWN', 'NONE', '469 866 73 63');
-    stmt.run('MC254168', 'PORTUGUEZ JACOBO MISAEL', '3305 VANCE RD DAYTON, OH 45439', 'OHIO', 'CLASS D', 'NONE', '/fotos/misael_jacobo.png', '06-28-1981', 'M', '6\'0"', '', 'BROWN', 'NONE', '859 509 6002');
+    stmt.run('MC254168', 'PORTUGUEZ JACOBO MISAEL', '3305 VANCE RD DAYTON, OH 45439', 'OHIO', 'CLASS D', 'NONE', '/fotos/JACOBO_MISAEL.png', '06-28-1981', 'M', '6\'0"', '', 'BROWN', 'NONE', '859 509 6002');
 
     stmt.finalize();
 });
