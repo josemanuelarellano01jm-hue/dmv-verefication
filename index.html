@@ -11,27 +11,9 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            background: 
-                linear-gradient(135deg, rgba(0, 30, 80, 0.82) 0%, rgba(0, 70, 150, 0.75) 50%, rgba(0, 40, 100, 0.85) 100%),
-                url('https://images.unsplash.com/photo-1485902401835-30b6b7d6b8b5?auto=format&fit=crop&w=1500&q=60') no-repeat center center fixed;
-            background-size: cover;
-            background-blend-mode: overlay;
+            /* Solo fondo azul degradado, sin imagen de bandera */
+            background: linear-gradient(135deg, #001e50 0%, #004696 50%, #002864 100%);
             min-height: 100vh;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?auto=format&fit=crop&w=1500&q=60');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.12;
-            pointer-events: none;
-            z-index: 0;
         }
         .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; font-weight: 900 !important; }
         .hidden { display: none; }
@@ -105,29 +87,10 @@
                 backdrop-filter: blur(12px);
             }
             .nav-links.active { display: flex; }
-            /* Ajustes para la tabla en móvil */
             .ok-table thead { display: none; }
-            .ok-table tr {
-                display: block;
-                margin-bottom: 1rem;
-                border-bottom: 2px solid #e5e7eb;
-            }
-            .ok-table td {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 8px 10px;
-                font-size: 13px;
-            }
-            .ok-table td::before {
-                content: attr(data-label);
-                font-weight: 800;
-                text-transform: uppercase;
-                color: #1f2937;
-                font-size: 10px;
-                width: 50%;
-                text-align: left;
-            }
+            .ok-table tr { display: block; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; }
+            .ok-table td { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; font-size: 13px; }
+            .ok-table td::before { content: attr(data-label); font-weight: 800; text-transform: uppercase; color: #1f2937; font-size: 10px; width: 50%; text-align: left; }
         }
     </style>
 </head>
@@ -297,14 +260,12 @@
         </div>
     </main>
 
-    <!-- RECORD PAGE (Rediseñada, sin Oklahoma) -->
+    <!-- RECORD PAGE -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
                 <button onclick="showTab('verify')" class="text-sm font-bold text-blue-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Verification</button>
             </div>
-
-            <!-- Cabecera propia del grupo, no Oklahoma -->
             <div class="bg-blue-900 text-white rounded-t-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
                     <h1 class="text-2xl font-black tracking-tight">CLIENT VERIFICATION RECORD</h1>
@@ -314,9 +275,7 @@
                     <span class="bg-white text-blue-900 px-4 py-1 rounded-full text-xs font-black">OFFICIAL RECORD</span>
                 </div>
             </div>
-
             <div class="mt-8 space-y-6">
-                <!-- Tabla con datos -->
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                     <table class="w-full text-left ok-table">
                         <thead>
@@ -334,8 +293,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!-- Único recuadro con los datos personales (antes había 4, ahora solo 1) -->
                 <div class="bg-gray-50 p-5 rounded-2xl shadow-inner">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -352,15 +309,11 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Botón de restricciones -->
                 <div class="flex justify-center md:justify-start">
                     <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-0.5 px-2 rounded font-bold uppercase tracking-wider transition flex items-center gap-1 shadow-none">
                         <i class="fas fa-exclamation-triangle text-[9px]"></i> View Restrictions
                     </button>
                 </div>
-
-                <!-- Contenido de restricciones (oculto) -->
                 <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Required Medical Examinations:</h3>
                     <div class="space-y-2">
@@ -374,7 +327,6 @@
                         <i class="fas fa-phone-alt mr-2"></i> You are requested to immediately contact the DMV‑assigned advisor for detailed information on the procedure to regularize your situation and complete the pending requirements.
                     </div>
                 </div>
-
                 <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
                     <p>© 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
                 </div>
