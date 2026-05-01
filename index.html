@@ -1,419 +1,695 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMV CAR LAW GROUP | Trusted Document Consulting</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .tab-active { color: #2563eb !important; border-bottom: 4px solid #2563eb !important; font-weight: 900 !important; }
-        .hidden { display: none; }
-        .global-hero-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-            url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1500');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .animate-fade { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dmvirtual - Trámites Vehiculares USA</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-        /* Estilos Oklahoma */
-        .oklahoma-header {
-            background: #002664;
-            border-bottom: 4px solid #ffc425;
-        }
-        .sidebar-link {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1e3a8a;
-            display: block;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        .sidebar-link:hover {
-            background: #eef2ff;
-        }
-        .ok-table th {
-            background: #f0f4f9;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #1f2937;
-        }
-        .ok-table td {
-            font-size: 14px;
-            font-weight: 600;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        /* Estilos para la sección de restricciones */
-        .restrictions-card {
-            background: #fff3e0;
-            border-left: 6px solid #e67e22;
-            transition: all 0.3s ease;
-        }
-        .restrictions-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #f0c48b;
-        }
-        .total-amount {
-            background: #e67e22;
-            color: white;
-            padding: 12px;
-            border-radius: 16px;
-            font-weight: 900;
-            text-align: center;
-        }
-    </style>
+  :root {
+    --azul-profundo: #0a2b3e;
+    --azul-medio: #1e5a7a;
+    --azul-claro: #2c8eb3;
+    --azul-suave: #e1f0f7;
+    --azul-gris: #f0f7fc;
+    --rojo-promo: #d32f2f;
+    --rojo-oscuro: #b71c1c;
+    --oro: #ffb74d;
+    --blanco: #ffffff;
+    --texto: #1a2c3e;
+    --texto-claro: #4a627a;
+    --sombra: 0 8px 24px rgba(0,0,0,0.1);
+    --radio: 1rem;
+  }
+
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: linear-gradient(145deg, #eef5ff 0%, #ffffff 100%);
+    color: var(--texto);
+    scroll-behavior: smooth;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Navegación */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    background: rgba(10,43,62,0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #b3e0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    cursor: pointer;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.8rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    background: var(--azul-claro);
+    color: white;
+  }
+  .btn-outline-light {
+    background: transparent;
+    border: 1px solid var(--azul-claro);
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  .btn-outline-light:hover {
+    background: var(--azul-claro);
+    color: white;
+  }
+  .hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+  }
+
+  /* Botones generales - TAMAÑO REDUCIDO */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--azul-profundo), var(--azul-medio));
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .btn-light {
+    background: var(--azul-suave);
+    color: var(--azul-profundo);
+  }
+  .btn-light:hover {
+    background: var(--azul-claro);
+    color: white;
+  }
+  .btn-promo-red {
+    background: var(--rojo-promo);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.45rem 1rem;
+  }
+  .btn-promo-red:hover {
+    background: var(--rojo-oscuro);
+  }
+  .btn-white {
+    background: white;
+    color: var(--rojo-oscuro);
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 2rem;
+    font-weight: bold;
+  }
+
+  /* Secciones */
+  .section {
+    padding: 2.5rem 0;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .section-badge {
+    background: var(--azul-suave);
+    color: var(--azul-profundo);
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--azul-profundo);
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    color: var(--texto-claro);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+  }
+
+  /* Banner promocional ROJO */
+  .promo-banner {
+    background: linear-gradient(135deg, var(--rojo-promo), var(--rojo-oscuro));
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--sombra);
+  }
+  .promo-text h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+  .promo-text p {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .promo-buttons {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  /* Tarjetas de servicios */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .service-card {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    border: 1px solid #dceaf5;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra);
+  }
+  .service-icon {
+    width: 55px;
+    height: 55px;
+    background: var(--azul-suave);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--azul-medio);
+    font-size: 1.6rem;
+  }
+  .service-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .how-it-works {
+    background: var(--azul-gris);
+    padding: 0.8rem;
+    border-radius: 0.8rem;
+    margin: 0.8rem 0;
+    font-size: 0.75rem;
+    text-align: left;
+  }
+  .how-it-works strong {
+    color: var(--azul-profundo);
+  }
+  .how-it-works p {
+    margin: 0.2rem 0;
+  }
+  .price {
+    font-weight: 700;
+    color: var(--azul-profundo);
+    margin: 0.6rem 0;
+    font-size: 1rem;
+  }
+
+  /* Asesores */
+  .asesores-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .asesor-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: 190px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .asesor-avatar {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--azul-medio), var(--azul-claro));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.8rem;
+    font-size: 2rem;
+    color: white;
+  }
+  .asesor-card h4 {
+    font-size: 1rem;
+  }
+  .asesor-card p {
+    font-size: 0.7rem;
+  }
+  .wa-btn-sm {
+    background: #25D366;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* Verificar */
+  .verify-box {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--sombra);
+    max-width: 650px;
+    margin: 0 auto;
+  }
+  .verify-service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  .verify-opt {
+    border: 1px solid #cbdbe0;
+    border-radius: 1rem;
+    padding: 0.6rem;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+  }
+  .verify-input-group {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+  .verify-input {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+  }
+  .verify-result {
+    margin-top: 1rem;
+    background: #f0f7fc;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    display: none;
+    font-size: 0.8rem;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--azul-profundo);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.7rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+    .hamburger {
+      display: block;
+    }
+    .navbar.responsive .nav-links {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 0.8rem;
+    }
+    .promo-banner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .verify-input-group {
+      flex-direction: column;
+    }
+  }
+</style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
-    <header class="bg-white sticky top-0 z-50 shadow-md">
-        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white p-2 rounded-lg"><i class="fas fa-shield-alt text-xl"></i></div>
-                <h1 class="text-xl font-black italic uppercase tracking-tighter">DMV <span class="text-blue-600">CAR LAW GROUP</span></h1>
-            </div>
-            <nav class="flex space-x-1 md:space-x-4 mt-4 md:mt-0">
-                <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active">Home</button>
-                <button onclick="showTab('trust')" id="nav-trust" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Why Trust Us</button>
-                <button onclick="showTab('advisors')" id="nav-advisors" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Advisors</button>
-                <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Verification</button>
-            </nav>
+<nav class="navbar" id="navbar">
+  <div class="logo" onclick="goTo('home')">Dmvirtual</div>
+  <ul class="nav-links">
+    <li><a onclick="goTo('home')" id="nav-home" class="active">Inicio</a></li>
+    <li><a onclick="goTo('seguros')" id="nav-seguros">Seguros</a></li>
+    <li><a onclick="goTo('placas')" id="nav-placas">Placas</a></li>
+    <li><a onclick="goTo('licencias')" id="nav-licencias">Licencias</a></li>
+    <li><a onclick="goTo('verify')" id="nav-verify">Verificar</a></li>
+    <li><button class="btn-outline-light" onclick="openModal('general')">Solicitar</button></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- Página Home -->
+<div class="page active" id="page-home">
+  <div class="container">
+    <!-- Banner promocional rojo -->
+    <div class="promo-banner">
+      <div class="promo-text">
+        <h2>🔥 OFERTA LANZAMIENTO 🔥</h2>
+        <p>Licencia de Conducir + Placa Temporal por solo <strong>$180</strong> (ahorra $60)</p>
+        <p>Incluye asesoría personalizada y seguimiento 24/7.</p>
+      </div>
+      <div class="promo-buttons">
+        <button class="btn-white" onclick="openModal('promo-licencia-placa')">Aprovechar</button>
+        <button class="btn-white" onclick="goTo('licencias')">Ver Licencias</button>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="section-badge">Tu aliado vehicular en USA</div>
+      <h1 class="section-title">Dmvirtual – Trámites sin complicaciones</h1>
+      <p class="section-sub">Seguros, placas y licencias con el respaldo de expertos. Proceso 100% digital.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card" onclick="goTo('seguros')">
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Seguros de Auto</h3>
+        <p>Cobertura completa para tu tranquilidad.</p>
+        <div class="how-it-works">
+          <strong><i class="fas fa-check-circle"></i> ¿Cómo tramitar?</strong>
+          <p>1. Selecciona el plan (Básico o Full Cover).</p>
+          <p>2. Llena el formulario con tus datos y vehículo.</p>
+          <p>3. Un asesor te contacta en <24h y activa tu póliza digital.</p>
+          <p>✅ Cobertura inmediata en 50 estados.</p>
         </div>
-    </header>
+        <div class="price">Desde $75/mes</div>
+        <button class="btn btn-primary" onclick="openModal('seguro-generico')">Cotizar</button>
+      </div>
 
-    <!-- HOME TAB -->
-    <main id="tab-home" class="animate-fade">
-        <section class="global-hero-bg text-white py-32 px-6 text-center">
-            <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
-            <p class="max-w-3xl mx-auto text-slate-300 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
-            <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
-        </section>
-        <section class="py-24 px-6 bg-white">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-black uppercase italic mb-16 text-center">Success <span class="text-blue-600">Stories</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
-                        <p class="italic text-slate-600 text-sm leading-relaxed">"I was struggling with my paperwork for months until I found DMV CAR LAW GROUP. Their team handled everything with such professionalism and speed."</p>
-                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Carlos Martinez</span>
-                    </div>
-                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
-                        <p class="italic text-slate-600 text-sm leading-relaxed">"The level of transparency here is unmatched. Being able to verify my document status directly on their portal gave me total peace of mind."</p>
-                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Elena Rodriguez</span>
-                    </div>
-                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
-                        <p class="italic text-slate-600 text-sm leading-relaxed">"If you are looking for serious consultants, look no further. 100% recommended for the immigrant community."</p>
-                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Monica Peralta</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- TRUST TAB -->
-    <main id="tab-trust" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
-        <section class="container mx-auto py-24 px-6 text-white">
-            <div class="text-center mb-16">
-                <span class="text-blue-400 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span>
-                <h2 class="text-5xl font-black uppercase italic mt-4 text-white">Why Choose <span class="text-blue-500">Us?</span></h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8 bg-slate-900/40 p-10 rounded-[3rem] backdrop-blur-md border border-white/10">
-                    <div>
-                        <h3 class="text-2xl font-black uppercase italic text-blue-400 mb-4">20 Years of Unmatched Experience</h3>
-                        <p class="text-slate-200 leading-relaxed">Since our founding, we have dedicated two decades to mastering the complexities of document consulting.</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-blue-600/20 p-6 rounded-2xl border-b-4 border-blue-500 backdrop-blur-sm">
-                            <p class="text-3xl font-black text-white">150K+</p>
-                            <p class="text-[10px] font-bold uppercase text-blue-300 tracking-widest">Satisfied Clients</p>
-                        </div>
-                        <div class="bg-blue-600/20 p-6 rounded-2xl border-b-4 border-blue-500 backdrop-blur-sm">
-                            <p class="text-3xl font-black text-white">100%</p>
-                            <p class="text-[10px] font-bold uppercase text-blue-300 tracking-widest">Legal Processes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-blue-600 text-white p-10 rounded-[3rem] shadow-2xl">
-                    <h3 class="text-xl font-black uppercase italic mb-6">Our Core Pillars</h3>
-                    <ul class="space-y-6">
-                        <li class="flex gap-4"><i class="fas fa-shield-check text-white mt-1"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100 mt-1">High-end encryption and verified legal channels.</p></div></li>
-                        <li class="flex gap-4"><i class="fas fa-bolt text-white mt-1"></i><div><p class="font-black uppercase text-sm">Industry Speed</p><p class="text-xs text-blue-100 mt-1">Direct connections for 3x faster processing.</p></div></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ADVISORS TAB -->
-    <main id="tab-advisors" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
-        <section class="py-24 px-6 text-center w-full">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-black uppercase italic mb-16 text-white">Meet Our <span class="text-blue-500">Senior Advisors</span></h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Rogelio Olivo</h4>
-                    </div>
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Fermin Garcia</h4>
-                    </div>
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Marcela Vanegas</h4>
-                    </div>
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Edwin Peralta</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- VERIFICATION TAB -->
-    <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade">
-        <div class="max-w-5xl mx-auto space-y-10">
-            <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
-                <h2 class="text-2xl font-black uppercase italic mb-8">Secure <span class="text-blue-600">Authentication</span></h2>
-                <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
-                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
-                </form>
-            </div>
+      <div class="service-card" onclick="goTo('placas')">
+        <div class="service-icon"><i class="fas fa-id-card"></i></div>
+        <h3>Placas Temporales</h3>
+        <p>Válidas en todo USA. Entrega rápida.</p>
+        <div class="how-it-works">
+          <strong><i class="fas fa-check-circle"></i> ¿Cómo obtener tus placas?</strong>
+          <p>1. Elige el tipo de placa (Estándar o Express).</p>
+          <p>2. Ingresa el VIN de tu vehículo y dirección de envío.</p>
+          <p>3. Recibe tu placa oficial en tu domicilio en 3-7 días hábiles.</p>
+          <p>🚗 Opción express disponible en 24-48h.</p>
         </div>
-    </main>
+        <div class="price">Desde $49.99</div>
+        <button class="btn btn-primary" onclick="openModal('placa-generico')">Solicitar</button>
+      </div>
 
-    <!-- PÁGINA DE RESULTADO ESTILO OKLAHOMA (con botón siempre visible y verificación de PIN) -->
-    <main id="tab-record" class="hidden bg-white min-h-screen">
-        <div class="max-w-7xl mx-auto px-4 py-8">
-            <div class="mb-4 text-right">
-                <button onclick="showTab('verify')" class="text-sm font-bold text-blue-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Verification</button>
-            </div>
-
-            <div class="oklahoma-header text-white rounded-t-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div>
-                    <h1 class="text-3xl font-black tracking-tight">OKLAHOMA SERVICE</h1>
-                    <p class="text-sm font-semibold opacity-90">Driver Services | Motor Vehicles | Service Oklahoma Offices | Online Portal | Forms | Contact Us</p>
-                </div>
-                <div class="mt-4 md:mt-0">
-                    <span class="bg-white text-[#002664] px-4 py-1 rounded-full text-xs font-black">OFFICIAL RECORD</span>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8 mt-8">
-                <!-- Sidebar izquierdo -->
-                <div class="md:col-span-1 bg-gray-50 p-5 rounded-2xl border border-gray-200">
-                    <div class="space-y-1">
-                        <h3 class="text-xs font-black uppercase text-gray-500 mb-3">Oklahoma Driver Licenses & ID</h3>
-                        <a href="#" class="sidebar-link"><i class="fas fa-id-card w-5"></i> Renew Driver License (OK)</a>
-                        <a href="#" class="sidebar-link"><i class="fas fa-check-circle"></i> DL Status Check</a>
-                        <a href="#" class="sidebar-link"><i class="fas fa-chart-line"></i> Driving Records</a>
-                        <a href="#" class="sidebar-link"><i class="fas fa-star"></i> REAL ID OK</a>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200 space-y-1">
-                        <h3 class="text-xs font-black uppercase text-gray-500 mb-3">OK Motor Vehicle Services</h3>
-                        <a href="#" class="sidebar-link"><i class="fas fa-car"></i> Vehicle Registration</a>
-                        <a href="#" class="sidebar-link"><i class="fas fa-file-alt"></i> Title Services</a>
-                        <a href="#" class="sidebar-link"><i class="fas fa-grip-lines"></i> License Plates</a>
-                        <a href="#" class="sidebar-link"><i class="fas fa-store"></i> Tag Agent Lookup</a>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200 space-y-1">
-                        <h3 class="text-xs font-black uppercase text-gray-500 mb-3">Service Oklahoma Divisions</h3>
-                        <a href="#" class="sidebar-link">Service Oklahoma Units</a>
-                        <a href="#" class="sidebar-link">Regulatory Services</a>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <a href="#" class="sidebar-link">About Service OK</a>
-                    </div>
-                </div>
-
-                <!-- Contenido principal -->
-                <div class="md:col-span-3 space-y-6">
-                    <div class="bg-blue-50 border-l-8 border-blue-600 p-4 rounded-xl">
-                        <p class="text-sm font-black uppercase text-blue-800"><i class="fas fa-upload mr-2"></i> UPLOAD DOCUMENT (<span id="record-lastname">Cliente</span>)</p>
-                    </div>
-
-                    <!-- Tabla principal -->
-                    <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-                        <table class="w-full text-left ok-table">
-                            <thead>
-                                <tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Class</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-b">
-                                    <td class="px-6 py-4 font-mono font-bold" id="record-code">---</td>
-                                    <td class="px-6 py-4 font-bold" id="record-fullname">---</td>
-                                    <td class="px-6 py-4" id="record-type">---</td>
-                                    <td class="px-6 py-4" id="record-class">---</td>
-                                    <td class="px-6 py-4" id="record-date">---</td>
-                                    <td class="px-6 py-4 text-green-700 font-black" id="record-doc">---</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Datos adicionales -->
-                    <div class="grid md:grid-cols-2 gap-5">
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p>
-                            <p class="font-bold text-gray-800" id="record-dob">---</p>
-                        </div>
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p>
-                            <p class="font-bold text-gray-800" id="record-state">---</p>
-                        </div>
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Sex / Height / Weight</p>
-                            <p class="font-bold text-gray-800" id="record-physical">---</p>
-                        </div>
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p>
-                            <p class="font-bold text-gray-800 text-sm" id="record-address">---</p>
-                        </div>
-                    </div>
-
-                    <!-- 🆕 BOTÓN SIEMPRE VISIBLE -->
-                    <button id="btn-restrictions" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-3">
-                        <i class="fas fa-exclamation-triangle text-xl"></i> Ver Restricciones y Exámenes Médicos
-                    </button>
-
-                    <!-- 🆕 SECCIÓN DE RESTRICCIONES (oculta inicialmente) -->
-                    <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
-                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Exámenes médicos requeridos:</h3>
-                        <div class="space-y-2">
-                            <div class="restrictions-item"><span class="font-bold">Agudeza visual:</span> <span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Examen auditivo:</span> <span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Prueba antidoping (alcohol y drogas):</span> <span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Examen de sangre:</span> <span class="font-black">$105,24 USD</span></div>
-                        </div>
-                        <div class="total-amount mt-5">
-                            Monto total adeudado: <span class="text-2xl block">$420,96 USD</span>
-                        </div>
-                        <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
-                            <i class="fas fa-phone-alt mr-2"></i> Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
-                        </div>
-                    </div>
-
-                    <!-- Footer -->
-                    <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
-                        <div class="flex justify-center space-x-6 mb-3">
-                            <i class="fab fa-facebook-f text-blue-700"></i>
-                            <i class="fab fa-instagram text-pink-600"></i>
-                            <i class="fab fa-youtube text-red-600"></i>
-                            <i class="fab fa-linkedin-in text-blue-800"></i>
-                        </div>
-                        <p>© 2026 State of Oklahoma | ServiceOklahoma.gov | Policies | General Disclaimer | Help | Login</p>
-                    </div>
-                </div>
-            </div>
+      <div class="service-card" onclick="goTo('licencias')">
+        <div class="service-icon"><i class="fas fa-car"></i></div>
+        <h3>Licencias de Conducir</h3>
+        <p>Obtén, renueva o duplica tu licencia.</p>
+        <div class="how-it-works">
+          <strong><i class="fas fa-check-circle"></i> ¿Cómo tramitar tu licencia?</strong>
+          <p>1. Indica el trámite: nueva, renovación o duplicado.</p>
+          <p>2. Completa el formulario con tus documentos escaneados.</p>
+          <p>3. Un asesor revisa tu caso y te guía hasta la obtención del plástico.</p>
+          <p>📄 Aceptamos todos los estados.</p>
         </div>
-    </main>
+        <div class="price">Desde $34.99</div>
+        <button class="btn btn-primary" onclick="openModal('licencia-generico')">Iniciar</button>
+      </div>
+    </div>
 
-    <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center">
-        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
-    </footer>
+    <!-- Sección Asesores -->
+    <div class="section" style="background: transparent;">
+      <div class="section-header">
+        <div class="section-badge">Atención personalizada</div>
+        <h2 class="section-title">Elige a tu asesor</h2>
+        <p class="section-sub">Habla directamente con un experto por WhatsApp.</p>
+      </div>
+      <div class="asesores-grid">
+        <div class="asesor-card">
+          <div class="asesor-avatar"><i class="fas fa-user-tie"></i></div>
+          <h4>Carlos Méndez</h4>
+          <p>Placas y licencias</p>
+          <a href="https://wa.me/1234567890?text=Hola%20Carlos" target="_blank" class="wa-btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <div class="asesor-card">
+          <div class="asesor-avatar"><i class="fas fa-user-md"></i></div>
+          <h4>Laura Jiménez</h4>
+          <p>Asesora de seguros</p>
+          <a href="https://wa.me/1234567891?text=Hola%20Laura" target="_blank" class="wa-btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <div class="asesor-card">
+          <div class="asesor-avatar"><i class="fas fa-user-graduate"></i></div>
+          <h4>Roberto Díaz</h4>
+          <p>Trámites exprés</p>
+          <a href="https://wa.me/1234567892?text=Hola%20Roberto" target="_blank" class="wa-btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <p>© 2025 Dmvirtual – Trámites vehiculares en USA | No afiliado a ninguna agencia gubernamental</p>
+  </footer>
+</div>
 
-    <script>
-        // Variable global para guardar los datos del cliente actualmente autenticado
-        let currentClientData = null;
+<!-- Página Seguros -->
+<div class="page" id="page-seguros">
+  <div class="container" style="padding: 2rem 1rem;">
+    <button class="btn btn-light" onclick="goTo('home')" style="margin-bottom:1rem;"><i class="fas fa-arrow-left"></i> Volver</button>
+    <div class="section-header"><div class="section-badge">Seguros</div><h2 class="section-title">Protege tu vehículo con nosotros</h2></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Seguro Básico</h3>
+        <p>Cobertura legal mínima en todos los estados.</p>
+        <div class="how-it-works"><strong>📋 Proceso rápido:</strong><p>✔️ Completa el formulario.<br>✔️ Recibe la póliza digital en 1 hora.<br>✔️ Paga mensualmente o anual.</p></div>
+        <div class="price">$75/mes</div>
+        <button class="btn btn-primary" onclick="openModal('seguro-basico')">Contratar</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-crown"></i></div>
+        <h3>Full Cover</h3>
+        <p>Protección total contra daños, robo y asistencia 24/7.</p>
+        <div class="how-it-works"><strong>📋 Proceso exprés:</strong><p>✔️ Te contacta un asesor en minutos.<br>✔️ Cobertura inmediata al contratar.<br>✔️ Incluye auto de reemplazo.</p></div>
+        <div class="price">$140/mes</div>
+        <button class="btn btn-primary" onclick="openModal('seguro-full')">Contratar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        function showTab(id) {
-            document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
-            const target = document.getElementById('tab-' + id);
-            if(target) target.classList.remove('hidden');
-            document.querySelectorAll('nav button').forEach(b => {
-                b.classList.remove('tab-active');
-                b.classList.add('text-slate-400');
-            });
-            const activeBtn = document.getElementById('nav-' + id);
-            if(activeBtn) {
-                activeBtn.classList.add('tab-active');
-                activeBtn.classList.remove('text-slate-400');
-            }
-            window.scrollTo(0,0);
-        }
+<!-- Página Placas -->
+<div class="page" id="page-placas">
+  <div class="container" style="padding: 2rem 1rem;">
+    <button class="btn btn-light" onclick="goTo('home')" style="margin-bottom:1rem;"><i class="fas fa-arrow-left"></i> Volver</button>
+    <div class="section-header"><div class="section-badge">Placas Temporales</div><h2 class="section-title">Elige la opción que necesites</h2></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-clock"></i></div>
+        <h3>Placa Estándar</h3>
+        <p>Válida 60 días. Entrega en 5-7 días hábiles.</p>
+        <div class="how-it-works"><strong>🚗 Pasos:</strong><p>1. Ingresa VIN.<br>2. Confirma dirección.<br>3. Recibe placa por correo.</p></div>
+        <div class="price">$49.99</div>
+        <button class="btn btn-primary" onclick="openModal('placa-estandar')">Solicitar</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Placa Express</h3>
+        <p>Procesamiento prioritario. Envío en 24-48 horas.</p>
+        <div class="how-it-works"><strong>⚡ Proceso urgente:</strong><p>✔️ Validación en 4h.<br>✔️ Seguimiento por WhatsApp.<br>✔️ Envío tracking incluido.</p></div>
+        <div class="price">$89.99</div>
+        <button class="btn btn-primary" onclick="openModal('placa-express')">Solicitar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        function formatDate(dateStr) {
-            if (!dateStr) return 'N/A';
-            const [y, m, d] = dateStr.split('-');
-            if (!y || !m || !d) return dateStr;
-            const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-            return `${d} ${months[parseInt(m)-1]} ${y}`;
-        }
+<!-- Página Licencias -->
+<div class="page" id="page-licencias">
+  <div class="container" style="padding: 2rem 1rem;">
+    <button class="btn btn-light" onclick="goTo('home')" style="margin-bottom:1rem;"><i class="fas fa-arrow-left"></i> Volver</button>
+    <div class="section-header"><div class="section-badge">Licencias de Conducir</div><h2 class="section-title">Tramita tu licencia sin filas</h2></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-plus-circle"></i></div>
+        <h3>Nueva Licencia</h3>
+        <p>Para conductores primerizos o por cambio de estado.</p>
+        <div class="how-it-works"><strong>📌 ¿Cómo funciona?</strong><p>1. Asesor personal.<br>2. Preparamos documentos.<br>3. Agenda cita DMV (opcional).<br>4. Recibes licencia en casa.</p></div>
+        <div class="price">$59.99</div>
+        <button class="btn btn-primary" onclick="openModal('licencia-nueva')">Iniciar</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-redo"></i></div>
+        <h3>Renovación</h3>
+        <p>Renueva tu licencia antes de que venza.</p>
+        <div class="how-it-works"><strong>📋 Proceso sencillo:</strong><p>✔️ Verificamos elegibilidad.<br>✔️ Completamos online.<br>✔️ Envío del nuevo plástico.</p></div>
+        <div class="price">$44.99</div>
+        <button class="btn btn-primary" onclick="openModal('licencia-renovacion')">Renovar</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-clone"></i></div>
+        <h3>Duplicado</h3>
+        <p>Por pérdida, robo o deterioro.</p>
+        <div class="how-it-works"><strong>⚠️ Pasos rápidos:</strong><p>1. Denuncia (opcional).<br>2. Gestionamos duplicado oficial.<br>3. Envío en 5-7 días.</p></div>
+        <div class="price">$34.99</div>
+        <button class="btn btn-primary" onclick="openModal('licencia-duplicado')">Solicitar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        async function handleVerify(e) {
-            e.preventDefault();
-            const nameInput = document.getElementById('v-name').value;
-            const idInput = document.getElementById('v-id').value;
+<!-- Página Verificar -->
+<div class="page" id="page-verify">
+  <div class="container" style="padding: 2rem 1rem;">
+    <button class="btn btn-light" onclick="goTo('home')" style="margin-bottom:1rem;"><i class="fas fa-arrow-left"></i> Volver</button>
+    <div class="section-header"><div class="section-badge">Seguimiento de trámites</div><h2 class="section-title">Verifica el estado de tu gestión</h2></div>
+    <div class="verify-box">
+      <div class="verify-service-grid">
+        <div class="verify-opt selected" data-service="seguros"><i class="fas fa-shield-alt"></i><span>Seguros</span></div>
+        <div class="verify-opt" data-service="placas"><i class="fas fa-id-card"></i><span>Placas</span></div>
+        <div class="verify-opt" data-service="licencias"><i class="fas fa-car"></i><span>Licencias</span></div>
+      </div>
+      <div class="verify-input-group">
+        <input type="text" id="verifyId" class="verify-input" placeholder="ID (ej: DMV-123456)">
+        <button class="btn btn-primary" onclick="runVerify()">Verificar</button>
+      </div>
+      <div id="verifyResult" class="verify-result"></div>
+    </div>
+  </div>
+</div>
 
-            try {
-                const res = await fetch('/api/verificar', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nombre: nameInput, id_cliente: idInput })
-                });
-                const data = await res.json();
+<!-- Modal -->
+<div class="modal-overlay" id="contactModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); align-items:center; justify-content:center; z-index:1000;">
+  <div style="background:white; max-width:450px; width:90%; border-radius:1.5rem; padding:1.5rem; position:relative;">
+    <button onclick="closeModal()" style="position:absolute; top:0.8rem; right:0.8rem; background:none; border:none; font-size:1.2rem; cursor:pointer;">&times;</button>
+    <div class="section-header"><h3 id="modalTitle">Solicitar Servicio</h3><p id="modalDesc">Completa el formulario y un asesor te contactará.</p></div>
+    <input type="text" id="formNombre" placeholder="Nombre completo" class="verify-input" style="width:100%; margin-bottom:0.8rem;">
+    <input type="email" id="formEmail" placeholder="Correo electrónico" class="verify-input" style="width:100%; margin-bottom:0.8rem;">
+    <input type="tel" id="formTelefono" placeholder="Teléfono / WhatsApp" class="verify-input" style="width:100%; margin-bottom:0.8rem;">
+    <select id="formEstado" class="verify-input" style="width:100%; margin-bottom:0.8rem;">
+      <option>Selecciona tu estado</option><option>Texas</option><option>California</option><option>Florida</option><option>New York</option>
+    </select>
+    <textarea id="formMensaje" rows="2" class="verify-input" placeholder="Detalles de tu trámite..." style="width:100%; margin-bottom:0.8rem;"></textarea>
+    <button class="btn btn-primary" style="width:100%;" onclick="submitForm()">Enviar</button>
+  </div>
+</div>
 
-                if (data.success && data.datos) {
-                    currentClientData = data.datos;  // guardar para la verificación de PIN
-                    const d = currentClientData;
+<script>
+  function goTo(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-'+page).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const navLink = document.getElementById('nav-'+page);
+    if (navLink) navLink.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function toggleMobileMenu() {
+    document.getElementById('navbar').classList.toggle('responsive');
+  }
+  function runVerify() {
+    const id = document.getElementById('verifyId').value.trim();
+    const resultDiv = document.getElementById('verifyResult');
+    if (!id) {
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = '<p style="color:red;">⚠️ Ingresa un ID válido.</p>';
+      return;
+    }
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `<p>🔍 Buscando trámite <strong>${id}</strong>...</p><p>✅ Estado actual: <span style="color:green;">En proceso de validación</span>. Un asesor te contactará pronto.</p>`;
+  }
+  document.querySelectorAll('.verify-opt').forEach(opt => {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.verify-opt').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+  function openModal(serviceKey) {
+    document.getElementById('contactModal').style.display = 'flex';
+    document.getElementById('modalTitle').innerText = 'Solicitar Servicio';
+    document.getElementById('modalDesc').innerText = 'Completa tus datos y te contactaremos en breve.';
+  }
+  function closeModal() {
+    document.getElementById('contactModal').style.display = 'none';
+  }
+  function submitForm() {
+    alert('✅ Solicitud enviada. En breve un asesor se comunicará.');
+    closeModal();
+    document.getElementById('formNombre').value = '';
+    document.getElementById('formEmail').value = '';
+    document.getElementById('formTelefono').value = '';
+    document.getElementById('formMensaje').value = '';
+  }
+  document.getElementById('contactModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  goTo('home');
+</script>
 
-                    // Llenar campos básicos
-                    document.getElementById('record-code').textContent = d.id_cliente || '---';
-                    document.getElementById('record-fullname').textContent = d.nombre || '---';
-                    document.getElementById('record-type').textContent = d.tipo_licencia || '---';
-                    document.getElementById('record-class').textContent = d.clase || d.class || '---';
-                    document.getElementById('record-date').textContent = d.fecha_emision || d.date || '---';
-                    document.getElementById('record-doc').textContent = d.documento || d.document || 'Approval';
-                    document.getElementById('record-lastname').textContent = (d.nombre || '').split(' ').slice(0,2).join(' ') || 'Cliente';
-                    document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
-                    document.getElementById('record-state').textContent = d.estado || 'OKLAHOMA';
-                    
-                    const sexo = d.sexo || 'N/A';
-                    const altura = d.estatura || 'N/A';
-                    const peso = d.peso || 'N/A';
-                    document.getElementById('record-physical').textContent = `${sexo} / ${altura} / ${peso}`;
-                    document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
-
-                    // Asegurar que la sección de restricciones esté oculta al cargar un nuevo registro
-                    const restrictionsDiv = document.getElementById('restrictions-content');
-                    restrictionsDiv.classList.add('hidden');
-
-                    // Configurar el botón de restricciones (siempre visible, pero verifica PIN al hacer clic)
-                    const btn = document.getElementById('btn-restrictions');
-                    // Remover eventos anteriores clonando el botón para evitar múltiples listeners
-                    const newBtn = btn.cloneNode(true);
-                    btn.parentNode.replaceChild(newBtn, btn);
-                    newBtn.addEventListener('click', () => {
-                        const pin = currentClientData.pin ? currentClientData.pin.toString() : null;
-                        const isValidPin = pin && /^\d{3}$/.test(pin);
-                        if (isValidPin) {
-                            restrictionsDiv.classList.toggle('hidden');
-                        } else {
-                            alert("⛔ Acceso denegado. No tiene restricciones médicas registradas o su PIN no es válido. Contacte a su asesor del DMV.");
-                        }
-                    });
-
-                    showTab('record');
-                } else {
-                    alert("RECORD NOT FOUND.\nVerifica que el nombre y el folio sean correctos.");
-                    currentClientData = null;
-                }
-            } catch (err) {
-                console.error("Error en la verificación:", err);
-                alert("Error de conexión con el servidor. Asegúrate de que el backend esté corriendo.");
-            }
-        }
-    </script>
+<style>
+  .page { display: none; }
+  .page.active { display: block; }
+  .modal-overlay { display: none; }
+</style>
 </body>
 </html>
