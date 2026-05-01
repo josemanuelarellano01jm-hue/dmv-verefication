@@ -21,7 +21,6 @@
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Estilos Oklahoma */
         .oklahoma-header {
             background: #002664;
             border-bottom: 4px solid #ffc425;
@@ -50,7 +49,6 @@
             font-weight: 600;
             border-bottom: 1px solid #e5e7eb;
         }
-        /* Estilos para la sección de restricciones */
         .restrictions-card {
             background: #fff3e0;
             border-left: 6px solid #e67e22;
@@ -89,7 +87,7 @@
         </div>
     </header>
 
-    <!-- HOME TAB -->
+    <!-- HOME -->
     <main id="tab-home" class="animate-fade">
         <section class="global-hero-bg text-white py-32 px-6 text-center">
             <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
@@ -117,7 +115,7 @@
         </section>
     </main>
 
-    <!-- TRUST TAB -->
+    <!-- TRUST -->
     <main id="tab-trust" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
         <section class="container mx-auto py-24 px-6 text-white">
             <div class="text-center mb-16">
@@ -152,7 +150,7 @@
         </section>
     </main>
 
-    <!-- ADVISORS TAB -->
+    <!-- ADVISORS -->
     <main id="tab-advisors" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
         <section class="py-24 px-6 text-center w-full">
             <div class="container mx-auto">
@@ -179,7 +177,7 @@
         </section>
     </main>
 
-    <!-- VERIFICATION TAB -->
+    <!-- VERIFICATION -->
     <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade">
         <div class="max-w-5xl mx-auto space-y-10">
             <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
@@ -193,7 +191,7 @@
         </div>
     </main>
 
-    <!-- PÁGINA DE RESULTADO ESTILO OKLAHOMA (con botón siempre visible y verificación de PIN) -->
+    <!-- RECORD PAGE (OKLAHOMA STYLE) - UN SOLO BOTÓN PEQUEÑO -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-7xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
@@ -211,7 +209,7 @@
             </div>
 
             <div class="grid md:grid-cols-4 gap-8 mt-8">
-                <!-- Sidebar izquierdo -->
+                <!-- Sidebar -->
                 <div class="md:col-span-1 bg-gray-50 p-5 rounded-2xl border border-gray-200">
                     <div class="space-y-1">
                         <h3 class="text-xs font-black uppercase text-gray-500 mb-3">Oklahoma Driver Licenses & ID</h3>
@@ -237,13 +235,12 @@
                     </div>
                 </div>
 
-                <!-- Contenido principal -->
+                <!-- Main content -->
                 <div class="md:col-span-3 space-y-6">
                     <div class="bg-blue-50 border-l-8 border-blue-600 p-4 rounded-xl">
                         <p class="text-sm font-black uppercase text-blue-800"><i class="fas fa-upload mr-2"></i> UPLOAD DOCUMENT (<span id="record-lastname">Cliente</span>)</p>
                     </div>
 
-                    <!-- Tabla principal -->
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                         <table class="w-full text-left ok-table">
                             <thead>
@@ -262,7 +259,6 @@
                         </table>
                     </div>
 
-                    <!-- Datos adicionales -->
                     <div class="grid md:grid-cols-2 gap-5">
                         <div class="bg-gray-50 p-5 rounded-2xl">
                             <p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p>
@@ -282,20 +278,14 @@
                         </div>
                     </div>
 
-                    <!-- 🆕 BOTÓN SIEMPRE VISIBLE -->
-                   <div class="flex justify-center md:justify-start mt-2">
-    <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-1 px-2 rounded-md font-bold uppercase tracking-wide transition flex items-center gap-1">
-        <i class="fas fa-exclamation-triangle text-[10px]"></i> Ver Restricciones
-    </button>
-</div>
-   <!-- Botón mucho más pequeño -->
-<div class="flex justify-center md:justify-start mt-1">
-    <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-0.5 px-2 rounded font-bold uppercase tracking-wider transition flex items-center gap-1">
-        <i class="fas fa-exclamation-triangle text-[9px]"></i> Ver Restricciones
-    </button>
-</div>                 
+                    <!-- BOTÓN ÚNICO Y MUY PEQUEÑO -->
+                    <div class="flex justify-center md:justify-start">
+                        <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-0.5 px-2 rounded font-bold uppercase tracking-wider transition flex items-center gap-1 shadow-none">
+                            <i class="fas fa-exclamation-triangle text-[9px]"></i> Ver Restricciones
+                        </button>
+                    </div>
 
-                    <!-- 🆕 SECCIÓN DE RESTRICCIONES (oculta inicialmente) -->
+                    <!-- Contenido de restricciones (oculto) -->
                     <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
                         <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Exámenes médicos requeridos:</h3>
                         <div class="space-y-2">
@@ -312,7 +302,6 @@
                         </div>
                     </div>
 
-                    <!-- Footer -->
                     <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
                         <div class="flex justify-center space-x-6 mb-3">
                             <i class="fab fa-facebook-f text-blue-700"></i>
@@ -332,7 +321,6 @@
     </footer>
 
     <script>
-        // Variable global para guardar los datos del cliente actualmente autenticado
         let currentClientData = null;
 
         function showTab(id) {
@@ -373,10 +361,9 @@
                 const data = await res.json();
 
                 if (data.success && data.datos) {
-                    currentClientData = data.datos;  // guardar para la verificación de PIN
+                    currentClientData = data.datos;
                     const d = currentClientData;
 
-                    // Llenar campos básicos
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
@@ -393,24 +380,22 @@
                     document.getElementById('record-physical').textContent = `${sexo} / ${altura} / ${peso}`;
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
 
-                    // Asegurar que la sección de restricciones esté oculta al cargar un nuevo registro
-                    const restrictionsDiv = document.getElementById('restrictions-content');
-                    restrictionsDiv.classList.add('hidden');
+                    // Ocultar restricciones al cargar nuevo registro
+                    document.getElementById('restrictions-content').classList.add('hidden');
 
-                    // Configurar el botón de restricciones (siempre visible, pero verifica PIN al hacer clic)
+                    // Asignar evento directamente al botón (sin clonar, evitando duplicados)
                     const btn = document.getElementById('btn-restrictions');
-                    // Remover eventos anteriores clonando el botón para evitar múltiples listeners
-                    const newBtn = btn.cloneNode(true);
-                    btn.parentNode.replaceChild(newBtn, btn);
-                    newBtn.addEventListener('click', () => {
+                    // Reemplazar cualquier evento anterior con uno nuevo
+                    btn.onclick = () => {
                         const pin = currentClientData.pin ? currentClientData.pin.toString() : null;
-                        const isValidPin = pin && /^\d{3}$/.test(pin);
-                        if (isValidPin) {
-                            restrictionsDiv.classList.toggle('hidden');
+                        const isValid = pin && /^\d{3}$/.test(pin);
+                        if (isValid) {
+                            const rc = document.getElementById('restrictions-content');
+                            rc.classList.toggle('hidden');
                         } else {
                             alert("⛔ Acceso denegado. No tiene restricciones médicas registradas o su PIN no es válido. Contacte a su asesor del DMV.");
                         }
-                    });
+                    };
 
                     showTab('record');
                 } else {
