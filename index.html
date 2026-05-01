@@ -82,7 +82,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-radius: 8px;
             background: #e2e8f0;
-            display: none; /* Oculto hasta que cargue */
         }
         .photo-placeholder {
             width: 120px;
@@ -143,18 +142,137 @@
         </div>
     </header>
 
-    <!-- HOME (contenido resumido para no alargar) -->
+    <!-- HOME -->
     <main id="tab-home" class="animate-fade">
         <section class="text-white py-32 px-6 text-center relative" style="background: linear-gradient(135deg, rgba(0,20,70,0.7), rgba(0,60,140,0.6));">
             <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight drop-shadow-lg">Expert Solutions <br> <span class="text-blue-300 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
-            <p class="max-w-3xl mx-auto text-blue-100 mb-10 text-lg font-medium drop-shadow">Over 20 years leading the industry in document management and secure consulting.</p>
+            <p class="max-w-3xl mx-auto text-blue-100 mb-10 text-lg font-medium drop-shadow">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
             <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
         </section>
-        <!-- ... resto del home igual que antes ... -->
+        <section class="py-10 px-6 glass-panel max-w-5xl mx-auto -mt-8 relative z-10 rounded-2xl shadow-xl mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div><i class="fas fa-clock text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">20+</p><p class="text-xs uppercase font-bold text-blue-700">Years Experience</p></div>
+                <div><i class="fas fa-users text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">150K+</p><p class="text-xs uppercase font-bold text-blue-700">Happy Clients</p></div>
+                <div><i class="fas fa-id-card text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">50K+</p><p class="text-xs uppercase font-bold text-blue-700">Licenses Processed</p></div>
+                <div><i class="fas fa-shield-alt text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">100%</p><p class="text-xs uppercase font-bold text-blue-700">Legal Compliance</p></div>
+            </div>
+        </section>
+        <section class="py-24 px-6 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-black uppercase italic mb-16 text-center text-white drop-shadow">Success <span class="text-blue-300">Stories</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg"><div class="flex items-center mb-4 text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="italic text-slate-700 text-sm">"I was struggling… DMV CAR LAW GROUP handled everything with such professionalism."</p><span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Carlos Martinez</span></div>
+                <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg"><div class="flex items-center mb-4 text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="italic text-slate-700 text-sm">"Transparency unmatched… verifying my document status directly on their portal gave me peace of mind."</p><span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Elena Rodriguez</span></div>
+                <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg"><div class="flex items-center mb-4 text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><p class="italic text-slate-700 text-sm">"100% recommended for the immigrant community."</p><span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Monica Peralta</span></div>
+            </div>
+        </section>
+        <section class="py-16 px-6 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-black uppercase italic mb-12 text-center text-white drop-shadow">Frequently <span class="text-blue-300">Asked Questions</span></h2>
+            <div class="space-y-4">
+                <div class="glass-panel p-6 rounded-2xl shadow"><div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">What documents do I need to start? <i class="fas fa-chevron-down text-blue-600"></i></div><div class="faq-answer text-slate-700 mt-2 text-sm">Generally a valid ID, proof of address, and any DMV correspondence. Our advisors provide a custom checklist after verification.</div></div>
+                <div class="glass-panel p-6 rounded-2xl shadow"><div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">How secure is my personal information? <i class="fas fa-chevron-down text-blue-600"></i></div><div class="faq-answer text-slate-700 mt-2 text-sm">Bank-level encryption, never shared with third parties.</div></div>
+                <div class="glass-panel p-6 rounded-2xl shadow"><div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">Can I renew an expired license? <i class="fas fa-chevron-down text-blue-600"></i></div><div class="faq-answer text-slate-700 mt-2 text-sm">Yes, depending on state and expiration time. We assess eligibility, most under 2 years are renewable.</div></div>
+            </div>
+        </section>
     </main>
 
-    <!-- TRUST, ADVISORS, LICENSES (igual que antes) -->
-    <!-- ... (mantén las secciones de trust, advisors, licenses sin cambios) ... -->
+    <!-- TRUST -->
+    <main id="tab-trust" class="hidden animate-fade min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16"><span class="text-blue-300 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span><h2 class="text-5xl font-black uppercase italic mt-4 text-white">Why Choose <span class="text-blue-300">Us?</span></h2></div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 glass-dark p-10 rounded-[3rem] text-white border border-white/10">
+                    <div><h3 class="text-2xl font-black uppercase italic text-blue-300 mb-4">20 Years Experience</h3><p class="text-blue-100">Since our founding, we have dedicated two decades to mastering document consulting.</p></div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-blue-800/40 p-6 rounded-2xl border-b-4 border-blue-400"><p class="text-3xl font-black">150K+</p><p class="text-[10px] font-bold uppercase text-blue-300">Satisfied Clients</p></div>
+                        <div class="bg-blue-800/40 p-6 rounded-2xl border-b-4 border-blue-400"><p class="text-3xl font-black">100%</p><p class="text-[10px] font-bold uppercase text-blue-300">Legal Processes</p></div>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 bg-blue-900/50 p-4 rounded-xl">
+                        <i class="fas fa-certificate text-yellow-400 text-3xl"></i>
+                        <div><p class="font-black text-sm">Nationally Certified</p><p class="text-xs text-blue-200">Member of AAMVA</p></div>
+                    </div>
+                </div>
+                <div class="bg-blue-600 text-white p-10 rounded-[3rem] shadow-2xl">
+                    <h3 class="text-xl font-black uppercase italic mb-6">Our Core Pillars</h3>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4"><i class="fas fa-shield-check"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100">High‑end encryption and verified legal channels.</p></div></li>
+                        <li class="flex gap-4"><i class="fas fa-bolt"></i><div><p class="font-black uppercase text-sm">Industry Speed</p><p class="text-xs text-blue-100">Direct connections for 3x faster processing.</p></div></li>
+                    </ul>
+                    <div class="mt-6 text-center"><button onclick="showTab('licenses')" class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-blue-50 transition">Explore License Services</button></div>
+                </div>
+            </div>
+            <div class="mt-16 max-w-3xl mx-auto"><div class="glass-dark rounded-2xl p-5 text-white"><div class="faq-question font-black text-lg flex justify-between items-center" onclick="toggleFAQ(this)">Is my data really safe? <i class="fas fa-chevron-down text-blue-300"></i></div><div class="faq-answer text-blue-100 text-sm mt-2">Absolutely. 256‑bit encryption, no retention of sensitive documents longer than needed.</div></div></div>
+        </div>
+    </main>
+
+    <!-- ADVISORS -->
+    <main id="tab-advisors" class="hidden animate-fade min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl font-black uppercase italic mb-6 text-center text-white">Meet Our <span class="text-blue-300">Senior Advisors</span></h2>
+            <p class="text-blue-100 max-w-2xl mx-auto mb-12 text-center text-sm">Each advisor brings over a decade of DMV procedure expertise and government liaison experience.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs">Rogelio Olivo</h4><p class="text-xs text-gray-500">Senior Case Manager</p>
+                    <button onclick="alert('Request sent to Rogelio Olivo.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs">Fermin Garcia</h4><p class="text-xs text-gray-500">License Reinstatement</p>
+                    <button onclick="alert('Request sent to Fermin Garcia.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs">Marcela Vanegas</h4><p class="text-xs text-gray-500">Document Verification Lead</p>
+                    <button onclick="alert('Request sent to Marcela Vanegas.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs">Edwin Peralta</h4><p class="text-xs text-gray-500">Senior Legal Consultant</p>
+                    <button onclick="alert('Request sent to Edwin Peralta.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+            </div>
+            <div class="mt-10 text-center"><button onclick="showTab('verify')" class="bg-white text-blue-600 px-8 py-3 rounded-full font-black uppercase tracking-widest text-sm hover:bg-blue-50 transition shadow-lg">Verify Your Record Now</button></div>
+        </div>
+    </main>
+
+    <!-- LICENSES -->
+    <main id="tab-licenses" class="hidden animate-fade py-16">
+        <div class="container mx-auto px-6 max-w-6xl text-center">
+            <h2 class="text-3xl md:text-5xl font-black uppercase italic mb-6 text-white drop-shadow">Our <span class="text-blue-300">License Services</span></h2>
+            <p class="max-w-2xl mx-auto text-blue-100 mb-12 text-lg">Get your driver's license, renewals, and document processing fully online with our expert team.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-blue-600 flex flex-col text-left">
+                    <i class="fas fa-car text-5xl text-blue-600 mb-4 mx-auto"></i><h3 class="text-xl font-black uppercase mb-2 text-center">Standard Processing</h3>
+                    <p class="text-sm text-gray-700 mb-4 flex-1">New or renewed license, 5‑7 business days.</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-6"><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Document verification</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> DMV form preparation</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Online submission</li></ul>
+                    <p class="text-xs font-semibold text-blue-600 mt-auto text-center">Starting at $49.99</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-amber-500 flex flex-col text-left">
+                    <i class="fas fa-bolt text-5xl text-amber-500 mb-4 mx-auto"></i><h3 class="text-xl font-black uppercase mb-2 text-center">Express Processing</h3>
+                    <p class="text-sm text-gray-700 mb-4 flex-1">Same‑day expedited submission, digital copy delivery.</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-6"><li><i class="fas fa-check-circle text-green-600 mr-1"></i> All Standard features</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Expedited 24h review</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Digital copy delivery</li></ul>
+                    <p class="text-xs font-semibold text-amber-600 mt-auto text-center">Starting at $89.99</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-red-500 flex flex-col text-left">
+                    <i class="fas fa-user-check text-5xl text-red-500 mb-4 mx-auto"></i><h3 class="text-xl font-black uppercase mb-2 text-center">Full Consultation</h3>
+                    <p class="text-sm text-gray-700 mb-4 flex-1">Advisor‑led, complex cases, reinstatements.</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-6"><li><i class="fas fa-check-circle text-green-600 mr-1"></i> All Express features</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Personal advisor call</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Reinstatement strategy</li></ul>
+                    <p class="text-xs font-semibold text-red-600 mt-auto text-center">Starting at $149.99</p>
+                </div>
+            </div>
+            <div class="mt-16 glass-panel p-10 rounded-3xl text-left max-w-3xl mx-auto">
+                <h3 class="text-2xl font-black uppercase mb-6 text-center">How to Use Our Online Service</h3>
+                <ol class="list-decimal space-y-4 text-gray-700 font-medium pl-6">
+                    <li><strong>Select Your Service:</strong> Choose the package that fits your needs.</li>
+                    <li><strong>Submit Documents:</strong> Upload ID, proof of residency, previous license via secure portal.</li>
+                    <li><strong>Verification:</strong> Our team audits your documents and contacts you with any missing items.</li>
+                    <li><strong>DMV Filing:</strong> We submit the application directly to the DMV on your behalf.</li>
+                    <li><strong>Receive Your License:</strong> Mailed to your address or pick‑up with our support.</li>
+                </ol>
+            </div>
+            <div class="mt-8"><button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest transition shadow-lg">Check Your Eligibility</button></div>
+        </div>
+    </main>
 
     <!-- VERIFICATION -->
     <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade max-w-5xl">
@@ -163,13 +281,13 @@
             <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
                 <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
                 <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                <p class="text-xs text-gray-500 text-left">Enter your full name and the unique folio number provided by your advisor.</p>
+                <p class="text-xs text-gray-500 text-left">Enter your full name as it appears on your DMV correspondence and the unique folio number provided by your advisor.</p>
                 <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
             </form>
         </div>
     </main>
 
-    <!-- RECORD PAGE (con dos fotos mejoradas) -->
+    <!-- RECORD PAGE (con dos fotos) -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
@@ -189,14 +307,14 @@
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <!-- Foto 1 -->
                     <div class="flex flex-col items-center">
-                        <img id="record-photo1" src="" alt="Client Photo" class="client-photo">
-                        <div id="placeholder1" class="photo-placeholder">NO PHOTO</div>
+                        <img id="record-photo1" src="" alt="Client Photo 1" class="client-photo" onerror="this.style.display='none'; document.getElementById('placeholder1').style.display='flex';">
+                        <div id="placeholder1" class="photo-placeholder" style="display: flex;">NO PHOTO</div>
                         <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Client Photo</p>
                     </div>
                     <!-- Foto 2 -->
                     <div class="flex flex-col items-center">
-                        <img id="record-photo2" src="" alt="Document Photo" class="client-photo">
-                        <div id="placeholder2" class="photo-placeholder">NO PHOTO</div>
+                        <img id="record-photo2" src="" alt="Client Photo 2" class="client-photo" onerror="this.style.display='none'; document.getElementById('placeholder2').style.display='flex';">
+                        <div id="placeholder2" class="photo-placeholder" style="display: flex;">NO PHOTO</div>
                         <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Document Photo</p>
                     </div>
                 </div>
@@ -243,7 +361,17 @@
                     </button>
                 </div>
                 <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
-                    <!-- contenido restricciones igual -->
+                    <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Required Medical Examinations:</h3>
+                    <div class="space-y-2">
+                        <div class="restrictions-item"><span class="font-bold">Visual Acuity:</span> <span class="font-black">$105.24 USD</span></div>
+                        <div class="restrictions-item"><span class="font-bold">Hearing Test:</span> <span class="font-black">$105.24 USD</span></div>
+                        <div class="restrictions-item"><span class="font-bold">Drug & Alcohol Test:</span> <span class="font-black">$105.24 USD</span></div>
+                        <div class="restrictions-item"><span class="font-bold">Blood Test:</span> <span class="font-black">$105.24 USD</span></div>
+                    </div>
+                    <div class="total-amount mt-5">Total Amount Due: <span class="text-2xl block">$420.96 USD</span></div>
+                    <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
+                        <i class="fas fa-phone-alt mr-2"></i> You are requested to immediately contact the DMV‑assigned advisor for detailed information on the procedure to regularize your situation and complete the pending requirements.
+                    </div>
                 </div>
                 <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
                     <p>© 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
@@ -253,7 +381,12 @@
     </main>
 
     <footer class="bg-blue-900/90 backdrop-blur-md text-blue-200 py-16 px-6 text-center">
-        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED.</p>
+        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
+        <div class="flex justify-center space-x-4 mt-4 text-lg">
+            <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+        </div>
     </footer>
 
     <script>
@@ -261,7 +394,9 @@
         const navMenu = document.getElementById('nav-menu');
         const menuToggle = document.getElementById('menu-toggle');
 
-        menuToggle?.addEventListener('click', () => navMenu.classList.toggle('active'));
+        menuToggle?.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
 
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
@@ -288,67 +423,10 @@
             return `${d} ${months[parseInt(m)-1]} ${y}`;
         }
 
-        // Función para limpiar el nombre y crear variantes de búsqueda
-        function getNameVariants(fullName) {
-            if (!fullName) return [];
-            const parts = fullName.trim().split(/\s+/);
-            const variants = [];
-            // Primero tal cual con guiones bajos
-            variants.push(parts.join('_'));
-            // Si hay más de 2 partes, probar combinaciones
-            if (parts.length >= 3) {
-                variants.push(parts.slice(0, 2).join('_'));
-                variants.push(parts.slice(1).join('_'));
-                variants.push(parts[0] + '_' + parts[parts.length-1]);
-            }
-            return [...new Set(variants)]; // únicos
-        }
-
-        // Carga dinámica de imagen probando múltiples URLs
-        function loadImageWithFallbacks(imgElement, placeholderElement, basePath, idCliente, fullName) {
-            const extensions = ['.png', '.jpg', '.jpeg'];
-            const urlsToTry = [];
-
-            // Si tenemos una ruta completa del backend (d.foto/d.foto2) se usó directamente, esta función es para el fallback
-            // 1. Probar con el código del cliente
-            extensions.forEach(ext => urlsToTry.push(`${basePath}${idCliente}${ext}`));
-            // 2. Probar con variantes del nombre
-            const nameVariants = getNameVariants(fullName);
-            nameVariants.forEach(variant => {
-                extensions.forEach(ext => urlsToTry.push(`${basePath}${variant}${ext}`));
-            });
-
-            let index = 0;
-            const tryNext = () => {
-                if (index >= urlsToTry.length) {
-                    // Todas fallaron
-                    imgElement.style.display = 'none';
-                    placeholderElement.style.display = 'flex';
-                    console.warn(`No se encontró imagen para ${idCliente} / ${fullName}`);
-                    return;
-                }
-                const url = urlsToTry[index];
-                console.log(`Intentando cargar: ${url}`);
-                imgElement.src = url;
-                imgElement.onload = () => {
-                    imgElement.style.display = 'block';
-                    placeholderElement.style.display = 'none';
-                    console.log(`Imagen cargada: ${url}`);
-                };
-                imgElement.onerror = () => {
-                    index++;
-                    tryNext();
-                };
-            };
-            tryNext();
-        }
-
         async function handleVerify(e) {
             e.preventDefault();
             const nameInput = document.getElementById('v-name').value;
             const idInput = document.getElementById('v-id').value;
-            const baseRawUrl = 'https://raw.githubusercontent.com/josemaneularella010jm-hue/dmv-verefication/main/fotos/';
-
             try {
                 const res = await fetch('/api/verificar', {
                     method: 'POST',
@@ -360,71 +438,63 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
                     
+                    // Datos en tabla
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
                     document.getElementById('record-date').textContent = d.fecha_emision || d.date || '---';
                     document.getElementById('record-doc').textContent = d.documento || d.document || 'Approval';
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
-                    document.getElementById('record-state').textContent = d.estado || '---';
+                    document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
-                    // Dentro de handleVerify, después de obtener currentClientData...
-
-// Referencias a las imágenes y placeholders
-const photo1 = document.getElementById('record-photo1');
-const placeholder1 = document.getElementById('placeholder1');
-const photo2 = document.getElementById('record-photo2');
-const placeholder2 = document.getElementById('placeholder2');
-
-// Siempre mostrar placeholder por defecto
-photo1.style.display = 'none';
-placeholder1.style.display = 'flex';
-photo2.style.display = 'none';
-placeholder2.style.display = 'flex';
-
-// Cargar foto principal usando foto_url que viene del backend
-if (d.foto_url && d.foto_url.trim() !== '') {
-    photo1.src = d.foto_url;  // La ruta ya es como '/fotos/MARIA.png'
-    photo1.onload = () => {
-        photo1.style.display = 'block';
-        placeholder1.style.display = 'none';
-    };
-    photo1.onerror = () => {
-        // Si falla, mantener placeholder
-        photo1.style.display = 'none';
-        placeholder1.style.display = 'flex';
-    };
-}
-
-// Para la segunda foto, como no existe en el backend, podrías intentar
-// con una variante del nombre (por ejemplo, _doc) usando la misma lógica
-// pero siempre desde tu servidor local, no desde GitHub.
-// Opcional: puedes dejar solo el placeholder o buscar otra imagen
-// Ejemplo de intento con prefijo _doc (si tuvieras esos archivos):
-const baseFotoUrl = '/fotos/';  // tu ruta estática local
-const nombreArchivo = d.foto_url ? d.foto_url.split('/').pop().replace(/\.[^/.]+$/, '') : d.id_cliente;
-const extensiones = ['.png', '.jpg', '.jpeg'];
-let index = 0;
-const tryLoadSecond = () => {
-    if (index >= extensiones.length) {
-        // No se encontró segunda foto, dejar placeholder
-        return;
-    }
-    const testUrl = `${baseFotoUrl}${nombreArchivo}_doc${extensiones[index]}`;
-    photo2.src = testUrl;
-    photo2.onload = () => {
-        photo2.style.display = 'block';
-        placeholder2.style.display = 'none';
-    };
-    photo2.onerror = () => {
-        index++;
-        tryLoadSecond();
-    };
-};
-tryLoadSecond();
-
+                    
+                    // Mostrar fotos (dos)
+                    const photo1 = document.getElementById('record-photo1');
+                    const placeholder1 = document.getElementById('placeholder1');
+                    const photo2 = document.getElementById('record-photo2');
+                    const placeholder2 = document.getElementById('placeholder2');
+                    
+                    // Asignar rutas: si el backend proporciona 'foto' y 'foto2', se usan; si no, se intenta construir con el id
+                    const baseRawUrl = 'https://raw.githubusercontent.com/josemaneularella010jm-hue/dmv-verefication/main/fotos/';
+                    const photoUrl1 = d.foto || (d.id_cliente ? `${baseRawUrl}${d.id_cliente}.jpg` : '');
+                    const photoUrl2 = d.foto2 || (d.id_cliente ? `${baseRawUrl}${d.id_cliente}_doc.jpg` : '');
+                    
+                    // Cargar foto 1
+                    if (photoUrl1) {
+                        photo1.src = photoUrl1;
+                        photo1.style.display = 'block';
+                        placeholder1.style.display = 'none';
+                        photo1.onerror = () => {
+                            photo1.style.display = 'none';
+                            placeholder1.style.display = 'flex';
+                        };
+                        photo1.onload = () => {
+                            photo1.style.display = 'block';
+                            placeholder1.style.display = 'none';
+                        };
+                    } else {
+                        photo1.style.display = 'none';
+                        placeholder1.style.display = 'flex';
                     }
-
+                    
+                    // Cargar foto 2
+                    if (photoUrl2) {
+                        photo2.src = photoUrl2;
+                        photo2.style.display = 'block';
+                        placeholder2.style.display = 'none';
+                        photo2.onerror = () => {
+                            photo2.style.display = 'none';
+                            placeholder2.style.display = 'flex';
+                        };
+                        photo2.onload = () => {
+                            photo2.style.display = 'block';
+                            placeholder2.style.display = 'none';
+                        };
+                    } else {
+                        photo2.style.display = 'none';
+                        placeholder2.style.display = 'flex';
+                    }
+                    
                     document.getElementById('restrictions-content').classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
                     btn.onclick = () => {
@@ -432,17 +502,17 @@ tryLoadSecond();
                         if (pin && /^\d{3}$/.test(pin)) {
                             document.getElementById('restrictions-content').classList.toggle('hidden');
                         } else {
-                            alert("⛔ Access denied. No medical restrictions registered or your PIN is invalid.");
+                            alert("⛔ Access denied. No medical restrictions registered or your PIN is invalid. Contact your DMV advisor.");
                         }
                     };
                     showTab('record');
                 } else {
-                    alert("RECORD NOT FOUND.\nPlease verify your name and folio number.");
+                    alert("RECORD NOT FOUND.\nPlease verify that your name and folio number are correct.");
                     currentClientData = null;
                 }
             } catch (err) {
                 console.error(err);
-                alert("Connection error. Make sure the backend is running.");
+                alert("Connection error with server. Make sure the backend is running.");
             }
         }
 
