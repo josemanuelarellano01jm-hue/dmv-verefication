@@ -129,7 +129,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: 'Jmchinohes84@gmail.com',
-            foto_url: '/fotos/MARTINEZ_JAZMIN.png',
+            foto_url: '/fotos/fotos/MARTINEZ _JAZMIN.jpeg',
             fecha_nacimiento: '06/05/1974',
             sexo: 'M',
             estatura: `5'52"`,
