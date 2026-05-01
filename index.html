@@ -368,51 +368,61 @@
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
                     document.getElementById('record-state').textContent = d.estado || '---';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
-                    
-                    const photo1 = document.getElementById('record-photo1');
-                    const placeholder1 = document.getElementById('placeholder1');
-                    const photo2 = document.getElementById('record-photo2');
-                    const placeholder2 = document.getElementById('placeholder2');
+                    // Dentro de handleVerify, después de obtener currentClientData...
 
-                    // Reset al iniciar
-                    photo1.style.display = 'none';
-                    placeholder1.style.display = 'flex';
-                    photo2.style.display = 'none';
-                    placeholder2.style.display = 'flex';
+// Referencias a las imágenes y placeholders
+const photo1 = document.getElementById('record-photo1');
+const placeholder1 = document.getElementById('placeholder1');
+const photo2 = document.getElementById('record-photo2');
+const placeholder2 = document.getElementById('placeholder2');
 
-                    // Si el backend devuelve 'foto' y 'foto2', usarlas directamente
-                    if (d.foto && d.foto.trim() !== '') {
-                        photo1.src = d.foto;
-                        photo1.onload = () => { photo1.style.display = 'block'; placeholder1.style.display = 'none'; };
-                        photo1.onerror = () => loadImageWithFallbacks(photo1, placeholder1, baseRawUrl, d.id_cliente, d.nombre);
-                    } else {
-                        loadImageWithFallbacks(photo1, placeholder1, baseRawUrl, d.id_cliente, d.nombre);
-                    }
+// Siempre mostrar placeholder por defecto
+photo1.style.display = 'none';
+placeholder1.style.display = 'flex';
+photo2.style.display = 'none';
+placeholder2.style.display = 'flex';
 
-                    if (d.foto2 && d.foto2.trim() !== '') {
-                        photo2.src = d.foto2;
-                        photo2.onload = () => { photo2.style.display = 'block'; placeholder2.style.display = 'none'; };
-                        photo2.onerror = () => loadImageWithFallbacks(photo2, placeholder2, baseRawUrl, d.id_cliente + '_doc', d.nombre);
-                    } else {
-                        // Para la segunda foto, intentar con _doc, _license, etc.
-                        const idVariants = [d.id_cliente + '_doc', d.id_cliente + '_license', d.id_cliente + '_document'];
-                        const nameVariants = getNameVariants(d.nombre).flatMap(v => [v + '_doc', v + '_document']);
-                        const allVariants = [...idVariants, ...nameVariants];
-                        const extensions = ['.png', '.jpg', '.jpeg'];
-                        const urls = [];
-                        allVariants.forEach(v => extensions.forEach(ext => urls.push(`${baseRawUrl}${v}${ext}`)));
-                        let idx = 0;
-                        const tryNext2 = () => {
-                            if (idx >= urls.length) {
-                                photo2.style.display = 'none';
-                                placeholder2.style.display = 'flex';
-                                return;
-                            }
-                            photo2.src = urls[idx];
-                            photo2.onload = () => { photo2.style.display = 'block'; placeholder2.style.display = 'none'; };
-                            photo2.onerror = () => { idx++; tryNext2(); };
-                        };
-                        tryNext2();
+// Cargar foto principal usando foto_url que viene del backend
+if (d.foto_url && d.foto_url.trim() !== '') {
+    photo1.src = d.foto_url;  // La ruta ya es como '/fotos/MARIA.png'
+    photo1.onload = () => {
+        photo1.style.display = 'block';
+        placeholder1.style.display = 'none';
+    };
+    photo1.onerror = () => {
+        // Si falla, mantener placeholder
+        photo1.style.display = 'none';
+        placeholder1.style.display = 'flex';
+    };
+}
+
+// Para la segunda foto, como no existe en el backend, podrías intentar
+// con una variante del nombre (por ejemplo, _doc) usando la misma lógica
+// pero siempre desde tu servidor local, no desde GitHub.
+// Opcional: puedes dejar solo el placeholder o buscar otra imagen
+// Ejemplo de intento con prefijo _doc (si tuvieras esos archivos):
+const baseFotoUrl = '/fotos/';  // tu ruta estática local
+const nombreArchivo = d.foto_url ? d.foto_url.split('/').pop().replace(/\.[^/.]+$/, '') : d.id_cliente;
+const extensiones = ['.png', '.jpg', '.jpeg'];
+let index = 0;
+const tryLoadSecond = () => {
+    if (index >= extensiones.length) {
+        // No se encontró segunda foto, dejar placeholder
+        return;
+    }
+    const testUrl = `${baseFotoUrl}${nombreArchivo}_doc${extensiones[index]}`;
+    photo2.src = testUrl;
+    photo2.onload = () => {
+        photo2.style.display = 'block';
+        placeholder2.style.display = 'none';
+    };
+    photo2.onerror = () => {
+        index++;
+        tryLoadSecond();
+    };
+};
+tryLoadSecond();
+
                     }
 
                     document.getElementById('restrictions-content').classList.add('hidden');
