@@ -137,7 +137,7 @@ db.serialize(() => {
             color_ojos: 'BLACK',
             color_cabello: 'BLACK',
             telefono: '422 351 1286',
-            pin: '123' // Se agregó pin para evitar errores de validación
+            pin: '' // Se agregó pin para evitar errores de validación
         }
     ];
 
