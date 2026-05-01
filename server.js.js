@@ -121,15 +121,15 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '859 509 6002',
             pin: '123'
-        }, // <--- Aquí faltaba esta coma
+        },
         {
-            id_cliente: 'Y0706960',
+            id_cliente: 'Y0706961',
             nombre: 'MARTINEZ JAZMIN JUAN MANUEL',
             direccion: '579 ENTERPRISE ST ESCENDIDO CAL. 920029',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: 'Jmchinohes84@gmail.com',
-            foto_url: '/fotos/fotos/MARTINEZ _JAZMIN.jpeg',
+            foto_url: '/fotos/MARTINEZ_JAZMIN.jpeg',
             fecha_nacimiento: '06/05/1974',
             sexo: 'M',
             estatura: `5'52"`,
@@ -137,11 +137,25 @@ db.serialize(() => {
             color_ojos: 'BLACK',
             color_cabello: 'BLACK',
             telefono: '422 351 1286',
-            pin: '' // Se agregó pin para evitar errores de validación
+            pin: ''
+        },
+        {
+            id_cliente: 'Y0706960', 
+            nombre: 'ALFREDO ISLAS BARRIOS',
+            direccion: '1974 Concordia Walk Los Angeles CA 90062',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'NONE',
+            foto_url: '/fotos/ISLAS_BARRIOS.png',
+            fecha_nacimiento: '01/12/1982',
+            sexo: 'M',
+            estatura: `5'58"`,
+            peso: '175',
+            color_ojos: 'BROWN',
+            color_cabello: 'BROWN',
+            telefono: '2132145816',
+            pin: ''
         }
-
-
-        
     ];
 
     const stmt = db.prepare(`
