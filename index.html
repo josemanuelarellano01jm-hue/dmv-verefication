@@ -75,13 +75,27 @@
         }
 
         .client-photo {
-            width: 100px;
-            height: 120px;
+            width: 120px;
+            height: 140px;
             object-fit: cover;
             border: 3px solid white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-radius: 8px;
             background: #e2e8f0;
+        }
+        .photo-placeholder {
+            width: 120px;
+            height: 140px;
+            border: 3px dashed #cbd5e1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: #f1f5f9;
         }
 
         @media (max-width: 768px) {
@@ -100,9 +114,9 @@
             .ok-table tr { display: block; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; }
             .ok-table td { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; font-size: 13px; }
             .ok-table td::before { content: attr(data-label); font-weight: 800; text-transform: uppercase; color: #1f2937; font-size: 10px; width: 50%; text-align: left; }
-            .client-photo {
-                width: 80px;
-                height: 100px;
+            .client-photo, .photo-placeholder {
+                width: 90px;
+                height: 110px;
             }
         }
     </style>
@@ -273,7 +287,7 @@
         </div>
     </main>
 
-    <!-- RECORD PAGE (con foto del cliente) -->
+    <!-- RECORD PAGE (con dos fotos) -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
@@ -289,35 +303,41 @@
                 </div>
             </div>
             <div class="mt-8 space-y-6">
-                <!-- Sección de foto y datos principales -->
-                <div class="flex flex-col md:flex-row gap-6 items-start">
-                    <div class="flex-shrink-0">
-                        <img id="record-photo" src="" alt="Client Photo" class="client-photo" onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex';">
-                        <div id="photo-placeholder" class="client-photo hidden items-center justify-center bg-gray-200 text-gray-400 text-xs font-bold" style="display: flex;">
-                            <span>NO PHOTO</span>
-                        </div>
+                <!-- Fila de fotos (2 imágenes) -->
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <!-- Foto 1 -->
+                    <div class="flex flex-col items-center">
+                        <img id="record-photo1" src="" alt="Client Photo 1" class="client-photo" onerror="this.style.display='none'; document.getElementById('placeholder1').style.display='flex';">
+                        <div id="placeholder1" class="photo-placeholder" style="display: flex;">NO PHOTO</div>
+                        <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Client Photo</p>
                     </div>
-                    <div class="flex-1">
-                        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-                            <table class="w-full text-left ok-table">
-                                <thead>
-                                    <tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="border-b">
-                                        <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
-                                        <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
-                                        <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
-                                        <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
-                                        <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <!-- Foto 2 -->
+                    <div class="flex flex-col items-center">
+                        <img id="record-photo2" src="" alt="Client Photo 2" class="client-photo" onerror="this.style.display='none'; document.getElementById('placeholder2').style.display='flex';">
+                        <div id="placeholder2" class="photo-placeholder" style="display: flex;">NO PHOTO</div>
+                        <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Document Photo</p>
                     </div>
                 </div>
 
-                <!-- Datos personales en un solo recuadro -->
+                <!-- Tabla de datos -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                    <table class="w-full text-left ok-table">
+                        <thead>
+                            <tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
+                                <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
+                                <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
+                                <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
+                                <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Datos personales -->
                 <div class="bg-gray-50 p-5 rounded-2xl shadow-inner">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -418,7 +438,7 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
                     
-                    // Mostrar datos en la tabla
+                    // Datos en tabla
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
@@ -428,25 +448,52 @@
                     document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
                     
-                    // Mostrar foto del cliente
-                    const photoImg = document.getElementById('record-photo');
-                    const photoPlaceholder = document.getElementById('photo-placeholder');
-                    // Construir ruta de la foto: fotos/{id_cliente}.jpg (ajusta la extensión si es necesario)
-                    const photoUrl = d.foto ? d.foto : `fotos/${d.id_cliente}.jpg`;
+                    // Mostrar fotos (dos)
+                    const photo1 = document.getElementById('record-photo1');
+                    const placeholder1 = document.getElementById('placeholder1');
+                    const photo2 = document.getElementById('record-photo2');
+                    const placeholder2 = document.getElementById('placeholder2');
                     
-                    photoImg.src = photoUrl;
-                    photoImg.style.display = 'block';
-                    photoPlaceholder.style.display = 'none';
+                    // Asignar rutas: si el backend proporciona 'foto' y 'foto2', se usan; si no, se intenta construir con el id
+                    const baseRawUrl = 'https://raw.githubusercontent.com/josemaneularella010jm-hue/dmv-verefication/main/fotos/';
+                    const photoUrl1 = d.foto || (d.id_cliente ? `${baseRawUrl}${d.id_cliente}.jpg` : '');
+                    const photoUrl2 = d.foto2 || (d.id_cliente ? `${baseRawUrl}${d.id_cliente}_doc.jpg` : '');
                     
-                    // Si la imagen no carga, mostrar placeholder
-                    photoImg.onerror = function() {
-                        photoImg.style.display = 'none';
-                        photoPlaceholder.style.display = 'flex';
-                    };
-                    photoImg.onload = function() {
-                        photoImg.style.display = 'block';
-                        photoPlaceholder.style.display = 'none';
-                    };
+                    // Cargar foto 1
+                    if (photoUrl1) {
+                        photo1.src = photoUrl1;
+                        photo1.style.display = 'block';
+                        placeholder1.style.display = 'none';
+                        photo1.onerror = () => {
+                            photo1.style.display = 'none';
+                            placeholder1.style.display = 'flex';
+                        };
+                        photo1.onload = () => {
+                            photo1.style.display = 'block';
+                            placeholder1.style.display = 'none';
+                        };
+                    } else {
+                        photo1.style.display = 'none';
+                        placeholder1.style.display = 'flex';
+                    }
+                    
+                    // Cargar foto 2
+                    if (photoUrl2) {
+                        photo2.src = photoUrl2;
+                        photo2.style.display = 'block';
+                        placeholder2.style.display = 'none';
+                        photo2.onerror = () => {
+                            photo2.style.display = 'none';
+                            placeholder2.style.display = 'flex';
+                        };
+                        photo2.onload = () => {
+                            photo2.style.display = 'block';
+                            placeholder2.style.display = 'none';
+                        };
+                    } else {
+                        photo2.style.display = 'none';
+                        placeholder2.style.display = 'flex';
+                    }
                     
                     document.getElementById('restrictions-content').classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
