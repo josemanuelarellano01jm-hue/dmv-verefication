@@ -69,7 +69,7 @@ db.serialize(() => {
             color_ojos: 'GREY',
             color_cabello: 'BROWN',
             telefono: '786 906 4756',
-            pin: '123'
+            pin: '12'
         },
         {
             id_cliente: '37850640',
