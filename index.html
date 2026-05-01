@@ -8,18 +8,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .tab-active { color: #2563eb !important; border-bottom: 4px solid #2563eb !important; font-weight: 900 !important; }
-        .hidden { display: none; }
-        .global-hero-bg {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-            url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1500');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            /* Fondo azul con bandera de USA muy difuminada */
+            background: 
+                linear-gradient(135deg, rgba(0, 30, 80, 0.82) 0%, rgba(0, 70, 150, 0.75) 50%, rgba(0, 40, 100, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1485902401835-30b6b7d6b8b5?auto=format&fit=crop&w=1500&q=60') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-blend-mode: overlay;
+            min-height: 100vh;
         }
+        .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; font-weight: 900 !important; }
+        .hidden { display: none; }
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Contenedores semitransparentes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .glass-dark {
+            background: rgba(0, 20, 50, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
 
         .oklahoma-header {
             background: #002664;
@@ -68,47 +83,148 @@
             font-weight: 900;
             text-align: center;
         }
+
+        .faq-question {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .faq-question:hover {
+            color: #2563eb;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        /* Menú mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(255,255,255,0.95);
+                border-radius: 12px;
+                padding: 10px;
+                margin-top: 10px;
+                backdrop-filter: blur(12px);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
-    <header class="bg-white sticky top-0 z-50 shadow-md">
-        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
+    <header class="glass-dark sticky top-0 z-50 shadow-md text-white">
+        <div class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white p-2 rounded-lg"><i class="fas fa-shield-alt text-xl"></i></div>
-                <h1 class="text-xl font-black italic uppercase tracking-tighter">DMV <span class="text-blue-600">CAR LAW GROUP</span></h1>
+                <div class="bg-blue-500 text-white p-2 rounded-lg"><i class="fas fa-shield-alt text-xl"></i></div>
+                <h1 class="text-xl font-black italic uppercase tracking-tighter text-white">DMV <span class="text-blue-300">CAR LAW GROUP</span></h1>
             </div>
-            <nav class="flex space-x-1 md:space-x-4 mt-4 md:mt-0">
-                <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active">Home</button>
-                <button onclick="showTab('trust')" id="nav-trust" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Why Trust Us</button>
-                <button onclick="showTab('advisors')" id="nav-advisors" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Advisors</button>
-                <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-slate-400">Verification</button>
+            <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="nav-menu" class="nav-links md:flex md:space-x-4 mt-2 md:mt-0 flex-wrap justify-center">
+                <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active text-white">Home</button>
+                <button onclick="showTab('trust')" id="nav-trust" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Why Trust Us</button>
+                <button onclick="showTab('advisors')" id="nav-advisors" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Advisors</button>
+                <button onclick="showTab('licenses')" id="nav-licenses" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Licenses</button>
+                <button onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Verification</button>
             </nav>
         </div>
     </header>
 
     <!-- HOME -->
     <main id="tab-home" class="animate-fade">
-        <section class="global-hero-bg text-white py-32 px-6 text-center">
-            <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
-            <p class="max-w-3xl mx-auto text-slate-300 mb-10 text-lg font-medium">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
+        <section class="text-white py-32 px-6 text-center relative" style="background: linear-gradient(135deg, rgba(0,20,70,0.7), rgba(0,60,140,0.6));">
+            <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight drop-shadow-lg">Expert Solutions <br> <span class="text-blue-300 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
+            <p class="max-w-3xl mx-auto text-blue-100 mb-10 text-lg font-medium drop-shadow">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
             <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
         </section>
-        <section class="py-24 px-6 bg-white">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-black uppercase italic mb-16 text-center">Success <span class="text-blue-600">Stories</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
-                        <p class="italic text-slate-600 text-sm leading-relaxed">"I was struggling with my paperwork for months until I found DMV CAR LAW GROUP. Their team handled everything with such professionalism and speed."</p>
-                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Carlos Martinez</span>
+
+        <!-- Estadísticas añadidas -->
+        <section class="py-10 px-6 glass-panel max-w-5xl mx-auto -mt-8 relative z-10 rounded-2xl shadow-xl mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <i class="fas fa-clock text-blue-600 text-3xl mb-2"></i>
+                    <p class="text-3xl font-black text-blue-900">20+</p>
+                    <p class="text-xs uppercase font-bold text-blue-700">Years Experience</p>
+                </div>
+                <div>
+                    <i class="fas fa-users text-blue-600 text-3xl mb-2"></i>
+                    <p class="text-3xl font-black text-blue-900">150K+</p>
+                    <p class="text-xs uppercase font-bold text-blue-700">Happy Clients</p>
+                </div>
+                <div>
+                    <i class="fas fa-id-card text-blue-600 text-3xl mb-2"></i>
+                    <p class="text-3xl font-black text-blue-900">50K+</p>
+                    <p class="text-xs uppercase font-bold text-blue-700">Licenses Processed</p>
+                </div>
+                <div>
+                    <i class="fas fa-shield-alt text-blue-600 text-3xl mb-2"></i>
+                    <p class="text-3xl font-black text-blue-900">100%</p>
+                    <p class="text-xs uppercase font-bold text-blue-700">Legal Compliance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews (mezcla de estrellas) -->
+        <section class="py-24 px-6 max-w-6xl mx-auto">
+            <h2 class="text-3xl font-black uppercase italic mb-16 text-center text-white drop-shadow">Success <span class="text-blue-300">Stories</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg">
+                    <div class="flex items-center mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
-                        <p class="italic text-slate-600 text-sm leading-relaxed">"The level of transparency here is unmatched. Being able to verify my document status directly on their portal gave me total peace of mind."</p>
-                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Elena Rodriguez</span>
+                    <p class="italic text-slate-700 text-sm leading-relaxed">"I was struggling with my paperwork for months until I found DMV CAR LAW GROUP. Their team handled everything with such professionalism and speed."</p>
+                    <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Carlos Martinez</span>
+                </div>
+                <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg">
+                    <div class="flex items-center mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                     </div>
-                    <div class="p-8 bg-slate-50 rounded-3xl border-l-8 border-blue-600 shadow-sm">
-                        <p class="italic text-slate-600 text-sm leading-relaxed">"If you are looking for serious consultants, look no further. 100% recommended for the immigrant community."</p>
-                        <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Monica Peralta</span>
+                    <p class="italic text-slate-700 text-sm leading-relaxed">"The level of transparency here is unmatched. Being able to verify my document status directly on their portal gave me total peace of mind."</p>
+                    <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Elena Rodriguez</span>
+                </div>
+                <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg">
+                    <div class="flex items-center mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <p class="italic text-slate-700 text-sm leading-relaxed">"If you are looking for serious consultants, look no further. 100% recommended for the immigrant community."</p>
+                    <span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Monica Peralta</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Home -->
+        <section class="py-16 px-6 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-black uppercase italic mb-12 text-center text-white drop-shadow">Frequently <span class="text-blue-300">Asked Questions</span></h2>
+            <div class="space-y-4">
+                <div class="glass-panel p-6 rounded-2xl shadow">
+                    <div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">
+                        What documents do I need to start? <i class="fas fa-chevron-down text-blue-600"></i>
+                    </div>
+                    <div class="faq-answer text-slate-700 mt-2 text-sm">
+                        Generally you need a valid government-issued ID, proof of address, and any previous DMV correspondence. Our advisors will provide a customized checklist after your initial verification.
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl shadow">
+                    <div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">
+                        How secure is my personal information? <i class="fas fa-chevron-down text-blue-600"></i>
+                    </div>
+                    <div class="faq-answer text-slate-700 mt-2 text-sm">
+                        We use bank-level encryption and never share data with third parties. All processes follow strict DMV guidelines and privacy laws.
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl shadow">
+                    <div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">
+                        Can I renew an expired license? <i class="fas fa-chevron-down text-blue-600"></i>
+                    </div>
+                    <div class="faq-answer text-slate-700 mt-2 text-sm">
+                        Yes, depending on the state and time since expiration. We assess your situation and determine eligibility. Most expired licenses under 2 years are renewable with a small late fee.
                     </div>
                 </div>
             </div>
@@ -116,26 +232,33 @@
     </main>
 
     <!-- TRUST -->
-    <main id="tab-trust" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
-        <section class="container mx-auto py-24 px-6 text-white">
+    <main id="tab-trust" class="hidden animate-fade min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-6 max-w-6xl">
             <div class="text-center mb-16">
-                <span class="text-blue-400 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span>
-                <h2 class="text-5xl font-black uppercase italic mt-4 text-white">Why Choose <span class="text-blue-500">Us?</span></h2>
+                <span class="text-blue-300 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span>
+                <h2 class="text-5xl font-black uppercase italic mt-4 text-white">Why Choose <span class="text-blue-300">Us?</span></h2>
             </div>
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8 bg-slate-900/40 p-10 rounded-[3rem] backdrop-blur-md border border-white/10">
+                <div class="space-y-8 glass-dark p-10 rounded-[3rem] text-white border border-white/10">
                     <div>
-                        <h3 class="text-2xl font-black uppercase italic text-blue-400 mb-4">20 Years of Unmatched Experience</h3>
-                        <p class="text-slate-200 leading-relaxed">Since our founding, we have dedicated two decades to mastering the complexities of document consulting.</p>
+                        <h3 class="text-2xl font-black uppercase italic text-blue-300 mb-4">20 Years of Unmatched Experience</h3>
+                        <p class="text-blue-100 leading-relaxed">Since our founding, we have dedicated two decades to mastering the complexities of document consulting.</p>
                     </div>
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-blue-600/20 p-6 rounded-2xl border-b-4 border-blue-500 backdrop-blur-sm">
+                        <div class="bg-blue-800/40 p-6 rounded-2xl border-b-4 border-blue-400">
                             <p class="text-3xl font-black text-white">150K+</p>
                             <p class="text-[10px] font-bold uppercase text-blue-300 tracking-widest">Satisfied Clients</p>
                         </div>
-                        <div class="bg-blue-600/20 p-6 rounded-2xl border-b-4 border-blue-500 backdrop-blur-sm">
+                        <div class="bg-blue-800/40 p-6 rounded-2xl border-b-4 border-blue-400">
                             <p class="text-3xl font-black text-white">100%</p>
                             <p class="text-[10px] font-bold uppercase text-blue-300 tracking-widest">Legal Processes</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 bg-blue-900/50 p-4 rounded-xl">
+                        <i class="fas fa-certificate text-yellow-400 text-3xl"></i>
+                        <div>
+                            <p class="font-black text-sm">Nationally Certified</p>
+                            <p class="text-xs text-blue-200">Member of the American Association of Motor Vehicle Administrators</p>
                         </div>
                     </div>
                 </div>
@@ -145,59 +268,138 @@
                         <li class="flex gap-4"><i class="fas fa-shield-check text-white mt-1"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100 mt-1">High-end encryption and verified legal channels.</p></div></li>
                         <li class="flex gap-4"><i class="fas fa-bolt text-white mt-1"></i><div><p class="font-black uppercase text-sm">Industry Speed</p><p class="text-xs text-blue-100 mt-1">Direct connections for 3x faster processing.</p></div></li>
                     </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ADVISORS -->
-    <main id="tab-advisors" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
-        <section class="py-24 px-6 text-center w-full">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-black uppercase italic mb-16 text-white">Meet Our <span class="text-blue-500">Senior Advisors</span></h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Rogelio Olivo</h4>
-                    </div>
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Fermin Garcia</h4>
-                    </div>
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Marcela Vanegas</h4>
-                    </div>
-                    <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border-b-8 border-blue-600">
-                        <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
-                        <h4 class="font-black uppercase text-xs text-slate-800">Edwin Peralta</h4>
+                    <div class="mt-6 text-center">
+                        <button onclick="showTab('licenses')" class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-blue-50 transition">Explore License Services</button>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <!-- VERIFICATION -->
-    <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade">
-        <div class="max-w-5xl mx-auto space-y-10">
-            <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
-                <h2 class="text-2xl font-black uppercase italic mb-8">Secure <span class="text-blue-600">Authentication</span></h2>
-                <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
-                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
-                </form>
+            <div class="mt-16 space-y-4 max-w-3xl mx-auto">
+                <div class="glass-dark rounded-2xl p-5 text-white">
+                    <div class="faq-question font-black text-lg flex justify-between items-center" onclick="toggleFAQ(this)">
+                        Is my data really safe? <i class="fas fa-chevron-down text-blue-300"></i>
+                    </div>
+                    <div class="faq-answer text-blue-100 text-sm mt-2">
+                        Absolutely. We employ 256-bit encryption and do not retain sensitive documents longer than necessary.
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- RECORD PAGE (OKLAHOMA STYLE) - UN SOLO BOTÓN PEQUEÑO -->
+    <!-- ADVISORS -->
+    <main id="tab-advisors" class="hidden animate-fade min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl font-black uppercase italic mb-6 text-center text-white drop-shadow">Meet Our <span class="text-blue-300">Senior Advisors</span></h2>
+            <p class="text-blue-100 max-w-2xl mx-auto mb-12 text-center text-sm">Each advisor brings over a decade of DMV procedure expertise, legal background, and government liaison experience.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs text-slate-800">Rogelio Olivo</h4>
+                    <p class="text-xs text-gray-500 mt-2">Senior Case Manager</p>
+                    <button onclick="alert('Your request has been sent to Rogelio Olivo. He will contact you shortly.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs text-slate-800">Fermin Garcia</h4>
+                    <p class="text-xs text-gray-500 mt-2">License Reinstatement Specialist</p>
+                    <button onclick="alert('Your request has been sent to Fermin Garcia. He will contact you shortly.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs text-slate-800">Marcela Vanegas</h4>
+                    <p class="text-xs text-gray-500 mt-2">Document Verification Lead</p>
+                    <button onclick="alert('Your request has been sent to Marcela Vanegas. She will contact you shortly.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+                <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100">
+                    <h4 class="font-black uppercase text-xs text-slate-800">Edwin Peralta</h4>
+                    <p class="text-xs text-gray-500 mt-2">Senior Legal Consultant</p>
+                    <button onclick="alert('Your request has been sent to Edwin Peralta. He will contact you shortly.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
+                </div>
+            </div>
+            <div class="mt-10 text-center">
+                <button onclick="showTab('verify')" class="bg-white text-blue-600 px-8 py-3 rounded-full font-black uppercase tracking-widest text-sm hover:bg-blue-50 transition shadow-lg">Verify Your Record Now</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- LICENSES -->
+    <main id="tab-licenses" class="hidden animate-fade py-16">
+        <div class="container mx-auto px-6 max-w-6xl text-center">
+            <h2 class="text-3xl md:text-5xl font-black uppercase italic mb-6 text-white drop-shadow">Our <span class="text-blue-300">License Services</span></h2>
+            <p class="max-w-2xl mx-auto text-blue-100 mb-12 text-lg">Get your driver's license, renewals, and document processing fully online with our expert team. We handle all DMV paperwork so you don't have to.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-blue-600 flex flex-col text-left">
+                    <i class="fas fa-car text-5xl text-blue-600 mb-4 mx-auto"></i>
+                    <h3 class="text-xl font-black uppercase mb-2 text-center">Standard Processing</h3>
+                    <p class="text-sm text-gray-700 mb-4 flex-1">We review your documents and submit your application for a new or renewed driver's license. Typical processing: 5-7 business days.</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-6">
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> Document verification</li>
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> DMV form preparation</li>
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> Online submission</li>
+                    </ul>
+                    <p class="text-xs font-semibold text-blue-600 mt-auto text-center">Starting at $49.99</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-amber-500 flex flex-col text-left">
+                    <i class="fas fa-bolt text-5xl text-amber-500 mb-4 mx-auto"></i>
+                    <h3 class="text-xl font-black uppercase mb-2 text-center">Express Processing</h3>
+                    <p class="text-sm text-gray-700 mb-4 flex-1">Same-day expedited submission with priority handling. Receive your license faster. Ideal for urgent cases.</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-6">
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> All Standard features</li>
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> Expedited 24h review</li>
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> Digital copy delivery</li>
+                    </ul>
+                    <p class="text-xs font-semibold text-amber-600 mt-auto text-center">Starting at $89.99</p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-red-500 flex flex-col text-left">
+                    <i class="fas fa-user-check text-5xl text-red-500 mb-4 mx-auto"></i>
+                    <h3 class="text-xl font-black uppercase mb-2 text-center">Full Consultation</h3>
+                    <p class="text-sm text-gray-700 mb-4 flex-1">One-on-one consultation with a senior advisor. We handle complex cases, legal holds, and license reinstatement.</p>
+                    <ul class="text-sm text-gray-700 space-y-2 mb-6">
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> All Express features</li>
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> Personal advisor call</li>
+                        <li><i class="fas fa-check-circle text-green-600 mr-1"></i> Reinstatement strategy</li>
+                    </ul>
+                    <p class="text-xs font-semibold text-red-600 mt-auto text-center">Starting at $149.99</p>
+                </div>
+            </div>
+
+            <div class="mt-16 glass-panel p-10 rounded-3xl text-left max-w-3xl mx-auto">
+                <h3 class="text-2xl font-black uppercase mb-6 text-center">How to Use Our Online License Services</h3>
+                <ol class="list-decimal space-y-4 text-gray-700 font-medium pl-6">
+                    <li><strong>Select Your Service:</strong> Choose the package that fits your needs.</li>
+                    <li><strong>Submit Your Documents:</strong> Upload a copy of your ID, proof of residency, and any previous license via our secure portal.</li>
+                    <li><strong>Verification:</strong> Our team will audit your documents within the selected timeframe and contact you with any missing items.</li>
+                    <li><strong>DMV Filing:</strong> We submit the application directly to the DMV on your behalf, ensuring 100% compliance.</li>
+                    <li><strong>Receive Your License:</strong> Once approved, we'll mail the physical copy to your address or you can pick it up at a local DMV office with our support.</li>
+                </ol>
+            </div>
+            <div class="mt-8">
+                <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest transition shadow-lg">Check Your Eligibility</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- VERIFICATION -->
+    <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade max-w-5xl">
+        <div class="glass-panel p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
+            <h2 class="text-2xl font-black uppercase italic mb-8 text-gray-800">Secure <span class="text-blue-600">Authentication</span></h2>
+            <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
+                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
+                <p class="text-xs text-gray-500 text-left">Enter your full name as it appears on your DMV correspondence and the unique folio number provided by your advisor.</p>
+                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- RECORD PAGE -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-7xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
                 <button onclick="showTab('verify')" class="text-sm font-bold text-blue-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Verification</button>
             </div>
-
             <div class="oklahoma-header text-white rounded-t-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
                     <h1 class="text-3xl font-black tracking-tight">OKLAHOMA SERVICE</h1>
@@ -207,9 +409,7 @@
                     <span class="bg-white text-[#002664] px-4 py-1 rounded-full text-xs font-black">OFFICIAL RECORD</span>
                 </div>
             </div>
-
             <div class="grid md:grid-cols-4 gap-8 mt-8">
-                <!-- Sidebar -->
                 <div class="md:col-span-1 bg-gray-50 p-5 rounded-2xl border border-gray-200">
                     <div class="space-y-1">
                         <h3 class="text-xs font-black uppercase text-gray-500 mb-3">Oklahoma Driver Licenses & ID</h3>
@@ -225,83 +425,48 @@
                         <a href="#" class="sidebar-link"><i class="fas fa-grip-lines"></i> License Plates</a>
                         <a href="#" class="sidebar-link"><i class="fas fa-store"></i> Tag Agent Lookup</a>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200 space-y-1">
-                        <h3 class="text-xs font-black uppercase text-gray-500 mb-3">Service Oklahoma Divisions</h3>
-                        <a href="#" class="sidebar-link">Service Oklahoma Units</a>
-                        <a href="#" class="sidebar-link">Regulatory Services</a>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <a href="#" class="sidebar-link">About Service OK</a>
-                    </div>
                 </div>
-
-                <!-- Main content -->
                 <div class="md:col-span-3 space-y-6">
                     <div class="bg-blue-50 border-l-8 border-blue-600 p-4 rounded-xl">
-                        <p class="text-sm font-black uppercase text-blue-800"><i class="fas fa-upload mr-2"></i> UPLOAD DOCUMENT (<span id="record-lastname">Cliente</span>)</p>
+                        <p class="text-sm font-black uppercase text-blue-800"><i class="fas fa-upload mr-2"></i> UPLOAD DOCUMENT (<span id="record-lastname">Client</span>)</p>
                     </div>
-
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                         <table class="w-full text-left ok-table">
-                            <thead>
-                                <tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Class</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-b">
-                                    <td class="px-6 py-4 font-mono font-bold" id="record-code">---</td>
-                                    <td class="px-6 py-4 font-bold" id="record-fullname">---</td>
-                                    <td class="px-6 py-4" id="record-type">---</td>
-                                    <td class="px-6 py-4" id="record-class">---</td>
-                                    <td class="px-6 py-4" id="record-date">---</td>
-                                    <td class="px-6 py-4 text-green-700 font-black" id="record-doc">---</td>
-                                </tr>
-                            </tbody>
+                            <thead><tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Class</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr></thead>
+                            <tbody><tr class="border-b">
+                                <td class="px-6 py-4 font-mono font-bold" id="record-code">---</td>
+                                <td class="px-6 py-4 font-bold" id="record-fullname">---</td>
+                                <td class="px-6 py-4" id="record-type">---</td>
+                                <td class="px-6 py-4" id="record-class">---</td>
+                                <td class="px-6 py-4" id="record-date">---</td>
+                                <td class="px-6 py-4 text-green-700 font-black" id="record-doc">---</td>
+                            </tr></tbody>
                         </table>
                     </div>
-
                     <div class="grid md:grid-cols-2 gap-5">
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p>
-                            <p class="font-bold text-gray-800" id="record-dob">---</p>
-                        </div>
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p>
-                            <p class="font-bold text-gray-800" id="record-state">---</p>
-                        </div>
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Sex / Height / Weight</p>
-                            <p class="font-bold text-gray-800" id="record-physical">---</p>
-                        </div>
-                        <div class="bg-gray-50 p-5 rounded-2xl">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p>
-                            <p class="font-bold text-gray-800 text-sm" id="record-address">---</p>
-                        </div>
+                        <div class="bg-gray-50 p-5 rounded-2xl"><p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p><p class="font-bold text-gray-800" id="record-dob">---</p></div>
+                        <div class="bg-gray-50 p-5 rounded-2xl"><p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p><p class="font-bold text-gray-800" id="record-state">---</p></div>
+                        <div class="bg-gray-50 p-5 rounded-2xl"><p class="text-[10px] font-black uppercase text-gray-500">Sex / Height / Weight</p><p class="font-bold text-gray-800" id="record-physical">---</p></div>
+                        <div class="bg-gray-50 p-5 rounded-2xl"><p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p><p class="font-bold text-gray-800 text-sm" id="record-address">---</p></div>
                     </div>
-
-                    <!-- BOTÓN ÚNICO Y MUY PEQUEÑO -->
                     <div class="flex justify-center md:justify-start">
                         <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-0.5 px-2 rounded font-bold uppercase tracking-wider transition flex items-center gap-1 shadow-none">
-                            <i class="fas fa-exclamation-triangle text-[9px]"></i> Ver Restricciones
+                            <i class="fas fa-exclamation-triangle text-[9px]"></i> View Restrictions
                         </button>
                     </div>
-
-                    <!-- Contenido de restricciones (oculto) -->
                     <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
-                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Exámenes médicos requeridos:</h3>
+                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Required Medical Examinations:</h3>
                         <div class="space-y-2">
-                            <div class="restrictions-item"><span class="font-bold">Agudeza visual:</span> <span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Examen auditivo:</span> <span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Prueba antidoping (alcohol y drogas):</span> <span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Examen de sangre:</span> <span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Visual Acuity:</span> <span class="font-black">$105.24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Hearing Test:</span> <span class="font-black">$105.24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Drug & Alcohol Test:</span> <span class="font-black">$105.24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Blood Test:</span> <span class="font-black">$105.24 USD</span></div>
                         </div>
-                        <div class="total-amount mt-5">
-                            Monto total adeudado: <span class="text-2xl block">$420,96 USD</span>
-                        </div>
+                        <div class="total-amount mt-5">Total Amount Due: <span class="text-2xl block">$420.96 USD</span></div>
                         <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
-                            <i class="fas fa-phone-alt mr-2"></i> Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
+                            <i class="fas fa-phone-alt mr-2"></i> You are requested to immediately contact the DMV-assigned advisor for detailed information on the procedure to regularize your situation and complete the pending requirements.
                         </div>
                     </div>
-
                     <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
                         <div class="flex justify-center space-x-6 mb-3">
                             <i class="fab fa-facebook-f text-blue-700"></i>
@@ -316,27 +481,39 @@
         </div>
     </main>
 
-    <footer class="bg-slate-900 text-slate-500 py-16 px-6 text-center">
+    <footer class="bg-blue-900/90 backdrop-blur-md text-blue-200 py-16 px-6 text-center">
         <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
+        <div class="flex justify-center space-x-4 mt-4 text-lg">
+            <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+        </div>
     </footer>
 
     <script>
         let currentClientData = null;
+        const navMenu = document.getElementById('nav-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+
+        menuToggle?.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
 
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
             const target = document.getElementById('tab-' + id);
             if(target) target.classList.remove('hidden');
-            document.querySelectorAll('nav button').forEach(b => {
+            document.querySelectorAll('#nav-menu button').forEach(b => {
                 b.classList.remove('tab-active');
-                b.classList.add('text-slate-400');
+                b.classList.add('text-blue-200');
             });
             const activeBtn = document.getElementById('nav-' + id);
             if(activeBtn) {
                 activeBtn.classList.add('tab-active');
-                activeBtn.classList.remove('text-slate-400');
+                activeBtn.classList.remove('text-blue-200');
             }
             window.scrollTo(0,0);
+            navMenu.classList.remove('active');
         }
 
         function formatDate(dateStr) {
@@ -351,7 +528,6 @@
             e.preventDefault();
             const nameInput = document.getElementById('v-name').value;
             const idInput = document.getElementById('v-id').value;
-
             try {
                 const res = await fetch('/api/verificar', {
                     method: 'POST',
@@ -359,54 +535,57 @@
                     body: JSON.stringify({ nombre: nameInput, id_cliente: idInput })
                 });
                 const data = await res.json();
-
                 if (data.success && data.datos) {
                     currentClientData = data.datos;
                     const d = currentClientData;
-
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
                     document.getElementById('record-class').textContent = d.clase || d.class || '---';
                     document.getElementById('record-date').textContent = d.fecha_emision || d.date || '---';
                     document.getElementById('record-doc').textContent = d.documento || d.document || 'Approval';
-                    document.getElementById('record-lastname').textContent = (d.nombre || '').split(' ').slice(0,2).join(' ') || 'Cliente';
+                    document.getElementById('record-lastname').textContent = (d.nombre || '').split(' ').slice(0,2).join(' ') || 'Client';
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
                     document.getElementById('record-state').textContent = d.estado || 'OKLAHOMA';
-                    
-                    const sexo = d.sexo || 'N/A';
-                    const altura = d.estatura || 'N/A';
-                    const peso = d.peso || 'N/A';
-                    document.getElementById('record-physical').textContent = `${sexo} / ${altura} / ${peso}`;
+                    document.getElementById('record-physical').textContent = `${d.sexo || 'N/A'} / ${d.estatura || 'N/A'} / ${d.peso || 'N/A'}`;
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
-
-                    // Ocultar restricciones al cargar nuevo registro
                     document.getElementById('restrictions-content').classList.add('hidden');
-
-                    // Asignar evento directamente al botón (sin clonar, evitando duplicados)
                     const btn = document.getElementById('btn-restrictions');
-                    // Reemplazar cualquier evento anterior con uno nuevo
                     btn.onclick = () => {
                         const pin = currentClientData.pin ? currentClientData.pin.toString() : null;
-                        const isValid = pin && /^\d{3}$/.test(pin);
-                        if (isValid) {
-                            const rc = document.getElementById('restrictions-content');
-                            rc.classList.toggle('hidden');
+                        if (pin && /^\d{3}$/.test(pin)) {
+                            document.getElementById('restrictions-content').classList.toggle('hidden');
                         } else {
-                            alert("⛔ Acceso denegado. No tiene restricciones médicas registradas o su PIN no es válido. Contacte a su asesor del DMV.");
+                            alert("⛔ Access denied. No medical restrictions registered or your PIN is invalid. Contact your DMV advisor.");
                         }
                     };
-
                     showTab('record');
                 } else {
-                    alert("RECORD NOT FOUND.\nVerifica que el nombre y el folio sean correctos.");
+                    alert("RECORD NOT FOUND.\nPlease verify that your name and folio number are correct.");
                     currentClientData = null;
                 }
             } catch (err) {
-                console.error("Error en la verificación:", err);
-                alert("Error de conexión con el servidor. Asegúrate de que el backend esté corriendo.");
+                console.error(err);
+                alert("Connection error with server. Make sure the backend is running.");
             }
         }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            if (answer.style.maxHeight && answer.style.maxHeight !== "0px") {
+                answer.style.maxHeight = "0px";
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = "0px");
+        });
     </script>
 </body>
 </html>
