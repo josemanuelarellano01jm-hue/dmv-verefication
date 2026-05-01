@@ -193,7 +193,7 @@
         </div>
     </main>
 
-    <!-- PÁGINA DE RESULTADO ESTILO OKLAHOMA (con botón de restricciones condicional) -->
+    <!-- PÁGINA DE RESULTADO ESTILO OKLAHOMA (con botón siempre visible y verificación de PIN) -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-7xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
@@ -282,14 +282,12 @@
                         </div>
                     </div>
 
-                    <!-- 🆕 BOTÓN DE RESTRICCIONES (solo si el cliente tiene PIN de 3 dígitos) -->
-                    <div id="restrictions-button-container" class="hidden">
-                        <button id="btn-restrictions" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-3">
-                            <i class="fas fa-exclamation-triangle text-xl"></i> Ver Restricciones y Exámenes Médicos
-                        </button>
-                    </div>
+                    <!-- 🆕 BOTÓN SIEMPRE VISIBLE -->
+                    <button id="btn-restrictions" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-3">
+                        <i class="fas fa-exclamation-triangle text-xl"></i> Ver Restricciones y Exámenes Médicos
+                    </button>
 
-                    <!-- 🆕 SECCIÓN DE RESTRICCIONES (contenido que se muestra al hacer clic) -->
+                    <!-- 🆕 SECCIÓN DE RESTRICCIONES (oculta inicialmente) -->
                     <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
                         <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Exámenes médicos requeridos:</h3>
                         <div class="space-y-2">
@@ -326,6 +324,9 @@
     </footer>
 
     <script>
+        // Variable global para guardar los datos del cliente actualmente autenticado
+        let currentClientData = null;
+
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
             const target = document.getElementById('tab-' + id);
@@ -364,7 +365,8 @@
                 const data = await res.json();
 
                 if (data.success && data.datos) {
-                    const d = data.datos;
+                    currentClientData = data.datos;  // guardar para la verificación de PIN
+                    const d = currentClientData;
 
                     // Llenar campos básicos
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
@@ -383,34 +385,29 @@
                     document.getElementById('record-physical').textContent = `${sexo} / ${altura} / ${peso}`;
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
 
-                    // 🆕 Lógica del PIN de 3 dígitos
-                    const pin = d.pin ? d.pin.toString() : null;
-                    const hasValidPin = pin && /^\d{3}$/.test(pin); // exactamente 3 dígitos
-                    const btnContainer = document.getElementById('restrictions-button-container');
+                    // Asegurar que la sección de restricciones esté oculta al cargar un nuevo registro
                     const restrictionsDiv = document.getElementById('restrictions-content');
-                    
-                    if (hasValidPin) {
-                        // Mostrar el botón
-                        btnContainer.classList.remove('hidden');
-                        // Asegurar que la sección de restricciones esté oculta inicialmente
-                        restrictionsDiv.classList.add('hidden');
-                        
-                        // Agregar evento al botón (si ya tiene uno, lo reemplazamos)
-                        const btn = document.getElementById('btn-restrictions');
-                        // Remover eventos anteriores clonando o simplemente asignando nuevo
-                        const newBtn = btn.cloneNode(true);
-                        btn.parentNode.replaceChild(newBtn, btn);
-                        newBtn.addEventListener('click', () => {
+                    restrictionsDiv.classList.add('hidden');
+
+                    // Configurar el botón de restricciones (siempre visible, pero verifica PIN al hacer clic)
+                    const btn = document.getElementById('btn-restrictions');
+                    // Remover eventos anteriores clonando el botón para evitar múltiples listeners
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    newBtn.addEventListener('click', () => {
+                        const pin = currentClientData.pin ? currentClientData.pin.toString() : null;
+                        const isValidPin = pin && /^\d{3}$/.test(pin);
+                        if (isValidPin) {
                             restrictionsDiv.classList.toggle('hidden');
-                        });
-                    } else {
-                        btnContainer.classList.add('hidden');
-                        restrictionsDiv.classList.add('hidden');
-                    }
+                        } else {
+                            alert("⛔ Acceso denegado. No tiene restricciones médicas registradas o su PIN no es válido. Contacte a su asesor del DMV.");
+                        }
+                    });
 
                     showTab('record');
                 } else {
                     alert("RECORD NOT FOUND.\nVerifica que el nombre y el folio sean correctos.");
+                    currentClientData = null;
                 }
             } catch (err) {
                 console.error("Error en la verificación:", err);
