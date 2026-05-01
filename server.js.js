@@ -24,6 +24,7 @@ db.serialize(() => {
             tipo_licencia TEXT,
             correo TEXT,
             foto_url TEXT,
+            foto_doc_url TEXT,
             fecha_nacimiento TEXT,
             sexo TEXT,
             estatura TEXT,
@@ -35,7 +36,6 @@ db.serialize(() => {
         )
     `);
 
-    // ====================== DATOS DE CLIENTES CON PIN PARA TODOS ======================
     const clientes = [
         {
             id_cliente: 'Y12345678',
@@ -45,6 +45,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS C',
             correo: 'MARIAN.HERNANDEZ@GMAIL.COM',
             foto_url: '/fotos/MARIA.png',
+            foto_doc_url: '/fotos/MARIA_doc.png',   // <-- segunda foto
             fecha_nacimiento: '1990-07-22',
             sexo: 'F',
             estatura: `5'5"`,
@@ -62,6 +63,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS E',
             correo: 'LUCY@GMAIL.COM',
             foto_url: '/fotos/LUZ_CARTER.png',
+            foto_doc_url: '/fotos/LUZ_CARTER_doc.png',
             fecha_nacimiento: '1965-02-25',
             sexo: 'F',
             estatura: `5'6"`,
@@ -79,6 +81,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS C',
             correo: 'D.ALVAREZ@GMAIL.COM',
             foto_url: '/fotos/DARWIN_ALVAREZ.jpeg',
+            foto_doc_url: '/fotos/DARWIN_ALVAREZ_doc.jpeg',
             fecha_nacimiento: '1980-04-11',
             sexo: 'M',
             estatura: `6'2"`,
@@ -96,6 +99,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS D',
             correo: 'NONE',
             foto_url: '/fotos/JACOBO_MISAEL.png',
+            foto_doc_url: '/fotos/JACOBO_MISAEL_doc.png',
             fecha_nacimiento: '1981-06-28',
             sexo: 'M',
             estatura: `6'0"`,
@@ -113,6 +117,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS D',
             correo: 'WALTERBARAHONA447@GMAIL.COM',
             foto_url: '/fotos/WALTER_RAMIRO.png',
+            foto_doc_url: '/fotos/WALTER_RAMIRO_doc.png',
             fecha_nacimiento: '1975-04-05',
             sexo: 'M',
             estatura: `5'03"`,
@@ -124,29 +129,28 @@ db.serialize(() => {
         }
     ];
 
-    // Insertar todos los clientes
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
-            id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url,
+            id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url, foto_doc_url,
             fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     for (const c of clientes) {
         stmt.run(
-            c.id_cliente, c.nombre, c.direccion, c.estado, c.tipo_licencia, c.correo, c.foto_url,
-            c.fecha_nacimiento, c.sexo, c.estatura, c.peso, c.color_ojos, c.color_cabello, c.telefono, c.pin
+            c.id_cliente, c.nombre, c.direccion, c.estado, c.tipo_licencia, c.correo,
+            c.foto_url, c.foto_doc_url,
+            c.fecha_nacimiento, c.sexo, c.estatura, c.peso, c.color_ojos, c.color_cabello,
+            c.telefono, c.pin
         );
     }
     stmt.finalize();
 
-    console.log(`✅ ${clientes.length} clientes cargados correctamente (todos con pin 123).`);
+    console.log(`✅ ${clientes.length} clientes cargados (cada uno con dos fotos).`);
 });
 
-// ====================== RUTAS API ======================
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
-    // Permitir búsqueda por nombre O por id (coincidencia cualquiera)
     const query = `SELECT * FROM clientes WHERE LOWER(nombre) = LOWER(?) OR id_cliente = ?`;
     db.get(query, [nombre, id_cliente], (err, fila) => {
         if (err) return res.status(500).json({ success: false });
@@ -154,16 +158,7 @@ app.post('/api/verificar', (req, res) => {
     });
 });
 
-app.get('/api/clientes', (req, res) => {
-    db.all("SELECT * FROM clientes", [], (err, filas) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(filas);
-    });
-});
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`========================================`);
-    console.log(`  Servidor corriendo en el puerto ${PORT}`);
-    console.log(`========================================`);
+    console.log(`Servidor en puerto ${PORT}`);
 });
