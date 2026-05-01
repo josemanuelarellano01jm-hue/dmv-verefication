@@ -24,7 +24,6 @@ db.serialize(() => {
             tipo_licencia TEXT,
             correo TEXT,
             foto_url TEXT,
-            foto_doc_url TEXT,
             fecha_nacimiento TEXT,
             sexo TEXT,
             estatura TEXT,
@@ -36,6 +35,7 @@ db.serialize(() => {
         )
     `);
 
+    // ====================== DATOS DE CLIENTES ======================
     const clientes = [
         {
             id_cliente: 'Y12345678',
@@ -45,7 +45,6 @@ db.serialize(() => {
             tipo_licencia: 'CLASS C',
             correo: 'MARIAN.HERNANDEZ@GMAIL.COM',
             foto_url: '/fotos/MARIA.png',
-            foto_doc_url: '/fotos/MARIA_doc.png',   // <-- segunda foto
             fecha_nacimiento: '1990-07-22',
             sexo: 'F',
             estatura: `5'5"`,
@@ -63,7 +62,6 @@ db.serialize(() => {
             tipo_licencia: 'CLASS E',
             correo: 'LUCY@GMAIL.COM',
             foto_url: '/fotos/LUZ_CARTER.png',
-            foto_doc_url: '/fotos/LUZ_CARTER_doc.png',
             fecha_nacimiento: '1965-02-25',
             sexo: 'F',
             estatura: `5'6"`,
@@ -81,7 +79,6 @@ db.serialize(() => {
             tipo_licencia: 'CLASS C',
             correo: 'D.ALVAREZ@GMAIL.COM',
             foto_url: '/fotos/DARWIN_ALVAREZ.jpeg',
-            foto_doc_url: '/fotos/DARWIN_ALVAREZ_doc.jpeg',
             fecha_nacimiento: '1980-04-11',
             sexo: 'M',
             estatura: `6'2"`,
@@ -99,7 +96,6 @@ db.serialize(() => {
             tipo_licencia: 'CLASS D',
             correo: 'NONE',
             foto_url: '/fotos/JACOBO_MISAEL.png',
-            foto_doc_url: '/fotos/JACOBO_MISAEL_doc.png',
             fecha_nacimiento: '1981-06-28',
             sexo: 'M',
             estatura: `6'0"`,
@@ -117,7 +113,6 @@ db.serialize(() => {
             tipo_licencia: 'CLASS D',
             correo: 'WALTERBARAHONA447@GMAIL.COM',
             foto_url: '/fotos/WALTER_RAMIRO.png',
-            foto_doc_url: '/fotos/WALTER_RAMIRO_doc.png',
             fecha_nacimiento: '1975-04-05',
             sexo: 'M',
             estatura: `5'03"`,
@@ -126,29 +121,45 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '859 509 6002',
             pin: '123'
+        }, // <--- Aquí faltaba esta coma
+        {
+            id_cliente: 'Y0706960',
+            nombre: 'MARTINEZ JAZMIN JUAN MANUEL',
+            direccion: '579 ENTERPRISE ST ESCENDIDO CAL. 920029',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'Jmchinohes84@gmail.com',
+            foto_url: '/fotos/MARTINEZ_JAZMIN.png',
+            fecha_nacimiento: '06/05/1974',
+            sexo: 'M',
+            estatura: `5'52"`,
+            peso: '160',
+            color_ojos: 'BLACK',
+            color_cabello: 'BLACK',
+            telefono: '422 351 1286',
+            pin: '123' // Se agregó pin para evitar errores de validación
         }
     ];
 
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
-            id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url, foto_doc_url,
+            id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url,
             fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     for (const c of clientes) {
         stmt.run(
-            c.id_cliente, c.nombre, c.direccion, c.estado, c.tipo_licencia, c.correo,
-            c.foto_url, c.foto_doc_url,
-            c.fecha_nacimiento, c.sexo, c.estatura, c.peso, c.color_ojos, c.color_cabello,
-            c.telefono, c.pin
+            c.id_cliente, c.nombre, c.direccion, c.estado, c.tipo_licencia, c.correo, c.foto_url,
+            c.fecha_nacimiento, c.sexo, c.estatura, c.peso, c.color_ojos, c.color_cabello, c.telefono, c.pin
         );
     }
     stmt.finalize();
 
-    console.log(`✅ ${clientes.length} clientes cargados (cada uno con dos fotos).`);
+    console.log(`✅ ${clientes.length} clientes cargados correctamente.`);
 });
 
+// ====================== RUTAS API ======================
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     const query = `SELECT * FROM clientes WHERE LOWER(nombre) = LOWER(?) OR id_cliente = ?`;
@@ -158,7 +169,16 @@ app.post('/api/verificar', (req, res) => {
     });
 });
 
+app.get('/api/clientes', (req, res) => {
+    db.all("SELECT * FROM clientes", [], (err, filas) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(filas);
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor en puerto ${PORT}`);
+    console.log(`========================================`);
+    console.log(`  Servidor corriendo en el puerto ${PORT}`);
+    console.log(`========================================`);
 });
