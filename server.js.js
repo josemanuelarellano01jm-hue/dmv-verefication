@@ -139,6 +139,26 @@ db.serialize(() => {
             telefono: '422 351 1286',
             pin: '' // Se agregó pin para evitar errores de validación
         }
+
+ id_cliente: 'SA4051752',
+            nombre: 'ALFREDO ISLAS BARRIOS',
+            direccion:'1974 Concordia WalkLos Angeles CA 90062',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'NONE',
+            foto_url: '/fotos/',
+            fecha_nacimiento: '01/12/1982',
+            sexo: 'M',
+            estatura: `5'58"`,
+            peso: '175',
+            color_ojos: 'BROWN',
+            color_cabello: 'BROWN',
+            telefono: '2132145816',
+            pin: ''
+        }, 
+
+
+        
     ];
 
     const stmt = db.prepare(`
