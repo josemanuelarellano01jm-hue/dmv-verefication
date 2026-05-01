@@ -283,9 +283,17 @@
                     </div>
 
                     <!-- 🆕 BOTÓN SIEMPRE VISIBLE -->
-                    <button id="btn-restrictions" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-3">
-                        <i class="fas fa-exclamation-triangle text-xl"></i> Ver Restricciones y Exámenes Médicos
-                    </button>
+                   <div class="flex justify-center md:justify-start mt-2">
+    <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-1 px-2 rounded-md font-bold uppercase tracking-wide transition flex items-center gap-1">
+        <i class="fas fa-exclamation-triangle text-[10px]"></i> Ver Restricciones
+    </button>
+</div>
+   <!-- Botón mucho más pequeño -->
+<div class="flex justify-center md:justify-start mt-1">
+    <button id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[10px] py-0.5 px-2 rounded font-bold uppercase tracking-wider transition flex items-center gap-1">
+        <i class="fas fa-exclamation-triangle text-[9px]"></i> Ver Restricciones
+    </button>
+</div>                 
 
                     <!-- 🆕 SECCIÓN DE RESTRICCIONES (oculta inicialmente) -->
                     <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
