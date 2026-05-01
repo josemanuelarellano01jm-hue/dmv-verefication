@@ -146,7 +146,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: 'NONE',
-            foto_url: '/fotos/',
+            foto_url: '/fotos/ISLAS_BARRIOS.png',
             fecha_nacimiento: '01/12/1982',
             sexo: 'M',
             estatura: `5'58"`,
