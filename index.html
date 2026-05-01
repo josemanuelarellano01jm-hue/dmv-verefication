@@ -74,18 +74,20 @@
             transition: max-height 0.3s ease;
         }
 
+        /* Fotos: se ven completas (sin recortes) y con tamaño razonable */
         .client-photo {
-            width: 120px;
-            height: 140px;
-            object-fit: cover;
+            width: 180px;
+            height: 220px;
+            object-fit: contain;        /* ← muestra la imagen completa */
             border: 3px solid white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             border-radius: 8px;
-            background: #e2e8f0;
+            background: #f8fafc;
+            display: none;              /* oculto hasta que cargue correctamente */
         }
         .photo-placeholder {
-            width: 120px;
-            height: 140px;
+            width: 180px;
+            height: 220px;
             border: 3px dashed #cbd5e1;
             border-radius: 8px;
             display: flex;
@@ -115,8 +117,8 @@
             .ok-table td { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; font-size: 13px; }
             .ok-table td::before { content: attr(data-label); font-weight: 800; text-transform: uppercase; color: #1f2937; font-size: 10px; width: 50%; text-align: left; }
             .client-photo, .photo-placeholder {
-                width: 90px;
-                height: 110px;
+                width: 140px;
+                height: 170px;
             }
         }
     </style>
@@ -307,14 +309,14 @@
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <!-- Foto 1 -->
                     <div class="flex flex-col items-center">
-                        <img id="record-photo1" src="" alt="Client Photo 1" class="client-photo" onerror="this.style.display='none'; document.getElementById('placeholder1').style.display='flex';">
-                        <div id="placeholder1" class="photo-placeholder" style="display: flex;">NO PHOTO</div>
+                        <img id="record-photo1" src="" alt="Client Photo" class="client-photo">
+                        <div id="placeholder1" class="photo-placeholder">NO PHOTO</div>
                         <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Client Photo</p>
                     </div>
                     <!-- Foto 2 -->
                     <div class="flex flex-col items-center">
-                        <img id="record-photo2" src="" alt="Client Photo 2" class="client-photo" onerror="this.style.display='none'; document.getElementById('placeholder2').style.display='flex';">
-                        <div id="placeholder2" class="photo-placeholder" style="display: flex;">NO PHOTO</div>
+                        <img id="record-photo2" src="" alt="Document Photo" class="client-photo">
+                        <div id="placeholder2" class="photo-placeholder">NO PHOTO</div>
                         <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Document Photo</p>
                     </div>
                 </div>
@@ -322,9 +324,7 @@
                 <!-- Tabla de datos -->
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                     <table class="w-full text-left ok-table">
-                        <thead>
-                            <tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr>
-                        </thead>
+                        <thead><tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr></thead>
                         <tbody>
                             <tr class="border-b">
                                 <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
@@ -340,18 +340,9 @@
                 <!-- Datos personales -->
                 <div class="bg-gray-50 p-5 rounded-2xl shadow-inner">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p>
-                            <p class="font-bold text-gray-800" id="record-dob">---</p>
-                        </div>
-                        <div>
-                            <p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p>
-                            <p class="font-bold text-gray-800" id="record-state">---</p>
-                        </div>
-                        <div class="md:col-span-2">
-                            <p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p>
-                            <p class="font-bold text-gray-800 text-sm" id="record-address">---</p>
-                        </div>
+                        <div><p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p><p class="font-bold text-gray-800" id="record-dob">---</p></div>
+                        <div><p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p><p class="font-bold text-gray-800" id="record-state">---</p></div>
+                        <div class="md:col-span-2"><p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p><p class="font-bold text-gray-800 text-sm" id="record-address">---</p></div>
                     </div>
                 </div>
 
@@ -394,9 +385,7 @@
         const navMenu = document.getElementById('nav-menu');
         const menuToggle = document.getElementById('menu-toggle');
 
-        menuToggle?.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+        menuToggle?.addEventListener('click', () => navMenu.classList.toggle('active'));
 
         function showTab(id) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
@@ -448,53 +437,57 @@
                     document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
                     
-                    // Mostrar fotos (dos)
+                    // --- CARGAR FOTOS USANDO foto_url DEL BACKEND ---
                     const photo1 = document.getElementById('record-photo1');
                     const placeholder1 = document.getElementById('placeholder1');
                     const photo2 = document.getElementById('record-photo2');
                     const placeholder2 = document.getElementById('placeholder2');
-                    
-                    // Asignar rutas: si el backend proporciona 'foto' y 'foto2', se usan; si no, se intenta construir con el id
-                    const baseRawUrl = 'https://raw.githubusercontent.com/josemaneularella010jm-hue/dmv-verefication/main/fotos/';
-                    const photoUrl1 = d.foto || (d.id_cliente ? `${baseRawUrl}${d.id_cliente}.jpg` : '');
-                    const photoUrl2 = d.foto2 || (d.id_cliente ? `${baseRawUrl}${d.id_cliente}_doc.jpg` : '');
-                    
-                    // Cargar foto 1
-                    if (photoUrl1) {
-                        photo1.src = photoUrl1;
-                        photo1.style.display = 'block';
-                        placeholder1.style.display = 'none';
-                        photo1.onerror = () => {
-                            photo1.style.display = 'none';
-                            placeholder1.style.display = 'flex';
-                        };
+
+                    // Reiniciar estado: placeholder visible, imagen oculta
+                    photo1.style.display = 'none';
+                    placeholder1.style.display = 'flex';
+                    photo2.style.display = 'none';
+                    placeholder2.style.display = 'flex';
+
+                    // Foto 1 – siempre desde d.foto_url
+                    if (d.foto_url && d.foto_url.trim() !== '') {
+                        photo1.src = d.foto_url;
                         photo1.onload = () => {
                             photo1.style.display = 'block';
                             placeholder1.style.display = 'none';
                         };
-                    } else {
-                        photo1.style.display = 'none';
-                        placeholder1.style.display = 'flex';
-                    }
-                    
-                    // Cargar foto 2
-                    if (photoUrl2) {
-                        photo2.src = photoUrl2;
-                        photo2.style.display = 'block';
-                        placeholder2.style.display = 'none';
-                        photo2.onerror = () => {
-                            photo2.style.display = 'none';
-                            placeholder2.style.display = 'flex';
+                        photo1.onerror = () => {
+                            photo1.style.display = 'none';
+                            placeholder1.style.display = 'flex';
                         };
-                        photo2.onload = () => {
-                            photo2.style.display = 'block';
-                            placeholder2.style.display = 'none';
-                        };
-                    } else {
-                        photo2.style.display = 'none';
-                        placeholder2.style.display = 'flex';
                     }
-                    
+
+                    // Foto 2 – primero buscamos d.foto_doc_url; si no existe, 
+                    // lo construimos añadiendo '_doc' antes de la extensión
+                    if (d.foto_doc_url && d.foto_doc_url.trim() !== '') {
+                        photo2.src = d.foto_doc_url;
+                        loadSecondPhoto(photo2, placeholder2);
+                    } else if (d.foto_url && d.foto_url.trim() !== '') {
+                        const parts = d.foto_url.split('.');
+                        const extension = parts.length > 1 ? '.' + parts.pop() : '.png';
+                        const nameBase = parts.join('.');
+                        const fotoDocUrl = nameBase + '_doc' + extension;
+                        photo2.src = fotoDocUrl;
+                        loadSecondPhoto(photo2, placeholder2);
+                    }
+
+                    // Función auxiliar para manejar el estado de la segunda foto
+                    function loadSecondPhoto(img, placeholder) {
+                        img.onload = () => {
+                            img.style.display = 'block';
+                            placeholder.style.display = 'none';
+                        };
+                        img.onerror = () => {
+                            img.style.display = 'none';
+                            placeholder.style.display = 'flex';
+                        };
+                    }
+
                     document.getElementById('restrictions-content').classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
                     btn.onclick = () => {
