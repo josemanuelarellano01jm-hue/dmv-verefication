@@ -331,7 +331,14 @@
                                 <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                 <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
                                 <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
-                                <input type="text" id="record-doc" class="font-bold text-green-700 border border-gray-300 rounded px-2 py-1 w-24">
+                                <td class="px-6 py-4" data-label="Document">
+    <select id="record-doc" class="bg-white border border-gray-300 rounded px-2 py-1 font-bold text-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="Pending">Pending</option>
+        <option value="Approval">Approval</option>
+        <option value="Rejected">Rejected</option>
+        <!-- Añade más estados según necesites -->
+    </select>
+</td>
                             </tr>
                         </tbody>
                     </table>
