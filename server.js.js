@@ -39,22 +39,24 @@ db.serialize(() => {
     // ====================== DATOS DE CLIENTES ======================
     const clientes = [
         {
-            id_cliente: 'Y12345678',
-            nombre: 'MARIA HERNANDEZ',
-            direccion: '2312 A Texas Av 32',
-            estado: 'TEXAS',
-            tipo_licencia: 'CLASS C',
-            correo: 'MARIAN.HERNANDEZ@GMAIL.COM',
-            foto_url: '/fotos/MARIA.png',
-            fecha_nacimiento: '1990-07-22',
-            sexo: 'F',
-            estatura: `5'5"`,
-            peso: '140 lb',
-            color_ojos: 'BROWN',
-            color_cabello: 'BROWN',
-            telefono: '+1 214-555-0199',
-            pin: '123',
-            documento: 'Pending'
+        
+    id_cliente: 'SA4051752',
+    nombre: 'ALVARADO BARAHONA WALTER RAMIRO',
+    direccion: '12 GEORGE, APT 2 LYNN, MA 01905-2986',
+    estado: 'MASSACHUSETTS',          // Corrige el typo "PASSACIOUSITES"
+    tipo_licencia: 'CLASS D',
+    correo: 'WALTERBARAHONA447@GMAIL.COM',
+    foto_url: '/fotos/WALTER_RAMIRO.png',
+    foto_doc_url: '/fotos/WALTER_RAMIRO_doc.png',   // ← NUEVO
+    fecha_nacimiento: '1975-04-05',
+    sexo: 'M',
+    estatura: `5'03"`,
+    peso: '',
+    color_ojos: 'BROWN',    // también corrige "BROWIN"
+    color_cabello: 'BLACK',
+    telefono: '859 509 6002',
+    pin: '123',
+    documento: 'Approval'
         },
         {
             id_cliente: 'C473652870230',
