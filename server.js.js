@@ -156,6 +156,7 @@ db.serialize(() => {
             tipo_licencia: 'REAL ID',
             correo: 'NONE',
             foto_url: '/fotos/ISLAS_BARRIOS.png',
+             foto_doc_url: '/fotos/barrios.jpeg',
             fecha_nacimiento: '01/12/1982',
             sexo: 'M',
             estatura: `5'58"`,
