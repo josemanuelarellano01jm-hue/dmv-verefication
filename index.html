@@ -331,7 +331,7 @@
                                 <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                 <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
                                 <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
-                                <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
+                                <input type="text" id="record-doc" class="font-bold text-green-700 border border-gray-300 rounded px-2 py-1 w-24">
                             </tr>
                         </tbody>
                     </table>
@@ -432,7 +432,7 @@
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
                     document.getElementById('record-date').textContent = d.fecha_emision || d.date || '---';
-                    document.getElementById('record-doc').textContent = d.documento || d.document || 'Approval';
+                    document.getElementById('record-doc').value = d.documento || d.document || 'Approval';
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
                     document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
