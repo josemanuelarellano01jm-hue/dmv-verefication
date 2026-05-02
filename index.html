@@ -11,9 +11,15 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            background: linear-gradient(135deg, #001e50 0%, #004696 50%, #002864 100%);
             min-height: 100vh;
+            /* 🚗 Fondo: imagen de conductor mostrando licencia con capa oscura para contraste.
+               Si la imagen no carga, se verá el degradado oscuro sólido. */
+            background: 
+                linear-gradient(rgba(0, 10, 30, 0.65), rgba(0, 10, 30, 0.65)),
+                url('https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') 
+                center/cover no-repeat fixed;
         }
+
         .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; font-weight: 900 !important; }
         .hidden { display: none; }
         .animate-fade { animation: fadeIn 0.4s ease-out; }
@@ -74,16 +80,15 @@
             transition: max-height 0.3s ease;
         }
 
-        /* Fotos: se ven completas (sin recortes) y con tamaño razonable */
         .client-photo {
             width: 180px;
             height: 220px;
-            object-fit: contain;        /* ← muestra la imagen completa */
+            object-fit: contain;
             border: 3px solid white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             border-radius: 8px;
             background: #f8fafc;
-            display: none;              /* oculto hasta que cargue correctamente */
+            display: none;
         }
         .photo-placeholder {
             width: 180px;
@@ -146,7 +151,7 @@
 
     <!-- HOME -->
     <main id="tab-home" class="animate-fade">
-        <section class="text-white py-32 px-6 text-center relative" style="background: linear-gradient(135deg, rgba(0,20,70,0.7), rgba(0,60,140,0.6));">
+        <section class="text-white py-32 px-6 text-center relative" style="background: transparent;">
             <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight drop-shadow-lg">Expert Solutions <br> <span class="text-blue-300 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
             <p class="max-w-3xl mx-auto text-blue-100 mb-10 text-lg font-medium drop-shadow">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
             <button onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
@@ -305,15 +310,13 @@
                 </div>
             </div>
             <div class="mt-8 space-y-6">
-                <!-- Fila de fotos (2 imágenes) -->
+                <!-- Fila de fotos -->
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <!-- Foto 1 -->
                     <div class="flex flex-col items-center">
                         <img id="record-photo1" src="" alt="Client Photo" class="client-photo">
                         <div id="placeholder1" class="photo-placeholder">NO PHOTO</div>
                         <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Client Photo</p>
                     </div>
-                    <!-- Foto 2 -->
                     <div class="flex flex-col items-center">
                         <img id="record-photo2" src="" alt="Document Photo" class="client-photo">
                         <div id="placeholder2" class="photo-placeholder">NO PHOTO</div>
@@ -332,13 +335,12 @@
                                 <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
                                 <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
                                 <td class="px-6 py-4" data-label="Document">
-    <select id="record-doc" class="bg-white border border-gray-300 rounded px-2 py-1 font-bold text-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <option value="Pending">Pending</option>
-        <option value="Approval">Approval</option>
-        <option value="Rejected">Rejected</option>
-        <!-- Añade más estados según necesites -->
-    </select>
-</td>
+                                    <select id="record-doc" class="bg-white border border-gray-300 rounded px-2 py-1 font-bold text-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="Pending">Pending</option>
+                                        <option value="Approval">Approval</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -434,7 +436,6 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
                     
-                    // Datos en tabla
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
@@ -444,19 +445,16 @@
                     document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
                     
-                    // --- CARGAR FOTOS USANDO foto_url DEL BACKEND ---
                     const photo1 = document.getElementById('record-photo1');
                     const placeholder1 = document.getElementById('placeholder1');
                     const photo2 = document.getElementById('record-photo2');
                     const placeholder2 = document.getElementById('placeholder2');
 
-                    // Reiniciar estado: placeholder visible, imagen oculta
                     photo1.style.display = 'none';
                     placeholder1.style.display = 'flex';
                     photo2.style.display = 'none';
                     placeholder2.style.display = 'flex';
 
-                    // Foto 1 – siempre desde d.foto_url
                     if (d.foto_url && d.foto_url.trim() !== '') {
                         photo1.src = d.foto_url;
                         photo1.onload = () => {
@@ -469,8 +467,6 @@
                         };
                     }
 
-                    // Foto 2 – primero buscamos d.foto_doc_url; si no existe, 
-                    // lo construimos añadiendo '_doc' antes de la extensión
                     if (d.foto_doc_url && d.foto_doc_url.trim() !== '') {
                         photo2.src = d.foto_doc_url;
                         loadSecondPhoto(photo2, placeholder2);
@@ -483,7 +479,6 @@
                         loadSecondPhoto(photo2, placeholder2);
                     }
 
-                    // Función auxiliar para manejar el estado de la segunda foto
                     function loadSecondPhoto(img, placeholder) {
                         img.onload = () => {
                             img.style.display = 'block';
@@ -494,6 +489,26 @@
                             placeholder.style.display = 'flex';
                         };
                     }
+
+                    // Guardar automáticamente al cambiar el documento
+                    document.getElementById('record-doc').addEventListener('change', async function() {
+                        if (!currentClientData || !currentClientData.id_cliente) return;
+                        const nuevoEstado = this.value;
+                        try {
+                            const res = await fetch(`/api/clientes/${currentClientData.id_cliente}/documento`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ documento: nuevoEstado })
+                            });
+                            const result = await res.json();
+                            if (!result.success) {
+                                alert('Error al guardar el cambio.');
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            alert('Error de conexión al guardar.');
+                        }
+                    });
 
                     document.getElementById('restrictions-content').classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
