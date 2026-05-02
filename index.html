@@ -339,9 +339,8 @@
                                 <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                 <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
                                 <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
-                                <td class="px-6 py-4" data-label="Document">
-                                    <input type="text" id="record-doc" class="bg-white border border-gray-300 rounded px-2 py-1 font-bold text-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-24" value="">
-                                </td>
+                                <!-- Document ahora es texto simple (editable solo en server.js) -->
+                                <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
                             </tr>
                         </tbody>
                     </table>
@@ -434,11 +433,12 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
                     
+                    // Asignación a elementos HTML (ahora record-doc es un td, usamos textContent)
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
                     document.getElementById('record-date').textContent = d.fecha_emision || d.date || '---';
-                    document.getElementById('record-doc').value = d.documento || d.document || 'Approval';
+                    document.getElementById('record-doc').textContent = d.documento || d.document || 'Approval';
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
                     document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
@@ -487,26 +487,6 @@
                             placeholder.style.display = 'flex';
                         };
                     }
-
-                    // Guardar automáticamente al cambiar el documento
-                    document.getElementById('record-doc').addEventListener('change', async function() {
-                        if (!currentClientData || !currentClientData.id_cliente) return;
-                        const nuevoEstado = this.value;
-                        try {
-                            const res = await fetch(`/api/clientes/${currentClientData.id_cliente}/documento`, {
-                                method: 'PUT',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ documento: nuevoEstado })
-                            });
-                            const result = await res.json();
-                            if (!result.success) {
-                                alert('Error al guardar el cambio.');
-                            }
-                        } catch (err) {
-                            console.error(err);
-                            alert('Error de conexión al guardar.');
-                        }
-                    });
 
                     document.getElementById('restrictions-content').classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
