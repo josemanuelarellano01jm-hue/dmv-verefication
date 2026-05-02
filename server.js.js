@@ -31,7 +31,8 @@ db.serialize(() => {
             color_ojos TEXT,
             color_cabello TEXT,
             telefono TEXT,
-            pin TEXT
+            pin TEXT,
+            documento TEXT DEFAULT 'Pending'
         )
     `);
 
@@ -52,7 +53,8 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'BROWN',
             telefono: '+1 214-555-0199',
-            pin: '123'
+            pin: '123',
+            documento: 'Pending'
         },
         {
             id_cliente: 'C473652870230',
@@ -69,7 +71,8 @@ db.serialize(() => {
             color_ojos: 'GREY',
             color_cabello: 'BROWN',
             telefono: '786 906 4756',
-            pin: '12'
+            pin: '12',
+            documento: 'Pending'
         },
         {
             id_cliente: '37850640',
@@ -86,7 +89,8 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
             telefono: '469 866 73 63',
-            pin: '123'
+            pin: '123',
+            documento: 'Pending'
         },
         {
             id_cliente: 'MC254168',
@@ -103,7 +107,8 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'NONE',
             telefono: '859 509 6002',
-            pin: '123'
+            pin: '123',
+            documento: 'Pending'
         },
         {
             id_cliente: 'SA4051752',
@@ -120,7 +125,8 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
             telefono: '859 509 6002',
-            pin: '123'
+            pin: '123',
+            documento: 'Approval'   // Este es el que ya tenías como "Approval"
         },
         {
             id_cliente: 'Y0706961',
@@ -137,7 +143,8 @@ db.serialize(() => {
             color_ojos: 'BLACK',
             color_cabello: 'BLACK',
             telefono: '422 351 1286',
-            pin: ''
+            pin: '',
+            documento: 'Pending'
         },
         {
             id_cliente: 'Y0706960', 
@@ -154,21 +161,23 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'BROWN',
             telefono: '2132145816',
-            pin: ''
+            pin: '',
+            documento: 'Pending'
         }
     ];
 
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
             id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url,
-            fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin, documento
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     for (const c of clientes) {
         stmt.run(
             c.id_cliente, c.nombre, c.direccion, c.estado, c.tipo_licencia, c.correo, c.foto_url,
-            c.fecha_nacimiento, c.sexo, c.estatura, c.peso, c.color_ojos, c.color_cabello, c.telefono, c.pin
+            c.fecha_nacimiento, c.sexo, c.estatura, c.peso, c.color_ojos, c.color_cabello, c.telefono, c.pin,
+            c.documento
         );
     }
     stmt.finalize();
@@ -190,6 +199,19 @@ app.get('/api/clientes', (req, res) => {
     db.all("SELECT * FROM clientes", [], (err, filas) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(filas);
+    });
+});
+
+// Nueva ruta para actualizar el campo documento
+app.put('/api/clientes/:id_cliente/documento', (req, res) => {
+    const { documento } = req.body;
+    const { id_cliente } = req.params;
+    if (!documento) {
+        return res.status(400).json({ success: false, error: 'El campo "documento" es requerido.' });
+    }
+    db.run("UPDATE clientes SET documento = ? WHERE id_cliente = ?", [documento, id_cliente], function(err) {
+        if (err) return res.status(500).json({ success: false, error: err.message });
+        res.json({ success: true, changes: this.changes });
     });
 });
 
