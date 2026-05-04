@@ -155,6 +155,29 @@ db.serialize(() => {
             pin: '',
             documento: 'Pending'
         }
+
+         {
+            id_cliente: 'Y3073616', 
+            nombre: 'CUEVAS HERNANDEZ DANIEL',
+            direccion: '17550 Chestnut st Fountain Valley  Ca 92708',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'Dcuevas9@aol.com',
+            foto_url: '/fotos/ISLAS_BARRIOS.png',
+            foto_doc_url: '/fotos/barrios_islas_doc.png',
+            fecha_nacimiento: '1972-12-11', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            sexo: 'M',
+            estatura: `5'07"`,
+            peso: '200',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: 'NONE',
+            pin: '123',
+            documento: 'Pending'
+        }
+
+
+        
     ];
 
     // Actualizamos la sentencia preparada para incluir foto_doc_url
