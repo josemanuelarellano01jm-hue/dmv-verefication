@@ -174,7 +174,7 @@ db.serialize(() => {
            telefono: 'NONE',
            pin: '123',
            documento: 'Pending'
-        }
+        },
 
 
 {
