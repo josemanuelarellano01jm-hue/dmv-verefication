@@ -172,7 +172,7 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
            telefono: 'NONE',
-           pin: '123',
+           pin: '456',
            documento: 'Pending'
         },
 
