@@ -164,7 +164,7 @@ db.serialize(() => {
             tipo_licencia: 'REAL ID',
             correo: 'Dcuevas9@aol.com',
             foto_url: '/fotos/DANIEL_CUEVAS.png',
-            foto_doc_url: '/fotos/barrios_islas_doc.png',
+            foto_doc_url: 'fotos/CUEVAS_doc.jpeg',
             fecha_nacimiento: '1972-12-11', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
             estatura: `5'07"`,
@@ -173,7 +173,7 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: 'NONE',
             pin: '123',
-            documento: 'Pending'
+           documento: 'Pending'
         }
 
 
