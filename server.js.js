@@ -175,6 +175,28 @@ db.serialize(() => {
            pin: '123',
            documento: 'Pending'
         }
+
+
+{
+            id_cliente: 'K04578522', 
+            nombre: 'FIGUEROA CRUZ CARLOS GUSTAVO',
+            direccion: '1109 Allison st Newton Kansas 67114',
+            estado: 'KANSAS',
+            tipo_licencia: 'REAL ID',
+            correo: 'gabyhonduras1995@gmail.com',
+            foto_url: '/fotos/ISLAS_BARRIOS.png',
+            foto_doc_url: '/fotos/barrios_islas_doc.png',
+            fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            sexo: 'M',
+            estatura: `5'08"`,
+            peso: '180',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '9374094508,
+            pin: '',
+            documento: 'Pending'
+        },
+
         
     ];
 
