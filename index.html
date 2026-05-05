@@ -299,7 +299,7 @@
         </div>
     </main>
 
-    <!-- RECORD PAGE (con dos fotos) -->
+    <!-- RECORD PAGE (con dos fotos y restricciones en español) -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
@@ -339,7 +339,6 @@
                                 <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                 <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
                                 <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
-                                <!-- Document ahora es texto simple (editable solo en server.js) -->
                                 <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
                             </tr>
                         </tbody>
@@ -360,16 +359,39 @@
                         <i class="fas fa-exclamation-triangle text-[9px]"></i> View Restrictions
                     </button>
                 </div>
+
+                <!-- RESTRICCIONES ACTUALIZADAS EN ESPAÑOL -->
                 <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
-                    <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2"><i class="fas fa-file-medical"></i> Required Medical Examinations:</h3>
+                    <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2">
+                        <i class="fas fa-file-medical"></i> Exámenes médicos requeridos:
+                    </h3>
                     <div class="space-y-2">
-                        <div class="restrictions-item"><span class="font-bold">Blood Test:</span> <span class="font-black"></span></div>
+                        <div class="restrictions-item">
+                            <span class="font-bold">Agudeza visual:</span> 
+                            <span class="font-black">$105,24 USD</span>
+                        </div>
+                        <div class="restrictions-item">
+                            <span class="font-bold">Examen auditivo:</span> 
+                            <span class="font-black">$105,24 USD</span>
+                        </div>
+                        <div class="restrictions-item">
+                            <span class="font-bold">Prueba antidoping (alcohol y drogas):</span> 
+                            <span class="font-black">$105,24 USD</span>
+                        </div>
+                        <div class="restrictions-item">
+                            <span class="font-bold">Examen de sangre:</span> 
+                            <span class="font-black">$105,24 USD</span>
+                        </div>
                     </div>
-                    <div class="total-amount mt-5">Total Amount Due: <span class="text-2xl block"></span></div>
+                    <div class="total-amount mt-5">
+                        Monto total adeudado: <span class="text-2xl block">$420,96 USD</span>
+                    </div>
                     <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
-                        <i class="fas fa-phone-alt mr-2"></i> You are requested to immediately contact the DMV‑assigned advisor for detailed information on the procedure to regularize your situation and complete the pending requirements.
+                        <i class="fas fa-phone-alt mr-2"></i> 
+                        Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
                     </div>
                 </div>
+
                 <div class="border-t pt-6 mt-4 text-center text-gray-500 text-xs">
                     <p>© 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
                 </div>
@@ -433,7 +455,6 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
                     
-                    // Asignación a elementos HTML (ahora record-doc es un td, usamos textContent)
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
                     document.getElementById('record-type').textContent = d.tipo_licencia || '---';
