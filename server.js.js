@@ -154,7 +154,7 @@ db.serialize(() => {
             telefono: '2132145816',
             pin: '',
             documento: 'Pending'
-        }
+        },
 
          {
             id_cliente: 'Y3073616', 
@@ -165,18 +165,16 @@ db.serialize(() => {
             correo: 'Dcuevas9@aol.com',
             foto_url: '/fotos/DANIEL_CUEVAS.png',
             foto_doc_url: 'fotos/CUEVAS_doc.jpeg',
-            fecha_nacimiento: '1972-12-11', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            fecha_nacimiento: '1972-12-11', 
             sexo: 'M',
             estatura: `5'07"`,
             peso: '200',
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
-            telefono: 'NONE',
-            pin: '123',
+           telefono: 'NONE',
+           pin: '123',
            documento: 'Pending'
         }
-
-
         
     ];
 
