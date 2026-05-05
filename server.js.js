@@ -163,7 +163,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: 'Dcuevas9@aol.com',
-            foto_url: '/fotos/ISLAS_BARRIOS.png',
+            foto_url: '/fotos/DANIEL_CUEVAS.png',
             foto_doc_url: '/fotos/barrios_islas_doc.png',
             fecha_nacimiento: '1972-12-11', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
