@@ -184,8 +184,8 @@ db.serialize(() => {
             estado: 'KANSAS',
             tipo_licencia: 'REAL ID',
             correo: 'gabyhonduras1995@gmail.com',
-            foto_url: '/fotos/ISLAS_BARRIOS.png',
-            foto_doc_url: '/fotos/barrios_islas_doc.png',
+            foto_url: '/fotos/carlos_cruz.png',
+            foto_doc_url: '/fotos/carlos_cruz1.doc.png',
             fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
             estatura: `5'08"`,
