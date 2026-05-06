@@ -206,7 +206,7 @@ db.serialize(() => {
             tipo_licencia: 'REAL ID',
             correo: 'gabyhonduras1995@gmail.com',
             foto_url: 'fotos/carlos_cruz.png',
-            foto_doc_url: '/fotos/carlos_cruz.doc.png',
+            foto_doc_url: '/fotos/carlos_cruz1.doc.png',
             fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
             estatura: `5'08"`,
