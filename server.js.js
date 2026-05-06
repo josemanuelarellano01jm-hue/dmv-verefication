@@ -179,7 +179,7 @@ db.serialize(() => {
 
 {
             id_cliente: 'Y0706962', 
-            nombre: 'MORLES PABLO ABEL',
+            nombre: 'PABLO MORALES ABEL',
             direccion: '1109 Allison st Newton Kansas 67114',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
