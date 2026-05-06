@@ -198,6 +198,28 @@ db.serialize(() => {
         },
 
         
+{
+            id_cliente: 'K04578522', 
+            nombre: 'FIGUEROA CRUZ CARLOS GUSTAVO',
+            direccion: '1109 Allison st Newton Kansas 67114',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'gabyhonduras1995@gmail.com',
+            foto_url: 'fotos/carlos_cruz.png',
+            foto_doc_url: '/fotos/carlos_cruz.doc.png',
+            fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            sexo: 'M',
+            estatura: `5'08"`,
+            peso: '180',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '909 8108975',
+            pin: '123',
+            documento: 'Pending'
+        },
+
+
+        
     ];
 
     // Actualizamos la sentencia preparada para incluir foto_doc_url
