@@ -178,21 +178,21 @@ db.serialize(() => {
 
 
 {
-            id_cliente: 'K04578522', 
-            nombre: 'FIGUEROA CRUZ CARLOS GUSTAVO',
+            id_cliente: 'Y0706962', 
+            nombre: 'MORLES PABLO ABEL',
             direccion: '1109 Allison st Newton Kansas 67114',
-            estado: 'KANSAS',
+            estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
-            correo: 'gabyhonduras1995@gmail.com',
+            correo: '1018 Texas st Redlands CA 92374',
             foto_url: '/fotos/carlos_cruz.png',
             foto_doc_url: '/fotos/carlos_cruz1.doc.png',
             fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
-            estatura: `5'08"`,
-            peso: '180',
+            estatura: `5'06"`,
+            peso: '145',
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
-            telefono: '9374094508',
+            telefono: '909 8108975',
             pin: '',
             documento: 'Pending'
         },
