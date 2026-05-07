@@ -193,7 +193,7 @@ db.serialize(() => {
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
             telefono: '909 8108975',
-            pin: '',
+            pin: '123',
             documento: 'Pending'
         },
 
