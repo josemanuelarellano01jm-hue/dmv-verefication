@@ -226,7 +226,7 @@ db.serialize(() => {
             estado: 'WISCONSIN',
             tipo_licencia: 'REGULAR',
             correo: 'Jose13252@icloud.com',
-            foto_url: 'fotos/José alberto1.png',
+            foto_url: '/fotos/José alberto1.png',
             foto_doc_url: '/fotos/José alberto.doc.png',
             fecha_nacimiento: '23/12/2003', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
