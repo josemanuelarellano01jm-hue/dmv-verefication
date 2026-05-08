@@ -218,6 +218,27 @@ db.serialize(() => {
             documento: 'Pending'
         },
 
+                
+{
+            id_cliente: 'R316-2517', 
+            nombre: 'Rosendo garcia Jose Alberto',
+            direccion: '5273 N BUSINESS CEN N BUSINESS CEN N, LADYSMITH, WI 54848',
+            estado: 'WISCONSIN',
+            tipo_licencia: 'REGULAR',
+            correo: 'Jose13252@icloud.com',
+            foto_url: 'fotos/José alberto1.png',
+            foto_doc_url: '/fotos/José alberto.doc.png',
+            fecha_nacimiento: '23/12/2003', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            sexo: 'M',
+            estatura: `5'0"`,
+            peso: '180',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: 'NONE',
+            pin: '',
+            documento: 'Pending'
+        },
+
 
         
     ];
