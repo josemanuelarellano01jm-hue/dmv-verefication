@@ -156,26 +156,6 @@ db.serialize(() => {
             documento: 'Pending'
         },
 
-         {
-            id_cliente: 'Y3073616', 
-            nombre: 'CUEVAS HERNANDEZ DANIEL',
-            direccion: '17550 Chestnut st Fountain Valley  Ca 92708',
-            estado: 'CALIFORNIA',
-            tipo_licencia: 'REAL ID',
-            correo: 'Dcuevas9@aol.com',
-            foto_url: '/fotos/carlos_cruz.png',
-            foto_doc_url: 'fotos/carlos_cruz1.doc.png',
-            fecha_nacimiento: '1972-12-11', 
-            sexo: 'M',
-            estatura: `5'07"`,
-            peso: '200',
-            color_ojos: 'BROWN',
-            color_cabello: 'BLACK',
-           telefono: 'NONE',
-           pin: '456',
-           documento: 'Pending'
-        },
-
 
 {
             id_cliente: 'Y0706962', 
@@ -240,6 +220,31 @@ db.serialize(() => {
         },
 
 
+
+{
+            id_cliente: 'A19799679', 
+            nombre: 'MARADIAGA ARBIS JOB',
+            direccion: '5100 MCMANUS DR FREDEEICKSBURG, VA 22407-7772',
+            estado: 'VIRGINIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'Arbimaradiaga@gmail.com',
+            foto_url: '/fotos/jose _alberto1.png',
+            foto_doc_url: '/fotos/jose_alberto.doc.png',
+            fecha_nacimiento: '12/05/1980', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            sexo: 'M',
+            estatura: `5'05"`,
+            peso: '180',
+            color_ojos: 'BLACK',
+            color_cabello: 'BLACK',
+            telefono: '5407349476',
+            pin: '',
+            documento: 'Pending'
+        },
+
+
+        
+
+        
         
     ];
 
