@@ -212,7 +212,7 @@ db.serialize(() => {
         },
         {
             id_cliente: 'A19799679', 
-            nombre: 'MARADIAGA ARBIS JOB',
+            nombre: 'Maradiaga Arbis Job',
             direccion: '5100 MCMANUS DR FREDEEICKSBURG, VA 22407-7772',
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
