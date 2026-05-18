@@ -228,8 +228,8 @@ db.serialize(() => {
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/jose _alberto1.png',
-            foto_doc_url: '/fotos/jose_alberto.doc.png',
+            foto_url: '/fotos/MARADIAGA_png',
+            foto_doc_url: '/fotos/MARADIAGA_doc.png',
             fecha_nacimiento: '12/05/1980', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
             sexo: 'M',
             estatura: `5'05"`,
