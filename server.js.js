@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
 const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
-    // Actualizamos el esquema para incluir foto_doc_url
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
             id_cliente TEXT PRIMARY KEY,
@@ -25,8 +24,8 @@ db.serialize(() => {
             tipo_licencia TEXT,
             correo TEXT,
             foto_url TEXT,
-            foto_doc_url TEXT,  -- NUEVA COLUMNA
-            fecha_nacimiento TEXT, -- Recomendado formato YYYY-MM-DD
+            foto_doc_url TEXT,
+            fecha_nacimiento TEXT,
             sexo TEXT,
             estatura TEXT,
             peso TEXT,
@@ -67,7 +66,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS E',
             correo: 'LUCY@GMAIL.COM',
             foto_url: '/fotos/LUZ_CARTER.png',
-            foto_doc_url: '', // Añadido para consistencia
+            foto_doc_url: '',
             fecha_nacimiento: '1965-02-25',
             sexo: 'F',
             estatura: `5'6"`,
@@ -86,7 +85,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS C',
             correo: 'D.ALVAREZ@GMAIL.COM',
             foto_url: '/fotos/DARWIN_ALVAREZ.jpeg',
-            foto_doc_url: '', // Añadido para consistencia
+            foto_doc_url: '',
             fecha_nacimiento: '1980-04-11',
             sexo: 'M',
             estatura: `6'2"`,
@@ -105,7 +104,7 @@ db.serialize(() => {
             tipo_licencia: 'CLASS D',
             correo: 'NONE',
             foto_url: '/fotos/JACOBO_MISAEL.png',
-            foto_doc_url: '', // Añadido para consistencia
+            foto_doc_url: '',
             fecha_nacimiento: '1981-06-28',
             sexo: 'M',
             estatura: `6'0"`,
@@ -116,7 +115,6 @@ db.serialize(() => {
             pin: '123',
             documento: 'Pending'
         },
-        // ELIMINADO EL DUPLICADO DE SA4051752
         {
             id_cliente: 'Y0706961',
             nombre: 'MARTINEZ JAZMIN JUAN MANUEL',
@@ -125,8 +123,8 @@ db.serialize(() => {
             tipo_licencia: 'REAL ID',
             correo: 'Jmchinohes84@gmail.com',
             foto_url: '/fotos/MARTINEZ.png',
-            foto_doc_url: '', // Añadido para consistencia
-            fecha_nacimiento: '1974-06-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            foto_doc_url: '',
+            fecha_nacimiento: '1974-06-05',
             sexo: 'M',
             estatura: `5'52"`,
             peso: '160',
@@ -145,7 +143,7 @@ db.serialize(() => {
             correo: 'NONE',
             foto_url: '/fotos/ISLAS_BARRIOS.png',
             foto_doc_url: '/fotos/barrios_islas_doc.png',
-            fecha_nacimiento: '1982-01-12', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            fecha_nacimiento: '1982-01-12',
             sexo: 'M',
             estatura: `5'58"`,
             peso: '175',
@@ -155,18 +153,16 @@ db.serialize(() => {
             pin: '',
             documento: 'Pending'
         },
-
-
-{
+        {
             id_cliente: 'Y0706962', 
             nombre: 'PABLO MORALES ABEL',
             direccion: '1109 Allison st Newton Kansas 67114',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: '1018 Texas st Redlands CA 92374',
-            foto_url: 'fotos/PABLO_MORALES1.png',
+            foto_url: '/fotos/PABLO_MORALES1.png', // Corregido: añadido '/' al inicio
             foto_doc_url: '/fotos/PABLO_MORALES.doc.png',
-            fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            fecha_nacimiento: '1987-11-05',
             sexo: 'M',
             estatura: `5'06"`,
             peso: '145',
@@ -176,18 +172,16 @@ db.serialize(() => {
             pin: '123',
             documento: 'Pending'
         },
-
-        
-{
+        {
             id_cliente: 'K04578522', 
             nombre: 'FIGUEROA CRUZ CARLOS GUSTAVO',
             direccion: '1109 Allison st Newton Kansas 67114',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: 'gabyhonduras1995@gmail.com',
-            foto_url: 'fotos/carlos_cruz.png',
+            foto_url: '/fotos/carlos_cruz.png', // Corregido: añadido '/' al inicio
             foto_doc_url: '/fotos/carlos_cruz1.doc.png',
-            fecha_nacimiento: '1987-11-05', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            fecha_nacimiento: '1987-11-05',
             sexo: 'M',
             estatura: `5'08"`,
             peso: '180',
@@ -197,9 +191,7 @@ db.serialize(() => {
             pin: '123',
             documento: 'Pending'
         },
-
-                
-{
+        {
             id_cliente: 'R316-2517', 
             nombre: 'Rosendo garcia Jose Alberto',
             direccion: '5273 N BUSINESS CEN N BUSINESS CEN N, LADYSMITH, WI 54848',
@@ -208,7 +200,7 @@ db.serialize(() => {
             correo: 'Jose13252@icloud.com',
             foto_url: '/fotos/jose _alberto1.png',
             foto_doc_url: '/fotos/jose_alberto.doc.png',
-            fecha_nacimiento: '23/12/2003', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            fecha_nacimiento: '2003-12-23', // Corregido: Formato YYYY-MM-DD
             sexo: 'M',
             estatura: `5'0"`,
             peso: '180',
@@ -218,19 +210,16 @@ db.serialize(() => {
             pin: '',
             documento: 'Pending'
         },
-
-
-
-{
+        {
             id_cliente: 'A19799679', 
-            nombre: 'Maradiaga Arbis Job',
+            nombre: 'MARADIAGA ARBIS JOB',
             direccion: '5100 MCMANUS DR FREDEEICKSBURG, VA 22407-7772',
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA_png',
+            foto_url: '/fotos/MARADIAGA.png', // Corregido: cambiado _png por .png
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
-            fecha_nacimiento: '12/05/1980', // Corregido formato DD/MM/YYYY -> YYYY-MM-DD
+            fecha_nacimiento: '1980-05-12', // Corregido: Formato YYYY-MM-DD
             sexo: 'M',
             estatura: `5'05"`,
             peso: '180',
@@ -239,16 +228,9 @@ db.serialize(() => {
             telefono: '5407349476',
             pin: '',
             documento: 'Pending'
-        },
-
-
-        
-
-        
-        
+        }
     ];
 
-    // Actualizamos la sentencia preparada para incluir foto_doc_url
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
             id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url, foto_doc_url,
@@ -265,7 +247,7 @@ db.serialize(() => {
             c.tipo_licencia, 
             c.correo, 
             c.foto_url, 
-            c.foto_doc_url || '', // Manejo de valor por defecto si no existe
+            c.foto_doc_url || '', 
             c.fecha_nacimiento, 
             c.sexo, 
             c.estatura, 
@@ -278,7 +260,6 @@ db.serialize(() => {
         );
     }
     stmt.finalize();
-
     console.log(`✅ ${clientes.length} clientes cargados correctamente.`);
 });
 
@@ -286,17 +267,21 @@ db.serialize(() => {
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     
-    // Mejor rendimiento normalizando el nombre en la aplicación antes de la consulta
-    const nombreNormalizado = nombre ? nombre.trim().toLowerCase() : '';
-    const idClienteNormalizado = id_cliente ? id_cliente.trim() : '';
+    const nombreNormalizado = nombre ? nombre.trim().toLowerCase() : null;
+    const idClienteNormalizado = id_cliente ? id_cliente.trim() : null;
 
     if (!nombreNormalizado && !idClienteNormalizado) {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
-    const query = `SELECT * FROM clientes WHERE LOWER(nombre) = ? OR id_cliente = ?`;
+    // Consulta SQL corregida para que funcione bien con parámetros nulos o vacíos alternados
+    const query = `
+        SELECT * FROM clientes 
+        WHERE (? IS NOT NULL AND LOWER(nombre) = ?) 
+           OR (? IS NOT NULL AND id_cliente = ?)
+    `;
     
-    db.get(query, [nombreNormalizado, idClienteNormalizado], (err, fila) => {
+    db.get(query, [nombreNormalizado, nombreNormalizado, idClienteNormalizado, idClienteNormalizado], (err, fila) => {
         if (err) {
             console.error('Error al verificar cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
@@ -342,7 +327,6 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-// Por seguridad en desarrollo local, es mejor '127.0.0.1'
 const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
 
 app.listen(PORT, HOST, () => {
