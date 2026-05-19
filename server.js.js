@@ -229,7 +229,33 @@ db.serialize(() => {
             pin: '',
             documento: 'Pending'
         }
+
+
+         {
+            id_cliente: '145428', 
+            nombre: 'Mojica Acuna Carlos Alirio',
+            direccion: '7008 JUDAL LN CHARLOTTE NC 28269',
+            estado: 'North Carolina',
+            tipo_licencia: 'REGULAR',
+         correo: 'Mojicaacuña@gmail.com',
+            foto_url: '/fotos/jose _alberto1.png',
+            foto_doc_url: '/fotos/jose_alberto.doc.png',
+            fecha_nacimiento: '1971-04-25', // Corregido: Formato YYYY-MM-DD
+            sexo: 'M',
+            estatura: `5'75"`,
+            peso: '220',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '7042986216',
+            pin: '',
+            documento: 'Pending'
+        },
+
+
+        
     ];
+
+    
 
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
