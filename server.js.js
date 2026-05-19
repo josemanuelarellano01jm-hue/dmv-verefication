@@ -217,7 +217,7 @@ db.serialize(() => {
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA.png', 
+            foto_url: '/fotos/MARADIAGA_png', 
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
             fecha_nacimiento: '1980-05-12',
             sexo: 'M',
