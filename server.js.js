@@ -226,7 +226,7 @@ db.serialize(() => {
             color_ojos: 'BLACK',
             color_cabello: 'BLACK',
             telefono: '5407349476',
-            pin: '',
+            pin: '123',
             documento: 'Pending'
         }, // <--- CORREGIDO: Se agregó la coma de separación aquí
         {
