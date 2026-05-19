@@ -1,43 +1,4 @@
-const express = require('express');
-const cors = require('cors');
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-const db = new sqlite3.Database(':memory:');
-
-db.serialize(() => {
-    db.run(`
-        CREATE TABLE IF NOT EXISTS clientes (
-            id_cliente TEXT PRIMARY KEY,
-            nombre TEXT,
-            direccion TEXT,
-            estado TEXT,
-            tipo_licencia TEXT,
-            correo TEXT,
-            foto_url TEXT,
-            foto_doc_url TEXT,
-            fecha_nacimiento TEXT,
-            sexo TEXT,
-            estatura TEXT,
-            peso TEXT,
-            color_ojos TEXT,
-            color_cabello TEXT,
-            telefono TEXT,
-            pin TEXT,
-            documento TEXT DEFAULT 'Pending'
-        )
-    `);
-
-    // ====================== DATOS DE CLIENTES CORREGIDOS ======================
+// ====================== DATOS DE CLIENTES CORREGIDOS ======================
     const clientes = [
         {
             id_cliente: 'SA4051752',
@@ -160,7 +121,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: '1018 Texas st Redlands CA 92374',
-            foto_url: '/fotos/PABLO_MORALES1.png', // Corregido: añadido '/' al inicio
+            foto_url: '/fotos/PABLO_MORALES1.png',
             foto_doc_url: '/fotos/PABLO_MORALES.doc.png',
             fecha_nacimiento: '1987-11-05',
             sexo: 'M',
@@ -179,7 +140,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
             correo: 'gabyhonduras1995@gmail.com',
-            foto_url: '/fotos/carlos_cruz.png', // Corregido: añadido '/' al inicio
+            foto_url: '/fotos/carlos_cruz.png',
             foto_doc_url: '/fotos/carlos_cruz1.doc.png',
             fecha_nacimiento: '1987-11-05',
             sexo: 'M',
@@ -200,7 +161,7 @@ db.serialize(() => {
             correo: 'Jose13252@icloud.com',
             foto_url: '/fotos/jose _alberto1.png',
             foto_doc_url: '/fotos/jose_alberto.doc.png',
-            fecha_nacimiento: '2003-12-23', // Corregido: Formato YYYY-MM-DD
+            fecha_nacimiento: '2003-12-23',
             sexo: 'M',
             estatura: `5'0"`,
             peso: '180',
@@ -217,9 +178,9 @@ db.serialize(() => {
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA_png', // Corregido: cambiado _png por .png
+            foto_url: '/fotos/MARADIAGA.png',
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
-            fecha_nacimiento: '1980-05-12', // Corregido: Formato YYYY-MM-DD
+            fecha_nacimiento: '1980-05-12',
             sexo: 'M',
             estatura: `5'05"`,
             peso: '180',
@@ -228,19 +189,17 @@ db.serialize(() => {
             telefono: '5407349476',
             pin: '',
             documento: 'Pending'
-        }
-
-
-         {
+        }, // <--- Aquí faltaba esta coma para separar los objetos
+        {
             id_cliente: '145428', 
             nombre: 'Mojica Acuna Carlos Alirio',
             direccion: '7008 JUDAL LN CHARLOTTE NC 28269',
             estado: 'North Carolina',
             tipo_licencia: 'REGULAR',
-         correo: 'Mojicaacuña@gmail.com',
-            foto_url: '/fotos/jose _alberto1.png',
+            correo: 'Mojicaacuña@gmail.com',
+            foto_url: '/fotos/jose _alberto1.png', // Nota: Verifica si esta foto es la correcta o si corresponde a Carlos Alirio
             foto_doc_url: '/fotos/jose_alberto.doc.png',
-            fecha_nacimiento: '1971-04-25', // Corregido: Formato YYYY-MM-DD
+            fecha_nacimiento: '1971-04-25',
             sexo: 'M',
             estatura: `5'75"`,
             peso: '220',
@@ -249,8 +208,8 @@ db.serialize(() => {
             telefono: '7042986216',
             pin: '',
             documento: 'Pending'
-        },
-
+        }
+    ]; // <--- Aquí se cierra correctamente el array de clientes
 
         
     ];
