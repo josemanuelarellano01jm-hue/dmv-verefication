@@ -1,4 +1,43 @@
-// ====================== DATOS DE CLIENTES CORREGIDOS ======================
+const express = require('express');
+const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+const db = new sqlite3.Database(':memory:');
+
+db.serialize(() => {
+    db.run(`
+        CREATE TABLE IF NOT EXISTS clientes (
+            id_cliente TEXT PRIMARY KEY,
+            nombre TEXT,
+            direccion TEXT,
+            estado TEXT,
+            tipo_licencia TEXT,
+            correo TEXT,
+            foto_url TEXT,
+            foto_doc_url TEXT,
+            fecha_nacimiento TEXT,
+            sexo TEXT,
+            estatura TEXT,
+            peso TEXT,
+            color_ojos TEXT,
+            color_cabello TEXT,
+            telefono TEXT,
+            pin TEXT,
+            documento TEXT DEFAULT 'Pending'
+        )
+    `);
+
+    // ====================== DATOS DE CLIENTES CORREGIDOS ======================
     const clientes = [
         {
             id_cliente: 'SA4051752',
@@ -178,7 +217,7 @@
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA.png',
+            foto_url: '/fotos/MARADIAGA.png', 
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
             fecha_nacimiento: '1980-05-12',
             sexo: 'M',
@@ -189,7 +228,7 @@
             telefono: '5407349476',
             pin: '',
             documento: 'Pending'
-        }, // <--- Aquí faltaba esta coma para separar los objetos
+        }, // <--- CORREGIDO: Se agregó la coma de separación aquí
         {
             id_cliente: '145428', 
             nombre: 'Mojica Acuna Carlos Alirio',
@@ -197,7 +236,7 @@
             estado: 'North Carolina',
             tipo_licencia: 'REGULAR',
             correo: 'Mojicaacuña@gmail.com',
-            foto_url: '/fotos/jose _alberto1.png', // Nota: Verifica si esta foto es la correcta o si corresponde a Carlos Alirio
+            foto_url: '/fotos/jose _alberto1.png',
             foto_doc_url: '/fotos/jose_alberto.doc.png',
             fecha_nacimiento: '1971-04-25',
             sexo: 'M',
@@ -208,9 +247,7 @@
             telefono: '7042986216',
             pin: '',
             documento: 'Pending'
-        }
-    ]; // <--- Aquí se cierra correctamente el array de clientes
-
+        } // <--- CORREGIDO: Se eliminó el cierre extra erróneo y se estructuró el cierre del array
         
     ];
 
