@@ -269,6 +269,29 @@ db.serialize(() => {
             pin: '123',
             documento: 'Pending'
         },
+
+
+
+{
+            id_cliente: 'Y0706963', // Sigue la correlación de IDs de tus clientes de California (Y0706960, Y0706961, Y0706962...)
+            nombre: 'LUIS C MARTINEZ DONAIRE',
+            direccion: '3619 LYRA ST SACRAMENTO, CA 95827',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'Luiscmati3@gmail.com',
+            foto_url: '/fotos/luis_martinez.png',
+            foto_doc_url: '/fotos/luis_martinez_doc.png',
+            fecha_nacimiento: '2000-10-30', // Formateado correctamente a YYYY-MM-DD
+            sexo: 'M',
+            estatura: `6'2"`, // Convertido de 1,87m a pies/pulgadas para el formato de USA
+            peso: '185 lb',
+            color_ojos: 'BLACK',
+            color_cabello: 'BROWN',
+            telefono: '',
+            pin: '',
+            documento: 'Pending'
+        },
+
         
     ];
 
