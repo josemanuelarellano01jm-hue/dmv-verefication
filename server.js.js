@@ -268,7 +268,7 @@ db.serialize(() => {
             telefono: '',
             pin: '123',
             documento: 'Pending'
-        }
+        },
         
     ];
 
