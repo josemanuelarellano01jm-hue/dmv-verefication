@@ -258,7 +258,7 @@ db.serialize(() => {
             tipo_licencia: 'REGULAR',
             correo: 'giovannycas77@yahoo.com',
             foto_url: '/fotos/castiblanco.png',
-            foto_doc_url: '/fotos/GIOVANNY_CASTIBLANCO_doc.png',
+            foto_doc_url: '/fotos/CASTIBLANCO.doc.png',
             fecha_nacimiento: '1976-08-07', // Formateado a YYYY-MM-DD
             sexo: 'M',
             estatura: `5'6"`,
@@ -266,7 +266,7 @@ db.serialize(() => {
             color_ojos: 'GREEN',
             color_cabello: 'CHESTNUT',
             telefono: '',
-            pin: '',
+            pin: '123',
             documento: 'Pending'
         }
         
