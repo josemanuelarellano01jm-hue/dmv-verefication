@@ -258,7 +258,7 @@ db.serialize(() => {
             tipo_licencia: 'REGULAR',
             correo: 'giovannycas77@yahoo.com',
             foto_url: '/fotos/castiblanco.png',
-            foto_doc_url: '/fotos/Ccastiblanco.doc.png',
+            foto_doc_url: '/fotos/castiblanco.doc.png',
             fecha_nacimiento: '1976-08-07', // Formateado a YYYY-MM-DD
             sexo: 'M',
             estatura: `5'6"`,
