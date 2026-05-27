@@ -226,7 +226,7 @@ db.serialize(() => {
             color_ojos: 'BROWN', 
             color_cabello: 'BROWN',
             telefono: '7142539117',
-            pin: '',
+            pin: '123',
             documento: 'Pending'
         },
         {
