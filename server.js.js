@@ -210,6 +210,28 @@ db.serialize(() => {
             pin: '',
             documento: 'Pending'
         },
+
+{
+    id_cliente: 'Y0706963', // ID secuencial asignado para California
+    nombre: 'ALVARADO GUILLEN EMY JULIETA',
+    direccion: '1570 E CANFIELD LN 2 ANAHEIM CA 92805',
+    estado: 'CALIFORNIA',
+    tipo_licencia: 'REGULAR',
+    correo: 'emyhonduras@gmail.com',
+    foto_url: '/fotos/EMY_JULIETA.png', // Ruta estandarizada para la imagen de perfil
+    foto_doc_url: '',
+    fecha_nacimiento: '1981-03-15', // Formato estandarizado YYYY-MM-DD
+    sexo: 'F',
+    estatura: `5'01"`,
+    peso: '200 lb',
+    color_ojos: 'BROWN', // Traducido para coincidir con los campos del sistema
+    color_cabello: 'BROWN',
+    telefono: '7142539117',
+    pin: '',
+    documento: 'Pending'
+},
+
+        
         {
             id_cliente: 'A19799679', 
             nombre: 'Maradiaga Arbis Job',
