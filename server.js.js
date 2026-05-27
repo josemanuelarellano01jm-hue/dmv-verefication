@@ -305,27 +305,25 @@ db.serialize(() => {
             pin: '',
             documento: 'Pending'
         },
-
 {
-    id_cliente: 'Y0706965', // Sigue la correlación de tus clientes de California/Nuevos
-    nombre: 'LUIS MAURICIO ZAMBRANO LONDONO',
-    direccion: '171 BENJAMIN ST HOLBROOK NY 11741',
+    id_cliente: 'Y0706965',
+    nombre: 'CARLOS ALBERTO RODRIGUEZ PINEDA',
+    direccion: '15297 BITTNER PL MOORPARK CA 93021',
     estado: 'CALIFORNIA',
-    tipo_licencia: 'CDL COMMERCIAL',
-    correo: 'mauzam13@gmail.com',
+    tipo_licencia: 'REGULAR',
+    correo: 'NONE',
     foto_url: 'fotos/carlos rodriguez.png',
     foto_doc_url: 'fotos/carlos rodriguez.doc.png', 
-    fecha_nacimiento: '1978-12-04', // Convertido a formato estándar YYYY-MM-DD
+    fecha_nacimiento: '1980-09-19',
     sexo: 'M',
-    estatura: `5'05"`, // Ajustado al formato estándar de pies/pulgadas (5.5 pies)
-    peso: '152 lb',
-    color_ojos: 'BROWN',
-    color_cabello: 'BLACK', // No especificado
-    telefono: '3478068079', // No especificado
+    estatura: `5'06"`,
+    peso: '187 lb',
+    color_ojos: 'BLACK',
+    color_cabello: 'BLACK',
+    telefono: '3478068079',
     pin: '',
     documento: 'Pending'
 },
-
 
         
     ];
