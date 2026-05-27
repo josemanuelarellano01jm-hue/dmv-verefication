@@ -325,7 +325,7 @@ db.serialize(() => {
     pin: '',
     documento: 'Pending'
 },
-},
+
 
         
     ];
