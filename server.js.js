@@ -294,7 +294,7 @@ db.serialize(() => {
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
             foto_url: 'fotos/carlos rodriguez.png',
-            foto_doc_url: '', 
+            foto_doc_url: 'fotos/carlos rodriguez.doc.png', 
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
             estatura: `6'2"`, 
