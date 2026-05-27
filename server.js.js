@@ -212,14 +212,14 @@ db.serialize(() => {
         },
 
 {
-    id_cliente: 'Y0706963', // ID secuencial asignado para California
+    id_cliente: 'Y0706963', // 
     nombre: 'ALVARADO GUILLEN EMY JULIETA',
     direccion: '1570 E CANFIELD LN 2 ANAHEIM CA 92805',
     estado: 'CALIFORNIA',
     tipo_licencia: 'REGULAR',
     correo: 'emyhonduras@gmail.com',
-    foto_url: '/fotos/EMY_JULIETA.png', // Ruta estandarizada para la imagen de perfil
-    foto_doc_url: '',
+    foto_url: '/fotos/emyy.png', //
+    foto_doc_url: '/fotos/Alvarado Guillen.doc.png',
     fecha_nacimiento: '1981-03-15', // Formato estandarizado YYYY-MM-DD
     sexo: 'F',
     estatura: `5'01"`,
@@ -301,15 +301,15 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: '/fotos/',
-            foto_doc_url: 'fotos/Alvarado Guillen.doc.png',
+            foto_url: '',
+            foto_doc_url: ,
             fecha_nacimiento: '2000-10-30', // Formateado correctamente a YYYY-MM-DD
             sexo: 'M',
             estatura: `6'2"`, // Convertido de 1,87m a pies/pulgadas para el formato de USA
             peso: '185 lb',
             color_ojos: 'BLACK',
             color_cabello: 'BROWN',
-            telefono: '',
+            telefono: '7142539117',
             pin: '',
             documento: 'Pending'
         },
