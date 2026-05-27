@@ -301,8 +301,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: '/fotos/luis.png',
-            foto_doc_url: '/fotos/luis C_doc.png',
+            foto_url: '/fotos/',
+            foto_doc_url: 'fotos/Alvarado Guillen.doc.png',
             fecha_nacimiento: '2000-10-30', // Formateado correctamente a YYYY-MM-DD
             sexo: 'M',
             estatura: `6'2"`, // Convertido de 1,87m a pies/pulgadas para el formato de USA
