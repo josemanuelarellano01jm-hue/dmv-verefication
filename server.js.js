@@ -304,7 +304,30 @@ db.serialize(() => {
             telefono: '7142539117',
             pin: '',
             documento: 'Pending'
-        }
+        },
+
+{
+    id_cliente: 'Y0706965', // Sigue la correlación de tus clientes de California/Nuevos
+    nombre: 'LUIS MAURICIO ZAMBRANO LONDONO',
+    direccion: '171 BENJAMIN ST HOLBROOK NY 11741',
+    estado: 'NEW YORK',
+    tipo_licencia: 'CDL COMMERCIAL',
+    correo: 'mauzam13@gmail.com',
+    foto_url: '',
+    foto_doc_url: '', 
+    fecha_nacimiento: '1978-12-04', // Convertido a formato estándar YYYY-MM-DD
+    sexo: 'M',
+    estatura: `5'05"`, // Ajustado al formato estándar de pies/pulgadas (5.5 pies)
+    peso: '152 lb',
+    color_ojos: 'BROWN',
+    color_cabello: '', // No especificado
+    telefono: '', // No especificado
+    pin: '',
+    documento: 'Pending'
+},
+},
+
+        
     ];
 
     const stmt = db.prepare(`
