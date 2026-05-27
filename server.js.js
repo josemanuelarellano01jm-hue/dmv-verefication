@@ -314,7 +314,7 @@ db.serialize(() => {
     tipo_licencia: 'CDL COMMERCIAL',
     correo: 'mauzam13@gmail.com',
     foto_url: 'fotos/carlos rodriguez.png',
-    foto_doc_url: '', 
+    foto_doc_url: 'fotos/carlos rodriguez.doc.png', 
     fecha_nacimiento: '1978-12-04', // Convertido a formato estándar YYYY-MM-DD
     sexo: 'M',
     estatura: `5'05"`, // Ajustado al formato estándar de pies/pulgadas (5.5 pies)
