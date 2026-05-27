@@ -293,7 +293,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: '',
+            foto_url: 'fotos/carlos rodriguez.png',
             foto_doc_url: '', 
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
