@@ -4,14 +4,17 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const app = express();
 
+// ====================== MIDDLEWARES ======================
 app.use(cors());
 app.use(express.json());
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
+// ====================== VISTAS ======================
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// ====================== BASE DE DATOS (SQLITE IN-MEMORY) ======================
 const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
@@ -293,8 +296,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: 'fotos/donaire.png',
-            foto_doc_url: 'fotos/donaire.doc.png', 
+            foto_url: '/fotos/donaire.png', // Corregido: Añadida la barra '/' inicial
+            foto_doc_url: '/fotos/donaire.doc.png', // Corregido: Añadida la barra '/' inicial
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
             estatura: `6'2"`, 
@@ -305,27 +308,25 @@ db.serialize(() => {
             pin: '123',
             documento: 'Pending'
         },
-{
-    id_cliente: 'Y0706965',
-    nombre: 'CARLOS ALBERTO RODRIGUEZ PINEDA',
-    direccion: '15297 BITTNER PL MOORPARK CA 93021',
-    estado: 'CALIFORNIA',
-    tipo_licencia: 'REGULAR',
-    correo: 'NONE',
-    foto_url: 'fotos/carlos rodriguez.png',
-    foto_doc_url: 'fotos/carlos rodriguez.doc.png', 
-    fecha_nacimiento: '1980-09-19',
-    sexo: 'M',
-    estatura: `5'06"`,
-    peso: '187 lb',
-    color_ojos: 'BLACK',
-    color_cabello: 'BLACK',
-    telefono: '3478068079',
-    pin: '',
-    documento: 'Pending'
-},
-
-        
+        {
+            id_cliente: 'Y0706965',
+            nombre: 'CARLOS ALBERTO RODRIGUEZ PINEDA',
+            direccion: '15297 BITTNER PL MOORPARK CA 93021',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'NONE',
+            foto_url: '/fotos/carlos rodriguez.png', // Corregido: Añadida la barra '/' inicial
+            foto_doc_url: '/fotos/carlos rodriguez.doc.png', // Corregido: Añadida la barra '/' inicial
+            fecha_nacimiento: '1980-09-19',
+            sexo: 'M',
+            estatura: `5'06"`,
+            peso: '187 lb',
+            color_ojos: 'BLACK',
+            color_cabello: 'BLACK',
+            telefono: '3478068079',
+            pin: '',
+            documento: 'Pending'
+        }
     ];
 
     const stmt = db.prepare(`
@@ -365,16 +366,18 @@ app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     
     const nombreNormalizado = nombre ? nombre.trim().toLowerCase() : null;
-    const idClienteNormalizado = id_cliente ? id_cliente.trim() : null;
+    // Forzamos el ID que ingresa a MAYÚSCULAS para evitar errores de tipeo
+    const idClienteNormalizado = id_cliente ? id_cliente.trim().toUpperCase() : null;
 
     if (!nombreNormalizado && !idClienteNormalizado) {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
+    // Corregido: Usamos UPPER(id_cliente) en el WHERE para que coincida sin importar si se busca en minúsculas
     const query = `
         SELECT * FROM clientes 
         WHERE (? IS NOT NULL AND LOWER(nombre) = ?) 
-           OR (? IS NOT NULL AND id_cliente = ?)
+           OR (? IS NOT NULL AND UPPER(id_cliente) = ?)
     `;
     
     db.get(query, [nombreNormalizado, nombreNormalizado, idClienteNormalizado, idClienteNormalizado], (err, fila) => {
@@ -404,7 +407,8 @@ app.put('/api/clientes/:id_cliente/documento', (req, res) => {
         return res.status(400).json({ success: false, error: 'El campo "documento" es requerido y debe ser una cadena de texto.' });
     }
     
-    db.run("UPDATE clientes SET documento = ? WHERE id_cliente = ?", [documento.trim(), id_cliente.trim()], function(err) {
+    // Corregido: Hacemos la actualización buscando con UPPER por si el parámetro viene en minúsculas
+    db.run("UPDATE clientes SET documento = ? WHERE UPPER(id_cliente) = UPPER(?)", [documento.trim(), id_cliente.trim()], function(err) {
         if (err) {
             console.error('Error al actualizar documento del cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
@@ -422,14 +426,12 @@ app.use((err, req, res, next) => {
   res.status(500).send('¡Algo salió mal en el servidor!');
 });
 
-// Inicialización del servidor
+// Inicialización del servidor compatible con Nubes (Render, Heroku, VPS)
 const PORT = process.env.PORT || 3000;
 
-// Al usar '0.0.0.0', el servidor aceptará conexiones tanto locales como externas (desde tu dominio)
-const HOST = '0.0.0.0'; 
-
-app.listen(PORT, HOST, () => {
+// Dejamos que Express escuche en el puerto asignado dinámicamente sin amarrar IP estricta
+app.listen(PORT, () => {
     console.log(`========================================`);
-    console.log(`  Servidor corriendo en http://${HOST}:${PORT}`);
+    console.log(`  Servidor backend activo en puerto: ${PORT}`);
     console.log(`========================================`);
 });
