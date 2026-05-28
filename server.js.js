@@ -293,8 +293,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: 'fotos/carlos rodriguez.png',
-            foto_doc_url: 'fotos/carlos rodriguez.doc.png', 
+            foto_url: 'fotos/',
+            foto_doc_url: 'fotos/', 
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
             estatura: `6'2"`, 
@@ -302,7 +302,7 @@ db.serialize(() => {
             color_ojos: 'BLACK',
             color_cabello: 'BROWN',
             telefono: '7142539117',
-            pin: '',
+            pin: '123',
             documento: 'Pending'
         },
 {
