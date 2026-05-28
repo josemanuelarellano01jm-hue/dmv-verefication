@@ -424,11 +424,12 @@ app.use((err, req, res, next) => {
 
 // Inicialización del servidor
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+
+// Al usar '0.0.0.0', el servidor aceptará conexiones tanto locales como externas (desde tu dominio)
+const HOST = '0.0.0.0'; 
 
 app.listen(PORT, HOST, () => {
     console.log(`========================================`);
     console.log(`  Servidor corriendo en http://${HOST}:${PORT}`);
-    console.log(`  Entorno: ${process.env.NODE_ENV || 'desarrollo'}`);
     console.log(`========================================`);
 });
