@@ -293,7 +293,7 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: 'fotos/',
+            foto_url: 'fotos/donaire.png',
             foto_doc_url: 'fotos/', 
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
