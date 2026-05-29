@@ -162,7 +162,7 @@ db.serialize(() => {
             direccion: '1109 Allison st Newton Kansas 67114',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
-            correo: '1018 Texas st Redlands CA 92374',
+            correo: 'pablo.morales@example.com', // Modificado sugerido para evitar dirección física en email
             foto_url: '/fotos/PABLO_MORALES1.png',
             foto_doc_url: '/fotos/PABLO_MORALES.doc.png',
             fecha_nacimiento: '1987-11-05',
@@ -239,7 +239,7 @@ db.serialize(() => {
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA_png', 
+            foto_url: '/fotos/MARADIAGA.png', // Corregido: añadido punto antes de la extensión png
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
             fecha_nacimiento: '1980-05-12',
             sexo: 'M',
@@ -296,8 +296,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: '/fotos/donaire.png', // Corregido: Añadida la barra '/' inicial
-            foto_doc_url: '/fotos/donaire.doc.png', // Corregido: Añadida la barra '/' inicial
+            foto_url: '/fotos/donaire.png',
+            foto_doc_url: '/fotos/donaire.doc.png',
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
             estatura: `6'2"`, 
@@ -315,8 +315,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'NONE',
-            foto_url: '/fotos/carlos rodriguez.png', // Corregido: Añadida la barra '/' inicial
-            foto_doc_url: '/fotos/carlos rodriguez.doc.png', // Corregido: Añadida la barra '/' inicial
+            foto_url: '/fotos/carlos rodriguez.png',
+            foto_doc_url: '/fotos/carlos rodriguez.doc.png',
             fecha_nacimiento: '1980-09-19',
             sexo: 'M',
             estatura: `5'06"`,
@@ -366,14 +366,12 @@ app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     
     const nombreNormalizado = nombre ? nombre.trim().toLowerCase() : null;
-    // Forzamos el ID que ingresa a MAYÚSCULAS para evitar errores de tipeo
     const idClienteNormalizado = id_cliente ? id_cliente.trim().toUpperCase() : null;
 
     if (!nombreNormalizado && !idClienteNormalizado) {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
-    // Corregido: Usamos UPPER(id_cliente) en el WHERE para que coincida sin importar si se busca en minúsculas
     const query = `
         SELECT * FROM clientes 
         WHERE (? IS NOT NULL AND LOWER(nombre) = ?) 
@@ -407,7 +405,6 @@ app.put('/api/clientes/:id_cliente/documento', (req, res) => {
         return res.status(400).json({ success: false, error: 'El campo "documento" es requerido y debe ser una cadena de texto.' });
     }
     
-    // Corregido: Hacemos la actualización buscando con UPPER por si el parámetro viene en minúsculas
     db.run("UPDATE clientes SET documento = ? WHERE UPPER(id_cliente) = UPPER(?)", [documento.trim(), id_cliente.trim()], function(err) {
         if (err) {
             console.error('Error al actualizar documento del cliente:', err.message);
@@ -426,10 +423,9 @@ app.use((err, req, res, next) => {
   res.status(500).send('¡Algo salió mal en el servidor!');
 });
 
-// Inicialización del servidor compatible con Nubes (Render, Heroku, VPS)
+// Inicialización del servidor compatible con Nubes
 const PORT = process.env.PORT || 3000;
 
-// Dejamos que Express escuche en el puerto asignado dinámicamente sin amarrar IP estricta
 app.listen(PORT, () => {
     console.log(`========================================`);
     console.log(`  Servidor backend activo en puerto: ${PORT}`);
