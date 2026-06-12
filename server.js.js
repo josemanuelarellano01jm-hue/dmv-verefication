@@ -354,7 +354,7 @@ direccion: '1828 FLORES ST SEASIDE CA 93955',
 estado: 'CALIFORNIA',
 tipo_licencia: 'COMERCIAL',
 correo: 'antoniosierra63@yahoo.com',
-foto_url: '/fotos/antonio vasquez.png', // URL de foto sugerida
+foto_url: 'fotos/antonio.png', // URL de foto sugerida
 foto_doc_url: '/fotos/antonio vasquez.doc.png', // URL de documento sugerida
 fecha_nacimiento: '1972-07-11', // Formato estándar AAAA-MM-DD
 sexo: 'M',
