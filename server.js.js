@@ -363,7 +363,7 @@ peso: '140 lb',
 color_ojos: 'BROWN',
 color_cabello: 'BLACK',
 telefono: '8312385293', // Agregar si dispones de él
-pin: '123',
+pin: '',
 documento: 'Pending'
         },
 
