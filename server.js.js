@@ -326,7 +326,26 @@ db.serialize(() => {
             telefono: '3478068079',
             pin: '',
             documento: 'Pending'
-        }
+        },
+ {
+id_cliente: '050685014', // Asignar nuevo ID si es necesario
+nombre: 'FLORES MARTINEZ MANUEL DE JESUS',
+direccion: '4214 MAGNOLIA PL GAINESVILLE GA 30504-5893',
+estado: 'GEORGIA',
+tipo_licencia: 'REGULAR',
+correo: 'manuelfloresmar1@yahoo.com',
+foto_url: '/fotos/manuel flores.png',
+foto_doc_url: '/fotos/manuel flores.doc.png',
+fecha_nacimiento: '1968-12-31',
+sexo: 'M',
+estatura: `5'06"`,
+peso: '180 lb',
+color_ojos: 'BROWN',
+color_cabello: 'BLACK',
+telefono: '', // Agregar si dispones de él
+pin: '',
+documento: 'Pending'
+  }       
     ];
 
     const stmt = db.prepare(`
