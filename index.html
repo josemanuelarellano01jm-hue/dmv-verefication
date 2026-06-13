@@ -200,7 +200,7 @@
                     <div class="bg-blue-600 text-white p-10 rounded-[3rem] shadow-2xl">
                         <h3 class="text-xl font-black uppercase italic mb-6">Our Core Pillars</h3>
                         <ul class="space-y-6">
-                            <li class="flex gap-4"><i class="fas fa-shield"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100">High‑end encryption and verified legal channels.</p></div></li>
+                            <li class="flex gap-4"><i class="fas fa-shield-alt"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100">High‑end encryption and verified legal channels.</p></div></li>
                             <li class="flex gap-4"><i class="fas fa-bolt"></i><div><p class="font-black uppercase text-sm">Industry Speed</p><p class="text-xs text-blue-100">Direct connections for 3x faster processing.</p></div></li>
                         </ul>
                         <div class="mt-6 text-center"><button type="button" onclick="showTab('licenses')" class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-blue-50 transition">Explore License Services</button></div>
@@ -312,7 +312,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b">
+                                class="border-b">
                                     <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
                                     <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                     <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
@@ -368,7 +368,7 @@
     </footer>
 
     <script>
-        // --- 1. Controles de Navegación del Servidor e Interfaz ---
+        // --- 1. Controles de Navegación ---
         const navMenu = document.getElementById('nav-menu');
         const menuToggle = document.getElementById('menu-toggle');
 
@@ -377,7 +377,6 @@
             navMenu.classList.toggle('active');
         });
 
-        // FUNCIÓN CORREGIDA INTELIGENTE PARA EVITAR ERRORES DE NAV DE IDA Y VUELTA
         function showTab(id) {
             const allMains = document.querySelectorAll('#main-content-wrapper main');
             allMains.forEach(m => {
@@ -399,7 +398,6 @@
                 activeBtn.classList.add('tab-active');
                 activeBtn.classList.remove('text-blue-200');
             } else if (id === 'record') {
-                // Si visualiza un expediente de cliente (id 'record'), ilumina el botón de verificación para evitar fallos
                 const verifyBtn = document.getElementById('nav-verify');
                 if (verifyBtn) {
                     verifyBtn.classList.add('tab-active');
@@ -429,97 +427,100 @@
             }
         }
 
-        // --- 2. Base de Datos Local de Registros ---
-        const clientDatabase = [
-            {
-                code: "A7810895",
-                fullName: "VASQUEZ ANTONIO SIERRA",
-                idNumber: "A7810895",
-                document: "COMMERCIAL DRIVER LICENSE - CLASS A (PENDING)",
-                dob: "11 JUL 1972",
-                state: "CALIFORNIA",
-                address: "1828 FLORES ST SEASIDE CA 93955",
-                photoClient: "fotos/A7810895_client.png",
-                photoDoc: "fotos/A7810895_doc.png"
-            }
-        ];
+        // --- Manejo del botón de restricciones del diseño ---
+        const btnRestricciones = document.getElementById('btn-restrictions');
+        const contentRestricciones = document.getElementById('restrictions-content');
+        btnRestricciones?.addEventListener('click', () => {
+            contentRestricciones?.classList.toggle('hidden');
+        });
 
-        // --- 3. Lógica de Autenticación y Despliegue de Datos ---
+        // --- 2. Función de Conexión Inteligente y Blindaje de Errores ---
         function handleVerify(event) {
             event.preventDefault();
             
-            const nameInput = document.getElementById('v-name').value.trim().toUpperCase();
-            const idInput = document.getElementById('v-id').value.trim().toUpperCase();
-            
-            // Búsqueda del registro en la base de datos local
-            const record = clientDatabase.find(client => 
-                client.fullName.toUpperCase() === nameInput && 
-                (client.code.toUpperCase() === idInput || client.idNumber.toUpperCase() === idInput)
-            );
-            
-            if (record) {
-                // Rellenar datos de texto
-                document.getElementById('record-code').innerText = record.code;
-                document.getElementById('record-fullname').innerText = record.fullName;
-                document.getElementById('record-doc').innerText = record.document;
-                document.getElementById('record-dob').innerText = record.dob;
-                document.getElementById('record-state').innerText = record.state;
-                document.getElementById('record-address').innerText = record.address;
-                
-                // Control dinámico de Foto 1 (Rostro)
-                const img1 = document.getElementById('record-photo1');
-                const placeholder1 = document.getElementById('placeholder1');
-                if (record.photoClient) {
-                    img1.src = record.photoClient;
-                    img1.style.display = 'block';
-                    placeholder1.style.display = 'none';
-                    img1.onerror = function() {
-                        img1.style.display = 'none';
-                        placeholder1.style.display = 'flex';
-                        placeholder1.innerText = "ERROR CARGA";
-                    };
-                } else {
-                    img1.style.display = 'none';
-                    placeholder1.style.display = 'flex';
-                    placeholder1.innerText = "NO PHOTO";
-                }
-                
-                // Control dinámico de Foto 2 (Documento)
-                const img2 = document.getElementById('record-photo2');
-                const placeholder2 = document.getElementById('placeholder2');
-                if (record.photoDoc) {
-                    img2.src = record.photoDoc;
-                    img2.style.display = 'block';
-                    placeholder2.style.display = 'none';
-                    img2.onerror = function() {
-                        img2.style.display = 'none';
-                        placeholder2.style.display = 'flex';
-                        placeholder2.innerText = "ERROR CARGA";
-                    };
-                } else {
-                    img2.style.display = 'none';
-                    placeholder2.style.display = 'flex';
-                    placeholder2.innerText = "NO PHOTO";
-                }
-                
-                // Resetear siempre el panel de restricciones oculto por defecto
-                document.getElementById('restrictions-content').classList.add('hidden');
-                
-                // Cambiar a la pestaña del expediente
-                showTab('record');
-            } else {
-                alert("Authentication Failed: Record not found. Please review the Name and Folio number or contact your assigned advisor.");
-            }
-        }
+            const inputName = document.getElementById('v-name').value.trim().toLowerCase();
+            const inputId = document.getElementById('v-id').value.trim();
 
-        // Manejo del botón colapsable de restricciones médicas
-        document.getElementById('btn-restrictions')?.addEventListener('click', function() {
-            const content = document.getElementById('restrictions-content');
-            content.classList.toggle('hidden');
-            if(!content.classList.contains('hidden')){
-                content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        });
+            // Llamada limpia a la API de tu server.js
+            fetch(`/api/verificar?nombre=${encodeURIComponent(inputName)}&id=${encodeURIComponent(inputId)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Cliente no registrado en la base de datos o error de servidor.');
+                    }
+                    return response.json();
+                })
+                .then(client => {
+                    // Renderizamos los textos de forma segura
+                    document.getElementById('record-code').innerText = client.id || '---';
+                    document.getElementById('record-fullname').innerText = (client.nombre || '---').toUpperCase();
+                    document.getElementById('record-doc').innerText = (client.documento || '---').toUpperCase();
+                    document.getElementById('record-dob').innerText = client.fecha_nacimiento || '---';
+                    document.getElementById('record-state').innerText = (client.estado || '---').toUpperCase();
+                    document.getElementById('record-address').innerText = client.direccion || '---';
+
+                    // Ocultamos las restricciones por defecto para el nuevo perfil cargado
+                    contentRestricciones?.classList.add('hidden');
+
+                    // --- BLINDAJE DE FOTOS CRÍTICO ---
+                    const imgPerfil = document.getElementById('record-photo1');
+                    const placeholderPerfil = document.getElementById('placeholder1');
+                    const imgDoc = document.getElementById('record-photo2');
+                    const placeholderDoc = document.getElementById('placeholder2');
+
+                    // Rutas dinámicas basadas en los nombres de archivo enviados por tu server.js
+                    const urlFotoPerfil = client.foto_url || '';
+                    const urlFotoDoc = client.foto_doc_url || '';
+
+                    // Manejo Seguro Foto Perfil
+                    if (imgPerfil && placeholderPerfil) {
+                        if (urlFotoPerfil) {
+                            imgPerfil.src = urlFotoPerfil;
+                            imgPerfil.style.display = 'block';
+                            placeholderPerfil.style.display = 'none';
+                            
+                            // Si falla la carga del archivo físico, activa el salvavidas
+                            imgPerfil.onerror = function() {
+                                this.style.display = 'none';
+                                placeholderPerfil.style.display = 'flex';
+                                placeholderPerfil.innerText = "ERROR FOTO";
+                                console.log("Advertencia: El archivo de imagen de perfil no existe en el disco.");
+                            };
+                        } else {
+                            imgPerfil.style.display = 'none';
+                            placeholderPerfil.style.display = 'flex';
+                            placeholderPerfil.innerText = "NO PHOTO";
+                        }
+                    }
+
+                    // Manejo Seguro Foto Documento
+                    if (imgDoc && placeholderDoc) {
+                        if (urlFotoDoc) {
+                            imgDoc.src = urlFotoDoc;
+                            imgDoc.style.display = 'block';
+                            placeholderDoc.style.display = 'none';
+                            
+                            // Si falla la carga del archivo físico, activa el salvavidas
+                            imgDoc.onerror = function() {
+                                this.style.display = 'none';
+                                placeholderDoc.style.display = 'flex';
+                                placeholderDoc.innerText = "ERROR DOC";
+                                console.log("Advertencia: El archivo de imagen del documento no existe en el disco.");
+                            };
+                        } else {
+                            imgDoc.style.display = 'none';
+                            placeholderDoc.style.display = 'flex';
+                            placeholderDoc.innerText = "NO PHOTO";
+                        }
+                    }
+
+                    // Cambiamos de pestaña al expediente de forma limpia sin bloqueos
+                    showTab('record');
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Acceso denegado: El nombre o folio ingresado no coincide con nuestros registros activos.");
+                });
+        }
     </script>
 </body>
 </html>
