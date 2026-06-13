@@ -306,7 +306,7 @@ db.serialize(() => {
         {
             id_cliente: 'Y0706964', 
             nombre: 'LUIS C MARTINEZ DONAIRE',
-            direccion: '3619 LYRA ST SACRAMENTO, CA 95827',
+            direccion: '3619 LYRA St SACRAMENTO, CA 95827',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
@@ -370,8 +370,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'COMERCIAL',
             correo: 'antoniosierra63@yahoo.com',
-            foto_url: '/fotos/antonio.png',        // <--- CORREGIDO A SINGULAR
-            foto_doc_url: '/fotos/antonio_sierra_doc.png', // <--- CORREGIDO A SINGULAR
+            foto_url: '/fotos/antonio.png',        // <--- Mantiene singular
+            foto_doc_url: '/fotos/VAZQUEZ.doc.png', // <--- ¡CORREGIDO AL NOMBRE REAL DE GITHUB!
             fecha_nacimiento: '1972-07-11',
             sexo: 'M',
             estatura: `5'04"`,
