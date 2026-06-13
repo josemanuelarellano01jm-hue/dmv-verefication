@@ -36,60 +36,305 @@ db.serialize(() => {
             color_cabello TEXT,
             telefono TEXT,
             pin TEXT,
-            documento TEXT DEFAULT 'Pending',
-            tipo_restriccion TEXT DEFAULT 'MED'
+            documento TEXT DEFAULT 'Pending'
         )
     `);
 
     // ====================== DATOS DE CLIENTES CORREGIDOS ======================
     const clientes = [
         {
-            id_cliente: '050685014',
-            nombre: 'FLORES MARTINEZ MANUEL DE JESUS',
-            direccion: '4214 MAGNOLIA PL GAINESVILLE GA 30504-5893',
-            estado: 'GEORGIA',
-            tipo_licencia: 'CDL',
-            correo: 'manuelfloresmar1@yahoo.com',
-            foto_url: 'manueld.png',        
-            foto_doc_url: 'manuel.doc.png', 
-            fecha_nacimiento: '1968-12-31',
+            id_cliente: 'SA4051752',
+            nombre: 'ALVARADO BARAHONA WALTER RAMIRO',
+            direccion: '12 GEORGE, APT 2 LYNN, MA 01905-2986',
+            estado: 'MASSACHUSETTS',
+            tipo_licencia: 'CLASS D',
+            correo: 'WALTERBARAHONA447@GMAIL.COM',
+            foto_url: '/fotos/WALTER_RAMIRO.png',
+            foto_doc_url: '/fotos/WALTER_RAMIRO_doc.png',
+            fecha_nacimiento: '1975-04-05',
             sexo: 'M',
-            estatura: `5'06"`,
-            peso: '180 lb',
+            estatura: `5'03"`,
+            peso: '',
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
-            telefono: '',
+            telefono: '859 509 6002',
             pin: '123',
-            documento: 'Pending',
-            tipo_restriccion: 'MED'
+            documento: 'Approval'
         },
         {
-            id_cliente: 'A7810895',
-            nombre: 'VASQUEZ ANTONIO SIERRA',
-            direccion: '1828 FLORES ST SEASIDE CA 93955',
-            estado: 'CALIFORNIA',
-            tipo_licencia: 'COMERCIAL',
-            correo: 'antoniosierra63@yahoo.com',
-            foto_url: 'antonio.png',          
-            foto_doc_url: 'VAZQUEZ.doc.png',   
-            fecha_nacimiento: '1972-07-11',
+            id_cliente: 'C473652870230',
+            nombre: 'LUZ CARTER',
+            direccion: '3059 SE LIME TREE TER ATUART, FL 34997',
+            estado: 'FLORIDA',
+            tipo_licencia: 'CLASS E',
+            correo: 'LUCY@GMAIL.COM',
+            foto_url: '/fotos/LUZ_CARTER.png',
+            foto_doc_url: '',
+            fecha_nacimiento: '1965-02-25',
+            sexo: 'F',
+            estatura: `5'6"`,
+            peso: '128 lb',
+            color_ojos: 'GREY',
+            color_cabello: 'BROWN',
+            telefono: '786 906 4756',
+            pin: '12',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: '37850640',
+            nombre: 'DARWIN G ALVAREZ MARTINEZ',
+            direccion: '1012 RIO BRAVO DR FORNEY, TX 75126',
+            estado: 'TEXAS',
+            tipo_licencia: 'CLASS C',
+            correo: 'D.ALVAREZ@GMAIL.COM',
+            foto_url: '/fotos/DARWIN_ALVAREZ.jpeg',
+            foto_doc_url: '',
+            fecha_nacimiento: '1980-04-11',
             sexo: 'M',
-            estatura: `5'04"`,
-            peso: '140 lb',
+            estatura: `6'2"`,
+            peso: '',
             color_ojos: 'BROWN',
             color_cabello: 'BLACK',
-            telefono: '8312385293',
+            telefono: '469 866 73 63',
             pin: '123',
-            documento: 'Pending',
-            tipo_restriccion: 'MED'
-        }
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'MC254168',
+            nombre: 'PORTUGUEZ JACOBO MISAEL',
+            direccion: '3305 VANCE RD DAYTON, OH 45439',
+            estado: 'OHIO',
+            tipo_licencia: 'CLASS D',
+            correo: 'NONE',
+            foto_url: '/fotos/JACOBO_MISAEL.png',
+            foto_doc_url: '',
+            fecha_nacimiento: '1981-06-28',
+            sexo: 'M',
+            estatura: `6'0"`,
+            peso: '',
+            color_ojos: 'BROWN',
+            color_cabello: 'NONE',
+            telefono: '859 509 6002',
+            pin: '123',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'Y0706961',
+            nombre: 'MARTINEZ JAZMIN JUAN MANUEL',
+            direccion: '579 ENTERPRISE ST ESCENDIDO CAL. 920029',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'Jmchinohes84@gmail.com',
+            foto_url: '/fotos/MARTINEZ.png',
+            foto_doc_url: '',
+            fecha_nacimiento: '1974-06-05',
+            sexo: 'M',
+            estatura: `5'52"`,
+            peso: '160',
+            color_ojos: 'BLACK',
+            color_cabello: 'BLACK',
+            telefono: '422 351 1286',
+            pin: '',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'Y0706960', 
+            nombre: 'ALFREDO ISLAS BARRIOS',
+            direccion: '1974 Concordia Walk Los Angeles CA 90062',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'NONE',
+            foto_url: '/fotos/ISLAS_BARRIOS.png',
+            foto_doc_url: '/fotos/barrios_islas_doc.png',
+            fecha_nacimiento: '1982-01-12',
+            sexo: 'M',
+            estatura: `5'58"`,
+            peso: '175',
+            color_ojos: 'BROWN',
+            color_cabello: 'BROWN',
+            telefono: '2132145816',
+            pin: '',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'Y0706962', 
+            nombre: 'PABLO MORALES ABEL',
+            direccion: '1109 Allison st Newton Kansas 67114',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'pablo.morales@example.com', // Modificado sugerido para evitar dirección física en email
+            foto_url: '/fotos/PABLO_MORALES1.png',
+            foto_doc_url: '/fotos/PABLO_MORALES.doc.png',
+            fecha_nacimiento: '1987-11-05',
+            sexo: 'M',
+            estatura: `5'06"`,
+            peso: '145',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '909 8108975',
+            pin: '123',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'K04578522', 
+            nombre: 'FIGUEROA CRUZ CARLES GUSTAVO',
+            direccion: '1109 Allison st Newton Kansas 67114',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REAL ID',
+            correo: 'gabyhonduras1995@gmail.com',
+            foto_url: '/fotos/carlos_cruz.png',
+            foto_doc_url: '/fotos/carlos_cruz1.doc.png',
+            fecha_nacimiento: '1987-11-05',
+            sexo: 'M',
+            estatura: `5'08"`,
+            peso: '180',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '909 8108975',
+            pin: '123',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'R316-2517', 
+            nombre: 'Rosendo garcia Jose Alberto',
+            direccion: '5273 N BUSINESS CEN N BUSINESS CEN N, LADYSMITH, WI 54848',
+            estado: 'WISCONSIN',
+            tipo_licencia: 'REGULAR',
+            correo: 'Jose13252@icloud.com',
+            foto_url: '/fotos/jose _alberto1.png',
+            foto_doc_url: '/fotos/jose_alberto.doc.png',
+            fecha_nacimiento: '2003-12-23',
+            sexo: 'M',
+            estatura: `5'0"`,
+            peso: '180',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: 'NONE',
+            pin: '',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'Y0706963', 
+            nombre: 'ALVARADO GUILLEN EMY JULIETA',
+            direccion: '1570 E CANFIELD LN 2 ANAHEIM CA 92805',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'emyhonduras@gmail.com',
+            foto_url: '/fotos/emyy.png', 
+            foto_doc_url: '/fotos/Alvarado Guillen.doc.png',
+            fecha_nacimiento: '1981-03-15', 
+            sexo: 'F',
+            estatura: `5'01"`,
+            peso: '200 lb',
+            color_ojos: 'BROWN', 
+            color_cabello: 'BROWN',
+            telefono: '7142539117',
+            pin: '123',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'A19799679', 
+            nombre: 'Maradiaga Arbis Job',
+            direccion: '5100 MCMANUS DR FREDEEICKSBURG, VA 22407-7772',
+            estado: 'VIRGINIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'Arbimaradiaga@gmail.com',
+            foto_url: '/fotos/MARADIAGA.png', // Corregido: añadido punto antes de la extensión png
+            foto_doc_url: '/fotos/MARADIAGA_doc.png',
+            fecha_nacimiento: '1980-05-12',
+            sexo: 'M',
+            estatura: `5'05"`,
+            peso: '180',
+            color_ojos: 'BLACK',
+            color_cabello: 'BLACK',
+            telefono: '5407349476',
+            pin: '123',
+            documento: 'Pending'
+        }, 
+        {
+            id_cliente: '145428', 
+            nombre: 'Mojica Acuna Carlos Alirio',
+            direccion: '7008 JUDAL LN CHARLOTTE NC 28269',
+            estado: 'North Carolina',
+            tipo_licencia: 'REGULAR',
+            correo: 'Mojicaacuña@gmail.com',
+            foto_url: '/fotos/Mojica Acuna.png',
+            foto_doc_url: '/fotos/Mojca Acuna.doc.png',
+            fecha_nacimiento: '1971-04-25',
+            sexo: 'M',
+            estatura: `5'75"`,
+            peso: '220',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '7042986216',
+            pin: '',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'C753951468', 
+            nombre: 'CASTIBLANCO MARTINEZ GIOVANNY',
+            direccion: '2915 PINE RUN RD APTO 101 NAPLES FL 34109',
+            estado: 'FLORIDA',
+            tipo_licencia: 'REGULAR',
+            correo: 'giovannycas77@yahoo.com',
+            foto_url: '/fotos/castiblanco.png',
+            foto_doc_url: '/fotos/castiblanco_doc.png',
+            fecha_nacimiento: '1976-08-07', 
+            sexo: 'M',
+            estatura: `5'6"`,
+            peso: '176 lb',
+            color_ojos: 'GREEN',
+            color_cabello: 'CHESTNUT',
+            telefono: '',
+            pin: '123',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'Y0706964', 
+            nombre: 'LUIS C MARTINEZ DONAIRE',
+            direccion: '3619 LYRA ST SACRAMENTO, CA 95827',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'Luiscmati3@gmail.com',
+            foto_url: '/fotos/donaireE.png',
+            foto_doc_url: 'fotos/donaire.doc.png',
+            fecha_nacimiento: '2000-10-30', 
+            sexo: 'M',
+            estatura: `6'2"`, 
+            peso: '185 lb',
+            color_ojos: 'BLACK',
+            color_cabello: 'BROWN',
+            telefono: '7142539117',
+            pin: '123',
+            documento: 'Pending'
+        },
+        {
+            id_cliente: 'Y0706965',
+            nombre: 'CARLOS ALBERTO RODRIGUEZ PINEDA',
+            direccion: '15297 BITTNER PL MOORPARK CA 93021',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'REGULAR',
+            correo: 'NONE',
+            foto_url: '/fotos/carlos rodriguez.png',
+            foto_doc_url: '/fotos/carlos rodriguez.doc.png',
+            fecha_nacimiento: '1980-09-19',
+            sexo: 'M',
+            estatura: `5'06"`,
+            peso: '187 lb',
+            color_ojos: 'BLACK',
+            color_cabello: 'BLACK',
+            telefono: '3478068079',
+            pin: '',
+            documento: 'Pending'
+        },
+
     ];
 
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
             id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url, foto_doc_url,
-            fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin, documento, tipo_restriccion
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin, documento
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     for (const c of clientes) {
@@ -110,8 +355,7 @@ db.serialize(() => {
             c.color_cabello, 
             c.telefono, 
             c.pin,
-            c.documento,
-            c.tipo_restriccion || 'MED'
+            c.documento
         );
     }
     stmt.finalize();
@@ -129,10 +373,9 @@ app.post('/api/verificar', (req, res) => {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
-    // Solución definitiva para ignorar si el usuario escribe con S o con Z
     const query = `
         SELECT * FROM clientes 
-        WHERE (? IS NOT NULL AND (REPLACE(LOWER(nombre), 'z', 's') = REPLACE(?, 'z', 's'))) 
+        WHERE (? IS NOT NULL AND LOWER(nombre) = ?) 
            OR (? IS NOT NULL AND UPPER(id_cliente) = ?)
     `;
     
@@ -141,18 +384,7 @@ app.post('/api/verificar', (req, res) => {
             console.error('Error al verificar cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
         }
-        
-        if (!fila) {
-            return res.json({ success: false, datos: null });
-        }
-
-        const datosCorregidos = {
-            ...fila,
-            fotos_url: fila.foto_url ? `/fotos/${fila.foto_url}` : '',      
-            fotos_doc_url: fila.foto_doc_url ? `/fotos/${fila.foto_doc_url}` : '' 
-        };
-
-        res.json({ success: true, datos: datosCorregidos });
+        res.json({ success: !!fila, datos: fila || null });
     });
 });
 
@@ -171,7 +403,7 @@ app.put('/api/clientes/:id_cliente/documento', (req, res) => {
     const { id_cliente } = req.params;
     
     if (!documento || typeof documento !== 'string') {
-        return res.status(400).json({ success: false, error: 'El campo "documento" es requerido.' });
+        return res.status(400).json({ success: false, error: 'El campo "documento" es requerido y debe ser una cadena de texto.' });
     }
     
     db.run("UPDATE clientes SET documento = ? WHERE UPPER(id_cliente) = UPPER(?)", [documento.trim(), id_cliente.trim()], function(err) {
@@ -179,33 +411,22 @@ app.put('/api/clientes/:id_cliente/documento', (req, res) => {
             console.error('Error al actualizar documento del cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
         }
-        res.json({ success: true, changes: this.changes });
-    });
-});
-
-app.put('/api/clientes/:id_cliente/restriccion', (req, res) => {
-    const { tipo_restriccion } = req.body;
-    const { id_cliente } = req.params;
-    
-    if (!tipo_restriccion || typeof tipo_restriccion !== 'string') {
-        return res.status(400).json({ success: false, error: 'El campo "tipo_restriccion" es requerido.' });
-    }
-    
-    db.run("UPDATE clientes SET tipo_restriccion = ? WHERE UPPER(id_cliente) = UPPER(?)", [tipo_restriccion.trim().toUpperCase(), id_cliente.trim()], function(err) {
-        if (err) {
-            console.error('Error al actualizar restricción:', err.message);
-            return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
+        if (this.changes === 0) {
+            return res.status(404).json({ success: false, error: `No se encontró el cliente con id: ${id_cliente}` });
         }
         res.json({ success: true, changes: this.changes });
     });
 });
 
+// Manejo de errores global
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('¡Algo salió mal en el servidor!');
 });
 
+// Inicialización del servidor compatible con Nubes
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
     console.log(`========================================`);
     console.log(`  Servidor backend activo en puerto: ${PORT}`);
