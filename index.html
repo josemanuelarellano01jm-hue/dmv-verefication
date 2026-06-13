@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -265,7 +266,7 @@
         <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade max-w-5xl">
             <div class="glass-panel p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
                 <h2 class="text-2xl font-black uppercase italic mb-8 text-gray-800">Secure <span class="text-blue-600">Authentication</span></h2>
-                <form onsubmit="handleVerify(event)" class="space-y-4 max-w-lg mx-auto">
+                <form id="verify-form" class="space-y-4 max-w-lg mx-auto">
                     <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
                     <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
                     <p class="text-xs text-gray-500 text-left">Enter your full name as it appears on your DMV correspondence and the unique folio number provided by your advisor.</p>
@@ -312,7 +313,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                class="border-b">
+                                <tr class="border-b">
                                     <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
                                     <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                     <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
@@ -365,10 +366,9 @@
             <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
             <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
         </div>
-    </footer>
+    </footer >
 
     <script>
-        // --- 1. Controles de Navegación ---
         const navMenu = document.getElementById('nav-menu');
         const menuToggle = document.getElementById('menu-toggle');
 
@@ -379,14 +379,10 @@
 
         function showTab(id) {
             const allMains = document.querySelectorAll('#main-content-wrapper main');
-            allMains.forEach(m => {
-                m.classList.add('hidden');
-            });
+            allMains.forEach(m => m.classList.add('hidden'));
             
             const target = document.getElementById('tab-' + id);
-            if (target) {
-                target.classList.remove('hidden');
-            }
+            if (target) target.classList.remove('hidden');
             
             document.querySelectorAll('#nav-menu button').forEach(b => {
                 b.classList.remove('tab-active');
@@ -404,123 +400,94 @@
                     verifyBtn.classList.remove('text-blue-200');
                 }
             }
-            
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-            }
-            
+            if (navMenu?.classList.contains('active')) navMenu.classList.remove('active');
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
         function toggleFAQ(element) {
             const answer = element.nextElementSibling;
             const icon = element.querySelector('i');
-            
             if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
                 answer.style.maxHeight = '0px';
                 icon.style.transform = 'rotate(0deg)';
-                icon.style.transition = 'transform 0.3s ease';
             } else {
                 answer.style.maxHeight = answer.scrollHeight + 'px';
                 icon.style.transform = 'rotate(180deg)';
-                icon.style.transition = 'transform 0.3s ease';
             }
+            icon.style.transition = 'transform 0.3s ease';
         }
 
-        // --- Manejo del botón de restricciones del diseño ---
         const btnRestricciones = document.getElementById('btn-restrictions');
         const contentRestricciones = document.getElementById('restrictions-content');
         btnRestricciones?.addEventListener('click', () => {
-            contentRestricciones?.classList.toggle('hidden');
+            contentRestricciones.classList.toggle('hidden');
         });
 
-        // --- 2. Función de Conexión Inteligente y Blindaje de Errores ---
-        function handleVerify(event) {
-            event.preventDefault();
+        // --- ENVIAR DATOS A TU SERVIDOR EXPRESS ---
+        const verifyForm = document.getElementById('verify-form');
+        verifyForm?.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            const inputName = document.getElementById('v-name').value.trim().toLowerCase();
-            const inputId = document.getElementById('v-id').value.trim();
+            const nombreInput = document.getElementById('v-name').value;
+            const idInput = document.getElementById('v-id').value;
 
-            // Llamada limpia a la API de tu server.js
-            fetch(`/api/verificar?nombre=${encodeURIComponent(inputName)}&id=${encodeURIComponent(inputId)}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Cliente no registrado en la base de datos o error de servidor.');
-                    }
-                    return response.json();
-                })
-                .then(client => {
-                    // Renderizamos los textos de forma segura
-                    document.getElementById('record-code').innerText = client.id || '---';
-                    document.getElementById('record-fullname').innerText = (client.nombre || '---').toUpperCase();
-                    document.getElementById('record-doc').innerText = (client.documento || '---').toUpperCase();
-                    document.getElementById('record-dob').innerText = client.fecha_nacimiento || '---';
-                    document.getElementById('record-state').innerText = (client.estado || '---').toUpperCase();
-                    document.getElementById('record-address').innerText = client.direccion || '---';
-
-                    // Ocultamos las restricciones por defecto para el nuevo perfil cargado
-                    contentRestricciones?.classList.add('hidden');
-
-                    // --- BLINDAJE DE FOTOS CRÍTICO ---
-                    const imgPerfil = document.getElementById('record-photo1');
-                    const placeholderPerfil = document.getElementById('placeholder1');
-                    const imgDoc = document.getElementById('record-photo2');
-                    const placeholderDoc = document.getElementById('placeholder2');
-
-                    // Rutas dinámicas basadas en los nombres de archivo enviados por tu server.js
-                    const urlFotoPerfil = client.foto_url || '';
-                    const urlFotoDoc = client.foto_doc_url || '';
-
-                    // Manejo Seguro Foto Perfil
-                    if (imgPerfil && placeholderPerfil) {
-                        if (urlFotoPerfil) {
-                            imgPerfil.src = urlFotoPerfil;
-                            imgPerfil.style.display = 'block';
-                            placeholderPerfil.style.display = 'none';
-                            
-                            // Si falla la carga del archivo físico, activa el salvavidas
-                            imgPerfil.onerror = function() {
-                                this.style.display = 'none';
-                                placeholderPerfil.style.display = 'flex';
-                                placeholderPerfil.innerText = "ERROR FOTO";
-                                console.log("Advertencia: El archivo de imagen de perfil no existe en el disco.");
-                            };
-                        } else {
-                            imgPerfil.style.display = 'none';
-                            placeholderPerfil.style.display = 'flex';
-                            placeholderPerfil.innerText = "NO PHOTO";
-                        }
-                    }
-
-                    // Manejo Seguro Foto Documento
-                    if (imgDoc && placeholderDoc) {
-                        if (urlFotoDoc) {
-                            imgDoc.src = urlFotoDoc;
-                            imgDoc.style.display = 'block';
-                            placeholderDoc.style.display = 'none';
-                            
-                            // Si falla la carga del archivo físico, activa el salvavidas
-                            imgDoc.onerror = function() {
-                                this.style.display = 'none';
-                                placeholderDoc.style.display = 'flex';
-                                placeholderDoc.innerText = "ERROR DOC";
-                                console.log("Advertencia: El archivo de imagen del documento no existe en el disco.");
-                            };
-                        } else {
-                            imgDoc.style.display = 'none';
-                            placeholderDoc.style.display = 'flex';
-                            placeholderDoc.innerText = "NO PHOTO";
-                        }
-                    }
-
-                    // Cambiamos de pestaña al expediente de forma limpia sin bloqueos
-                    showTab('record');
-                })
-                .catch(error => {
-                    console.error(error);
-                    alert("Acceso denegado: El nombre o folio ingresado no coincide con nuestros registros activos.");
+            try {
+                // Petición al backend en el puerto 3000
+                const respuesta = await fetch('/api/verificar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: nombreInput, id_cliente: idInput })
                 });
-        }
+
+                const resultado = await respuesta.json();
+
+                if (resultado.success && resultado.datos) {
+                    const cliente = resultado.datos;
+
+                    // Mapeo e inyección de datos dinámicos recibidos del backend
+                    document.getElementById('record-code').innerText = cliente.id_cliente;
+                    document.getElementById('record-fullname').innerText = cliente.nombre;
+                    document.getElementById('record-doc').innerText = cliente.documento;
+                    document.getElementById('record-dob').innerText = cliente.fecha_nacimiento;
+                    document.getElementById('record-state').innerText = cliente.estado;
+                    document.getElementById('record-address').innerText = cliente.direccion;
+
+                    // Control y render de las imágenes
+                    const img1 = document.getElementById('record-photo1');
+                    const ph1 = document.getElementById('placeholder1');
+                    if (cliente.fotos_url) {
+                        img1.src = cliente.fotos_url;
+                        img1.style.display = 'block';
+                        ph1.style.display = 'none';
+                    } else {
+                        img1.style.display = 'none';
+                        ph1.style.display = 'flex';
+                    }
+
+                    const img2 = document.getElementById('record-photo2');
+                    const ph2 = document.getElementById('placeholder2');
+                    if (cliente.fotos_doc_url) {
+                        img2.src = cliente.fotos_doc_url;
+                        img2.style.display = 'block';
+                        ph2.style.display = 'none';
+                    } else {
+                        img2.style.display = 'none';
+                        ph2.style.display = 'flex';
+                    }
+
+                    // Forzar el colapso del bloque de restricciones al cambiar de registro
+                    contentRestricciones.classList.add('hidden');
+
+                    // Saltar directo a la vista del registro verificado
+                    showTab('record');
+                } else {
+                    alert('❌ Registro no encontrado. Verifique el nombre o folio ingresado.');
+                }
+            } catch (error) {
+                console.error('Error en la autenticación:', error);
+                alert('⚠️ Error de conexión con el servidor.');
+            }
+        });
     </script>
 </body>
 </html>
