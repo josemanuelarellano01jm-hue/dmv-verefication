@@ -371,7 +371,7 @@ db.serialize(() => {
             tipo_licencia: 'COMERCIAL',
             correo: 'antoniosierra63@yahoo.com',
             foto_url: '/fotos/antonio.png',        // <--- CORREGIDO A SINGULAR
-            foto_doc_url: '/fotos/antonio_sierra.png', // <--- CORREGIDO A SINGULAR
+            foto_doc_url: '/fotos/antonio_sierra_doc.png', // <--- CORREGIDO A SINGULAR
             fecha_nacimiento: '1972-07-11',
             sexo: 'M',
             estatura: `5'04"`,
