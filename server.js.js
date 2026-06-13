@@ -343,7 +343,7 @@ peso: '180 lb',
 color_ojos: 'BROWN',
 color_cabello: 'BLACK',
 telefono: '', // Agregar si dispones de él
-pin: '',
+pin: '123',
 documento: 'Pending'
   },
         
