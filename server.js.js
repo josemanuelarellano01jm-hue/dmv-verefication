@@ -311,7 +311,7 @@ db.serialize(() => {
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
             foto_url: '/fotos/donaireE.png',
-            foto_doc_url: 'fotos/donaire.doc.png',
+            foto_doc_url: '/fotos/donaire.doc.png',
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
             estatura: `6'2"`, 
@@ -350,8 +350,8 @@ db.serialize(() => {
             estado: 'GEORGIA',
             tipo_licencia: 'CDL',
             correo: 'manuelfloresmar1@yahoo.com',
-            foto_url: 'fotos/manueld.png',
-            foto_doc_url:'fotos/manuel.doc.png',
+            foto_url: '/fotos/manueld.png',
+            foto_doc_url: '/fotos/manuel.doc.png',
             fecha_nacimiento: '1968-12-31',
             sexo: 'M',
             estatura: `5'06"`,
@@ -364,26 +364,25 @@ db.serialize(() => {
             tipo_restriccion: 'MED'
         },
         {
-           
-    id_cliente: 'A7810895',
-    nombre: 'VASQUEZ ANTONIO SIERRA',
-    direccion: '1828 FLORES ST SEASIDE CA 93955',
-    estado: 'CALIFORNIA',
-    tipo_licencia: 'COMERCIAL',
-    correo: 'antoniosierra63@yahoo.com',
-    foto_url: '/fotos/antonio.png',       // <--- CORREGIDO (Singular y con /)
-    foto_doc_url: '/fotos/antonio_sierra.png', // <--- CORREGIDO (Singular y con /)
-    fecha_nacimiento: '1972-07-11',
-    sexo: 'M',
-    estatura: `5'04"`,
-    peso: '140 lb',
-    color_ojos: 'BROWN',
-    color_cabello: 'BLACK',
-    telefono: '8312385293',
-    pin: '123',
-    documento: 'Pending',
-    tipo_restriccion: 'USP' 
-       }     
+            id_cliente: 'A7810895',
+            nombre: 'VASQUEZ ANTONIO SIERRA',
+            direccion: '1828 FLORES ST SEASIDE CA 93955',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'COMERCIAL',
+            correo: 'antoniosierra63@yahoo.com',
+            foto_url: '/fotos/antonio.png',        // <--- CORREGIDO A SINGULAR
+            foto_doc_url: '/fotos/antonio_sierra.png', // <--- CORREGIDO A SINGULAR
+            fecha_nacimiento: '1972-07-11',
+            sexo: 'M',
+            estatura: `5'04"`,
+            peso: '140 lb',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '8312385293',
+            pin: '123',
+            documento: 'Pending',
+            tipo_restriccion: 'USP'
+        }
     ];
 
     const stmt = db.prepare(`
@@ -441,7 +440,20 @@ app.post('/api/verificar', (req, res) => {
             console.error('Error al verificar cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
         }
-        res.json({ success: !!fila, datos: fila || null });
+        
+        if (!fila) {
+            return res.json({ success: false, datos: null });
+        }
+
+        // --- TRUCO DE COMPATIBILIDAD CON TU FRONTEND ---
+        // Aseguramos que devuelva tanto singular como plural para que el frontend no falle
+        const datosCorregidos = {
+            ...fila,
+            fotos_url: fila.foto_url,      // Crea el plural por si el HTML lo usa
+            fotos_doc_url: fila.foto_doc_url // Crea el plural por si el HTML lo usa
+        };
+
+        res.json({ success: true, datos: datosCorregidos });
     });
 });
 
