@@ -50,8 +50,8 @@ db.serialize(() => {
             estado: 'GEORGIA',
             tipo_licencia: 'CDL',
             correo: 'manuelfloresmar1@yahoo.com',
-            foto_url: 'manueld.png',        // <--- ¡CORREGIDO! Quitamos el "/fotos/" repetido
-            foto_doc_url: 'manuel.doc.png', // <--- ¡CORREGIDO! Quitamos el "/fotos/" repetido
+            foto_url: 'manueld.png',        
+            foto_doc_url: 'manuel.doc.png', 
             fecha_nacimiento: '1968-12-31',
             sexo: 'M',
             estatura: `5'06"`,
@@ -70,8 +70,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'COMERCIAL',
             correo: 'antoniosierra63@yahoo.com',
-            foto_url: 'antonio.png',          // <--- ¡CORREGIDO! Agregada su foto asignada
-            foto_doc_url: 'VAZQUEZ.doc.png',   // <--- ¡CORREGIDO! Vinculado al nombre real de tu archivo
+            foto_url: 'antonio.png',          
+            foto_doc_url: 'VAZQUEZ.doc.png',   
             fecha_nacimiento: '1972-07-11',
             sexo: 'M',
             estatura: `5'04"`,
@@ -122,7 +122,6 @@ db.serialize(() => {
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     
-    // Convertimos a minúsculas y limpiamos espacios raros
     const nombreNormalizado = nombre ? nombre.trim().toLowerCase() : null;
     const idClienteNormalizado = id_cliente ? id_cliente.trim().toUpperCase() : null;
 
@@ -130,7 +129,7 @@ app.post('/api/verificar', (req, res) => {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
-    // ¡SÚPER CORRECCIÓN AQUÍ! Ahora el sistema te dejará entrar escribas VAZQUEZ (con Z) o VASQUEZ (con S)
+    // Solución definitiva para ignorar si el usuario escribe con S o con Z
     const query = `
         SELECT * FROM clientes 
         WHERE (? IS NOT NULL AND (REPLACE(LOWER(nombre), 'z', 's') = REPLACE(?, 'z', 's'))) 
@@ -147,11 +146,10 @@ app.post('/api/verificar', (req, res) => {
             return res.json({ success: false, datos: null });
         }
 
-        // --- COMPATIBILIDAD CON TU FRONTEND ---
         const datosCorregidos = {
             ...fila,
-            fotos_url: fila.foto_url,      
-            fotos_doc_url: fila.foto_doc_url 
+            fotos_url: fila.foto_url ? `/fotos/${fila.foto_url}` : '',      
+            fotos_doc_url: fila.foto_doc_url ? `/fotos/${fila.foto_doc_url}` : '' 
         };
 
         res.json({ success: true, datos: datosCorregidos });
