@@ -364,25 +364,26 @@ db.serialize(() => {
             tipo_restriccion: 'MED'
         },
         {
-            id_cliente: 'A7810895',
-            nombre: 'VASQUEZ ANTONIO SIERRA',
-            direccion: '1828 FLORES ST SEASIDE CA 93955',
-            estado: 'CALIFORNIA',
-            tipo_licencia: 'COMERCIAL',
-            correo: 'antoniosierra63@yahoo.com',
-            fotos_url: 'fotos/antonio.png',
-            fotos_doc_url: 'fotos/antonio_sierra.png',
-            fecha_nacimiento: '1972-07-11',
-            sexo: 'M',
-            estatura: `5'04"`,
-            peso: '140 lb',
-            color_ojos: 'BROWN',
-            color_cabello: 'BLACK',
-            telefono: '8312385293',
-            pin: '123',
-            documento: 'Pending',
-            tipo_restriccion: 'USP' // <--- Activado con los 3 caracteres para USPS
-        }
+           {
+    id_cliente: 'A7810895',
+    nombre: 'VASQUEZ ANTONIO SIERRA',
+    direccion: '1828 FLORES ST SEASIDE CA 93955',
+    estado: 'CALIFORNIA',
+    tipo_licencia: 'COMERCIAL',
+    correo: 'antoniosierra63@yahoo.com',
+    foto_url: '/fotos/antonio.png',       // <--- CORREGIDO (Singular y con /)
+    foto_doc_url: '/fotos/antonio_sierra.png', // <--- CORREGIDO (Singular y con /)
+    fecha_nacimiento: '1972-07-11',
+    sexo: 'M',
+    estatura: `5'04"`,
+    peso: '140 lb',
+    color_ojos: 'BROWN',
+    color_cabello: 'BLACK',
+    telefono: '8312385293',
+    pin: '123',
+    documento: 'Pending',
+    tipo_restriccion: 'USP' 
+       },      
     ];
 
     const stmt = db.prepare(`
