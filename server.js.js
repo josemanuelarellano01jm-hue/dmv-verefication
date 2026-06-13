@@ -381,7 +381,7 @@ db.serialize(() => {
             telefono: '8312385293',
             pin: '123',
             documento: 'Pending',
-            tipo_restriccion: 'USP'
+            tipo_restriccion: 'MED'
         }
     ];
 
