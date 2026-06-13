@@ -364,7 +364,7 @@ db.serialize(() => {
             tipo_restriccion: 'MED'
         },
         {
-           {
+           
     id_cliente: 'A7810895',
     nombre: 'VASQUEZ ANTONIO SIERRA',
     direccion: '1828 FLORES ST SEASIDE CA 93955',
@@ -383,7 +383,7 @@ db.serialize(() => {
     pin: '123',
     documento: 'Pending',
     tipo_restriccion: 'USP' 
-       },      
+       }     
     ];
 
     const stmt = db.prepare(`
