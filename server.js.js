@@ -61,7 +61,7 @@ db.serialize(() => {
             telefono: '',
             pin: '123',
             documento: 'Pending',
-            tipo_restriccion: 'MED'
+            tipo_restriccion: 'USP'
         },
         {
             id_cliente: 'A7810895',
