@@ -332,7 +332,7 @@ id_cliente: '050685014', // Asignar nuevo ID si es necesario
 nombre: 'FLORES MARTINEZ MANUEL DE JESUS',
 direccion: '4214 MAGNOLIA PL GAINESVILLE GA 30504-5893',
 estado: 'GEORGIA',
-tipo_licencia: 'REGULAR',
+tipo_licencia: 'CDL',
 correo: 'manuelfloresmar1@yahoo.com',
 foto_url: 'fotos/manueld.png',
 foto_doc_url:'fotos/manuel.doc.png',
