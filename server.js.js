@@ -36,7 +36,8 @@ db.serialize(() => {
             color_cabello TEXT,
             telefono TEXT,
             pin TEXT,
-            documento TEXT DEFAULT 'Pending'
+            documento TEXT DEFAULT 'Pending',
+            tipo_restriccion TEXT DEFAULT 'MED'
         )
     `);
 
@@ -59,7 +60,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '859 509 6002',
             pin: '123',
-            documento: 'Approval'
+            documento: 'Approval',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'C473652870230',
@@ -78,7 +80,8 @@ db.serialize(() => {
             color_cabello: 'BROWN',
             telefono: '786 906 4756',
             pin: '12',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: '37850640',
@@ -97,7 +100,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '469 866 73 63',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'MC254168',
@@ -116,7 +120,8 @@ db.serialize(() => {
             color_cabello: 'NONE',
             telefono: '859 509 6002',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'Y0706961',
@@ -135,7 +140,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '422 351 1286',
             pin: '',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'Y0706960', 
@@ -154,7 +160,8 @@ db.serialize(() => {
             color_cabello: 'BROWN',
             telefono: '2132145816',
             pin: '',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'Y0706962', 
@@ -162,7 +169,7 @@ db.serialize(() => {
             direccion: '1109 Allison st Newton Kansas 67114',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
-            correo: 'pablo.morales@example.com', // Modificado sugerido para evitar dirección física en email
+            correo: 'pablo.morales@example.com',
             foto_url: '/fotos/PABLO_MORALES1.png',
             foto_doc_url: '/fotos/PABLO_MORALES.doc.png',
             fecha_nacimiento: '1987-11-05',
@@ -173,7 +180,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '909 8108975',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'K04578522', 
@@ -192,7 +200,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '909 8108975',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'R316-2517', 
@@ -211,7 +220,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: 'NONE',
             pin: '',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'Y0706963', 
@@ -230,7 +240,8 @@ db.serialize(() => {
             color_cabello: 'BROWN',
             telefono: '7142539117',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'A19799679', 
@@ -239,7 +250,7 @@ db.serialize(() => {
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA.png', // Corregido: añadido punto antes de la extensión png
+            foto_url: '/fotos/MARADIAGA.png',
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
             fecha_nacimiento: '1980-05-12',
             sexo: 'M',
@@ -249,7 +260,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '5407349476',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         }, 
         {
             id_cliente: '145428', 
@@ -268,7 +280,8 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '7042986216',
             pin: '',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'C753951468', 
@@ -287,7 +300,8 @@ db.serialize(() => {
             color_cabello: 'CHESTNUT',
             telefono: '',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'Y0706964', 
@@ -306,7 +320,8 @@ db.serialize(() => {
             color_cabello: 'BROWN',
             telefono: '7142539117',
             pin: '123',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
         {
             id_cliente: 'Y0706965',
@@ -325,57 +340,56 @@ db.serialize(() => {
             color_cabello: 'BLACK',
             telefono: '3478068079',
             pin: '',
-            documento: 'Pending'
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
- {
-id_cliente: '050685014', // Asignar nuevo ID si es necesario
-nombre: 'FLORES MARTINEZ MANUEL DE JESUS',
-direccion: '4214 MAGNOLIA PL GAINESVILLE GA 30504-5893',
-estado: 'GEORGIA',
-tipo_licencia: 'CDL',
-correo: 'manuelfloresmar1@yahoo.com',
-foto_url: 'fotos/manueld.png',
-foto_doc_url:'fotos/manuel.doc.png',
-fecha_nacimiento: '1968-12-31',
-sexo: 'M',
-estatura: `5'06"`,
-peso: '180 lb',
-color_ojos: 'BROWN',
-color_cabello: 'BLACK',
-telefono: '', // Agregar si dispones de él
-pin: '123',
-documento: 'Pending'
-  },
-        
-{
- id_cliente: 'A7810895', // Asignar nuevo ID si es necesario
-nombre: 'VASQUEZ ANTONIO SIERRA',
-direccion: '1828 FLORES ST SEASIDE CA 93955',
-estado: 'CALIFORNIA',
-tipo_licencia: 'COMERCIAL',
-correo: 'antoniosierra63@yahoo.com',
-foto_url: 'fotos/antonio.png', // URL de foto sugerida
-foto_doc_url: 'fotos/VAZQUEZ.doc.png', // URL de documento sugerida
-fecha_nacimiento: '1972-07-11', // Formato estándar AAAA-MM-DD
-sexo: 'M',
-estatura: `5'04"`,
-peso: '140 lb',
-color_ojos: 'BROWN',
-color_cabello: 'BLACK',
-telefono: '8312385293', // Agregar si dispones de él
-pin: '123',
-documento: 'Pending'
+        {
+            id_cliente: '050685014',
+            nombre: 'FLORES MARTINEZ MANUEL DE JESUS',
+            direccion: '4214 MAGNOLIA PL GAINESVILLE GA 30504-5893',
+            estado: 'GEORGIA',
+            tipo_licencia: 'CDL',
+            correo: 'manuelfloresmar1@yahoo.com',
+            foto_url: 'fotos/manueld.png',
+            foto_doc_url:'fotos/manuel.doc.png',
+            fecha_nacimiento: '1968-12-31',
+            sexo: 'M',
+            estatura: `5'06"`,
+            peso: '180 lb',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '',
+            pin: '123',
+            documento: 'Pending',
+            tipo_restriccion: 'MED'
         },
-
-
-        
+        {
+            id_cliente: 'A7810895',
+            nombre: 'VASQUEZ ANTONIO SIERRA',
+            direccion: '1828 FLORES ST SEASIDE CA 93955',
+            estado: 'CALIFORNIA',
+            tipo_licencia: 'COMERCIAL',
+            correo: 'antoniosierra63@yahoo.com',
+            foto_url: 'fotos/antonio.png',
+            foto_doc_url: 'fotos/VAZQUEZ.doc.png',
+            fecha_nacimiento: '1972-07-11',
+            sexo: 'M',
+            estatura: `5'04"`,
+            peso: '140 lb',
+            color_ojos: 'BROWN',
+            color_cabello: 'BLACK',
+            telefono: '8312385293',
+            pin: '123',
+            documento: 'Pending',
+            tipo_restriccion: 'USP' // <--- Activado con los 3 caracteres para USPS
+        }
     ];
 
     const stmt = db.prepare(`
         INSERT OR REPLACE INTO clientes (
             id_cliente, nombre, direccion, estado, tipo_licencia, correo, foto_url, foto_doc_url,
-            fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin, documento
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            fecha_nacimiento, sexo, estatura, peso, color_ojos, color_cabello, telefono, pin, documento, tipo_restriccion
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     for (const c of clientes) {
@@ -396,7 +410,8 @@ documento: 'Pending'
             c.color_cabello, 
             c.telefono, 
             c.pin,
-            c.documento
+            c.documento,
+            c.tipo_restriccion || 'MED'
         );
     }
     stmt.finalize();
@@ -444,7 +459,7 @@ app.put('/api/clientes/:id_cliente/documento', (req, res) => {
     const { id_cliente } = req.params;
     
     if (!documento || typeof documento !== 'string') {
-        return res.status(400).json({ success: false, error: 'El campo "documento" es requerido y debe ser una cadena de texto.' });
+        return res.status(400).json({ success: false, error: 'El campo "documento" es requerido.' });
     }
     
     db.run("UPDATE clientes SET documento = ? WHERE UPPER(id_cliente) = UPPER(?)", [documento.trim(), id_cliente.trim()], function(err) {
@@ -452,22 +467,33 @@ app.put('/api/clientes/:id_cliente/documento', (req, res) => {
             console.error('Error al actualizar documento del cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
         }
-        if (this.changes === 0) {
-            return res.status(404).json({ success: false, error: `No se encontró el cliente con id: ${id_cliente}` });
+        res.json({ success: true, changes: this.changes });
+    });
+});
+
+app.put('/api/clientes/:id_cliente/restriccion', (req, res) => {
+    const { tipo_restriccion } = req.body;
+    const { id_cliente } = req.params;
+    
+    if (!tipo_restriccion || typeof tipo_restriccion !== 'string') {
+        return res.status(400).json({ success: false, error: 'El campo "tipo_restriccion" es requerido.' });
+    }
+    
+    db.run("UPDATE clientes SET tipo_restriccion = ? WHERE UPPER(id_cliente) = UPPER(?)", [tipo_restriccion.trim().toUpperCase(), id_cliente.trim()], function(err) {
+        if (err) {
+            console.error('Error al actualizar restricción:', err.message);
+            return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
         }
         res.json({ success: true, changes: this.changes });
     });
 });
 
-// Manejo de errores global
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('¡Algo salió mal en el servidor!');
 });
 
-// Inicialización del servidor compatible con Nubes
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
     console.log(`========================================`);
     console.log(`  Servidor backend activo en puerto: ${PORT}`);
