@@ -371,7 +371,7 @@ db.serialize(() => {
             tipo_licencia: 'COMERCIAL',
             correo: 'antoniosierra63@yahoo.com',
             foto_url: '/fotos/antonio.png',        // <--- Mantiene singular
-            foto_doc_url: '/fotos/VAZQUEZ.doc.png', // <--- ¡CORREGIDO AL NOMBRE REAL DE GITHUB!
+            foto_doc_url: '/fotos/MARADIAGA_doc.png', // <--- ¡CORREGIDO AL NOMBRE REAL DE GITHUB!
             fecha_nacimiento: '1972-07-11',
             sexo: 'M',
             estatura: `5'04"`,
