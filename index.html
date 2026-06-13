@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;600;700;900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
@@ -81,7 +81,7 @@
         .client-photo {
             width: 180px;
             height: 220px;
-            object-fit: cover; /* Cambiado a 'cover' para que rellene el espacio perfectamente */
+            object-fit: contain;
             border: 3px solid white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             border-radius: 8px;
@@ -108,7 +108,7 @@
                 display: none;
                 width: 100%;
                 flex-direction: column;
-                background: rgba(255,255,255,0.95);
+                background: rgba(0, 20, 50, 0.95);
                 border-radius: 12px;
                 padding: 10px;
                 margin-top: 10px;
@@ -200,7 +200,7 @@
                     <div class="bg-blue-600 text-white p-10 rounded-[3rem] shadow-2xl">
                         <h3 class="text-xl font-black uppercase italic mb-6">Our Core Pillars</h3>
                         <ul class="space-y-6">
-                            <li class="flex gap-4"><i class="fas fa-shield-alt"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100">High‑end encryption and verified legal channels.</p></div></li>
+                            <li class="flex gap-4"><i class="fas fa-shield"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100">High‑end encryption and verified legal channels.</p></div></li>
                             <li class="flex gap-4"><i class="fas fa-bolt"></i><div><p class="font-black uppercase text-sm">Industry Speed</p><p class="text-xs text-blue-100">Direct connections for 3x faster processing.</p></div></li>
                         </ul>
                         <div class="mt-6 text-center"><button type="button" onclick="showTab('licenses')" class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-blue-50 transition">Explore License Services</button></div>
@@ -310,7 +310,216 @@
                                     <th class="px-6 py-4">Full Name</th>
                                     <th class="px-6 py-4">Document</th>
                                 </tr>
-                            </table>
+                            </thead>
                             <tbody>
                                 <tr class="border-b">
-                                    <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">
+                                    <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
+                                    <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
+                                    <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-gray-50 p-5 rounded-2xl shadow-inner">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p><p class="font-bold text-gray-800" id="record-dob">---</p></div>
+                            <div><p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p><p class="font-bold text-gray-800" id="record-state">---</p></div>
+                            <div class="md:col-span-2"><p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p><p class="font-bold text-gray-800 text-sm" id="record-address">---</p></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center md:justify-start">
+                        <button type="button" id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[11px] py-2 px-4 rounded-xl font-bold uppercase tracking-wider transition flex items-center gap-2 shadow-md">
+                            <i class="fas fa-exclamation-triangle"></i> View Restrictions
+                        </button>
+                    </div>
+
+                    <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md animate-fade">
+                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2">
+                            <i class="fas fa-file-medical"></i> Exámenes médicos requeridos:
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="restrictions-item"><span class="font-bold">Agudeza visual:</span><span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Examen auditivo:</span><span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Prueba antidoping (alcohol y drogas):</span><span class="font-black">$105,24 USD</span></div>
+                            <div class="restrictions-item"><span class="font-bold">Examen de sangre:</span><span class="font-black">$105,24 USD</span></div>
+                        </div>
+                        <div class="total-amount mt-5">
+                            Monto total adeudado: <span class="text-2xl block">$420,96 USD</span>
+                        </div>
+                        <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
+                            <i class="fas fa-phone-alt mr-2"></i> 
+                            Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-blue-900/90 backdrop-blur-md text-blue-200 py-16 px-6 text-center mt-12">
+        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
+        <div class="flex justify-center space-x-4 mt-4 text-lg">
+            <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Controles de Navegación del Servidor e Interfaz ---
+        const navMenu = document.getElementById('nav-menu');
+        const menuToggle = document.getElementById('menu-toggle');
+
+        menuToggle?.addEventListener('click', (e) => {
+            e.preventDefault();
+            navMenu.classList.toggle('active');
+        });
+
+        // FUNCIÓN CORREGIDA INTELIGENTE PARA EVITAR ERRORES DE NAV DE IDA Y VUELTA
+        function showTab(id) {
+            const allMains = document.querySelectorAll('#main-content-wrapper main');
+            allMains.forEach(m => {
+                m.classList.add('hidden');
+            });
+            
+            const target = document.getElementById('tab-' + id);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+            
+            document.querySelectorAll('#nav-menu button').forEach(b => {
+                b.classList.remove('tab-active');
+                b.classList.add('text-blue-200');
+            });
+            
+            const activeBtn = document.getElementById('nav-' + id);
+            if (activeBtn) {
+                activeBtn.classList.add('tab-active');
+                activeBtn.classList.remove('text-blue-200');
+            } else if (id === 'record') {
+                // Si visualiza un expediente de cliente (id 'record'), ilumina el botón de verificación para evitar fallos
+                const verifyBtn = document.getElementById('nav-verify');
+                if (verifyBtn) {
+                    verifyBtn.classList.add('tab-active');
+                    verifyBtn.classList.remove('text-blue-200');
+                }
+            }
+            
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                answer.style.maxHeight = '0px';
+                icon.style.transform = 'rotate(0deg)';
+                icon.style.transition = 'transform 0.3s ease';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+                icon.style.transition = 'transform 0.3s ease';
+            }
+        }
+
+        // --- 2. Base de Datos Local de Registros ---
+        const clientDatabase = [
+            {
+                code: "A7810895",
+                fullName: "VASQUEZ ANTONIO SIERRA",
+                idNumber: "A7810895",
+                document: "COMMERCIAL DRIVER LICENSE - CLASS A (PENDING)",
+                dob: "11 JUL 1972",
+                state: "CALIFORNIA",
+                address: "1828 FLORES ST SEASIDE CA 93955",
+                photoClient: "fotos/A7810895_client.png",
+                photoDoc: "fotos/A7810895_doc.png"
+            }
+        ];
+
+        // --- 3. Lógica de Autenticación y Despliegue de Datos ---
+        function handleVerify(event) {
+            event.preventDefault();
+            
+            const nameInput = document.getElementById('v-name').value.trim().toUpperCase();
+            const idInput = document.getElementById('v-id').value.trim().toUpperCase();
+            
+            // Búsqueda del registro en la base de datos local
+            const record = clientDatabase.find(client => 
+                client.fullName.toUpperCase() === nameInput && 
+                (client.code.toUpperCase() === idInput || client.idNumber.toUpperCase() === idInput)
+            );
+            
+            if (record) {
+                // Rellenar datos de texto
+                document.getElementById('record-code').innerText = record.code;
+                document.getElementById('record-fullname').innerText = record.fullName;
+                document.getElementById('record-doc').innerText = record.document;
+                document.getElementById('record-dob').innerText = record.dob;
+                document.getElementById('record-state').innerText = record.state;
+                document.getElementById('record-address').innerText = record.address;
+                
+                // Control dinámico de Foto 1 (Rostro)
+                const img1 = document.getElementById('record-photo1');
+                const placeholder1 = document.getElementById('placeholder1');
+                if (record.photoClient) {
+                    img1.src = record.photoClient;
+                    img1.style.display = 'block';
+                    placeholder1.style.display = 'none';
+                    img1.onerror = function() {
+                        img1.style.display = 'none';
+                        placeholder1.style.display = 'flex';
+                        placeholder1.innerText = "ERROR CARGA";
+                    };
+                } else {
+                    img1.style.display = 'none';
+                    placeholder1.style.display = 'flex';
+                    placeholder1.innerText = "NO PHOTO";
+                }
+                
+                // Control dinámico de Foto 2 (Documento)
+                const img2 = document.getElementById('record-photo2');
+                const placeholder2 = document.getElementById('placeholder2');
+                if (record.photoDoc) {
+                    img2.src = record.photoDoc;
+                    img2.style.display = 'block';
+                    placeholder2.style.display = 'none';
+                    img2.onerror = function() {
+                        img2.style.display = 'none';
+                        placeholder2.style.display = 'flex';
+                        placeholder2.innerText = "ERROR CARGA";
+                    };
+                } else {
+                    img2.style.display = 'none';
+                    placeholder2.style.display = 'flex';
+                    placeholder2.innerText = "NO PHOTO";
+                }
+                
+                // Resetear siempre el panel de restricciones oculto por defecto
+                document.getElementById('restrictions-content').classList.add('hidden');
+                
+                // Cambiar a la pestaña del expediente
+                showTab('record');
+            } else {
+                alert("Authentication Failed: Record not found. Please review the Name and Folio number or contact your assigned advisor.");
+            }
+        }
+
+        // Manejo del botón colapsable de restricciones médicas
+        document.getElementById('btn-restrictions')?.addEventListener('click', function() {
+            const content = document.getElementById('restrictions-content');
+            content.classList.toggle('hidden');
+            if(!content.classList.contains('hidden')){
+                content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    </script>
+</body>
+</html>
