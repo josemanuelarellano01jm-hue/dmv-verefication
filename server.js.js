@@ -50,8 +50,8 @@ db.serialize(() => {
             estado: 'GEORGIA',
             tipo_licencia: 'CDL',
             correo: 'manuelfloresmar1@yahoo.com',
-            foto_url: '/fotos/manueld.png',
-            foto_doc_url: '/fotos/manuel.doc.png',
+            foto_url: 'manueld.png',        // <--- ¡CORREGIDO! Quitamos el "/fotos/" repetido
+            foto_doc_url: 'manuel.doc.png', // <--- ¡CORREGIDO! Quitamos el "/fotos/" repetido
             fecha_nacimiento: '1968-12-31',
             sexo: 'M',
             estatura: `5'06"`,
@@ -70,8 +70,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'COMERCIAL',
             correo: 'antoniosierra63@yahoo.com',
-            foto_url: '',        // <--- Mantiene singular
-            foto_doc_url: '', // <--- ¡CORREGIDO AL NOMBRE REAL DE GITHUB!
+            foto_url: 'antonio.png',          // <--- ¡CORREGIDO! Agregada su foto asignada
+            foto_doc_url: 'VAZQUEZ.doc.png',   // <--- ¡CORREGIDO! Vinculado al nombre real de tu archivo
             fecha_nacimiento: '1972-07-11',
             sexo: 'M',
             estatura: `5'04"`,
@@ -122,6 +122,7 @@ db.serialize(() => {
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
     
+    // Convertimos a minúsculas y limpiamos espacios raros
     const nombreNormalizado = nombre ? nombre.trim().toLowerCase() : null;
     const idClienteNormalizado = id_cliente ? id_cliente.trim().toUpperCase() : null;
 
@@ -129,9 +130,10 @@ app.post('/api/verificar', (req, res) => {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
+    // ¡SÚPER CORRECCIÓN AQUÍ! Ahora el sistema te dejará entrar escribas VAZQUEZ (con Z) o VASQUEZ (con S)
     const query = `
         SELECT * FROM clientes 
-        WHERE (? IS NOT NULL AND LOWER(nombre) = ?) 
+        WHERE (? IS NOT NULL AND (REPLACE(LOWER(nombre), 'z', 's') = REPLACE(?, 'z', 's'))) 
            OR (? IS NOT NULL AND UPPER(id_cliente) = ?)
     `;
     
@@ -145,12 +147,11 @@ app.post('/api/verificar', (req, res) => {
             return res.json({ success: false, datos: null });
         }
 
-        // --- TRUCO DE COMPATIBILIDAD CON TU FRONTEND ---
-        // Aseguramos que devuelva tanto singular como plural para que el frontend no falle
+        // --- COMPATIBILIDAD CON TU FRONTEND ---
         const datosCorregidos = {
             ...fila,
-            fotos_url: fila.foto_url,      // Crea el plural por si el HTML lo usa
-            fotos_doc_url: fila.foto_doc_url // Crea el plural por si el HTML lo usa
+            fotos_url: fila.foto_url,      
+            fotos_doc_url: fila.foto_doc_url 
         };
 
         res.json({ success: true, datos: datosCorregidos });
