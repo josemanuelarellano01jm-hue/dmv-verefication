@@ -523,5 +523,78 @@
             }
         });
     </script>
+
+<script>
+        // Función principal para cambiar pestañas
+        function showTab(tabId) {
+            document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active', 'text-white'));
+            const activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) activeNav.classList.add('tab-active', 'text-white');
+        }
+
+        // Lógica del formulario de verificación
+        document.getElementById('verify-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('v-name').value;
+            const id = document.getElementById('v-id').value;
+
+            try {
+                const response = await fetch('/api/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, id })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Llenar datos
+                    document.getElementById('record-code').innerText = data.code;
+                    document.getElementById('record-fullname').innerText = data.fullname;
+                    document.getElementById('record-doc').innerText = data.document;
+                    document.getElementById('record-dob').innerText = data.dob;
+                    document.getElementById('record-state').innerText = data.state;
+                    document.getElementById('record-address').innerText = data.address;
+
+                    // Manejo de botones y secciones
+                    const btnRestricciones = document.getElementById('btn-restrictions');
+                    const btnUsps = document.getElementById('btn-usps-restrictions');
+                    
+                    // Ocultar todo inicialmente
+                    btnRestricciones.classList.add('hidden');
+                    btnUsps.classList.add('hidden');
+                    document.getElementById('restrictions-content').classList.add('hidden');
+                    document.getElementById('usps-restrictions-content').classList.add('hidden');
+
+                    // Mostrar botones según el tipo de restricción del servidor
+                    if (data.tipo_restriccion === 'MED') {
+                        btnRestricciones.classList.remove('hidden');
+                        btnRestricciones.onclick = () => document.getElementById('restrictions-content').classList.toggle('hidden');
+                    } else if (data.tipo_restriccion === 'USP') {
+                        btnUsps.classList.remove('hidden');
+                        btnUsps.onclick = () => document.getElementById('usps-restrictions-content').classList.toggle('hidden');
+                    }
+
+                    showTab('record');
+                } else {
+                    alert('Record not found. Please verify your legal name and folio number.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Connection error. Please try again later.');
+            }
+        });
+
+        // Menú móvil y FAQ
+        document.getElementById('menu-toggle').onclick = () => document.getElementById('nav-menu').classList.toggle('active');
+        function toggleFAQ(el) {
+            const answer = el.nextElementSibling;
+            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+        }
+    </script>
+
+    
 </body>
 </html>
