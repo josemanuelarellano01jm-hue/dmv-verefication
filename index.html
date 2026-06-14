@@ -8,570 +8,76 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;600;700;900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            min-height: 100vh;
-            background: 
-                linear-gradient(rgba(0, 10, 30, 0.65), rgba(0, 10, 30, 0.65)),
-                url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') 
-                center/cover no-repeat fixed;
-        }
-
-        .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; font-weight: 900 !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #000a1e; }
+        .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; }
         .hidden { display: none !important; }
-        .animate-fade { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .glass-dark {
-            background: rgba(0, 20, 50, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .ok-table th {
-            background: #f0f4f9;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #1f2937;
-        }
-        .ok-table td {
-            font-size: 14px;
-            font-weight: 600;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .restrictions-card {
-            background: #fff3e0;
-            border-left: 6px solid #e67e22;
-            transition: all 0.3s ease;
-        }
-        .restrictions-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #f0c48b;
-        }
-        .total-amount {
-            background: #e67e22;
-            color: white;
-            padding: 12px;
-            border-radius: 16px;
-            font-weight: 900;
-            text-align: center;
-        }
-
-        .faq-question {
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.2s;
-        }
-        .faq-question:hover { color: #2563eb; }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .client-photo {
-            width: 180px;
-            height: 220px;
-            object-fit: contain;
-            border: 3px solid white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            background: #f8fafc;
-            display: none;
-        }
-        .photo-placeholder {
-            width: 180px;
-            height: 220px;
-            border: 3px dashed #cbd5e1;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            background: #f1f5f9;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                background: rgba(0, 20, 50, 0.95);
-                border-radius: 12px;
-                padding: 10px;
-                margin-top: 10px;
-                backdrop-filter: blur(12px);
-            }
-            .nav-links.active { display: flex; }
-            .ok-table thead { display: none; }
-            .ok-table tr { display: block; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; }
-            .ok-table td { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; font-size: 13px; }
-            .ok-table td::before { content: attr(data-label); font-weight: 800; text-transform: uppercase; color: #1f2937; font-size: 10px; width: 50%; text-align: left; }
-            .client-photo, .photo-placeholder {
-                width: 140px;
-                height: 170px;
-            }
-        }
+        .glass-panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
 
-    <header class="glass-dark sticky top-0 z-50 shadow-md text-white">
-        <div class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
-            <div class="flex items-end gap-3 cursor-pointer" onclick="showTab('home')">
-                <span class="text-4xl font-black italic text-white leading-none" style="text-shadow: 0 4px 10px rgba(0,0,0,0.5);">DMV</span>
-                <div class="flex flex-col leading-tight">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-200">Car Law</span>
-                    <span class="text-[8px] font-bold uppercase tracking-[0.5em] text-blue-300">Group</span>
-                </div>
-            </div>
-            <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
-            <nav id="nav-menu" class="nav-links md:flex md:flex-1 md:w-auto md:space-x-4 mt-2 md:mt-0 flex-wrap justify-end">
-                <button type="button" onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active text-white">Home</button>
-                <button type="button" onclick="showTab('trust')" id="nav-trust" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Why Trust Us</button>
-                <button type="button" onclick="showTab('advisors')" id="nav-advisors" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Advisors</button>
-                <button type="button" onclick="showTab('licenses')" id="nav-licenses" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Licenses</button>
-                <button type="button" onclick="showTab('verify')" id="nav-verify" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Verification</button>
-            </nav>
+    <main id="tab-verify" class="container mx-auto px-6 py-16 max-w-xl">
+        <div class="glass-panel p-10 rounded-[3rem] shadow-2xl text-center">
+            <h2 class="text-2xl font-black uppercase italic mb-8 text-gray-800">Secure <span class="text-blue-600">Authentication</span></h2>
+            <form id="verify-form" class="space-y-4">
+                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-100 border-2 rounded-xl font-bold uppercase outline-none" required>
+                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-100 border-2 rounded-xl font-bold uppercase outline-none" required>
+                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800">Authenticate Record</button>
+            </form>
         </div>
-    </header>
+    </main>
 
-    <div id="main-content-wrapper">
-
-        <main id="tab-home" class="animate-fade">
-            <section class="text-white py-32 px-6 text-center relative" style="background: transparent;">
-                <h2 class="text-4xl md:text-7xl font-black mb-6 italic uppercase leading-tight drop-shadow-lg">Expert Solutions <br> <span class="text-blue-300 text-3xl md:text-5xl italic">For Your Peace of Mind</span></h2>
-                <p class="max-w-3xl mx-auto text-blue-100 mb-10 text-lg font-medium drop-shadow">Over 20 years leading the industry in document management and secure consulting. We make the impossible, simple.</p>
-                <button type="button" onclick="showTab('verify')" class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest transition shadow-2xl transform hover:scale-105">Verify My Record Now</button>
-            </section>
-            <section class="py-10 px-6 glass-panel max-w-5xl mx-auto -mt-8 relative z-10 rounded-2xl shadow-xl mb-12">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div><i class="fas fa-clock text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">20+</p><p class="text-xs uppercase font-bold text-blue-700">Years Experience</p></div>
-                    <div><i class="fas fa-users text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">150K+</p><p class="text-xs uppercase font-bold text-blue-700">Happy Clients</p></div>
-                    <div><i class="fas fa-id-card text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">50K+</p><p class="text-xs uppercase font-bold text-blue-700">Licenses Processed</p></div>
-                    <div><i class="fas fa-shield-alt text-blue-600 text-3xl mb-2"></i><p class="text-3xl font-black text-blue-900">100%</p><p class="text-xs uppercase font-bold text-blue-700">Legal Compliance</p></div>
-                </div>
-            </section>
-            <section class="py-24 px-6 max-w-6xl mx-auto">
-                <h2 class="text-3xl font-black uppercase italic mb-16 text-center text-white drop-shadow">Success <span class="text-blue-300">Stories</span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg"><div class="flex items-center mb-4 text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="italic text-slate-700 text-sm">"I was struggling… DMV CAR LAW GROUP handled everything with such professionalism."</p><span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Carlos Martinez</span></div>
-                    <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg"><div class="flex items-center mb-4 text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="italic text-slate-700 text-sm">"Transparency unmatched… verifying my document status directly on their portal gave me peace of mind."</p><span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Elena Rodriguez</span></div>
-                    <div class="p-8 glass-panel rounded-3xl border-l-8 border-blue-600 shadow-lg"><div class="flex items-center mb-4 text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div><p class="italic text-slate-700 text-sm">"100% recommended for the immigrant community."</p><span class="block mt-6 font-black uppercase text-blue-600 text-xs">— Monica Peralta</span></div>
-                </div>
-            </section>
-            <section class="py-16 px-6 max-w-4xl mx-auto">
-                <h2 class="text-3xl font-black uppercase italic mb-12 text-center text-white drop-shadow">Frequently <span class="text-blue-300">Asked Questions</span></h2>
-                <div class="space-y-4">
-                    <div class="glass-panel p-6 rounded-2xl shadow"><div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">What documents do I need to start? <i class="fas fa-chevron-down text-blue-600"></i></div><div class="faq-answer text-slate-700 mt-2 text-sm">Generally a valid ID, proof of address, and any DMV correspondence. Our advisors provide a custom checklist after verification.</div></div>
-                    <div class="glass-panel p-6 rounded-2xl shadow"><div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">How secure is my personal information? <i class="fas fa-chevron-down text-blue-600"></i></div><div class="faq-answer text-slate-700 mt-2 text-sm">Bank-level encryption, never shared with third parties.</div></div>
-                    <div class="glass-panel p-6 rounded-2xl shadow"><div class="faq-question font-black text-lg flex justify-between items-center text-gray-800" onclick="toggleFAQ(this)">Can I renew an expired license? <i class="fas fa-chevron-down text-blue-600"></i></div><div class="faq-answer text-slate-700 mt-2 text-sm">Yes, depending on state and expiration time. We assess eligibility, most under 2 years are renewable.</div></div>
-                </div>
-            </section>
-        </main>
-
-        <main id="tab-trust" class="hidden animate-fade py-16">
-            <div class="container mx-auto px-6 max-w-6xl">
-                <div class="text-center mb-16"><span class="text-blue-300 font-black uppercase tracking-[0.4em] text-xs">Proven Excellence</span><h2 class="text-5xl font-black uppercase italic mt-4 text-white">Why Choose <span class="text-blue-300">Us?</span></h2></div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8 glass-dark p-10 rounded-[3rem] text-white border border-white/10">
-                        <div><h3 class="text-2xl font-black uppercase italic text-blue-300 mb-4">20 Years Experience</h3><p class="text-blue-100">Since our founding, we have dedicated two decades to mastering document consulting.</p></div>
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="bg-blue-800/40 p-6 rounded-2xl border-b-4 border-blue-400"><p class="text-3xl font-black">150K+</p><p class="text-[10px] font-bold uppercase text-blue-300">Satisfied Clients</p></div>
-                            <div class="bg-blue-800/40 p-6 rounded-2xl border-b-4 border-blue-400"><p class="text-3xl font-black">100%</p><p class="text-[10px] font-bold uppercase text-blue-300">Legal Processes</p></div>
-                        </div>
-                        <div class="mt-6 flex items-center space-x-3 bg-blue-900/50 p-4 rounded-xl">
-                            <i class="fas fa-certificate text-yellow-400 text-3xl"></i>
-                            <div><p class="font-black text-sm">Nationally Certified</p><p class="text-xs text-blue-200">Member of AAMVA</p></div>
-                        </div>
-                    </div>
-                    <div class="bg-blue-600 text-white p-10 rounded-[3rem] shadow-2xl">
-                        <h3 class="text-xl font-black uppercase italic mb-6">Our Core Pillars</h3>
-                        <ul class="space-y-6">
-                            <li class="flex gap-4"><i class="fas fa-shield-alt"></i><div><p class="font-black uppercase text-sm">Absolute Security</p><p class="text-xs text-blue-100">High‑end encryption and verified legal channels.</p></div></li>
-                            <li class="flex gap-4"><i class="fas fa-bolt"></i><div><p class="font-black uppercase text-sm">Industry Speed</p><p class="text-xs text-blue-100">Direct connections for 3x faster processing.</p></div></li>
-                        </ul>
-                        <div class="mt-6 text-center"><button type="button" onclick="showTab('licenses')" class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-blue-50 transition">Explore License Services</button></div>
-                    </div>
-                </div>
+    <main id="tab-record" class="hidden container mx-auto px-6 py-16 max-w-4xl">
+        <div class="bg-white p-10 rounded-[3rem] shadow-2xl">
+            <h1 class="text-2xl font-black mb-6">CLIENT VERIFICATION RECORD</h1>
+            <p><strong>Code:</strong> <span id="record-code"></span></p>
+            <p><strong>Full Name:</strong> <span id="record-fullname"></span></p>
+            <p><strong>Document Status:</strong> <span id="record-doc"></span></p>
+            <div class="mt-6 flex gap-4">
+                <button id="btn-restrictions" class="hidden bg-orange-600 text-white px-4 py-2 rounded">View Restrictions</button>
+                <button id="btn-usps-restrictions" class="hidden bg-orange-600 text-white px-4 py-2 rounded">View USPS Restrictions</button>
             </div>
-        </main>
-
-        <main id="tab-advisors" class="hidden animate-fade py-16">
-            <div class="container mx-auto px-6 max-w-6xl">
-                <h2 class="text-3xl font-black uppercase italic mb-6 text-center text-white">Meet Our <span class="text-blue-300">Senior Advisors</span></h2>
-                <p class="text-blue-100 max-w-2xl mx-auto mb-12 text-center text-sm">Each advisor brings over a decade of DMV procedure expertise and government liaison experience.</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
-                        <img src="https://ui-avatars.com/api/?name=Rogelio+Olivo&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100" alt="Rogelio Olivo">
-                        <h4 class="font-black uppercase text-xs">Rogelio Olivo</h4><p class="text-xs text-gray-500">Senior Case Manager</p>
-                        <button type="button" onclick="alert('Request sent to Rogelio Olivo.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
-                    </div>
-                    <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
-                        <img src="https://ui-avatars.com/api/?name=Fermin+Garcia&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100" alt="Fermin Garcia">
-                        <h4 class="font-black uppercase text-xs">Fermin Garcia</h4><p class="text-xs text-gray-500">License Reinstatement</p>
-                        <button type="button" onclick="alert('Request sent to Fermin Garcia.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
-                    </div>
-                    <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
-                        <img src="https://ui-avatars.com/api/?name=Marcela+Vanegas&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100" alt="Marcela Vanegas">
-                        <h4 class="font-black uppercase text-xs">Marcela Vanegas</h4><p class="text-xs text-gray-500">Document Verification Lead</p>
-                        <button type="button" onclick="alert('Request sent to Marcela Vanegas.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
-                    </div>
-                    <div class="glass-panel backdrop-blur-md p-6 rounded-3xl shadow-xl border-b-8 border-blue-600 text-center">
-                        <img src="https://ui-avatars.com/api/?name=Edwin+Peralta&background=0D8ABC&color=fff" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-100" alt="Edwin Peralta">
-                        <h4 class="font-black uppercase text-xs">Edwin Peralta</h4><p class="text-xs text-gray-500">Senior Legal Consultant</p>
-                        <button type="button" onclick="alert('Request sent to Edwin Peralta.')" class="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold hover:bg-blue-700">Contact</button>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <main id="tab-licenses" class="hidden animate-fade py-16">
-            <div class="container mx-auto px-6 max-w-6xl text-center">
-                <h2 class="text-3xl md:text-5xl font-black uppercase italic mb-6 text-white drop-shadow">Our <span class="text-blue-300">License Services</span></h2>
-                <p class="max-w-2xl mx-auto text-blue-100 mb-12 text-lg">Get your driver's license, renewals, and document processing fully online with our expert team.</p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-blue-600 flex flex-col text-left">
-                        <i class="fas fa-car text-5xl text-blue-600 mb-4 mx-auto"></i><h3 class="text-xl font-black uppercase mb-2 text-center">Standard Processing</h3>
-                        <p class="text-sm text-gray-700 mb-4 flex-1">New or renewed license, 5‑7 business days.</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-6"><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Document verification</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> DMV form preparation</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Online submission</li></ul>
-                    </div>
-                    <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-amber-500 flex flex-col text-left">
-                        <i class="fas fa-bolt text-5xl text-amber-500 mb-4 mx-auto"></i><h3 class="text-xl font-black uppercase mb-2 text-center">Express Processing</h3>
-                        <p class="text-sm text-gray-700 mb-4 flex-1">Same‑day expedited submission, digital copy delivery.</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-6"><li><i class="fas fa-check-circle text-green-600 mr-1"></i> All Standard features</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Expedited 24h review</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Digital copy delivery</li></ul>
-                    </div>
-                    <div class="glass-panel p-8 rounded-3xl shadow-xl border-t-4 border-red-500 flex flex-col text-left">
-                        <i class="fas fa-user-check text-5xl text-red-500 mb-4 mx-auto"></i><h3 class="text-xl font-black uppercase mb-2 text-center">Full Consultation</h3>
-                        <p class="text-sm text-gray-700 mb-4 flex-1">Advisor‑led, complex cases, reinstatements.</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-6"><li><i class="fas fa-check-circle text-green-600 mr-1"></i> All Express features</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Personal advisor call</li><li><i class="fas fa-check-circle text-green-600 mr-1"></i> Reinstatement strategy</li></ul>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <main id="tab-verify" class="hidden container mx-auto px-6 py-16 animate-fade max-w-5xl">
-            <div class="glass-panel p-10 rounded-[3rem] shadow-2xl border-t-[12px] border-blue-600 text-center">
-                <h2 class="text-2xl font-black uppercase italic mb-8 text-gray-800">Secure <span class="text-blue-600">Authentication</span></h2>
-                <form id="verify-form" class="space-y-4 max-w-lg mx-auto">
-                    <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-xl font-bold uppercase text-xs focus:border-blue-600 outline-none" required>
-                    <p class="text-xs text-gray-500 text-left">Enter your full name as it appears on your DMV correspondence and the unique folio number provided by your advisor.</p>
-                    <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 transition shadow-lg">Authenticate Record</button>
-                </form>
-            </div>
-        </main>
-
-        <main id="tab-record" class="hidden bg-white min-h-screen rounded-3xl shadow-2xl overflow-hidden my-6 max-w-4xl mx-auto">
-            <div class="px-4 py-8">
-                <div class="mb-4 text-right">
-                    <button type="button" onclick="showTab('verify')" class="text-sm font-bold text-blue-700 hover:underline"><i class="fas fa-arrow-left"></i> Back to Verification</button>
-                </div>
-                <div class="bg-blue-900 text-white rounded-t-2xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
-                    <div>
-                        <h1 class="text-2xl font-black tracking-tight">CLIENT VERIFICATION RECORD</h1>
-                        <p class="text-sm font-semibold opacity-90">DMV Car Law Group · Secure Document Portal</p>
-                    </div>
-                    <div class="mt-4 md:mt-0">
-                        <span class="bg-white text-blue-900 px-4 py-1 rounded-full text-xs font-black">OFFICIAL RECORD</span>
-                    </div>
-                </div>
-                <div class="mt-8 space-y-6 px-2">
-                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                        <div class="flex flex-col items-center">
-                            <img id="record-photo1" src="" alt="Client Photo" class="client-photo">
-                            <div id="placeholder1" class="photo-placeholder">NO PHOTO</div>
-                            <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Client Photo</p>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <img id="record-photo2" src="" alt="Document Photo" class="client-photo">
-                            <div id="placeholder2" class="photo-placeholder">NO PHOTO</div>
-                            <p class="text-[10px] font-black uppercase text-gray-500 mt-1">Document Photo</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-                        <table class="w-full text-left ok-table">
-                            <thead>
-                                <tr>
-                                    <th class="px-6 py-4">Code</th>
-                                    <th class="px-6 py-4">Full Name</th>
-                                    <th class="px-6 py-4">Document</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                class="border-b">
-                                    <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
-                                    <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
-                                    <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="bg-gray-50 p-5 rounded-2xl shadow-inner">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><p class="text-[10px] font-black uppercase text-gray-500">Date of Birth</p><p class="font-bold text-gray-800" id="record-dob">---</p></div>
-                            <div><p class="text-[10px] font-black uppercase text-gray-500">Issuing State</p><p class="font-bold text-gray-800" id="record-state">---</p></div>
-                            <div class="md:col-span-2"><p class="text-[10px] font-black uppercase text-gray-500">Registered Address</p><p class="font-bold text-gray-800 text-sm" id="record-address">---</p></div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <button type="button" id="btn-restrictions" class="hidden bg-orange-600 hover:bg-orange-700 text-white text-[11px] py-2 px-4 rounded-xl font-bold uppercase tracking-wider transition flex items-center gap-2 shadow-md">
-                            <i class="fas fa-exclamation-triangle"></i> View Restrictions
-                        </button>
-                        <button type="button" id="btn-usps-restrictions" class="hidden bg-orange-600 hover:bg-orange-700 text-white text-[11px] py-2 px-4 rounded-xl font-bold uppercase tracking-wider transition flex items-center gap-2 shadow-md">
-                            <i class="fas fa-exclamation-triangle"></i> View USPS Restrictions
-                        </button>
-                    </div>
-
-                    <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md animate-fade">
-                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2">
-                            <i class="fas fa-file-medical"></i> Exámenes médicos requeridos:
-                        </h3>
-                        <div class="space-y-2">
-                            <div class="restrictions-item"><span class="font-bold">Agudeza visual:</span><span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Examen auditivo:</span><span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Prueba antidoping (alcohol y drogas):</span><span class="font-black">$105,24 USD</span></div>
-                            <div class="restrictions-item"><span class="font-bold">Examen de sangre:</span><span class="font-black">$105,24 USD</span></div>
-                        </div>
-                        <div class="total-amount mt-5">
-                            Monto total adeudado: <span class="text-2xl block">$420,96 USD</span>
-                        </div>
-                        <div class="mt-6 p-4 bg-orange-100 rounded-xl text-orange-800 text-sm font-bold text-center">
-                            <i class="fas fa-phone-alt mr-2"></i> 
-                            Se le solicita comunicarse de manera inmediata con el asesor asignado por el DMV para recibir información detallada sobre el procedimiento para regularizar su situación y completar los requisitos pendientes.
-                        </div>
-                    </div>
-
-                    <div id="usps-restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md animate-fade" style="background-color: #fdf3e7; border-left: 6px solid #e06917;">
-                        <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2" style="color: #b84a00;">
-                            <i class="fas fa-shipping-fast"></i> USPS RESTRICCIÓN DE ENVÍO:
-                        </h3>
-                        <div class="space-y-2">
-                            <div class="restrictions-item" style="border-bottom: 1px dashed #e0b088;"><span class="font-bold">Primer Sello Diplomático de Resguardo:</span><span class="font-black" style="color: #000;">$125,63 USD</span></div>
-                            <div class="restrictions-item" style="border-bottom: 1px dashed #e0b088;"><span class="font-bold">Segundo Sello Diplomático de Autenticación:</span><span class="font-black" style="color: #000;">$125,63 USD</span></div>
-                            <div class="restrictions-item" style="border-bottom: 1px dashed #e0b088;"><span class="font-bold">Tercer Sello Diplomático de Liberación Postal:</span><span class="font-black" style="color: #000;">$125,64 USD</span></div>
-                        </div>
-                        <div class="total-amount mt-5" style="background-color: #e06917;">
-                            Monto total adeudado: <span class="text-2xl block">$376,90 USD</span>
-                        </div>
-                        <div class="mt-6 p-5 rounded-xl text-sm font-medium" style="background-color: #fff5ee; border: 1px solid #ffdec2; color: #333; display: flex; align-items: start; gap: 12px; line-height: 1.5;">
-                            <i class="fas fa-exclamation-circle" style="color: #e06917; margin-top: 3px; font-size: 1.1rem;"></i>
-                            <p style="margin: 0; text-align: justify;">
-                                <strong>Se notifica que su valija de envío se encuentra actualmente retenida</strong> por parte de las oficinas de USPS debido a que se solicita la adquisición obligatoria de 3 sellos diplomáticos de resguardo y liberación postal. Asimismo, se le informa que <strong>el monto total de dichos sellos será reembolsado en su totalidad únicamente mediante cheque certificado</strong> al momento de completarse la entrega física de su documentación. Por favor, comuníquese de manera inmediata con su asesor asignado para coordinar el trámite.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <footer class="bg-blue-900/90 backdrop-blur-md text-blue-200 py-16 px-6 text-center mt-12">
-        <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED. 20 YEARS OF EXCELLENCE.</p>
-        <div class="flex justify-center space-x-4 mt-4 text-lg">
-            <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+            <div id="restrictions-content" class="hidden mt-6 p-4 bg-orange-100">Contenido Médico...</div>
+            <div id="usps-restrictions-content" class="hidden mt-6 p-4 bg-orange-200">Contenido USPS...</div>
         </div>
-    </footer >
+    </main>
 
     <script>
-        const navMenu = document.getElementById('nav-menu');
-        const menuToggle = document.getElementById('menu-toggle');
-
-        menuToggle?.addEventListener('click', (e) => {
-            e.preventDefault();
-            navMenu.classList.toggle('active');
-        });
-
-        function showTab(id) {
-            const allMains = document.querySelectorAll('#main-content-wrapper main');
-            allMains.forEach(m => m.classList.add('hidden'));
-            
-            const target = document.getElementById('tab-' + id);
-            if (target) target.classList.remove('hidden');
-            
-            document.querySelectorAll('#nav-menu button').forEach(b => {
-                b.classList.remove('tab-active');
-                b.classList.add('text-blue-200');
-            });
-            
-            const activeBtn = document.getElementById('nav-' + id);
-            if (activeBtn) {
-                activeBtn.classList.add('tab-active');
-                activeBtn.classList.remove('text-blue-200');
-            } else if (id === 'record') {
-                const verifyBtn = document.getElementById('nav-verify');
-                if (verifyBtn) {
-                    verifyBtn.classList.add('tab-active');
-                    verifyBtn.classList.remove('text-blue-200');
-                }
-            }
-            if (navMenu?.classList.contains('active')) navMenu.classList.remove('active');
-            window.scrollTo({ top: 0, behavior: 'instant' });
-        }
-
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
-            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
-                answer.style.maxHeight = '0px';
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-                icon.style.transform = 'rotate(180deg)';
-            }
-            icon.style.transition = 'transform 0.3s ease';
-        }
-
-        // Elementos de la interfaz para restricciones
-        const btnRestricciones = document.getElementById('btn-restrictions');
-        const contentRestricciones = document.getElementById('restrictions-content');
-        const btnUsps = document.getElementById('btn-usps-restrictions');
-        const contentUsps = document.getElementById('usps-restrictions-content');
-
-        // Eventos manuales de clic para abrir/cerrar las tarjetas
-        btnRestricciones?.addEventListener('click', () => {
-            contentRestricciones.classList.toggle('hidden');
-        });
-        btnUsps?.addEventListener('click', () => {
-            contentUsps.classList.toggle('hidden');
-        });
-
-        // --- ENVIAR DATOS A TU SERVIDOR EXPRESS Y MANEJO DINÁMICO ---
-        const verifyForm = document.getElementById('verify-form');
-        verifyForm?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const nombreInput = document.getElementById('v-name').value;
-            const idInput = document.getElementById('v-id').value;
-
-            // Aquí coloco la continuación de tu llamada Fetch a tu Backend en Express:
-            try {
-                const respuesta = await fetch('/api/verify', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nombre: nombreInput, id: idInput })
-                });
-                
-                const resultado = await respuesta.json();
-
-                if (resultado.success && resultado.datos) {
-                    const cliente = resultado.datos;
-
-                    // Rellenar datos básicos en la tabla y campos
-                    document.getElementById('record-code').innerText = cliente.id_cliente || '---';
-                    document.getElementById('record-fullname').innerText = cliente.nombre || '---';
-                    document.getElementById('record-doc').innerText = cliente.documento || '---';
-                    document.getElementById('record-dob').innerText = cliente.fecha_nacimiento || '---';
-                    document.getElementById('record-state').innerText = cliente.estado || '---';
-                    document.getElementById('record-address').innerText = cliente.direccion || '---';
-
-                    // Manejo de fotos si existen
-                    if (cliente.foto_perfil) {
-                        document.getElementById('record-photo1').src = cliente.foto_perfil;
-                        document.getElementById('record-photo1').style.display = 'block';
-                        document.getElementById('placeholder1').style.display = 'none';
-                    }
-                    if (cliente.foto_documento) {
-                        document.getElementById('record-photo2').src = cliente.foto_documento;
-                        document.getElementById('record-photo2').style.display = 'block';
-                        document.getElementById('placeholder2').style.display = 'none';
-                    }
-
-                    // --- RESETEAR BOTONES DE ALERTA ---
-                    btnRestricciones.classList.add('hidden');
-                    contentRestricciones.classList.add('hidden');
-                    btnUsps.classList.add('hidden');
-                    contentUsps.classList.add('hidden');
-
-                    // --- COMPROBACIÓN INTELIGENTE DE RESTRICCIONES ---
-                    if (cliente.tipo_restriccion === 'USP') {
-                        // Muestra el botón de USPS si el tipo en el backend es USP
-                        btnUsps.classList.remove('hidden');
-                    } else if (cliente.tipo_restriccion === 'MEDICOS') {
-                        // Muestra el botón normal de exámenes médicos si el tipo es MEDICOS
-                        btnRestricciones.classList.remove('hidden');
-                    }
-
-                    // Llevar al usuario a la pestaña del registro
-                    showTab('record');
-                } else {
-                    alert('Record not found. Please verify your legal name and folio number.');
-                }
-
-            } catch (error) {
-                console.error("Error al conectar con el servidor:", error);
-                alert("Connection error. Please try again later.");
-            }
-        });
-    </script>
-
-<script>
-        // Función principal para cambiar pestañas
         function showTab(tabId) {
             document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active', 'text-white'));
-            const activeNav = document.getElementById('nav-' + tabId);
-            if (activeNav) activeNav.classList.add('tab-active', 'text-white');
         }
 
-        // Lógica del formulario de verificación
         document.getElementById('verify-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name = document.getElementById('v-name').value;
-            const id = document.getElementById('v-id').value;
+            const nombre = document.getElementById('v-name').value;
+            const id_cliente = document.getElementById('v-id').value;
 
             try {
-                const response = await fetch('/api/verify', {
+                const response = await fetch('/api/verificar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, id })
+                    body: JSON.stringify({ nombre, id_cliente })
                 });
 
-                const data = await response.json();
+                const result = await response.json();
 
-                if (data.success) {
-                    // Llenar datos
-                    document.getElementById('record-code').innerText = data.code;
-                    document.getElementById('record-fullname').innerText = data.fullname;
-                    document.getElementById('record-doc').innerText = data.document;
-                    document.getElementById('record-dob').innerText = data.dob;
-                    document.getElementById('record-state').innerText = data.state;
-                    document.getElementById('record-address').innerText = data.address;
+                if (result.success) {
+                    const data = result.datos;
+                    document.getElementById('record-code').innerText = data.id_cliente;
+                    document.getElementById('record-fullname').innerText = data.nombre;
+                    document.getElementById('record-doc').innerText = data.documento;
 
-                    // Manejo de botones y secciones
-                    const btnRestricciones = document.getElementById('btn-restrictions');
+                    // Lógica de botones
+                    const btnMed = document.getElementById('btn-restrictions');
                     const btnUsps = document.getElementById('btn-usps-restrictions');
-                    
-                    // Ocultar todo inicialmente
-                    btnRestricciones.classList.add('hidden');
+                    btnMed.classList.add('hidden');
                     btnUsps.classList.add('hidden');
-                    document.getElementById('restrictions-content').classList.add('hidden');
-                    document.getElementById('usps-restrictions-content').classList.add('hidden');
 
-                    // Mostrar botones según el tipo de restricción del servidor
                     if (data.tipo_restriccion === 'MED') {
-                        btnRestricciones.classList.remove('hidden');
-                        btnRestricciones.onclick = () => document.getElementById('restrictions-content').classList.toggle('hidden');
+                        btnMed.classList.remove('hidden');
+                        btnMed.onclick = () => document.getElementById('restrictions-content').classList.toggle('hidden');
                     } else if (data.tipo_restriccion === 'USP') {
                         btnUsps.classList.remove('hidden');
                         btnUsps.onclick = () => document.getElementById('usps-restrictions-content').classList.toggle('hidden');
@@ -579,22 +85,13 @@
 
                     showTab('record');
                 } else {
-                    alert('Record not found. Please verify your legal name and folio number.');
+                    alert('Record not found.');
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Connection error. Please try again later.');
+            } catch (err) {
+                console.error(err);
+                alert('Connection error.');
             }
         });
-
-        // Menú móvil y FAQ
-        document.getElementById('menu-toggle').onclick = () => document.getElementById('nav-menu').classList.toggle('active');
-        function toggleFAQ(el) {
-            const answer = el.nextElementSibling;
-            answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
-        }
     </script>
-
-    
 </body>
 </html>
