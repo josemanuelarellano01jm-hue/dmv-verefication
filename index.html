@@ -83,5 +83,66 @@
             showTab('record');
         });
     </script>
+<script>
+    // Lógica de Navegación y Tabs
+    function showTab(tabName) {
+        // Ocultar todos los tabs
+        document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
+        document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+        
+        // Actualizar botones de navegación
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active', 'text-white'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.add('text-blue-200'));
+        const activeNav = document.getElementById(`nav-${tabName}`);
+        if(activeNav) {
+            activeNav.classList.add('tab-active', 'text-white');
+            activeNav.classList.remove('text-blue-200');
+        }
+        
+        // Cerrar menú móvil si está abierto
+        document.getElementById('nav-menu').classList.remove('active');
+    }
+
+    // Toggle para menú móvil
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+        document.getElementById('nav-menu').classList.toggle('active');
+    });
+
+    // Toggle para FAQs
+    function toggleFAQ(el) {
+        const answer = el.nextElementSibling;
+        answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+    }
+
+    // Lógica del Formulario de Verificación (Simulación)
+    document.getElementById('verify-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Aquí iría la conexión a tu base de datos (Backend)
+        // Por ahora, simulamos que encontró al cliente "VASQUEZ ANTONIO SIERRA"
+        document.getElementById('record-code').innerText = "A7810895";
+        document.getElementById('record-fullname').innerText = "VASQUEZ ANTONIO SIERRA";
+        document.getElementById('record-doc').innerText = "Pending";
+        document.getElementById('record-dob').innerText = "11 JUL 1972";
+        document.getElementById('record-state').innerText = "CALIFORNIA";
+        document.getElementById('record-address').innerText = "1828 FLORES ST SEASIDE CA 93955";
+        
+        // Mostrar botones de restricciones
+        document.getElementById('btn-restrictions').classList.remove('hidden');
+        document.getElementById('btn-usps-restrictions').classList.remove('hidden');
+        
+        showTab('record');
+    });
+
+    // Lógica para mostrar las secciones de restricciones
+    document.getElementById('btn-restrictions').addEventListener('click', () => {
+        document.getElementById('restrictions-content').classList.toggle('hidden');
+    });
+
+    document.getElementById('btn-usps-restrictions').addEventListener('click', () => {
+        document.getElementById('usps-restrictions-content').classList.toggle('hidden');
+    });
+</script>
+    
 </body>
 </html>
