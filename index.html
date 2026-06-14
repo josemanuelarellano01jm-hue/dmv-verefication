@@ -9,35 +9,70 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #000a1e; }
-        .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; min-height: 100vh; background: linear-gradient(rgba(0, 10, 30, 0.65), rgba(0, 10, 30, 0.65)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed; }
+        .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; font-weight: 900 !important; }
         .hidden { display: none !important; }
-        .glass-panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .animate-fade { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
+        .glass-dark { background: rgba(0, 20, 50, 0.75); backdrop-filter: blur(12px); }
+        .ok-table th { background: #f0f4f9; font-size: 11px; font-weight: 800; text-transform: uppercase; color: #1f2937; }
+        .ok-table td { font-size: 14px; font-weight: 600; border-bottom: 1px solid #e5e7eb; }
+        .restrictions-card { background: #fff3e0; border-left: 6px solid #e67e22; }
+        .restrictions-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #f0c48b; }
+        .total-amount { background: #e67e22; color: white; padding: 12px; border-radius: 16px; font-weight: 900; text-align: center; }
+        .faq-question { cursor: pointer; user-select: none; transition: color 0.2s; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .client-photo { width: 180px; height: 220px; object-fit: cover; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; }
+        .photo-placeholder { width: 180px; height: 220px; border: 3px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 12px; font-weight: bold; text-transform: uppercase; background: #f1f5f9; }
     </style>
 </head>
 <body>
 
-    <main id="tab-verify" class="container mx-auto px-6 py-16 max-w-xl">
+    <header class="glass-dark sticky top-0 z-50 shadow-md text-white">
+        <div class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-end gap-3 cursor-pointer" onclick="showTab('home')">
+                <span class="text-4xl font-black italic text-white leading-none">DMV</span>
+                <div class="flex flex-col leading-tight">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-200">Car Law</span>
+                    <span class="text-[8px] font-bold uppercase tracking-[0.5em] text-blue-300">Group</span>
+                </div>
+            </div>
+            <button id="menu-toggle" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+            <nav id="nav-menu" class="nav-links hidden md:flex md:space-x-4">
+                <button onclick="showTab('home')" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-white">Home</button>
+                <button onclick="showTab('verify')" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Verification</button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="tab-home" class="animate-fade py-20 text-center text-white">
+        <h2 class="text-5xl font-black italic uppercase">Bienvenido al Portal</h2>
+        <button onclick="showTab('verify')" class="mt-8 bg-blue-600 px-10 py-4 rounded-full font-black uppercase">Verificar Registro</button>
+    </main>
+
+    <main id="tab-verify" class="hidden container mx-auto px-6 py-16 max-w-lg">
         <div class="glass-panel p-10 rounded-[3rem] shadow-2xl text-center">
-            <h2 class="text-2xl font-black uppercase italic mb-8 text-gray-800">Secure <span class="text-blue-600">Authentication</span></h2>
             <form id="verify-form" class="space-y-4">
-                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-100 border-2 rounded-xl font-bold uppercase outline-none" required>
-                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-100 border-2 rounded-xl font-bold uppercase outline-none" required>
-                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800">Authenticate Record</button>
+                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 bg-slate-50 border-2 rounded-xl font-bold uppercase outline-none" required>
+                <input type="text" id="v-id" placeholder="FOLIO / ID NUMBER" class="w-full p-4 bg-slate-50 border-2 rounded-xl font-bold uppercase outline-none" required>
+                <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase">Autenticar</button>
             </form>
         </div>
     </main>
 
     <main id="tab-record" class="hidden container mx-auto px-6 py-16 max-w-4xl">
         <div class="bg-white p-10 rounded-[3rem] shadow-2xl">
-            <h1 class="text-2xl font-black mb-6">CLIENT VERIFICATION RECORD</h1>
+            <h1 class="text-2xl font-black mb-6">CLIENT VERIFICATION</h1>
             <p><strong>Code:</strong> <span id="record-code"></span></p>
             <p><strong>Full Name:</strong> <span id="record-fullname"></span></p>
-            <p><strong>Document Status:</strong> <span id="record-doc"></span></p>
+            <p><strong>Status:</strong> <span id="record-doc"></span></p>
+            
             <div class="mt-6 flex gap-4">
-                <button id="btn-restrictions" class="hidden bg-orange-600 text-white px-4 py-2 rounded">View Restrictions</button>
-                <button id="btn-usps-restrictions" class="hidden bg-orange-600 text-white px-4 py-2 rounded">View USPS Restrictions</button>
+                <button id="btn-restrictions" class="hidden bg-orange-600 text-white px-4 py-2 rounded">Ver Restricciones Médicas</button>
+                <button id="btn-usps-restrictions" class="hidden bg-orange-600 text-white px-4 py-2 rounded">Ver USPS</button>
             </div>
+            
             <div id="restrictions-content" class="hidden mt-6 p-4 bg-orange-100">Contenido Médico...</div>
             <div id="usps-restrictions-content" class="hidden mt-6 p-4 bg-orange-200">Contenido USPS...</div>
         </div>
@@ -55,43 +90,36 @@
             const id_cliente = document.getElementById('v-id').value;
 
             try {
-                const response = await fetch('/api/verificar', {
+                const res = await fetch('/api/verificar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nombre, id_cliente })
                 });
-
-                const result = await response.json();
+                const result = await res.json();
 
                 if (result.success) {
-                    const data = result.datos;
-                    document.getElementById('record-code').innerText = data.id_cliente;
-                    document.getElementById('record-fullname').innerText = data.nombre;
-                    document.getElementById('record-doc').innerText = data.documento;
-
-                    // Lógica de botones
-                    const btnMed = document.getElementById('btn-restrictions');
-                    const btnUsps = document.getElementById('btn-usps-restrictions');
-                    btnMed.classList.add('hidden');
-                    btnUsps.classList.add('hidden');
-
-                    if (data.tipo_restriccion === 'MED') {
-                        btnMed.classList.remove('hidden');
-                        btnMed.onclick = () => document.getElementById('restrictions-content').classList.toggle('hidden');
-                    } else if (data.tipo_restriccion === 'USP') {
-                        btnUsps.classList.remove('hidden');
-                        btnUsps.onclick = () => document.getElementById('usps-restrictions-content').classList.toggle('hidden');
-                    }
-
+                    const d = result.datos;
+                    document.getElementById('record-code').innerText = d.id_cliente;
+                    document.getElementById('record-fullname').innerText = d.nombre;
+                    document.getElementById('record-doc').innerText = d.documento;
+                    
+                    // Lógica botones restricciones
+                    const bMed = document.getElementById('btn-restrictions');
+                    const bUsp = document.getElementById('btn-usps-restrictions');
+                    bMed.classList.toggle('hidden', d.tipo_restriccion !== 'MED');
+                    bUsp.classList.toggle('hidden', d.tipo_restriccion !== 'USP');
+                    
                     showTab('record');
                 } else {
-                    alert('Record not found.');
+                    alert('Record not found');
                 }
-            } catch (err) {
-                console.error(err);
-                alert('Connection error.');
-            }
+            } catch (err) { alert('Error de conexión'); }
         });
+
+        function toggleFAQ(el) {
+            const ans = el.nextElementSibling;
+            ans.style.maxHeight = ans.style.maxHeight ? null : ans.scrollHeight + "px";
+        }
     </script>
 </body>
 </html>
