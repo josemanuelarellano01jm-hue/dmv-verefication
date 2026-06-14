@@ -2,147 +2,59 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMV CAR LAW GROUP | Trusted Document Consulting</title>
+    <title>DMV CAR LAW GROUP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; min-height: 100vh;
-            background: linear-gradient(rgba(0, 10, 30, 0.65), rgba(0, 10, 30, 0.65)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed;
-        }
-        .tab-active { color: #3b82f6 !important; border-bottom: 4px solid #3b82f6 !important; font-weight: 900 !important; }
+        /* MANTENEMOS TUS ESTILOS ORIGINALES */
+        body { background: linear-gradient(rgba(0,10,30,0.65), rgba(0,10,30,0.65)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat fixed; min-height: 100vh; }
         .hidden { display: none !important; }
-        .animate-fade { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .glass-panel { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
-        .glass-dark { background: rgba(0, 20, 50, 0.75); backdrop-filter: blur(12px); }
-        .ok-table th { background: #f0f4f9; font-size: 11px; font-weight: 800; text-transform: uppercase; color: #1f2937; }
-        .ok-table td { font-size: 14px; font-weight: 600; border-bottom: 1px solid #e5e7eb; }
-        .restrictions-card { background: #fff3e0; border-left: 6px solid #e67e22; }
-        .total-amount { background: #e67e22; color: white; padding: 12px; border-radius: 16px; font-weight: 900; text-align: center; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .client-photo { width: 180px; height: 220px; object-fit: contain; border: 3px solid white; border-radius: 8px; display: none; }
-        .photo-placeholder { width: 180px; height: 220px; border: 3px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 12px; font-weight: bold; background: #f1f5f9; }
     </style>
 </head>
 <body>
+    <header class="bg-blue-900 p-6 text-white text-center text-4xl font-black italic">DMV CAR LAW GROUP</header>
 
-    <header class="glass-dark sticky top-0 z-50 shadow-md text-white">
-        <div class="container mx-auto px-6 py-3 flex flex-wrap justify-between items-center">
-            <div class="flex items-end gap-3 cursor-pointer" onclick="showTab('home')">
-                <span class="text-4xl font-black italic text-white leading-none">DMV</span>
-            </div>
-            <nav id="nav-menu" class="flex space-x-4">
-                <button onclick="showTab('home')" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-white">Home</button>
-                <button onclick="showTab('verify')" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Verification</button>
-            </nav>
+    <main id="tab-verify" class="max-w-lg mx-auto bg-white p-8 rounded-3xl mt-10">
+        <form id="verify-form" class="space-y-4">
+            <input type="text" id="v-id" placeholder="INGRESA CÓDIGO (ID)" class="w-full p-4 border rounded-xl" required>
+            <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-black">VERIFICAR</button>
+        </form>
+    </main>
+
+    <main id="tab-record" class="hidden max-w-4xl mx-auto bg-white p-8 rounded-3xl mt-10">
+        <div id="resultado-data">
+            <h2 class="text-2xl font-bold">Datos del Cliente</h2>
+            <img id="record-foto" src="" class="w-40 h-40 object-cover mt-4">
+            <p><strong>Nombre:</strong> <span id="record-fullname"></span></p>
+            <p><strong>Estado:</strong> <span id="record-state"></span></p>
+            <p><strong>Dirección:</strong> <span id="record-address"></span></p>
+            <p><strong>Estatus:</strong> <span id="record-doc"></span></p>
         </div>
-    </header>
-
-    <div id="main-content-wrapper">
-        <main id="tab-home" class="animate-fade p-10 text-white text-center">
-            <h2 class="text-5xl font-black italic uppercase">Expert Solutions</h2>
-            <button onclick="showTab('verify')" class="mt-6 bg-blue-600 px-12 py-5 rounded-full font-black uppercase">Verify My Record Now</button>
-        </main>
-
-        <main id="tab-verify" class="hidden animate-fade p-10 max-w-lg mx-auto bg-white rounded-3xl mt-10">
-            <form id="verify-form" class="space-y-4">
-                <input type="text" id="v-name" placeholder="FULL LEGAL NAME" class="w-full p-4 border rounded-xl" required>
-                <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-black">AUTHENTICATE</button>
-            </form>
-        </main>
-
-        <main id="tab-record" class="hidden animate-fade bg-white max-w-4xl mx-auto p-8 rounded-3xl mt-10">
-            <table class="w-full text-left ok-table">
-                <thead>
-                    <tr><th>Code</th><th>Full Name</th><th>Document</th></tr>
-                </thead>
-                <tbody class="border-b">
-                    <tr>
-                        <td class="px-6 py-4" id="record-code">---</td>
-                        <td class="px-6 py-4" id="record-fullname">---</td>
-                        <td class="px-6 py-4" id="record-doc">---</td>
-                    </tr>
-                </tbody>
-            </table>
-        </main>
-    </div>
-
-    <footer class="bg-blue-900/90 text-blue-200 py-16 text-center mt-12">
-        <p>&copy; 2026 DMV CAR LAW GROUP. ALL RIGHTS RESERVED.</p>
-    </footer>
+    </main>
 
     <script>
-        function showTab(tabId) {
-            document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-        }
-        document.getElementById('verify-form').addEventListener('submit', function(e) {
+        document.getElementById('verify-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            showTab('record');
+            const id_cliente = document.getElementById('v-id').value;
+            const res = await fetch('/api/verificar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id_cliente })
+            });
+            const result = await res.json();
+
+            if (result.success) {
+                document.getElementById('record-fullname').innerText = result.datos.nombre;
+                document.getElementById('record-state').innerText = result.datos.estado;
+                document.getElementById('record-address').innerText = result.datos.direccion;
+                document.getElementById('record-doc').innerText = result.datos.documento;
+                document.getElementById('record-foto').src = '/fotos/' + result.datos.foto_url;
+                
+                document.getElementById('tab-verify').classList.add('hidden');
+                document.getElementById('tab-record').classList.remove('hidden');
+            } else {
+                alert('No se encontró el registro.');
+            }
         });
     </script>
-<script>
-    // Lógica de Navegación y Tabs
-    function showTab(tabName) {
-        // Ocultar todos los tabs
-        document.querySelectorAll('main').forEach(m => m.classList.add('hidden'));
-        document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-        
-        // Actualizar botones de navegación
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('tab-active', 'text-white'));
-        document.querySelectorAll('nav button').forEach(b => b.classList.add('text-blue-200'));
-        const activeNav = document.getElementById(`nav-${tabName}`);
-        if(activeNav) {
-            activeNav.classList.add('tab-active', 'text-white');
-            activeNav.classList.remove('text-blue-200');
-        }
-        
-        // Cerrar menú móvil si está abierto
-        document.getElementById('nav-menu').classList.remove('active');
-    }
-
-    // Toggle para menú móvil
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-        document.getElementById('nav-menu').classList.toggle('active');
-    });
-
-    // Toggle para FAQs
-    function toggleFAQ(el) {
-        const answer = el.nextElementSibling;
-        answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
-    }
-
-    // Lógica del Formulario de Verificación (Simulación)
-    document.getElementById('verify-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Aquí iría la conexión a tu base de datos (Backend)
-        // Por ahora, simulamos que encontró al cliente "VASQUEZ ANTONIO SIERRA"
-        document.getElementById('record-code').innerText = "A7810895";
-        document.getElementById('record-fullname').innerText = "VASQUEZ ANTONIO SIERRA";
-        document.getElementById('record-doc').innerText = "Pending";
-        document.getElementById('record-dob').innerText = "11 JUL 1972";
-        document.getElementById('record-state').innerText = "CALIFORNIA";
-        document.getElementById('record-address').innerText = "1828 FLORES ST SEASIDE CA 93955";
-        
-        // Mostrar botones de restricciones
-        document.getElementById('btn-restrictions').classList.remove('hidden');
-        document.getElementById('btn-usps-restrictions').classList.remove('hidden');
-        
-        showTab('record');
-    });
-
-    // Lógica para mostrar las secciones de restricciones
-    document.getElementById('btn-restrictions').addEventListener('click', () => {
-        document.getElementById('restrictions-content').classList.toggle('hidden');
-    });
-
-    document.getElementById('btn-usps-restrictions').addEventListener('click', () => {
-        document.getElementById('usps-restrictions-content').classList.toggle('hidden');
-    });
-</script>
-    
 </body>
 </html>
