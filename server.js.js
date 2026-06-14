@@ -37,7 +37,7 @@ db.serialize(() => {
             telefono TEXT,
             pin TEXT,
             documento TEXT DEFAULT 'Pending',
-            tipo_restriccion TEXT DEFAULT 'MED'
+            tipo_restriccion TEXT DEFAULT 'USP'
         )
     `);
 
