@@ -2,12 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Middleware
-app.use(cors()); // Permite peticiones desde GitHub Pages
+app.use(cors());
 app.use(express.json());
 
-// Puerto: Railway asigna process.env.PORT, si no, usa 3000
-const PORT = process.env.PORT || 3000;
+// ✅ PUERTO CORRECTO: Railway asigna process.env.PORT
+const PORT = process.env.PORT || 3000;  // Railway usará su puerto, si no, 3000
+
+// ... tus rutas (app.post, app.get, etc.)
+
+app.listen(PORT, () => {
+    console.log(`✅ Servidor corriendo en puerto ${PORT}`);
+});
 
 // Base de datos de ejemplo (en memoria)
 // En un caso real, esto debería ser una base de datos real (MongoDB, PostgreSQL, etc.)
