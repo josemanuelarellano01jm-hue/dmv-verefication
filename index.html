@@ -139,7 +139,7 @@
                 </div>
             </div>
 
-            <!-- Botón hamburguesa (solo móvil) - UN solo botón -->
+            <!-- Botón hamburguesa (solo móvil) -->
             <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
@@ -297,7 +297,7 @@
         </div>
     </main>
 
-    <!-- RECORD PAGE (tabla simplificada: Code, Full Name, Document) -->
+    <!-- RECORD PAGE -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
             <div class="mb-4 text-right">
@@ -327,7 +327,7 @@
                     </div>
                 </div>
 
-                <!-- Tabla de datos: única cabecera con 3 columnas (Code, Full Name, Document) -->
+                <!-- Tabla de datos -->
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                     <table class="w-full text-left ok-table">
                         <thead>
@@ -362,7 +362,7 @@
                     </button>
                 </div>
 
-                <!-- Restricciones en español -->
+                <!-- Restricciones -->
                 <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2">
                         <i class="fas fa-file-medical"></i> Exámenes médicos requeridos:
@@ -412,9 +412,9 @@
 
     <script>
         // ============================================================
-        // ⚠️ IMPORTANTE: Reemplaza esta URL con la de tu backend en Railway
+        // URL CORRECTA DE TU BACKEND EN RAILWAY (YA REEMPLAZADA)
         // ============================================================
-        const API_BASE = 'https://tu-backend-en-railway.up.railway.app';  // <--- CAMBIA ESTO
+        const API_BASE = 'https://dmv-verefication-production-2f39.up.railway.app';
 
         let currentClientData = null;
         const navMenu = document.getElementById('nav-menu');
@@ -462,30 +462,25 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
 
-                    // Llenar campos principales (solo 3 columnas)
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
-                    // Documento: se muestra 'Approval' o el contenido real, sin sobrescritura
                     document.getElementById('record-doc').textContent = d.documento || d.document || 'Pending';
                     
-                    // Datos adicionales
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
                     document.getElementById('record-state').textContent = d.estado || '---';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
 
-                    // --- Carga de fotos (corregida) ---
+                    // --- Carga de fotos ---
                     const photo1 = document.getElementById('record-photo1');
                     const placeholder1 = document.getElementById('placeholder1');
                     const photo2 = document.getElementById('record-photo2');
                     const placeholder2 = document.getElementById('placeholder2');
 
-                    // Resetear estado visual
                     photo1.style.display = 'none';
                     placeholder1.style.display = 'flex';
                     photo2.style.display = 'none';
                     placeholder2.style.display = 'flex';
 
-                    // Foto 1 (cliente)
                     if (d.foto_url && d.foto_url.trim() !== '') {
                         photo1.src = d.foto_url;
                         photo1.onload = () => {
@@ -496,17 +491,12 @@
                             photo1.style.display = 'none';
                             placeholder1.style.display = 'flex';
                         };
-                    } else {
-                        photo1.style.display = 'none';
-                        placeholder1.style.display = 'flex';
                     }
 
-                    // Foto 2 (documento)
                     let fotoDocUrl = null;
                     if (d.foto_doc_url && d.foto_doc_url.trim() !== '') {
                         fotoDocUrl = d.foto_doc_url;
                     } else if (d.foto_url && d.foto_url.trim() !== '') {
-                        // Intento automático de añadir "_doc" antes de la extensión
                         const lastDot = d.foto_url.lastIndexOf('.');
                         if (lastDot !== -1) {
                             fotoDocUrl = d.foto_url.substring(0, lastDot) + '_doc' + d.foto_url.substring(lastDot);
@@ -522,16 +512,12 @@
                             photo2.style.display = 'none';
                             placeholder2.style.display = 'flex';
                         };
-                    } else {
-                        photo2.style.display = 'none';
-                        placeholder2.style.display = 'flex';
                     }
 
-                    // Restricciones: se maneja con un evento limpio
+                    // Restricciones con PIN
                     const restrictionsDiv = document.getElementById('restrictions-content');
                     restrictionsDiv.classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
-                    // Reemplazar el botón para eliminar eventos anteriores
                     const newBtn = btn.cloneNode(true);
                     btn.parentNode.replaceChild(newBtn, btn);
                     newBtn.addEventListener('click', () => {
