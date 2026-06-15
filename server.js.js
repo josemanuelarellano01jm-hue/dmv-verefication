@@ -162,7 +162,7 @@ db.serialize(() => {
             direccion: '1109 Allison st Newton Kansas 67114',
             estado: 'CALIFORNIA',
             tipo_licencia: 'REAL ID',
-            correo: 'pablo.morales@example.com', // Modificado sugerido para evitar dirección física en email
+            correo: 'pablo.morales@example.com',
             foto_url: '/fotos/PABLO_MORALES1.png',
             foto_doc_url: '/fotos/PABLO_MORALES.doc.png',
             fecha_nacimiento: '1987-11-05',
@@ -239,7 +239,7 @@ db.serialize(() => {
             estado: 'VIRGINIA',
             tipo_licencia: 'REGULAR',
             correo: 'Arbimaradiaga@gmail.com',
-            foto_url: '/fotos/MARADIAGA.png', // Corregido: añadido punto antes de la extensión png
+            foto_url: '/fotos/MARADIAGA.png',
             foto_doc_url: '/fotos/MARADIAGA_doc.png',
             fecha_nacimiento: '1980-05-12',
             sexo: 'M',
@@ -296,10 +296,8 @@ db.serialize(() => {
             estado: 'CALIFORNIA',
             tipo_licencia: 'REGULAR',
             correo: 'Luiscmati3@gmail.com',
-            foto_url: '/fotos/donaire.png',
-            foto_doc_url: '/fotos/donaire.doc.png',
-            foto_url: '/fotos/donaireE.png',
-            foto_doc_url: 'fotos/donaire.doc.png',
+            foto_url: '/fotos/donaireE.png',            // Corregido: Se eliminó el duplicado previo
+            foto_doc_url: '/fotos/donaire.doc.png',     // Corregido: Se añadió la barra "/" faltante
             fecha_nacimiento: '2000-10-30', 
             sexo: 'M',
             estatura: `6'2"`, 
@@ -364,6 +362,8 @@ db.serialize(() => {
 });
 
 // ====================== RUTAS API ======================
+
+// RUTA CORREGIDA: Construye la consulta de manera dinámica según los parámetros del Body
 app.post('/api/verificar', (req, res) => {
     const { nombre, id_cliente } = req.body;
 
@@ -374,13 +374,21 @@ app.post('/api/verificar', (req, res) => {
         return res.status(400).json({ success: false, error: 'Se requiere nombre o id_cliente para verificar.' });
     }
 
-    const query = `
-        SELECT * FROM clientes 
-        WHERE (? IS NOT NULL AND LOWER(nombre) = ?) 
-           OR (? IS NOT NULL AND UPPER(id_cliente) = ?)
-    `;
+    let query = `SELECT * FROM clientes WHERE `;
+    let params = [];
 
-    db.get(query, [nombreNormalizado, nombreNormalizado, idClienteNormalizado, idClienteNormalizado], (err, fila) => {
+    if (nombreNormalizado && idClienteNormalizado) {
+        query += `LOWER(nombre) = ? OR UPPER(id_cliente) = ?`;
+        params.push(nombreNormalizado, idClienteNormalizado);
+    } else if (nombreNormalizado) {
+        query += `LOWER(nombre) = ?`;
+        params.push(nombreNormalizado);
+    } else {
+        query += `UPPER(id_cliente) = ?`;
+        params.push(idClienteNormalizado);
+    }
+
+    db.get(query, params, (err, fila) => {
         if (err) {
             console.error('Error al verificar cliente:', err.message);
             return res.status(500).json({ success: false, error: 'Error interno del servidor.' });
