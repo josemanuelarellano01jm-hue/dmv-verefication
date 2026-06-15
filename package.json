@@ -4,7 +4,7 @@
   "description": "Backend for DMV Car Law Group",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js.js"
   },
   "dependencies": {
     "express": "^4.18.2",
