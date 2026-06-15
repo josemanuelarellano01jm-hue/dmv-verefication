@@ -139,13 +139,12 @@
                 </div>
             </div>
 
-            <!-- Botón hamburguesa (solo móvil) -->
+            <!-- Botón hamburguesa (solo móvil) - UN solo botón -->
             <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- Menú de navegación (derecha) -->
-            <button id="menu-toggle" class="md:hidden text-white text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
+            <!-- Menú de navegación -->
             <nav id="nav-menu" class="nav-links md:flex md:flex-1 md:w-auto md:space-x-4 mt-2 md:mt-0 flex-wrap justify-end">
                 <button onclick="showTab('home')" id="nav-home" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest tab-active text-white">Home</button>
                 <button onclick="showTab('trust')" id="nav-trust" class="px-3 py-2 text-[10px] uppercase font-black tracking-widest text-blue-200">Why Trust Us</button>
@@ -298,7 +297,6 @@
         </div>
     </main>
 
-    <!-- RECORD PAGE (con dos fotos y restricciones en español) -->
     <!-- RECORD PAGE (tabla simplificada: Code, Full Name, Document) -->
     <main id="tab-record" class="hidden bg-white min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
@@ -329,11 +327,9 @@
                     </div>
                 </div>
 
-                <!-- Tabla de datos -->
-                <!-- Tabla de datos (solo Code, Full Name, Document) -->
+                <!-- Tabla de datos: única cabecera con 3 columnas (Code, Full Name, Document) -->
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
                     <table class="w-full text-left ok-table">
-                        <thead><tr><th class="px-6 py-4">Code</th><th class="px-6 py-4">Full Name</th><th class="px-6 py-4">License Type</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Document</th></tr></thead>
                         <thead>
                             <tr>
                                 <th class="px-6 py-4">Code</th>
@@ -345,8 +341,6 @@
                             <tr class="border-b">
                                 <td class="px-6 py-4 font-mono font-bold" data-label="Code" id="record-code">---</td>
                                 <td class="px-6 py-4 font-bold" data-label="Full Name" id="record-fullname">---</td>
-                                <td class="px-6 py-4" data-label="License Type" id="record-type">---</td>
-                                <td class="px-6 py-4" data-label="Date" id="record-date">---</td>
                                 <td class="px-6 py-4 text-green-700 font-black" data-label="Document" id="record-doc">---</td>
                             </tr>
                         </tbody>
@@ -368,7 +362,6 @@
                     </button>
                 </div>
 
-                <!-- RESTRICCIONES ACTUALIZADAS EN ESPAÑOL -->
                 <!-- Restricciones en español -->
                 <div id="restrictions-content" class="hidden restrictions-card p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-black uppercase text-orange-700 mb-4 flex items-center gap-2">
@@ -418,6 +411,11 @@
     </footer>
 
     <script>
+        // ============================================================
+        // ⚠️ IMPORTANTE: Reemplaza esta URL con la de tu backend en Railway
+        // ============================================================
+        const API_BASE = 'https://tu-backend-en-railway.up.railway.app';  // <--- CAMBIA ESTO
+
         let currentClientData = null;
         const navMenu = document.getElementById('nav-menu');
         const menuToggle = document.getElementById('menu-toggle');
@@ -454,7 +452,7 @@
             const nameInput = document.getElementById('v-name').value;
             const idInput = document.getElementById('v-id').value;
             try {
-                const res = await fetch('/api/verificar', {
+                const res = await fetch(`${API_BASE}/api/verificar`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nombre: nameInput, id_cliente: idInput })
@@ -464,28 +462,30 @@
                     currentClientData = data.datos;
                     const d = currentClientData;
 
-                    // Solo Code, Full Name y Document
+                    // Llenar campos principales (solo 3 columnas)
                     document.getElementById('record-code').textContent = d.id_cliente || '---';
                     document.getElementById('record-fullname').textContent = d.nombre || '---';
-                    document.getElementById('record-type').textContent = d.tipo_licencia || '---';
-                    document.getElementById('record-date').textContent = d.fecha_emision || d.date || '---';
-                    document.getElementById('record-doc').textContent = d.documento || d.document || 'Approval';
+                    // Documento: se muestra 'Approval' o el contenido real, sin sobrescritura
                     document.getElementById('record-doc').textContent = d.documento || d.document || 'Pending';
+                    
+                    // Datos adicionales
                     document.getElementById('record-dob').textContent = formatDate(d.fecha_nacimiento);
-                    document.getElementById('record-state').textContent = d.estado || 'FLORIDA';
                     document.getElementById('record-state').textContent = d.estado || '---';
                     document.getElementById('record-address').textContent = d.direccion || 'NOT REGISTERED';
 
+                    // --- Carga de fotos (corregida) ---
                     const photo1 = document.getElementById('record-photo1');
                     const placeholder1 = document.getElementById('placeholder1');
                     const photo2 = document.getElementById('record-photo2');
                     const placeholder2 = document.getElementById('placeholder2');
 
+                    // Resetear estado visual
                     photo1.style.display = 'none';
                     placeholder1.style.display = 'flex';
                     photo2.style.display = 'none';
                     placeholder2.style.display = 'flex';
 
+                    // Foto 1 (cliente)
                     if (d.foto_url && d.foto_url.trim() !== '') {
                         photo1.src = d.foto_url;
                         photo1.onload = () => {
@@ -496,48 +496,53 @@
                             photo1.style.display = 'none';
                             placeholder1.style.display = 'flex';
                         };
-                        photo1.onload = () => { photo1.style.display = 'block'; placeholder1.style.display = 'none'; };
-                        photo1.onerror = () => { photo1.style.display = 'none'; placeholder1.style.display = 'flex'; };
+                    } else {
+                        photo1.style.display = 'none';
+                        placeholder1.style.display = 'flex';
                     }
 
+                    // Foto 2 (documento)
+                    let fotoDocUrl = null;
                     if (d.foto_doc_url && d.foto_doc_url.trim() !== '') {
-                        photo2.src = d.foto_doc_url;
-                        loadSecondPhoto(photo2, placeholder2);
-                        photo2.onload = () => { photo2.style.display = 'block'; placeholder2.style.display = 'none'; };
-                        photo2.onerror = () => { photo2.style.display = 'none'; placeholder2.style.display = 'flex'; };
+                        fotoDocUrl = d.foto_doc_url;
                     } else if (d.foto_url && d.foto_url.trim() !== '') {
-                        const parts = d.foto_url.split('.');
-                        const extension = parts.length > 1 ? '.' + parts.pop() : '.png';
-                        const nameBase = parts.join('.');
-                        const fotoDocUrl = nameBase + '_doc' + extension;
+                        // Intento automático de añadir "_doc" antes de la extensión
+                        const lastDot = d.foto_url.lastIndexOf('.');
+                        if (lastDot !== -1) {
+                            fotoDocUrl = d.foto_url.substring(0, lastDot) + '_doc' + d.foto_url.substring(lastDot);
+                        }
+                    }
+                    if (fotoDocUrl) {
                         photo2.src = fotoDocUrl;
-                        loadSecondPhoto(photo2, placeholder2);
+                        photo2.onload = () => {
+                            photo2.style.display = 'block';
+                            placeholder2.style.display = 'none';
+                        };
+                        photo2.onerror = () => {
+                            photo2.style.display = 'none';
+                            placeholder2.style.display = 'flex';
+                        };
+                    } else {
+                        photo2.style.display = 'none';
+                        placeholder2.style.display = 'flex';
                     }
 
-                    function loadSecondPhoto(img, placeholder) {
-                        img.onload = () => {
-                            img.style.display = 'block';
-                            placeholder.style.display = 'none';
-                        };
-                        img.onerror = () => {
-                            img.style.display = 'none';
-                            placeholder.style.display = 'flex';
-                        };
-                        photo2.src = nameBase + '_doc' + extension;
-                        photo2.onload = () => { photo2.style.display = 'block'; placeholder2.style.display = 'none'; };
-                        photo2.onerror = () => { photo2.style.display = 'none'; placeholder2.style.display = 'flex'; };
-                    }
-
-                    document.getElementById('restrictions-content').classList.add('hidden');
+                    // Restricciones: se maneja con un evento limpio
+                    const restrictionsDiv = document.getElementById('restrictions-content');
+                    restrictionsDiv.classList.add('hidden');
                     const btn = document.getElementById('btn-restrictions');
-                    btn.onclick = () => {
-                        const pin = currentClientData.pin ? currentClientData.pin.toString() : null;
-                        if (pin && /^\d{3}$/.test(pin)) {
-                            document.getElementById('restrictions-content').classList.toggle('hidden');
+                    // Reemplazar el botón para eliminar eventos anteriores
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    newBtn.addEventListener('click', () => {
+                        const pin = currentClientData?.pin?.toString() || '';
+                        if (/^\d{3}$/.test(pin)) {
+                            restrictionsDiv.classList.toggle('hidden');
                         } else {
                             alert("⛔ Access denied. No medical restrictions registered or your PIN is invalid. Contact your DMV advisor.");
                         }
-                    };
+                    });
+                    
                     showTab('record');
                 } else {
                     alert("RECORD NOT FOUND.\nPlease verify that your name and folio number are correct.");
